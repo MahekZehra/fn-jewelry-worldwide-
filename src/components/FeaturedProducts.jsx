@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import products from "../data/products";
+import products from "../data/Products";
 import ProductCard from "./ProductCard";
 
 const FeaturedProducts = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import products from "../data/products";
+import products from "../data/Products";
 import ProductCard from "../components/ProductCard";
 
 const Shop = () => {

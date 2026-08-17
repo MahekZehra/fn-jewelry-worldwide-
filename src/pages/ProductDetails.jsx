@@ -9,7 +9,7 @@ import {
   FiShield,
 } from "react-icons/fi";
 
-import products from "../data/products";
+import products from "../data/Products";
 import { useCart } from "../context/CartContext";
 
 const ProductDetails = () => {
