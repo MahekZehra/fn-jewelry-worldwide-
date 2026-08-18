@@ -16,7 +16,12 @@ const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { addToCart } = useCart();
+  const {
+    addToCart,
+    currency,
+    formatPrice,
+    getProductPrice,
+  } = useCart();
 
   const product = products.find(
     (item) => item.id === Number(id)
@@ -31,7 +36,6 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <main className="min-h-screen bg-[#FAF8F5] px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
-
         <div className="mx-auto max-w-xl text-center">
 
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40">
@@ -56,10 +60,15 @@ const ProductDetails = () => {
           </button>
 
         </div>
-
       </main>
     );
   }
+
+  /* =====================================================
+     CURRENT PRODUCT PRICE
+  ===================================================== */
+
+  const currentPrice = getProductPrice(product);
 
   /* =====================================================
      ADD TO CART
@@ -118,12 +127,10 @@ const ProductDetails = () => {
                 className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               />
 
-              {/* Subtle overlay */}
               <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
 
             </div>
 
-            {/* Image Caption */}
             <p className="mt-4 text-center text-[10px] uppercase tracking-[0.25em] text-black/30">
               FN Jewelry Worldwide
             </p>
@@ -156,17 +163,21 @@ const ProductDetails = () => {
               {product.name}
             </h1>
 
-            {/* Price */}
+            {/* =================================================
+                PRICE
+            ================================================= */}
 
             <p className="mt-6 text-xl font-semibold text-black sm:text-2xl">
-              Rs. {product.price.toLocaleString()}
+              {formatPrice(currentPrice)}
             </p>
 
             {/* Divider */}
 
             <div className="my-8 border-t border-black/[0.08]" />
 
-            {/* Description */}
+            {/* =================================================
+                DESCRIPTION
+            ================================================= */}
 
             <div>
 
@@ -179,6 +190,72 @@ const ProductDetails = () => {
               </p>
 
             </div>
+
+            {/* =================================================
+                PRODUCT DETAILS
+            ================================================= */}
+
+            {product.details && (
+              <div className="mt-7 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
+
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">
+                  Product Details
+                </p>
+
+                <div className="mt-5 space-y-4">
+
+                  {product.details.material && (
+                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
+                      <span className="text-sm text-black/45">
+                        Material
+                      </span>
+
+                      <span className="text-right text-sm font-medium text-black">
+                        {product.details.material}
+                      </span>
+                    </div>
+                  )}
+
+                  {product.details.fabricLength && (
+                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
+                      <span className="text-sm text-black/45">
+                        Fabric Length
+                      </span>
+
+                      <span className="text-right text-sm font-medium text-black">
+                        {product.details.fabricLength}
+                      </span>
+                    </div>
+                  )}
+
+                  {product.details.type && (
+                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
+                      <span className="text-sm text-black/45">
+                        Type
+                      </span>
+
+                      <span className="text-right text-sm font-medium text-black">
+                        {product.details.type}
+                      </span>
+                    </div>
+                  )}
+
+                  {product.details.occasion && (
+                    <div className="flex justify-between gap-5">
+                      <span className="text-sm text-black/45">
+                        Occasion
+                      </span>
+
+                      <span className="text-right text-sm font-medium text-black">
+                        {product.details.occasion}
+                      </span>
+                    </div>
+                  )}
+
+                </div>
+
+              </div>
+            )}
 
             {/* =================================================
                 QUANTITY
@@ -264,11 +341,11 @@ const ProductDetails = () => {
                 <FiTruck className="text-lg text-black/60" />
 
                 <p className="mt-3 text-sm font-semibold">
-                  Delivery Available
+                  Worldwide Delivery
                 </p>
 
                 <p className="mt-1 text-xs leading-5 text-black/45">
-                  We'll contact you to confirm your delivery details.
+                  Delivery availability depends on your selected country.
                 </p>
 
               </div>
@@ -290,7 +367,7 @@ const ProductDetails = () => {
             </div>
 
             {/* =================================================
-                PRODUCT INFORMATION
+                BASIC PRODUCT INFORMATION
             ================================================= */}
 
             <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
@@ -310,6 +387,18 @@ const ProductDetails = () => {
               <div className="flex items-center justify-between border-b border-black/[0.07] py-4">
 
                 <span className="text-sm text-black/45">
+                  Collection
+                </span>
+
+                <span className="text-right text-sm font-medium text-black">
+                  {product.subCategory || "FN Collection"}
+                </span>
+
+              </div>
+
+              <div className="flex items-center justify-between border-b border-black/[0.07] py-4">
+
+                <span className="text-sm text-black/45">
                   Availability
                 </span>
 
@@ -322,11 +411,11 @@ const ProductDetails = () => {
               <div className="flex items-center justify-between pt-4">
 
                 <span className="text-sm text-black/45">
-                  Payment
+                  Currency
                 </span>
 
                 <span className="text-sm font-medium text-black">
-                  Cash on Delivery
+                  {currency}
                 </span>
 
               </div>
