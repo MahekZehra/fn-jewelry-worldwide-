@@ -1,10 +1,68 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiShoppingBag, FiArrowUpRight } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 
+const currencyRates = {
+  PKR: 1,
+  AED: 0.0102,
+  SAR: 0.0105,
+  QAR: 0.0101,
+  KWD: 0.0032,
+  GBP: 0.0022,
+  USD: 0.0026,
+  CAD: 0.0035,
+  AUD: 0.0040,
+  EUR: 0.0024,
+};
+
+const currencySymbols = {
+  PKR: "Rs.",
+  AED: "AED",
+  SAR: "SAR",
+  QAR: "QAR",
+  KWD: "KWD",
+  GBP: "£",
+  USD: "$",
+  CAD: "CA$",
+  AUD: "A$",
+  EUR: "€",
+};
+
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
+  const [currency, setCurrency] = useState("AED");
+
+  useEffect(() => {
+    const updateCurrency = () => {
+      const savedCountry = JSON.parse(
+        localStorage.getItem("selectedCountry")
+      );
+
+      setCurrency(savedCountry?.currency || "AED");
+    };
+
+    updateCurrency();
+
+    window.addEventListener("countryChanged", updateCurrency);
+
+    return () => {
+      window.removeEventListener("countryChanged", updateCurrency);
+    };
+  }, []);
+
+  const priceAED = Number(product.priceAED) || 0;
+
+  const convertedPrice =
+    currency === "AED"
+      ? priceAED
+      : priceAED / currencyRates[currency];
+
+  const formatPrice = (value) => {
+    return Math.round(value).toLocaleString();
+  };
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
@@ -23,7 +81,6 @@ const ProductCard = ({ product }) => {
         onClick={handleProductClick}
         className="relative aspect-[4/5] cursor-pointer overflow-hidden rounded-[1.5rem] bg-[#EEE9E3]"
       >
-
         <img
           src={product.image}
           alt={product.name}
@@ -31,7 +88,6 @@ const ProductCard = ({ product }) => {
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
-        {/* Image Overlay */}
         <div className="pointer-events-none absolute inset-0 bg-black/[0.02] transition duration-500 group-hover:bg-black/[0.06]" />
 
         {/* View Product */}
@@ -44,7 +100,7 @@ const ProductCard = ({ product }) => {
           <FiArrowUpRight className="text-lg" />
         </button>
 
-        {/* Add to Cart */}
+        {/* Add To Cart */}
         <button
           type="button"
           onClick={handleAddToCart}
@@ -53,25 +109,21 @@ const ProductCard = ({ product }) => {
           <FiShoppingBag className="text-base" />
           Add to Cart
         </button>
-
       </div>
 
       {/* Product Information */}
       <div className="pt-4">
 
-        {/* Category */}
         <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/40">
           {product.category}
         </p>
 
-        {/* Subcategory */}
         {product.subCategory && (
           <p className="mt-1 text-[11px] text-black/35">
             {product.subCategory}
           </p>
         )}
 
-        {/* Product Name */}
         <h3
           onClick={handleProductClick}
           className="mt-2 cursor-pointer text-sm font-medium leading-5 text-black transition-opacity hover:opacity-60 sm:text-base"
@@ -79,13 +131,12 @@ const ProductCard = ({ product }) => {
           {product.name}
         </h3>
 
-        {/* Price */}
+        {/* PRICE */}
         <p className="mt-2 text-sm font-semibold text-black">
-          Rs. {product.price.toLocaleString()}
+          {currencySymbols[currency]} {formatPrice(convertedPrice)}
         </p>
 
       </div>
-
     </article>
   );
 };

@@ -1,261 +1,385 @@
 const products = [
-  // Accessories
+  // =====================================================
+  // ACCESSORIES — KUNDAN CLUTCHES
+  // =====================================================
 
   {
     id: 7,
     name: "Royal Kundan Clutch",
-    price: 3499,
+    priceAED: 189,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-1.jpg",
     description:
-      "An elegant Kundan clutch designed to complement festive, wedding and formal looks.",
+      "An elegant Kundan clutch featuring intricate detailing and a refined traditional finish. Designed to complement wedding, festive and formal outfits. A beautiful statement accessory for special occasions.",
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Clutch",
+      occasion: "Weddings & Special Occasions",
+    },
   },
 
   {
     id: 8,
     name: "Classic Kundan Clutch",
-    price: 3799,
+    priceAED: 199,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-2.jpg",
     description:
-      "A sophisticated Kundan clutch featuring a beautiful traditional design for special occasions.",
+      "A sophisticated Kundan clutch with timeless traditional detailing. Perfect for adding an elegant finishing touch to festive and occasion wear. Designed for weddings, parties and formal events.",
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Clutch",
+      occasion: "Festive & Formal",
+    },
   },
 
   {
     id: 9,
     name: "Luxury Kundan Clutch",
-    price: 3999,
+    priceAED: 219,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-3.jpg",
     description:
-      "A premium statement clutch created to add an elegant finishing touch to your occasion wear.",
+      "A luxurious statement clutch designed to elevate your special occasion wardrobe. Features an elegant Kundan-inspired finish and sophisticated detailing. Ideal for weddings and evening events.",
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Statement Clutch",
+      occasion: "Wedding & Evening Wear",
+    },
   },
 
-    {
+  {
     id: 10,
     name: "Elegant Kundan Clutch",
-    price: 4299,
+    priceAED: 229,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-4.jpg",
     description:
-      "An elegant Kundan clutch featuring a refined traditional design, perfect for weddings and festive occasions.",
+      "An elegant Kundan clutch featuring refined traditional detailing. Designed to pair beautifully with festive and wedding outfits. A timeless accessory for your special occasions.",
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Clutch",
+      occasion: "Weddings & Festive Wear",
+    },
   },
 
   {
     id: 11,
     name: "Royal Pearl Kundan Clutch",
-    price: 4499,
+    priceAED: 239,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-5.jpg",
     description:
-      "A beautiful statement Kundan clutch designed to add a luxurious finishing touch to your special occasion look.",
+      "A beautiful statement clutch combining elegant Kundan-inspired detailing with a luxurious pearl finish. Designed to make your occasion look feel complete. Perfect for weddings and formal celebrations.",
+    details: {
+      material: "Kundan & Pearl Detailing",
+      type: "Statement Clutch",
+      occasion: "Weddings & Formal Events",
+    },
   },
 
   {
     id: 12,
     name: "Signature Kundan Clutch",
-    price: 4699,
+    priceAED: 249,
     category: "Accessories",
     subCategory: "Kundan Clutches",
     image: "/products/kundan-clutch-6.jpg",
     description:
-      "A sophisticated Kundan clutch crafted for elegant festive, wedding and formal looks.",
+      "A sophisticated Kundan clutch created for elegant festive and formal styling. Beautiful traditional-inspired detailing gives this piece a luxurious appearance. Perfect for weddings, parties and celebrations.",
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Clutch",
+      occasion: "Wedding & Formal Wear",
+    },
   },
 
-  // More Jewellery
+  // =====================================================
+  // JEWELLERY — SETS
+  // =====================================================
 
   {
     id: 13,
     name: "Elegant Jewellery Set",
-    price: 1499,
+    priceAED: 79,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Sets",
     image: "/products/jewellery-1.jpg",
     description:
-      "An elegant artificial jewellery piece designed to add a graceful touch to your everyday and occasion looks.",
+      "An elegant artificial jewellery set designed to add a graceful finishing touch to your look. Beautifully suited for both everyday styling and special occasions. Easy to pair with traditional and contemporary outfits.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Jewellery Set",
+      occasion: "Everyday & Special Occasions",
+    },
   },
 
   {
     id: 14,
     name: "Classic Jewellery Collection",
-    price: 1699,
+    priceAED: 89,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Designer Sets",
     image: "/products/jewellery-2.jpg",
     description:
-      "A timeless jewellery design created to complement both traditional and contemporary outfits.",
+      "A timeless jewellery design created for effortless elegance. Its versatile style complements both traditional and contemporary outfits. Perfect for gatherings, dinners and special occasions.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Designer Set",
+      occasion: "Everyday & Occasion Wear",
+    },
   },
 
   {
     id: 15,
     name: "Royal Statement Jewellery",
-    price: 1899,
+    priceAED: 99,
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Designer Sets",
     image: "/products/jewellery-3.jpg",
     description:
-      "A beautiful statement jewellery piece perfect for weddings, parties and special occasions.",
+      "A striking statement jewellery piece designed to create an elegant and luxurious look. Perfect for weddings, parties and festive celebrations. A beautiful choice for making your occasion outfit stand out.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Statement Set",
+      occasion: "Weddings & Parties",
+    },
   },
 
   {
     id: 16,
     name: "Golden Elegance",
-    price: 1999,
+    priceAED: 109,
     category: "Jewellery",
     subCategory: "Necklaces",
     image: "/products/jewellery-4.jpg",
     description:
-      "A sophisticated artificial jewellery design with an elegant golden finish.",
+      "A sophisticated golden-finish jewellery design with a timeless aesthetic. Designed to complement both traditional and modern outfits. Perfect for occasions where you want a refined statement.",
+    details: {
+      material: "Artificial Gold Finish",
+      type: "Necklace",
+      occasion: "Everyday & Occasion Wear",
+    },
   },
 
   {
     id: 17,
     name: "Pearl Grace Jewellery",
-    price: 1799,
+    priceAED: 95,
     category: "Jewellery",
-    subCategory: "Pearl Jewellery",
+    subCategory: "Everyday Jewellery",
     image: "/products/jewellery-5.jpg",
     description:
-      "A graceful jewellery design featuring an elegant pearl-inspired finish.",
+      "A graceful pearl-inspired jewellery design offering a soft and elegant appearance. Easy to style with both casual and formal outfits. Perfect for everyday elegance and intimate occasions.",
+    details: {
+      material: "Artificial Pearls",
+      type: "Jewellery",
+      occasion: "Everyday & Casual Wear",
+    },
   },
 
   {
     id: 18,
     name: "Festive Charm Set",
-    price: 2199,
+    priceAED: 119,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Sets",
     image: "/products/jewellery-6.jpg",
     description:
-      "A festive jewellery design created to beautifully complement traditional occasion wear.",
+      "A beautiful festive jewellery set designed to complement traditional occasion wear. Elegant detailing adds a graceful touch to your overall look. Ideal for celebrations, weddings and festive gatherings.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Jewellery Set",
+      occasion: "Festive & Wedding Wear",
+    },
   },
 
   {
     id: 19,
     name: "Classic Golden Earrings",
-    price: 1299,
+    priceAED: 69,
     category: "Jewellery",
     subCategory: "Earrings",
     image: "/products/jewellery-7.jpg",
     description:
-      "Elegant earrings designed for effortless everyday and special occasion styling.",
+      "Elegant golden-finish earrings designed for effortless everyday styling. Their versatile design works beautifully with both traditional and contemporary outfits. A simple statement for any occasion.",
+    details: {
+      material: "Artificial Gold Finish",
+      type: "Earrings",
+      occasion: "Everyday & Special Occasions",
+    },
   },
 
   {
     id: 20,
     name: "Luxury Occasion Jewellery",
-    price: 2399,
+    priceAED: 129,
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Designer Sets",
     image: "/products/jewellery-8.jpg",
     description:
-      "A luxurious artificial jewellery design made for memorable occasions.",
+      "A luxurious artificial jewellery design created for memorable occasions. Elegant detailing gives the piece a sophisticated and glamorous appearance. Perfect for weddings, parties and formal celebrations.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Designer Set",
+      occasion: "Wedding & Formal Wear",
+    },
   },
 
   {
     id: 21,
     name: "Delicate Gold Collection",
-    price: 1599,
+    priceAED: 85,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Everyday Jewellery",
     image: "/products/jewellery-9.jpg",
     description:
-      "A delicate jewellery piece designed to bring subtle elegance to your look.",
+      "A delicate golden jewellery design created for subtle everyday elegance. Lightweight styling makes it easy to pair with a variety of outfits. Ideal for casual outings and daily wear.",
+    details: {
+      material: "Artificial Gold Finish",
+      type: "Jewellery",
+      occasion: "Everyday Wear",
+    },
   },
 
   {
     id: 22,
     name: "Traditional Beauty Set",
-    price: 2299,
+    priceAED: 119,
     category: "Jewellery",
-    subCategory: "Traditional Jewellery",
+    subCategory: "Traditional Sets",
     image: "/products/jewellery-10.jpg",
     description:
-      "A traditional-inspired jewellery design perfect for festive and wedding looks.",
+      "A traditional-inspired jewellery design created to complement festive and wedding looks. Rich detailing gives the piece a graceful traditional character. Perfect for cultural celebrations and special occasions.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Traditional Set",
+      occasion: "Festive & Wedding Wear",
+    },
   },
 
   {
     id: 23,
     name: "Modern Statement Piece",
-    price: 1899,
+    priceAED: 99,
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     image: "/products/jewellery-11.jpg",
     description:
-      "A modern statement jewellery piece designed for stylish contemporary looks.",
+      "A modern statement jewellery piece designed for stylish contemporary looks. Its elegant design adds personality without overwhelming your outfit. Perfect for dinners, parties and special occasions.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Statement Jewellery",
+      occasion: "Party & Contemporary Wear",
+    },
   },
 
   {
     id: 24,
     name: "Elegant Party Jewellery",
-    price: 2099,
+    priceAED: 109,
     category: "Jewellery",
     subCategory: "Party Jewellery",
     image: "/products/jewellery-12.jpg",
     description:
-      "An elegant jewellery design perfect for parties, dinners and special occasions.",
+      "An elegant jewellery design made for parties, dinners and special occasions. Its sophisticated appearance adds a polished finishing touch to your outfit. Easy to style with both traditional and modern looks.",
+    details: {
+      material: "Artificial Jewellery",
+      type: "Party Jewellery",
+      occasion: "Parties & Dinners",
+    },
   },
 
   {
     id: 25,
     name: "Premium Jewellery Set",
-    price: 2499,
+    priceAED: 139,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Designer Sets",
     image: "/products/jewellery-13.jpg",
     description:
-      "A premium artificial jewellery design created to elevate your occasion wardrobe.",
+      "A premium artificial jewellery set created to elevate your occasion wardrobe. Elegant detailing provides a refined and luxurious appearance. Ideal for weddings, celebrations and formal events.",
+    details: {
+      material: "Premium Artificial Jewellery",
+      type: "Designer Set",
+      occasion: "Wedding & Formal Wear",
+    },
   },
 
   {
     id: 26,
     name: "Signature Gold Jewellery",
-    price: 1999,
+    priceAED: 109,
     category: "Jewellery",
-    subCategory: "Golden Jewellery",
+    subCategory: "Necklaces",
     image: "/products/jewellery-14.jpg",
     description:
-      "A signature golden jewellery design combining elegance with timeless style.",
+      "A signature golden jewellery design combining timeless elegance with contemporary styling. Designed to complement a wide range of outfits. Perfect for everyday wear and special occasions.",
+    details: {
+      material: "Artificial Gold Finish",
+      type: "Necklace",
+      occasion: "Everyday & Occasion Wear",
+    },
   },
 
   {
     id: 27,
     name: "Royal Occasion Set",
-    price: 2699,
+    priceAED: 149,
     category: "Jewellery",
-    subCategory: "Jewellery Sets",
+    subCategory: "Designer Sets",
     image: "/products/jewellery-15.jpg",
     description:
-      "A royal-inspired artificial jewellery set designed for weddings and grand occasions.",
+      "A royal-inspired artificial jewellery set designed for weddings and grand occasions. Elegant detailing creates a luxurious statement. Perfect for brides, wedding guests and festive celebrations.",
+    details: {
+      material: "Premium Artificial Jewellery",
+      type: "Designer Set",
+      occasion: "Weddings & Grand Occasions",
+    },
   },
 
-  // More Garments
+  // =====================================================
+  // GARMENTS
+  // =====================================================
 
   {
     id: 28,
     name: "Elegant Premium Fabric",
-    price: 2999,
+    priceAED: 129,
     category: "Garments",
     subCategory: "Cloth Material",
     image: "/products/garment-1.jpg",
     description:
-      "Premium cloth material suitable for creating elegant traditional and contemporary outfits.",
+      "Premium cloth material selected for creating elegant traditional and contemporary outfits. The fabric offers a refined finish and versatile styling options. Suitable for custom tailoring and occasion wear.",
+    details: {
+      material: "Premium Fabric",
+      fabricLength: "4 Yards",
+      type: "Fabric Material",
+      occasion: "Traditional & Occasion Wear",
+    },
   },
 
   {
     id: 29,
     name: "Luxury Fabric Collection",
-    price: 3499,
+    priceAED: 149,
     category: "Garments",
     subCategory: "Cloth Material",
     image: "/products/garment-2.jpg",
     description:
-      "Beautiful fabric material designed for sophisticated festive and occasion wear.",
+      "Beautiful luxury fabric material designed for sophisticated festive and occasion wear. Suitable for creating elegant custom outfits. A versatile choice for traditional and formal styling.",
+    details: {
+      material: "Luxury Fabric",
+      fabricLength: "4 Yards",
+      type: "Fabric Material",
+      occasion: "Festive & Formal Wear",
+    },
   },
 ];
+
 export default products;

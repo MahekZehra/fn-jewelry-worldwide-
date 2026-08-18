@@ -1,0 +1,81 @@
+const countries = [
+  {
+    name: "Pakistan",
+    code: "PK",
+    currency: "PKR",
+    symbol: "Rs.",
+    rate: 1,
+  },
+  {
+    name: "United Arab Emirates",
+    code: "AE",
+    currency: "AED",
+    symbol: "AED",
+    rate: 0.013,
+  },
+  {
+    name: "Saudi Arabia",
+    code: "SA",
+    currency: "SAR",
+    symbol: "SAR",
+    rate: 0.0135,
+  },
+  {
+    name: "Qatar",
+    code: "QA",
+    currency: "QAR",
+    symbol: "QAR",
+    rate: 0.013,
+  },
+  {
+    name: "Kuwait",
+    code: "KW",
+    currency: "KWD",
+    symbol: "KWD",
+    rate: 0.0011,
+  },
+  {
+    name: "Oman",
+    code: "OM",
+    currency: "OMR",
+    symbol: "OMR",
+    rate: 0.0014,
+  },
+  {
+    name: "Bahrain",
+    code: "BH",
+    currency: "BHD",
+    symbol: "BHD",
+    rate: 0.00135,
+  },
+  {
+    name: "United Kingdom",
+    code: "GB",
+    currency: "GBP",
+    symbol: "£",
+    rate: 0.0027,
+  },
+  {
+    name: "United States",
+    code: "US",
+    currency: "USD",
+    symbol: "$",
+    rate: 0.0036,
+  },
+  {
+    name: "Canada",
+    code: "CA",
+    currency: "CAD",
+    symbol: "CA$",
+    rate: 0.0049,
+  },
+  {
+    name: "Australia",
+    code: "AU",
+    currency: "AUD",
+    symbol: "A$",
+    rate: 0.0055,
+  },
+];
+
+export default countries;
