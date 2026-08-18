@@ -36,30 +36,33 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <main className="min-h-screen bg-[#FAF8F5] px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
+
         <div className="mx-auto max-w-xl text-center">
 
-          <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
             FN Jewelry Worldwide
           </p>
 
-          <h1 className="mt-4 font-serif text-4xl text-[#171717] sm:text-5xl">
+          <h1 className="mt-4 font-serif text-4xl tracking-tight text-[#171717] sm:text-5xl">
             Product Not Found
           </h1>
 
           <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-black/50">
-            Sorry, this product is no longer available. Please explore
-            our collection to discover something new.
+            Sorry, this product is no longer available.
+            Please explore our collection to discover
+            something new.
           </p>
 
           <button
             type="button"
             onClick={() => navigate("/shop")}
-            className="mt-8 rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-black/80"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-95"
           >
             Back to Shop
           </button>
 
         </div>
+
       </main>
     );
   }
@@ -90,7 +93,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#FAF8F5] px-5 py-8 sm:px-8 lg:px-16 lg:py-14">
+    <main className="min-h-screen bg-[#FAF8F5] px-5 pb-16 pt-8 sm:px-8 sm:pb-20 lg:px-16 lg:pb-24 lg:pt-14">
 
       <div className="mx-auto max-w-7xl">
 
@@ -101,7 +104,7 @@ const ProductDetails = () => {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="mb-8 flex items-center gap-2 text-sm text-black/50 transition hover:text-black"
+          className="mb-7 flex items-center gap-2 rounded-full py-2 text-sm text-black/50 transition-colors duration-300 hover:text-black"
         >
           <FiArrowLeft className="text-base" />
           Back
@@ -111,7 +114,7 @@ const ProductDetails = () => {
             PRODUCT LAYOUT
         ================================================= */}
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(400px,0.95fr)] lg:items-start lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] lg:items-start lg:gap-16">
 
           {/* =================================================
               PRODUCT IMAGE
@@ -119,19 +122,19 @@ const ProductDetails = () => {
 
           <div className="lg:sticky lg:top-28">
 
-            <div className="group relative overflow-hidden rounded-[2rem] bg-[#EEE9E3]">
+            <div className="group relative overflow-hidden rounded-[1.75rem] bg-[#EEE9E3] sm:rounded-[2rem]">
 
               <img
                 src={product.image}
                 alt={product.name}
-                className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
 
               <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
 
             </div>
 
-            <p className="mt-4 text-center text-[10px] uppercase tracking-[0.25em] text-black/30">
+            <p className="mt-4 text-center text-[9px] font-medium uppercase tracking-[0.3em] text-black/25 sm:text-[10px]">
               FN Jewelry Worldwide
             </p>
 
@@ -141,7 +144,7 @@ const ProductDetails = () => {
               PRODUCT INFORMATION
           ================================================= */}
 
-          <div className="lg:pt-4">
+          <div className="lg:pt-3">
 
             {/* Category */}
 
@@ -159,7 +162,7 @@ const ProductDetails = () => {
 
             {/* Product Name */}
 
-            <h1 className="mt-4 max-w-xl font-serif text-4xl leading-[1.05] tracking-tight text-[#171717] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-2xl font-serif text-4xl leading-[1.05] tracking-tight text-[#171717] sm:text-5xl lg:text-6xl">
               {product.name}
             </h1>
 
@@ -167,7 +170,7 @@ const ProductDetails = () => {
                 PRICE
             ================================================= */}
 
-            <p className="mt-6 text-xl font-semibold text-black sm:text-2xl">
+            <p className="mt-6 text-xl font-semibold tracking-tight text-black sm:text-2xl">
               {formatPrice(currentPrice)}
             </p>
 
@@ -179,9 +182,9 @@ const ProductDetails = () => {
                 DESCRIPTION
             ================================================= */}
 
-            <div>
+            <section>
 
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/40 sm:text-xs">
                 Description
               </p>
 
@@ -189,72 +192,88 @@ const ProductDetails = () => {
                 {product.description}
               </p>
 
-            </div>
+            </section>
 
             {/* =================================================
                 PRODUCT DETAILS
             ================================================= */}
 
             {product.details && (
-              <div className="mt-7 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
+              <section className="mt-7 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
 
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-black/40">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/40 sm:text-xs">
                   Product Details
                 </p>
 
-                <div className="mt-5 space-y-4">
+                <div className="mt-5">
+
+                  {/* Material */}
 
                   {product.details.material && (
-                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
-                      <span className="text-sm text-black/45">
+                    <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3 first:pt-0">
+
+                      <span className="shrink-0 text-sm text-black/45">
                         Material
                       </span>
 
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.material}
                       </span>
+
                     </div>
                   )}
 
+                  {/* Fabric Length */}
+
                   {product.details.fabricLength && (
-                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
-                      <span className="text-sm text-black/45">
+                    <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3">
+
+                      <span className="shrink-0 text-sm text-black/45">
                         Fabric Length
                       </span>
 
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.fabricLength}
                       </span>
+
                     </div>
                   )}
 
+                  {/* Type */}
+
                   {product.details.type && (
-                    <div className="flex justify-between gap-5 border-b border-black/[0.06] pb-3">
-                      <span className="text-sm text-black/45">
+                    <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3">
+
+                      <span className="shrink-0 text-sm text-black/45">
                         Type
                       </span>
 
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.type}
                       </span>
+
                     </div>
                   )}
 
+                  {/* Occasion */}
+
                   {product.details.occasion && (
-                    <div className="flex justify-between gap-5">
-                      <span className="text-sm text-black/45">
+                    <div className="flex items-start justify-between gap-6 py-3 last:pb-0">
+
+                      <span className="shrink-0 text-sm text-black/45">
                         Occasion
                       </span>
 
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.occasion}
                       </span>
+
                     </div>
                   )}
 
                 </div>
 
-              </div>
+              </section>
             )}
 
             {/* =================================================
@@ -263,11 +282,11 @@ const ProductDetails = () => {
 
             <div className="mt-8">
 
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-black/45">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45 sm:text-xs">
                 Quantity
               </p>
 
-              <div className="flex w-fit items-center rounded-full border border-black/10 bg-white p-1">
+              <div className="flex w-fit items-center rounded-full border border-black/10 bg-white p-1 shadow-sm">
 
                 <button
                   type="button"
@@ -276,7 +295,7 @@ const ProductDetails = () => {
                       Math.max(1, current - 1)
                     )
                   }
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5"
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:bg-black/5 active:scale-90"
                   aria-label="Decrease quantity"
                 >
                   <FiMinus className="text-sm" />
@@ -291,7 +310,7 @@ const ProductDetails = () => {
                   onClick={() =>
                     setQuantity((current) => current + 1)
                   }
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5"
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:bg-black/5 active:scale-90"
                   aria-label="Increase quantity"
                 >
                   <FiPlus className="text-sm" />
@@ -312,7 +331,7 @@ const ProductDetails = () => {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="flex h-14 w-full items-center justify-center gap-3 rounded-full bg-black text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg"
+                className="flex h-14 w-full items-center justify-center gap-3 rounded-full bg-black text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-[0.98]"
               >
                 <FiShoppingBag className="text-base" />
                 Add to Cart
@@ -323,7 +342,7 @@ const ProductDetails = () => {
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="flex h-14 w-full items-center justify-center rounded-full border border-black/15 bg-white text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg"
+                className="flex h-14 w-full items-center justify-center rounded-full border border-black/15 bg-white text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg active:scale-[0.98]"
               >
                 Buy Now
               </button>
@@ -331,14 +350,16 @@ const ProductDetails = () => {
             </div>
 
             {/* =================================================
-                TRUST / DELIVERY INFORMATION
+                TRUST / DELIVERY
             ================================================= */}
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
 
+              {/* Worldwide Delivery */}
+
               <div className="rounded-2xl border border-black/[0.07] bg-white p-4">
 
-                <FiTruck className="text-lg text-black/60" />
+                <FiTruck className="text-lg text-black/55" />
 
                 <p className="mt-3 text-sm font-semibold">
                   Worldwide Delivery
@@ -350,9 +371,11 @@ const ProductDetails = () => {
 
               </div>
 
+              {/* Secure Ordering */}
+
               <div className="rounded-2xl border border-black/[0.07] bg-white p-4">
 
-                <FiShield className="text-lg text-black/60" />
+                <FiShield className="text-lg text-black/55" />
 
                 <p className="mt-3 text-sm font-semibold">
                   Secure Ordering
@@ -372,19 +395,23 @@ const ProductDetails = () => {
 
             <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
 
-              <div className="flex items-center justify-between border-b border-black/[0.07] pb-4">
+              {/* Category */}
+
+              <div className="flex items-start justify-between gap-6 border-b border-black/[0.07] pb-4">
 
                 <span className="text-sm text-black/45">
                   Category
                 </span>
 
-                <span className="text-sm font-medium text-black">
+                <span className="text-right text-sm font-medium text-black">
                   {product.category}
                 </span>
 
               </div>
 
-              <div className="flex items-center justify-between border-b border-black/[0.07] py-4">
+              {/* Collection */}
+
+              <div className="flex items-start justify-between gap-6 border-b border-black/[0.07] py-4">
 
                 <span className="text-sm text-black/45">
                   Collection
@@ -395,6 +422,8 @@ const ProductDetails = () => {
                 </span>
 
               </div>
+
+              {/* Availability */}
 
               <div className="flex items-center justify-between border-b border-black/[0.07] py-4">
 
@@ -407,6 +436,8 @@ const ProductDetails = () => {
                 </span>
 
               </div>
+
+              {/* Currency */}
 
               <div className="flex items-center justify-between pt-4">
 

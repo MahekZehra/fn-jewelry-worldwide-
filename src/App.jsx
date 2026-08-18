@@ -5,11 +5,13 @@ import Hero from "./components/Hero";
 import CategorySection from "./components/CategorySection";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import WorldwideDelivery from "./components/WorldwideDelivery";
 
 function Home() {
   return (
@@ -17,6 +19,7 @@ function Home() {
       <Hero />
       <CategorySection />
       <FeaturedProducts />
+       <WorldwideDelivery />
       <Footer />
     </>
   );
@@ -46,6 +49,10 @@ function App() {
           element={<OrderConfirmation />}
         />
       </Routes>
+
+      {/* Floating WhatsApp Button */} 
+      <WhatsAppButton />
+      
     </BrowserRouter>
   );
 }
