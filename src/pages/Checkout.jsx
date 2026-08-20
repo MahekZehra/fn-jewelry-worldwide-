@@ -1,17 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   FiArrowLeft,
   FiCheck,
   FiShield,
   FiTruck,
 } from "react-icons/fi";
+
 import { useCart } from "../context/CartContext";
 
 const Checkout = () => {
   const navigate = useNavigate();
 
-  const { cart, cartTotal, clearCart } = useCart();
+  const {
+    cart,
+    cartTotal,
+    clearCart,
+
+    currency,
+    currencySymbols,
+
+    getProductPrice,
+    getCheckoutItems,
+    formatPrice,
+  } = useCart();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,7 +34,8 @@ const Checkout = () => {
     address: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
 
   /* =====================================================
      FORM CHANGE
@@ -52,29 +66,81 @@ const Checkout = () => {
         .toString()
         .slice(-6)}`;
 
+      const apiBaseUrl =
+        import.meta.env.VITE_API_URL ||
+        "http://localhost:3001";
+
+      /*
+       * IMPORTANT:
+       * getCheckoutItems() gives the SERVER
+       * the already-converted prices.
+       */
+
+      const checkoutItems =
+        getCheckoutItems();
+
       const response = await fetch(
-        "http://localhost:3001/api/send-order-email",
+        `${apiBaseUrl}/api/send-order-email`,
         {
           method: "POST",
+
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type":
+              "application/json",
           },
+
           body: JSON.stringify({
-            customerName: formData.fullName,
-            customerEmail: formData.email,
+            customerName:
+              formData.fullName,
+
+            customerEmail:
+              formData.email,
+
+            customerPhone:
+              formData.phone,
+
+            customerCity:
+              formData.city,
+
+            customerAddress:
+              formData.address,
+
             orderNumber,
-            items: cart,
+
+            /*
+             * Converted product prices
+             */
+            items: checkoutItems,
+
+            /*
+             * Converted total
+             */
             total: cartTotal,
+
+            /*
+             * Selected currency
+             */
+            currency,
           }),
         }
       );
 
-      const result = await response.json();
+      let result = {};
 
-      if (!response.ok || !result.success) {
+      try {
+        result =
+          await response.json();
+      } catch {
+        result = {};
+      }
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
         throw new Error(
           result.message ||
-            "Order confirmation email could not be sent."
+            "Order confirmation could not be completed."
         );
       }
 
@@ -85,12 +151,14 @@ const Checkout = () => {
 
       clearCart();
 
-      navigate("/order-confirmation", {
-        state: {
-          orderNumber,
-        },
-      });
-
+      navigate(
+        "/order-confirmation",
+        {
+          state: {
+            orderNumber,
+          },
+        }
+      );
     } catch (error) {
       console.error(
         "Order confirmation error:",
@@ -101,7 +169,6 @@ const Checkout = () => {
         error.message ||
           "Your order could not be confirmed right now. Please try again."
       );
-
     } finally {
       setIsSubmitting(false);
     }
@@ -114,7 +181,6 @@ const Checkout = () => {
   if (cart.length === 0) {
     return (
       <main className="min-h-screen bg-[#FAF8F5] px-5 py-20">
-
         <div className="mx-auto max-w-xl text-center">
 
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40">
@@ -126,45 +192,49 @@ const Checkout = () => {
           </h1>
 
           <p className="mt-4 text-sm leading-6 text-black/50">
-            Add something beautiful to your shopping bag before
-            proceeding to checkout.
+            Add something beautiful to your
+            shopping bag before proceeding
+            to checkout.
           </p>
 
           <button
             type="button"
-            onClick={() => navigate("/shop")}
+            onClick={() =>
+              navigate("/shop")
+            }
             className="mt-8 rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-black/80"
           >
             Continue Shopping
           </button>
 
         </div>
-
       </main>
     );
   }
+
+  /* =====================================================
+     MAIN CHECKOUT
+  ===================================================== */
 
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-5 py-10 sm:px-8 lg:px-16 lg:py-16">
 
       <div className="mx-auto max-w-7xl">
 
-        {/* =================================================
-            BACK
-        ================================================= */}
+        {/* BACK */}
 
         <button
           type="button"
-          onClick={() => navigate("/cart")}
+          onClick={() =>
+            navigate("/cart")
+          }
           className="mb-8 flex items-center gap-2 text-sm text-black/50 transition hover:text-black"
         >
           <FiArrowLeft />
           Back to Cart
         </button>
 
-        {/* =================================================
-            HEADER
-        ================================================= */}
+        {/* HEADER */}
 
         <header>
 
@@ -177,21 +247,17 @@ const Checkout = () => {
           </h1>
 
           <p className="mt-3 max-w-xl text-sm leading-6 text-black/50">
-            Enter your delivery details below to complete your
-            order.
+            Enter your delivery details below
+            to complete your order.
           </p>
 
         </header>
 
-        {/* =================================================
-            CHECKOUT GRID
-        ================================================= */}
+        {/* CHECKOUT GRID */}
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_380px] lg:gap-12">
 
-          {/* =================================================
-              CUSTOMER FORM
-          ================================================= */}
+          {/* CUSTOMER FORM */}
 
           <form
             onSubmit={handleSubmit}
@@ -208,10 +274,9 @@ const Checkout = () => {
 
             <div className="mt-8 space-y-5">
 
-              {/* Full Name */}
+              {/* FULL NAME */}
 
               <div>
-
                 <label
                   htmlFor="fullName"
                   className="mb-2 block text-sm font-medium"
@@ -229,13 +294,11 @@ const Checkout = () => {
                   required
                   className="h-12 w-full rounded-xl border border-black/10 bg-[#FAF8F5] px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
                 />
-
               </div>
 
-              {/* Email */}
+              {/* EMAIL */}
 
               <div>
-
                 <label
                   htmlFor="email"
                   className="mb-2 block text-sm font-medium"
@@ -253,13 +316,11 @@ const Checkout = () => {
                   required
                   className="h-12 w-full rounded-xl border border-black/10 bg-[#FAF8F5] px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
                 />
-
               </div>
 
-              {/* Phone */}
+              {/* PHONE */}
 
               <div>
-
                 <label
                   htmlFor="phone"
                   className="mb-2 block text-sm font-medium"
@@ -277,13 +338,11 @@ const Checkout = () => {
                   required
                   className="h-12 w-full rounded-xl border border-black/10 bg-[#FAF8F5] px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
                 />
-
               </div>
 
-              {/* City */}
+              {/* CITY */}
 
               <div>
-
                 <label
                   htmlFor="city"
                   className="mb-2 block text-sm font-medium"
@@ -301,13 +360,11 @@ const Checkout = () => {
                   required
                   className="h-12 w-full rounded-xl border border-black/10 bg-[#FAF8F5] px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
                 />
-
               </div>
 
-              {/* Address */}
+              {/* ADDRESS */}
 
               <div>
-
                 <label
                   htmlFor="address"
                   className="mb-2 block text-sm font-medium"
@@ -321,18 +378,15 @@ const Checkout = () => {
                   value={formData.address}
                   onChange={handleChange}
                   placeholder="House number, street, area..."
-                  rows="4"
+                  rows={4}
                   required
                   className="w-full resize-none rounded-xl border border-black/10 bg-[#FAF8F5] px-4 py-3 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
                 />
-
               </div>
 
             </div>
 
-            {/* =================================================
-                PAYMENT
-            ================================================= */}
+            {/* PAYMENT */}
 
             <div className="mt-10 border-t border-black/[0.08] pt-8">
 
@@ -353,7 +407,6 @@ const Checkout = () => {
                   </div>
 
                   <div>
-
                     <p className="text-sm font-semibold">
                       Cash on Delivery
                     </p>
@@ -361,7 +414,6 @@ const Checkout = () => {
                     <p className="mt-1 text-xs leading-5 text-black/50">
                       Pay securely when your order is delivered.
                     </p>
-
                   </div>
 
                 </div>
@@ -370,9 +422,7 @@ const Checkout = () => {
 
             </div>
 
-            {/* =================================================
-                PLACE ORDER
-            ================================================= */}
+            {/* PLACE ORDER */}
 
             <button
               type="submit"
@@ -385,15 +435,14 @@ const Checkout = () => {
             </button>
 
             <p className="mt-4 text-center text-xs leading-5 text-black/35">
-              By placing your order, you confirm that the delivery
-              information provided above is correct.
+              By placing your order, you confirm
+              that the delivery information provided
+              above is correct.
             </p>
 
           </form>
 
-          {/* =================================================
-              ORDER SUMMARY
-          ================================================= */}
+          {/* ORDER SUMMARY */}
 
           <aside className="h-fit rounded-[1.75rem] bg-white p-6 sm:p-8 lg:sticky lg:top-28">
 
@@ -405,49 +454,66 @@ const Checkout = () => {
               Your Order
             </h2>
 
-            {/* Products */}
-
             <div className="mt-7 space-y-4">
 
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-3"
-                >
+              {cart.map((item) => {
 
-                  <div className="h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-[#EEE9E3]">
+                const itemPrice =
+                  getProductPrice(item);
 
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="h-full w-full object-cover"
-                    />
+                const quantity =
+                  Number(item.quantity) || 0;
 
-                  </div>
+                const itemTotal =
+                  itemPrice * quantity;
 
-                  <div className="min-w-0 flex-1">
+                return (
+                  <div
+                    key={item.id}
+                    className="flex gap-3"
+                  >
 
-                    <p className="truncate text-sm font-medium">
-                      {item.name}
+                    <div className="h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-[#EEE9E3]">
+
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-full w-full object-cover"
+                      />
+
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+
+                      <p className="truncate text-sm font-medium">
+                        {item.name}
+                      </p>
+
+                      <p className="mt-1 text-xs text-black/45">
+                        Qty: {quantity}
+                      </p>
+
+                      <p className="mt-1 text-xs text-black/45">
+                        {currencySymbols[currency]}{" "}
+                        {formatPrice(itemPrice)}
+                      </p>
+
+                    </div>
+
+                    <p className="text-sm font-medium">
+                      {currencySymbols[currency]}{" "}
+                      {formatPrice(itemTotal)}
                     </p>
 
-                    <p className="mt-1 text-xs text-black/45">
-                      Qty: {item.quantity}
-                    </p>
-
                   </div>
-
-                  <p className="text-sm font-medium">
-                    Rs.{" "}
-                    {(item.price * item.quantity).toLocaleString()}
-                  </p>
-
-                </div>
-              ))}
+                );
+              })}
 
             </div>
 
             <div className="my-6 border-t border-black/[0.08]" />
+
+            {/* SUBTOTAL */}
 
             <div className="flex justify-between text-sm">
 
@@ -456,10 +522,13 @@ const Checkout = () => {
               </span>
 
               <span>
-                Rs. {cartTotal.toLocaleString()}
+                {currencySymbols[currency]}{" "}
+                {formatPrice(cartTotal)}
               </span>
 
             </div>
+
+            {/* DELIVERY */}
 
             <div className="mt-3 flex justify-between text-sm">
 
@@ -475,6 +544,8 @@ const Checkout = () => {
 
             <div className="my-6 border-t border-black/[0.08]" />
 
+            {/* TOTAL */}
+
             <div className="flex justify-between">
 
               <span className="font-semibold">
@@ -482,12 +553,13 @@ const Checkout = () => {
               </span>
 
               <span className="text-lg font-semibold">
-                Rs. {cartTotal.toLocaleString()}
+                {currencySymbols[currency]}{" "}
+                {formatPrice(cartTotal)}
               </span>
 
             </div>
 
-            {/* Trust */}
+            {/* TRUST */}
 
             <div className="mt-6 space-y-3">
 

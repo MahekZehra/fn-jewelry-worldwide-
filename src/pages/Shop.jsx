@@ -7,35 +7,66 @@ import ProductCard from "../components/ProductCard";
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  /* =====================================================
+     URL FILTERS
+  ===================================================== */
+
   const categoryFromUrl = searchParams.get("category");
-  const subCategoryFromUrl = searchParams.get("subCategory");
+  const subCategoryFromUrl =
+    searchParams.get("subCategory");
+  const saleFromUrl = searchParams.get("sale");
+
+  /* =====================================================
+     STATE
+  ===================================================== */
 
   const [activeCategory, setActiveCategory] = useState(
     categoryFromUrl || "All"
   );
 
-  const [activeSubCategory, setActiveSubCategory] = useState(
-    subCategoryFromUrl || "All"
+  const [activeSubCategory, setActiveSubCategory] =
+    useState(subCategoryFromUrl || "All");
+
+  const [isSaleOnly, setIsSaleOnly] = useState(
+    saleFromUrl === "true"
   );
 
   /* =====================================================
      MAIN CATEGORIES
   ===================================================== */
 
-  const categories = ["All", "Jewellery", "Garments", "Accessories"];
+  const categories = [
+    "All",
+    "Jewellery",
+    "Garments",
+    "Accessories",
+  ];
 
   /* =====================================================
-     UPDATE CATEGORY FROM URL
+     SYNC STATE WITH URL
   ===================================================== */
 
   useEffect(() => {
-    setActiveCategory(categoryFromUrl || "All");
-    setActiveSubCategory(subCategoryFromUrl || "All");
-  }, [categoryFromUrl, subCategoryFromUrl]);
+    setActiveCategory(
+      categoryFromUrl || "All"
+    );
+
+    setActiveSubCategory(
+      subCategoryFromUrl || "All"
+    );
+
+    setIsSaleOnly(
+      saleFromUrl === "true"
+    );
+  }, [
+    categoryFromUrl,
+    subCategoryFromUrl,
+    saleFromUrl,
+  ]);
 
   /* =====================================================
      AVAILABLE SUBCATEGORIES
-     Automatically taken from Products.js
+     Dynamically generated from Products.js
   ===================================================== */
 
   const subCategories = useMemo(() => {
@@ -45,19 +76,23 @@ const Shop = () => {
 
     const categoryProducts = products.filter(
       (product) =>
-        product.category?.trim().toLowerCase() ===
-        activeCategory.trim().toLowerCase()
+        product.category
+          ?.trim()
+          .toLowerCase() ===
+        activeCategory
+          .trim()
+          .toLowerCase()
     );
 
-    const uniqueSubCategories = [
+    return [
       ...new Set(
         categoryProducts
-          .map((product) => product.subCategory?.trim())
+          .map((product) =>
+            product.subCategory?.trim()
+          )
           .filter(Boolean)
       ),
     ];
-
-    return uniqueSubCategories;
   }, [activeCategory]);
 
   /* =====================================================
@@ -66,19 +101,52 @@ const Shop = () => {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
+
+      /* -----------------------------------------------
+         CATEGORY
+      ----------------------------------------------- */
+
       const matchesCategory =
         activeCategory === "All" ||
-        product.category?.trim().toLowerCase() ===
-          activeCategory.trim().toLowerCase();
+        product.category
+          ?.trim()
+          .toLowerCase() ===
+          activeCategory
+            .trim()
+            .toLowerCase();
+
+      /* -----------------------------------------------
+         SUBCATEGORY
+      ----------------------------------------------- */
 
       const matchesSubCategory =
         activeSubCategory === "All" ||
-        product.subCategory?.trim().toLowerCase() ===
-          activeSubCategory.trim().toLowerCase();
+        product.subCategory
+          ?.trim()
+          .toLowerCase() ===
+          activeSubCategory
+            .trim()
+            .toLowerCase();
 
-      return matchesCategory && matchesSubCategory;
+      /* -----------------------------------------------
+         SALE
+      ----------------------------------------------- */
+
+      const matchesSale =
+        !isSaleOnly ||
+        product.onSale === true;
+
+      return (
+        matchesCategory &&
+        matchesSubCategory &&
+        matchesSale
+      );
     });
-  }, [activeCategory, activeSubCategory]);
+  }, [
+    activeCategory,
+    activeSubCategory,
+    isSaleOnly,
+  ]);
 
   /* =====================================================
      MAIN CATEGORY CHANGE
@@ -87,6 +155,13 @@ const Shop = () => {
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
     setActiveSubCategory("All");
+
+    /*
+      Selecting a normal category
+      turns Sale mode off.
+    */
+
+    setIsSaleOnly(false);
 
     if (category === "All") {
       setSearchParams({});
@@ -101,24 +176,77 @@ const Shop = () => {
      SUBCATEGORY CHANGE
   ===================================================== */
 
-  const handleSubCategoryChange = (subCategory) => {
+  const handleSubCategoryChange = (
+    subCategory
+  ) => {
     setActiveSubCategory(subCategory);
 
-    if (activeCategory === "All") {
-      setSearchParams({});
-      return;
+    const params = {};
+
+    if (activeCategory !== "All") {
+      params.category = activeCategory;
     }
 
-    if (subCategory === "All") {
-      setSearchParams({
-        category: activeCategory,
-      });
-    } else {
-      setSearchParams({
-        category: activeCategory,
-        subCategory,
-      });
+    if (
+      subCategory !== "All" &&
+      activeCategory !== "All"
+    ) {
+      params.subCategory =
+        subCategory;
     }
+
+    /*
+      Preserve Sale mode when
+      changing subcategory.
+    */
+
+    if (isSaleOnly) {
+      params.sale = "true";
+    }
+
+    setSearchParams(params);
+  };
+
+  /* =====================================================
+     ON SALE FILTER
+  ===================================================== */
+
+  const handleSaleChange = () => {
+    const newSaleState = !isSaleOnly;
+
+    setIsSaleOnly(newSaleState);
+
+    const params = {};
+
+    /*
+      Keep current category.
+    */
+
+    if (activeCategory !== "All") {
+      params.category = activeCategory;
+    }
+
+    /*
+      Keep current subcategory.
+    */
+
+    if (
+      activeSubCategory !== "All" &&
+      activeCategory !== "All"
+    ) {
+      params.subCategory =
+        activeSubCategory;
+    }
+
+    /*
+      Enable / disable sale filter.
+    */
+
+    if (newSaleState) {
+      params.sale = "true";
+    }
+
+    setSearchParams(params);
   };
 
   /* =====================================================
@@ -128,17 +256,88 @@ const Shop = () => {
   const resetFilters = () => {
     setActiveCategory("All");
     setActiveSubCategory("All");
+    setIsSaleOnly(false);
+
     setSearchParams({});
   };
+
+  /* =====================================================
+     FILTER DESCRIPTION
+  ===================================================== */
+
+  const filterDescription = useMemo(() => {
+
+    /* -----------------------------------------------
+       SALE + SUBCATEGORY
+    ----------------------------------------------- */
+
+    if (
+      isSaleOnly &&
+      activeCategory !== "All" &&
+      activeSubCategory !== "All"
+    ) {
+      return `Showing sale items in ${activeSubCategory.toLowerCase()}`;
+    }
+
+    /* -----------------------------------------------
+       SALE + CATEGORY
+    ----------------------------------------------- */
+
+    if (
+      isSaleOnly &&
+      activeCategory !== "All"
+    ) {
+      return `Showing sale items in ${activeCategory.toLowerCase()}`;
+    }
+
+    /* -----------------------------------------------
+       ALL SALE ITEMS
+    ----------------------------------------------- */
+
+    if (isSaleOnly) {
+      return "Showing all products currently on sale";
+    }
+
+    /* -----------------------------------------------
+       ALL PRODUCTS
+    ----------------------------------------------- */
+
+    if (activeCategory === "All") {
+      return "Showing our complete collection";
+    }
+
+    /* -----------------------------------------------
+       CATEGORY
+    ----------------------------------------------- */
+
+    if (activeSubCategory === "All") {
+      return `Showing all ${activeCategory.toLowerCase()}`;
+    }
+
+    /* -----------------------------------------------
+       SUBCATEGORY
+    ----------------------------------------------- */
+
+    return `Showing ${activeSubCategory.toLowerCase()}`;
+
+  }, [
+    activeCategory,
+    activeSubCategory,
+    isSaleOnly,
+  ]);
+
+  /* =====================================================
+     PAGE
+  ===================================================== */
 
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-5 pb-20 pt-12 sm:px-8 sm:pt-16 lg:px-16 lg:pb-28 lg:pt-20">
 
       <div className="mx-auto max-w-7xl">
 
-        {/* =====================================================
+        {/* =================================================
             PAGE HEADER
-        ===================================================== */}
+        ================================================= */}
 
         <header className="mx-auto max-w-3xl text-center">
 
@@ -151,29 +350,41 @@ const Shop = () => {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-black/50 sm:text-base">
-            Explore elegant artificial jewellery, beautiful cloth materials
-            and statement accessories carefully selected to elevate every
-            occasion.
+            Explore elegant artificial jewellery,
+            beautiful cloth materials and statement
+            accessories carefully selected to elevate
+            every occasion.
           </p>
 
         </header>
 
-        {/* =====================================================
+        {/* =================================================
             MAIN CATEGORY FILTERS
-        ===================================================== */}
+        ================================================= */}
 
         <div className="mt-10 border-y border-black/[0.06] py-4 sm:mt-14">
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide sm:justify-center">
 
+            {/* =================================================
+                ALL / JEWELLERY / GARMENTS / ACCESSORIES
+            ================================================= */}
+
             {categories.map((category) => {
-              const isActive = activeCategory === category;
+
+              const isActive =
+                activeCategory === category &&
+                !isSaleOnly;
 
               return (
                 <button
                   key={category}
                   type="button"
-                  onClick={() => handleCategoryChange(category)}
+                  onClick={() =>
+                    handleCategoryChange(
+                      category
+                    )
+                  }
                   className={`whitespace-nowrap rounded-full px-6 py-3 text-xs font-semibold tracking-wide transition-all duration-300 ${
                     isActive
                       ? "bg-black text-white shadow-sm"
@@ -185,81 +396,154 @@ const Shop = () => {
               );
             })}
 
+            {/* =================================================
+                ON SALE
+            ================================================= */}
+
+            <button
+              type="button"
+              onClick={handleSaleChange}
+              className={`whitespace-nowrap rounded-full px-6 py-3 text-xs font-semibold tracking-wide transition-all duration-300 ${
+                isSaleOnly
+                  ? "bg-black text-white shadow-sm"
+                  : "bg-white text-black/55 ring-1 ring-black/[0.07] hover:bg-black hover:text-white"
+              }`}
+            >
+              On Sale
+            </button>
+
           </div>
 
         </div>
 
-        {/* =====================================================
-            SUBCATEGORY FILTERS
-        ===================================================== */}
+        {/* =================================================
+            SALE STATUS
+        ================================================= */}
 
-        {activeCategory !== "All" && subCategories.length > 0 && (
+        {isSaleOnly && (
 
-          <div className="mt-5">
+          <div className="mt-5 flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-black/[0.05] sm:px-5">
 
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide sm:justify-center">
+            <div className="flex items-center gap-3">
 
-              {/* ALL SUBCATEGORIES */}
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-bold text-white">
+                %
+              </span>
 
-              <button
-                type="button"
-                onClick={() => handleSubCategoryChange("All")}
-                className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
-                  activeSubCategory === "All"
-                    ? "bg-[#171717] text-white"
-                    : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
-                }`}
-              >
-                All {activeCategory}
-              </button>
+              <div>
 
-              {/* DYNAMIC SUBCATEGORIES */}
+                <p className="text-xs font-semibold text-black">
+                  Sale Collection
+                </p>
 
-              {subCategories.map((subCategory) => {
-                const isActive = activeSubCategory === subCategory;
+                <p className="mt-0.5 text-[11px] text-black/40">
+                  Discover our current special offers
+                </p>
 
-                return (
-                  <button
-                    key={subCategory}
-                    type="button"
-                    onClick={() => handleSubCategoryChange(subCategory)}
-                    className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
-                      isActive
-                        ? "bg-[#171717] text-white"
-                        : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
-                    }`}
-                  >
-                    {subCategory}
-                  </button>
-                );
-              })}
+              </div>
 
             </div>
 
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="text-[11px] font-medium text-black/45 transition hover:text-black"
+            >
+              Clear
+            </button>
+
           </div>
+
         )}
 
-        {/* =====================================================
+        {/* =================================================
+            SUBCATEGORY FILTERS
+        ================================================= */}
+
+        {activeCategory !== "All" &&
+          subCategories.length > 0 && (
+
+            <div className="mt-5">
+
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide sm:justify-center">
+
+                {/* =================================================
+                    ALL SUBCATEGORIES
+                ================================================= */}
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleSubCategoryChange(
+                      "All"
+                    )
+                  }
+                  className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
+                    activeSubCategory === "All"
+                      ? "bg-[#171717] text-white"
+                      : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
+                  }`}
+                >
+                  All {activeCategory}
+                </button>
+
+                {/* =================================================
+                    DYNAMIC SUBCATEGORIES
+                ================================================= */}
+
+                {subCategories.map(
+                  (subCategory) => {
+
+                    const isActive =
+                      activeSubCategory ===
+                      subCategory;
+
+                    return (
+                      <button
+                        key={subCategory}
+                        type="button"
+                        onClick={() =>
+                          handleSubCategoryChange(
+                            subCategory
+                          )
+                        }
+                        className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
+                          isActive
+                            ? "bg-[#171717] text-white"
+                            : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
+                        }`}
+                      >
+                        {subCategory}
+                      </button>
+                    );
+                  }
+                )}
+
+              </div>
+
+            </div>
+          )}
+
+        {/* =================================================
             PRODUCTS META
-        ===================================================== */}
+        ================================================= */}
 
         <div className="mt-8 flex items-center justify-between">
 
           <div>
 
             <p className="text-sm font-medium text-black">
+
               {filteredProducts.length}{" "}
-              {filteredProducts.length === 1 ? "Product" : "Products"}
+
+              {filteredProducts.length === 1
+                ? "Product"
+                : "Products"}
+
             </p>
 
             <p className="mt-1 text-xs text-black/40">
-
-              {activeCategory === "All"
-                ? "Showing our complete collection"
-                : activeSubCategory === "All"
-                ? `Showing all ${activeCategory.toLowerCase()}`
-                : `Showing ${activeSubCategory.toLowerCase()}`}
-
+              {filterDescription}
             </p>
 
           </div>
@@ -270,28 +554,32 @@ const Shop = () => {
 
         </div>
 
-        {/* =====================================================
+        {/* =================================================
             PRODUCTS GRID
-        ===================================================== */}
+        ================================================= */}
 
         {filteredProducts.length > 0 ? (
 
           <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-12 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4 lg:gap-x-7 lg:gap-y-16">
 
-            {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            ))}
+            {filteredProducts.map(
+              (product) => (
+
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+
+              )
+            )}
 
           </div>
 
         ) : (
 
-          /* =====================================================
+          /* =================================================
              EMPTY STATE
-          ===================================================== */
+          ================================================= */
 
           <div className="mx-auto mt-16 max-w-lg rounded-[2rem] border border-black/[0.06] bg-white px-6 py-16 text-center">
 
@@ -304,8 +592,11 @@ const Shop = () => {
             </h2>
 
             <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-black/45">
-              We couldn't find any products in this category.
-              Please explore another collection.
+
+              {isSaleOnly
+                ? "There are currently no sale products matching your selected filters."
+                : "We couldn't find any products in this category. Please explore another collection."}
+
             </p>
 
             <button

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiChevronDown, FiMapPin } from "react-icons/fi";
+import { FiChevronDown, FiMapPin, FiCheck } from "react-icons/fi";
 
 const countries = [
   {
@@ -89,7 +89,13 @@ const CountrySelector = () => {
       const saved = localStorage.getItem("selectedCountry");
 
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+
+        const matchingCountry = countries.find(
+          (country) => country.code === parsed.code
+        );
+
+        return matchingCountry || countries[0];
       }
     } catch (error) {
       console.error("Unable to load selected country:", error);
@@ -99,7 +105,7 @@ const CountrySelector = () => {
   });
 
   /* =====================================================
-     OPEN FROM WORLDWIDE DELIVERY BUTTON
+     OPEN SELECTOR FROM WORLDWIDE DELIVERY
   ===================================================== */
 
   useEffect(() => {
@@ -107,10 +113,7 @@ const CountrySelector = () => {
       setIsOpen(true);
     };
 
-    window.addEventListener(
-      "openCountrySelector",
-      openSelector
-    );
+    window.addEventListener("openCountrySelector", openSelector);
 
     return () => {
       window.removeEventListener(
@@ -121,7 +124,7 @@ const CountrySelector = () => {
   }, []);
 
   /* =====================================================
-     CLOSE WITH ESC
+     ESCAPE
   ===================================================== */
 
   useEffect(() => {
@@ -139,6 +142,24 @@ const CountrySelector = () => {
   }, []);
 
   /* =====================================================
+     LOCK BODY SCROLL ON MOBILE DROPDOWN
+  ===================================================== */
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const isMobile = window.innerWidth < 640;
+
+    if (isMobile) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  /* =====================================================
      COUNTRY CHANGE
   ===================================================== */
 
@@ -150,15 +171,13 @@ const CountrySelector = () => {
       JSON.stringify(country)
     );
 
-    setIsOpen(false);
+    window.dispatchEvent(new Event("countryChanged"));
 
-    window.dispatchEvent(
-      new Event("countryChanged")
-    );
+    setIsOpen(false);
   };
 
   return (
-    <div className="relative z-[100]">
+    <div className="relative z-[200]">
 
       {/* =================================================
           SELECTOR BUTTON
@@ -170,13 +189,15 @@ const CountrySelector = () => {
         className="flex w-full items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-medium text-black transition hover:border-black/20 sm:w-auto"
       >
 
-        {/* SELECTED FLAG */}
+        {/* FLAG */}
 
-        <span className="flex h-5 w-7 shrink-0 overflow-hidden rounded-sm">
+        <span className="flex h-5 w-7 shrink-0 overflow-hidden rounded-sm bg-gray-100">
           <img
             src={selectedCountry.flag}
             alt={`${selectedCountry.name} flag`}
-            className="h-full w-full object-cover"
+            className="block h-full w-full object-cover"
+            loading="eager"
+            draggable="false"
           />
         </span>
 
@@ -207,21 +228,23 @@ const CountrySelector = () => {
 
           {/* MOBILE BACKDROP */}
 
-          <button
-            type="button"
-            aria-label="Close country selector"
+          <div
+            className="fixed inset-0 z-[190] bg-black/30 sm:hidden"
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-[90] bg-black/20 sm:hidden"
           />
 
-          <div className="fixed left-4 right-4 top-24 z-[110] max-h-[calc(100dvh-7rem)] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-3 sm:w-72 sm:max-h-[min(500px,calc(100vh-120px))]">
+          {/* =================================================
+              DROPDOWN PANEL
+          ================================================= */}
+
+          <div className="fixed left-3 right-3 top-20 z-[210] flex max-h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-3 sm:w-80 sm:max-h-[500px]">
 
             {/* HEADER */}
 
-            <div className="border-b border-black/[0.06] px-4 py-3">
+            <div className="shrink-0 border-b border-black/[0.06] px-4 py-4">
 
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/35">
-                Shop From
+                Worldwide Shopping
               </p>
 
               <p className="mt-1 text-sm font-medium text-black">
@@ -230,20 +253,22 @@ const CountrySelector = () => {
 
             </div>
 
-            {/* SCROLLABLE COUNTRY LIST */}
+            {/* =================================================
+                SCROLLABLE LIST
+            ================================================= */}
 
             <div
-              className="max-h-[calc(100dvh-12rem)] overflow-y-auto overscroll-contain p-2 sm:max-h-80"
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2"
               style={{
                 WebkitOverflowScrolling: "touch",
+                touchAction: "pan-y",
               }}
             >
 
               {countries.map((country) => {
 
                 const isSelected =
-                  selectedCountry.currency ===
-                  country.currency;
+                  selectedCountry.code === country.code;
 
                 return (
                   <button
@@ -252,29 +277,30 @@ const CountrySelector = () => {
                     onClick={() =>
                       handleCountryChange(country)
                     }
-                    className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition ${
+                    className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3.5 text-left transition ${
                       isSelected
                         ? "bg-black text-white"
                         : "text-black hover:bg-[#FAF8F5]"
                     }`}
                   >
 
-                    {/* COUNTRY */}
+                    {/* LEFT */}
 
                     <span className="flex min-w-0 items-center gap-3">
 
                       {/* FLAG */}
 
-                      <span className="flex h-8 w-11 shrink-0 overflow-hidden rounded-md">
+                      <span className="flex h-9 w-12 shrink-0 overflow-hidden rounded-md bg-gray-100">
                         <img
                           src={country.flag}
                           alt={`${country.name} flag`}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
+                          className="block h-full w-full object-cover"
+                          loading="eager"
+                          draggable="false"
                         />
                       </span>
 
-                      {/* NAME */}
+                      {/* COUNTRY INFO */}
 
                       <span className="min-w-0">
 
@@ -283,24 +309,31 @@ const CountrySelector = () => {
                         </span>
 
                         <span
-                          className={`block text-[11px] ${
+                          className={`mt-0.5 block text-[11px] ${
                             isSelected
                               ? "text-white/60"
                               : "text-black/40"
                           }`}
                         >
-                          {country.code} ·{" "}
-                          {country.currency}
+                          {country.code} · {country.currency}
                         </span>
 
                       </span>
 
                     </span>
 
-                    {/* SYMBOL */}
+                    {/* RIGHT */}
 
-                    <span className="shrink-0 text-xs font-semibold">
-                      {country.symbol}
+                    <span className="flex shrink-0 items-center gap-2">
+
+                      <span className="text-xs font-semibold">
+                        {country.symbol}
+                      </span>
+
+                      {isSelected && (
+                        <FiCheck className="text-sm" />
+                      )}
+
                     </span>
 
                   </button>

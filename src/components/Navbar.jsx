@@ -15,17 +15,43 @@ const Navbar = () => {
   const location = useLocation();
   const { cartCount } = useCart();
 
+  /* =====================================================
+     ACTIVE PATH
+  ===================================================== */
+
   const isActive = (path) => {
     return location.pathname === path;
   };
 
+  /* =====================================================
+     ACTIVE CATEGORY
+  ===================================================== */
+
   const isCategoryActive = (category) => {
     const params = new URLSearchParams(location.search);
+
     return (
       location.pathname === "/shop" &&
       params.get("category") === category
     );
   };
+
+  /* =====================================================
+     ACTIVE SALE
+  ===================================================== */
+
+  const isSaleActive = () => {
+    const params = new URLSearchParams(location.search);
+
+    return (
+      location.pathname === "/shop" &&
+      params.get("sale") === "true"
+    );
+  };
+
+  /* =====================================================
+     CLOSE MOBILE MENU
+  ===================================================== */
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -65,6 +91,8 @@ const Navbar = () => {
 
           <nav className="hidden items-center gap-7 lg:flex xl:gap-9">
 
+            {/* HOME */}
+
             <Link
               to="/"
               className={`text-sm font-medium transition-colors duration-300 ${
@@ -75,6 +103,8 @@ const Navbar = () => {
             >
               Home
             </Link>
+
+            {/* SHOP */}
 
             <Link
               to="/shop"
@@ -87,6 +117,8 @@ const Navbar = () => {
               Shop
             </Link>
 
+            {/* JEWELLERY */}
+
             <Link
               to="/shop?category=Jewellery"
               className={`text-sm font-medium transition-colors duration-300 ${
@@ -97,6 +129,8 @@ const Navbar = () => {
             >
               Jewellery
             </Link>
+
+            {/* GARMENTS */}
 
             <Link
               to="/shop?category=Garments"
@@ -109,6 +143,8 @@ const Navbar = () => {
               Garments
             </Link>
 
+            {/* ACCESSORIES */}
+
             <Link
               to="/shop?category=Accessories"
               className={`text-sm font-medium transition-colors duration-300 ${
@@ -120,6 +156,21 @@ const Navbar = () => {
               Accessories
             </Link>
 
+            {/* =================================================
+                SALE
+            ================================================= */}
+
+            <Link
+              to="/shop?sale=true"
+              className={`text-sm font-semibold transition-colors duration-300 ${
+                isSaleActive()
+                  ? "text-white"
+                  : "text-white/55 hover:text-white"
+              }`}
+            >
+              Sale
+            </Link>
+
           </nav>
 
           {/* =================================================
@@ -128,7 +179,11 @@ const Navbar = () => {
 
           <div className="hidden items-center gap-3 lg:flex">
 
+            {/* COUNTRY SELECTOR */}
+
             <CountrySelector />
+
+            {/* CART */}
 
             <Link
               to="/cart"
@@ -152,7 +207,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-2 lg:hidden">
 
-            {/* Mobile Cart */}
+            {/* MOBILE CART */}
 
             <Link
               to="/cart"
@@ -168,7 +223,7 @@ const Navbar = () => {
               )}
             </Link>
 
-            {/* Mobile Menu */}
+            {/* MOBILE MENU */}
 
             <button
               type="button"
@@ -197,6 +252,8 @@ const Navbar = () => {
 
             <nav className="flex flex-col">
 
+              {/* HOME */}
+
               <Link
                 to="/"
                 onClick={closeMenu}
@@ -208,6 +265,8 @@ const Navbar = () => {
               >
                 Home
               </Link>
+
+              {/* SHOP */}
 
               <Link
                 to="/shop"
@@ -221,6 +280,8 @@ const Navbar = () => {
                 Shop
               </Link>
 
+              {/* JEWELLERY */}
+
               <Link
                 to="/shop?category=Jewellery"
                 onClick={closeMenu}
@@ -232,6 +293,8 @@ const Navbar = () => {
               >
                 Jewellery
               </Link>
+
+              {/* GARMENTS */}
 
               <Link
                 to="/shop?category=Garments"
@@ -245,6 +308,8 @@ const Navbar = () => {
                 Garments
               </Link>
 
+              {/* ACCESSORIES */}
+
               <Link
                 to="/shop?category=Accessories"
                 onClick={closeMenu}
@@ -255,6 +320,22 @@ const Navbar = () => {
                 }`}
               >
                 Accessories
+              </Link>
+
+              {/* =================================================
+                  SALE
+              ================================================= */}
+
+              <Link
+                to="/shop?sale=true"
+                onClick={closeMenu}
+                className={`border-b border-white/10 py-4 text-sm font-semibold transition-colors ${
+                  isSaleActive()
+                    ? "text-white"
+                    : "text-white/55 hover:text-white"
+                }`}
+              >
+                Sale
               </Link>
 
               {/* =================================================
@@ -280,10 +361,13 @@ const Navbar = () => {
 
       </header>
 
-      {/* Navbar spacing */}
+      {/* =====================================================
+          NAVBAR SPACING
+      ===================================================== */}
 
       <div className="h-20 sm:h-24" />
     </>
   );
 };
+
 export default Navbar;
