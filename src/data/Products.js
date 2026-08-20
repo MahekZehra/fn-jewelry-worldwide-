@@ -16,7 +16,7 @@ const products = [
     image: "/products/kundan-clutch-1.jpg",
 
     description:
-      "A beautifully detailed Kundan-style clutch with traditional-inspired embellishment and artificial stones. Its elegant structured design makes it perfect for weddings, festive celebrations and evening occasions. A graceful accessory for adding a luxurious touch to traditional and formal outfits.",
+      "A regal Kundan clutch with elegant traditional detailing and a refined finish. Perfect for weddings, festive celebrations and evening occasions.",
 
     details: {
       material: "Kundan & Artificial Stones",
@@ -38,7 +38,7 @@ const products = [
     image: "/products/kundan-clutch-2.jpg",
 
     description:
-      "A classic Kundan-style clutch featuring elegant traditional-inspired detailing and artificial stones. Its timeless design pairs beautifully with sarees, formal dresses, traditional suits and festive outfits. Perfect for weddings, dinners, gatherings and special occasions.",
+      "A classic Kundan clutch with elegant traditional detailing and a polished finish. A graceful choice for festive, formal and special occasions.",
 
     details: {
       material: "Kundan & Artificial Stones",
@@ -60,7 +60,7 @@ const products = [
     image: "/products/kundan-clutch-3.jpg",
 
     description:
-      "A statement Kundan-style clutch featuring detailed embellishment and a polished decorative finish. Designed to complement wedding, festive and evening outfits. Its elegant appearance adds sophistication and a glamorous touch to special occasion styling.",
+      "A luxurious Kundan clutch with detailed embellishment and a statement finish. Perfect for weddings, receptions, festive celebrations and elegant evening looks.",
 
     details: {
       material: "Kundan & Artificial Stones",
@@ -82,7 +82,7 @@ const products = [
     image: "/products/kundan-clutch-4.jpg",
 
     description:
-      "An elegant Kundan-style clutch with delicate traditional-inspired embellishment and a graceful structured design. Perfect for wedding wear, festive dresses, traditional suits and formal evening looks. A sophisticated accessory for memorable celebrations and special occasions.",
+      "An elegant Kundan clutch with delicate traditional-inspired detailing and a graceful silhouette. Designed to complement wedding, festive and formal outfits.",
 
     details: {
       material: "Kundan & Artificial Stones",
@@ -104,7 +104,7 @@ const products = [
     image: "/products/kundan-clutch-5.jpg",
 
     description:
-      "A sophisticated Kundan-style clutch enhanced with elegant pearl-inspired detailing and artificial stones. Its refined design pairs beautifully with wedding outfits, festive ensembles and formal evening wear. A graceful accessory for adding a soft and luxurious finishing touch.",
+      "A sophisticated Kundan clutch enhanced with elegant pearl-inspired detailing and a refined finish. Perfect for weddings, formal events and festive occasions.",
 
     details: {
       material: "Kundan & Pearl Detailing",
@@ -126,7 +126,7 @@ const products = [
     image: "/products/kundan-clutch-6.jpg",
 
     description:
-      "A signature Kundan-style clutch featuring traditional-inspired embellishment and a polished decorative finish. Designed for weddings, receptions, festive gatherings and formal celebrations. Its elegant structure beautifully complements both classic and contemporary occasion outfits.",
+      "A signature Kundan clutch with traditional-inspired embellishment and a polished finish. Ideal for weddings, festive celebrations and formal events.",
 
     details: {
       material: "Kundan & Artificial Stones",
@@ -152,7 +152,7 @@ const products = [
     image: "/products/jewellery-1.jpg",
 
     description:
-      "An elegant artificial jewellery set with graceful decorative detailing and a polished finish. Designed to complement traditional and contemporary outfits with ease. Perfect for everyday styling, gatherings, festive occasions and special events.",
+      "An elegant artificial jewellery set with graceful detailing and a polished finish. Perfect for traditional, contemporary and special occasion styling.",
 
     details: {
       material: "Artificial Jewellery",
@@ -174,7 +174,7 @@ const products = [
     image: "/products/jewellery-2.jpg",
 
     description:
-      "A classic artificial jewellery set featuring refined designer-inspired detailing and an elegant fashion finish. Easy to pair with traditional outfits, formal dresses and occasion wear. Ideal for dinners, gatherings, festive occasions and semi-formal styling.",
+      "A classic imitation jewellery set with refined designer-inspired detailing and an elegant finish. Easy to style with traditional and modern outfits.",
 
     details: {
       material: "Artificial Jewellery",
@@ -200,7 +200,7 @@ const products = [
     image: "/products/jewellery-3.jpg",
 
     description:
-      "A striking artificial jewellery set with detailed decorative styling and a sophisticated finish. Designed to create an elegant statement with wedding, festive and party outfits. Perfect for celebrations, gatherings and special occasions.",
+      "A striking artificial jewellery set with detailed design and a sophisticated finish. Perfect for weddings, parties, festive gatherings and special celebrations.",
 
     details: {
       material: "Artificial Jewellery",
@@ -222,7 +222,7 @@ const products = [
     image: "/products/jewellery-8.jpg",
 
     description:
-      "A sophisticated artificial jewellery design with detailed decorative elements and a polished fashion finish. Perfect for wedding outfits, formal dresses, festive clothing and evening ensembles. An elegant choice for weddings, celebrations and special occasions.",
+      "A luxurious artificial jewellery design with sophisticated detailing and a polished finish. Ideal for weddings, formal events and elegant evening styling.",
 
     details: {
       material: "Artificial Jewellery",
@@ -244,7 +244,7 @@ const products = [
     image: "/products/jewellery-13.jpg",
 
     description:
-      "A premium artificial jewellery set featuring elegant detailing and a refined decorative finish. Designed to complement wedding outfits, formal suits, festive dresses and traditional ensembles. Ideal for receptions, celebrations, formal gatherings and special events.",
+      "A premium artificial jewellery set featuring elegant detailing and a refined decorative finish. Designed to elevate wedding, formal and special occasion outfits.",
 
     details: {
       material: "Artificial Jewellery",
@@ -266,7 +266,7 @@ const products = [
     image: "/products/jewellery-15.jpg",
 
     description:
-      "A royal-inspired artificial jewellery set with luxurious decorative detailing and an elegant polished finish. Designed for brides, wedding guests and festive celebrations. A beautiful choice for creating a graceful statement with traditional occasion wear.",
+      "A royal-inspired artificial jewellery set with luxurious detailing and an elegant finish. Perfect for brides, wedding guests and festive celebrations.",
 
     details: {
       material: "Artificial Jewellery",
@@ -292,7 +292,7 @@ const products = [
     image: "/products/jewellery-4.jpg",
 
     description:
-      "A sophisticated artificial necklace with an elegant golden-tone fashion finish and graceful detailing. Its versatile design pairs beautifully with traditional suits, sarees, dresses and contemporary outfits. Perfect for everyday styling, dinners, festive gatherings and special occasions.",
+      "An artificial jewellery necklace with a sophisticated golden-finish appearance and graceful detailing. Perfect for traditional, contemporary and elegant occasion styling.",
 
     details: {
       material: "Artificial Jewellery",
@@ -314,7 +314,7 @@ const products = [
     image: "/products/jewellery-14.jpg",
 
     description:
-      "A signature artificial necklace with a refined golden-tone fashion finish and contemporary detailing. Easy to pair with both traditional and modern outfits. Designed for effortless everyday elegance, dinners, gatherings and special occasions.",
+      "A signature imitation jewellery necklace with a refined golden-finish look and contemporary detailing. Easy to pair with everyday and occasion outfits.",
 
     details: {
       material: "Artificial Jewellery",
@@ -340,7 +340,7 @@ const products = [
     image: "/products/jewellery-5.jpg",
 
     description:
-      "A delicate artificial jewellery design featuring elegant pearl-inspired detailing and a soft polished finish. Easy to style with casual, traditional and semi-formal outfits. Perfect for everyday wear, gatherings and understated feminine elegance.",
+      "A delicate artificial jewellery design featuring elegant pearl-inspired detailing and a soft finish. Perfect for everyday, casual and semi-formal styling.",
 
     details: {
       material: "Artificial Jewellery & Pearls",
@@ -362,7 +362,7 @@ const products = [
     image: "/products/jewellery-9.jpg",
 
     description:
-      "A delicate artificial jewellery design with a subtle golden-tone fashion finish and clean detailing. Created for effortless daily styling and understated elegance. Perfect for casual outings, everyday wear and simple semi-formal looks.",
+      "A delicate artificial jewellery design with a subtle golden-finish appearance and clean detailing. Created for effortless everyday styling and understated elegance.",
 
     details: {
       material: "Artificial Jewellery",
@@ -388,7 +388,7 @@ const products = [
     image: "/products/jewellery-6.jpg",
 
     description:
-      "A beautiful artificial jewellery set with elegant festive detailing and a polished fashion finish. Designed to complement traditional and wedding outfits with ease. Perfect for celebrations, family gatherings, festive occasions and special events.",
+      "A beautiful artificial jewellery set with elegant festive detailing and a polished finish. Perfect for traditional outfits, celebrations, gatherings and special occasions.",
 
     details: {
       material: "Artificial Jewellery",
@@ -414,7 +414,7 @@ const products = [
     image: "/products/jewellery-7.jpg",
 
     description:
-      "Elegant artificial earrings with a classic golden-tone fashion finish and refined detailing. Easy to pair with traditional, casual and occasion outfits. Designed for versatile everyday, festive and special occasion styling.",
+      "Elegant artificial earrings with a classic golden-finish appearance and refined detailing. Easy to pair with traditional, casual and occasion outfits.",
 
     details: {
       material: "Artificial Jewellery",
@@ -440,7 +440,7 @@ const products = [
     image: "/products/jewellery-10.jpg",
 
     description:
-      "A traditional-inspired artificial jewellery set with rich decorative detailing and an elegant polished finish. Designed to complement festive and wedding attire beautifully. Perfect for weddings, family celebrations, traditional events and special occasions.",
+      "A traditional-inspired artificial jewellery set with rich detailing and an elegant finish. Designed to complement festive, wedding and traditional occasion wear.",
 
     details: {
       material: "Artificial Jewellery",
@@ -466,7 +466,7 @@ const products = [
     image: "/products/jewellery-11.jpg",
 
     description:
-      "A modern artificial jewellery piece with contemporary detailing and a polished fashion finish. Designed to create a confident statement with stylish outfits. Ideal for parties, dinners, gatherings and modern occasion styling.",
+      "A modern artificial jewellery piece with contemporary detailing and a polished finish. Ideal for parties, dinners and stylish special occasions.",
 
     details: {
       material: "Artificial Jewellery",
@@ -492,7 +492,7 @@ const products = [
     image: "/products/jewellery-12.jpg",
 
     description:
-      "An elegant artificial jewellery design with polished decorative detailing and a sophisticated fashion finish. Created for parties, dinners and evening styling. Adds a refined and glamorous finishing touch to your outfit.",
+      "An elegant artificial jewellery design with polished detailing and a sophisticated finish. Perfect for parties, dinners and stylish evening occasions.",
 
     details: {
       material: "Artificial Jewellery",
@@ -518,7 +518,7 @@ const products = [
     image: "/products/garment-1.jpg",
 
     description:
-      "Premium Lawn fabric with a lightweight and breathable feel for comfortable seasonal styling. This single shirt piece measures approximately 3.5 yards and is ideal for creating a custom outfit. Perfect for warm weather, everyday wear and elegant semi-formal styling.",
+      "Premium Lawn fabric with a lightweight and breathable feel. This 3.5-yard single shirt piece is ideal for creating a stylish custom outfit for warm-weather wear.",
 
     details: {
       material: "Premium Lawn",
@@ -541,7 +541,7 @@ const products = [
     image: "/products/garment-2.jpg",
 
     description:
-      "A premium Lawn 2-piece fabric collection with a lightweight and breathable feel. The set includes approximately 6 yards of material for creating a coordinated outfit. Perfect for summer, festive, semi-formal and everyday seasonal styling.",
+      "A premium Lawn 2-piece fabric collection with a lightweight and breathable feel. The 6-yard material is ideal for elegant festive, summer and semi-formal styling.",
 
     details: {
       material: "Premium Lawn",
