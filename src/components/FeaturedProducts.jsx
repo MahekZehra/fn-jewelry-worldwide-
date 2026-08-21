@@ -4,46 +4,183 @@ import ProductCard from "./ProductCard";
 
 const FeaturedProducts = () => {
   return (
-    <section className="bg-[#FAF8F5] px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
+    <section
+      className="
+        relative overflow-hidden
+        bg-[#FFFDF9]
+        px-5 py-20
+        sm:px-8
+        lg:px-16 lg:py-28
+      "
+    >
 
-      <div className="mx-auto max-w-7xl">
+      {/* =====================================================
+          SOFT BACKGROUND DETAILS
+      ===================================================== */}
 
-        {/* Heading */}
-        <div className="mb-12 flex items-end justify-between gap-6 sm:mb-16">
+      <div
+        className="
+          pointer-events-none
+          absolute -right-32 top-10
+          h-80 w-80
+          rounded-full
+          bg-[#EFD9D5]/25
+          blur-3xl
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute -left-32 bottom-0
+          h-72 w-72
+          rounded-full
+          bg-[#E8D7B8]/20
+          blur-3xl
+        "
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+
+        {/* =================================================
+            HEADING
+        ================================================= */}
+
+        <div
+          className="
+            mb-12
+            flex items-end
+            justify-between
+            gap-6
+            sm:mb-16
+          "
+        >
 
           <div>
 
-            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
-              Customer Favorites
-            </p>
+            {/* Eyebrow */}
 
-            <h2 className="font-serif text-4xl leading-tight tracking-tight text-[#171717] sm:text-5xl">
+            <div className="mb-4 flex items-center gap-3">
+
+              <span className="h-px w-8 bg-[#C9A66B]/50" />
+
+              <p
+                className="
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.35em]
+                  text-[#B18A83]
+                  sm:text-xs
+                "
+              >
+                Customer Favorites
+              </p>
+
+            </div>
+
+            {/* Heading */}
+
+            <h2
+              className="
+                font-serif
+                text-4xl
+                leading-tight
+                tracking-[-0.02em]
+                text-[#3E302D]
+                sm:text-5xl
+              "
+            >
               Best Sellers
             </h2>
 
-            <p className="mt-3 max-w-md text-sm leading-6 text-black/50">
+            {/* Description */}
+
+            <p
+              className="
+                mt-4
+                max-w-md
+                text-sm
+                leading-6
+                text-[#776965]
+              "
+            >
               Discover some of our most loved pieces, selected to bring
               effortless elegance to every occasion.
             </p>
 
+            {/* Gold Accent */}
+
+            <div className="mt-5 flex items-center gap-2">
+
+              <span className="h-1 w-1 rounded-full bg-[#C9A66B]/70" />
+
+              <span className="h-px w-10 bg-[#C9A66B]/45" />
+
+            </div>
+
           </div>
 
-          {/* Desktop View All */}
+          {/* =================================================
+              DESKTOP VIEW ALL
+          ================================================= */}
+
           <Link
             to="/shop"
-            className="group hidden items-center gap-2 text-sm font-semibold sm:flex"
+            className="
+              group hidden
+              items-center gap-3
+              rounded-full
+              border border-[#C9A66B]/35
+              bg-[#FFFDF9]
+              px-5 py-2.5
+              text-sm
+              font-medium
+              text-[#5A4540]
+              shadow-[0_3px_12px_rgba(82,58,52,0.04)]
+              transition-all
+              duration-300
+              hover:border-[#C9A66B]/60
+              hover:bg-[#F9F0E9]
+              hover:shadow-[0_6px_18px_rgba(82,58,52,0.08)]
+              sm:flex
+            "
           >
             View All
 
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
+            <span
+              className="
+                text-[#B28A55]
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+            >
               →
             </span>
           </Link>
 
         </div>
 
-        {/* Products */}
-        <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4 lg:gap-x-7">
+        {/* =================================================
+            PRODUCTS
+        ================================================= */}
+
+        <div
+          className="
+            grid
+            grid-cols-2
+            gap-x-4
+            gap-y-12
+
+            sm:grid-cols-3
+            sm:gap-x-6
+            sm:gap-y-14
+
+            lg:grid-cols-4
+            lg:gap-x-7
+          "
+        >
 
           {products.slice(0, 4).map((product) => (
             <ProductCard
@@ -54,20 +191,56 @@ const FeaturedProducts = () => {
 
         </div>
 
-        {/* Mobile View All */}
+        {/* =================================================
+            MOBILE VIEW ALL
+        ================================================= */}
+
         <div className="mt-12 flex justify-center sm:hidden">
 
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 rounded-full border border-black/15 px-7 py-3.5 text-sm font-semibold transition duration-300 hover:bg-black hover:text-white"
+            className="
+              group
+              inline-flex
+              items-center
+              gap-2.5
+              rounded-full
+              border
+              border-[#B98B82]/35
+              bg-[#FFF9F7]
+              px-7 py-3.5
+              text-sm
+              font-medium
+              tracking-wide
+              text-[#5A4540]
+              shadow-[0_4px_15px_rgba(82,58,52,0.05)]
+              transition-all
+              duration-300
+              hover:border-[#C9A66B]/50
+              hover:bg-[#F5E7E3]
+              hover:shadow-[0_7px_20px_rgba(82,58,52,0.09)]
+              active:scale-[0.98]
+            "
           >
             View All Products
-            <span>→</span>
+
+            <span
+              className="
+                text-[#B28A55]
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+            >
+              →
+            </span>
+
           </Link>
 
         </div>
 
       </div>
+
     </section>
   );
 };

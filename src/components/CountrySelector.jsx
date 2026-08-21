@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { FiChevronDown, FiMapPin, FiCheck } from "react-icons/fi";
+import {
+  FiChevronDown,
+  FiMapPin,
+  FiCheck,
+} from "react-icons/fi";
 
 const countries = [
   {
@@ -98,7 +102,10 @@ const CountrySelector = () => {
         return matchingCountry || countries[0];
       }
     } catch (error) {
-      console.error("Unable to load selected country:", error);
+      console.error(
+        "Unable to load selected country:",
+        error
+      );
     }
 
     return countries[0];
@@ -113,7 +120,10 @@ const CountrySelector = () => {
       setIsOpen(true);
     };
 
-    window.addEventListener("openCountrySelector", openSelector);
+    window.addEventListener(
+      "openCountrySelector",
+      openSelector
+    );
 
     return () => {
       window.removeEventListener(
@@ -137,7 +147,10 @@ const CountrySelector = () => {
     window.addEventListener("keydown", handleEscape);
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener(
+        "keydown",
+        handleEscape
+      );
     };
   }, []);
 
@@ -171,7 +184,9 @@ const CountrySelector = () => {
       JSON.stringify(country)
     );
 
-    window.dispatchEvent(new Event("countryChanged"));
+    window.dispatchEvent(
+      new Event("countryChanged")
+    );
 
     setIsOpen(false);
   };
@@ -185,13 +200,39 @@ const CountrySelector = () => {
 
       <button
         type="button"
-        onClick={() => setIsOpen((current) => !current)}
-        className="flex w-full items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-medium text-black transition hover:border-black/20 sm:w-auto"
+        onClick={() =>
+          setIsOpen((current) => !current)
+        }
+        aria-expanded={isOpen}
+        aria-label="Select country and currency"
+        className="
+          group flex w-full items-center gap-2.5
+          rounded-full
+          border border-[#D8B9B5]/45
+          bg-[#FFFDF9]
+          px-3.5 py-2
+          text-xs font-medium
+          text-[#4A3D3A]
+          shadow-[0_3px_14px_rgba(119,88,78,0.06)]
+          transition-all duration-300
+          hover:border-[#C99A92]/65
+          hover:bg-[#FFF9F7]
+          hover:shadow-[0_5px_18px_rgba(119,88,78,0.10)]
+          active:scale-[0.98]
+          sm:w-auto
+        "
       >
 
         {/* FLAG */}
 
-        <span className="flex h-5 w-7 shrink-0 overflow-hidden rounded-sm bg-gray-100">
+        <span
+          className="
+            flex h-5 w-7 shrink-0
+            overflow-hidden rounded-[3px]
+            bg-[#F7F0EB]
+            ring-1 ring-[#C9A66B]/20
+          "
+        >
           <img
             src={selectedCountry.flag}
             alt={`${selectedCountry.name} flag`}
@@ -201,9 +242,14 @@ const CountrySelector = () => {
           />
         </span>
 
-        <FiMapPin className="shrink-0 text-sm" />
+        <FiMapPin
+          className="
+            shrink-0 text-sm
+            text-[#B98B82]
+          "
+        />
 
-        <span className="hidden sm:inline">
+        <span className="hidden max-w-[150px] truncate sm:inline">
           {selectedCountry.name}
         </span>
 
@@ -212,9 +258,12 @@ const CountrySelector = () => {
         </span>
 
         <FiChevronDown
-          className={`ml-auto shrink-0 text-sm transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`
+            ml-auto shrink-0
+            text-sm text-[#9C817B]
+            transition-transform duration-300
+            ${isOpen ? "rotate-180" : ""}
+          `}
         />
 
       </button>
@@ -229,7 +278,12 @@ const CountrySelector = () => {
           {/* MOBILE BACKDROP */}
 
           <div
-            className="fixed inset-0 z-[190] bg-black/30 sm:hidden"
+            className="
+              fixed inset-0 z-[190]
+              bg-[#3C2E2B]/25
+              backdrop-blur-[3px]
+              sm:hidden
+            "
             onClick={() => setIsOpen(false)}
           />
 
@@ -237,19 +291,99 @@ const CountrySelector = () => {
               DROPDOWN PANEL
           ================================================= */}
 
-          <div className="fixed left-3 right-3 top-20 z-[210] flex max-h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-3 sm:w-80 sm:max-h-[500px]">
+          <div
+            className="
+              fixed left-3 right-3 top-20 z-[210]
+              flex max-h-[calc(100dvh-6rem)]
+              flex-col overflow-hidden
 
-            {/* HEADER */}
+              rounded-[22px]
+              border border-[#D8B9B5]/35
+              bg-[#FFFDF9]
 
-            <div className="shrink-0 border-b border-black/[0.06] px-4 py-4">
+              shadow-[0_25px_70px_rgba(82,58,52,0.16)]
 
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-black/35">
-                Worldwide Shopping
-              </p>
+              sm:absolute
+              sm:left-auto
+              sm:right-0
+              sm:top-full
+              sm:mt-3
+              sm:w-80
+              sm:max-h-[500px]
+            "
+          >
 
-              <p className="mt-1 text-sm font-medium text-black">
-                Select your country
-              </p>
+            {/* =================================================
+                HEADER
+            ================================================= */}
+
+            <div
+              className="
+                shrink-0
+                border-b border-[#D8B9B5]/20
+                bg-gradient-to-br
+                from-[#FFF9F7]
+                via-[#FFFDF9]
+                to-[#F8F0EC]
+                px-5 py-5
+              "
+            >
+
+              <div className="flex items-start justify-between gap-4">
+
+                <div>
+
+                  <p
+                    className="
+                      text-[9px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.3em]
+                      text-[#B18A83]
+                    "
+                  >
+                    Worldwide Shopping
+                  </p>
+
+                  <p
+                    className="
+                      mt-1.5
+                      font-serif
+                      text-[17px]
+                      font-medium
+                      tracking-[-0.01em]
+                      text-[#3E302D]
+                    "
+                  >
+                    Select your country
+                  </p>
+
+                </div>
+
+                <span
+                  className="
+                    mt-1
+                    rounded-full
+                    border border-[#C9A66B]/25
+                    bg-[#F8F0E4]
+                    px-2.5 py-1
+                    text-[9px]
+                    font-medium
+                    tracking-wide
+                    text-[#A37C48]
+                  "
+                >
+                  {countries.length} destinations
+                </span>
+
+              </div>
+
+              <div
+                className="
+                  mt-3 h-px w-10
+                  bg-[#C9A66B]/60
+                "
+              />
 
             </div>
 
@@ -258,7 +392,12 @@ const CountrySelector = () => {
             ================================================= */}
 
             <div
-              className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2"
+              className="
+                min-h-0 flex-1
+                overflow-y-auto
+                overscroll-contain
+                p-2.5
+              "
               style={{
                 WebkitOverflowScrolling: "touch",
                 touchAction: "pan-y",
@@ -277,11 +416,31 @@ const CountrySelector = () => {
                     onClick={() =>
                       handleCountryChange(country)
                     }
-                    className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3.5 text-left transition ${
-                      isSelected
-                        ? "bg-black text-white"
-                        : "text-black hover:bg-[#FAF8F5]"
-                    }`}
+                    className={`
+                      group flex w-full
+                      items-center
+                      justify-between
+                      gap-3
+                      rounded-[15px]
+                      px-3
+                      py-3
+                      text-left
+                      transition-all
+                      duration-200
+
+                      ${
+                        isSelected
+                          ? `
+                            bg-[#F5E5E2]
+                            text-[#493936]
+                            shadow-[inset_0_0_0_1px_rgba(184,137,126,0.14)]
+                          `
+                          : `
+                            text-[#4A3D3A]
+                            hover:bg-[#FCF4F1]
+                          `
+                      }
+                    `}
                   >
 
                     {/* LEFT */}
@@ -290,11 +449,28 @@ const CountrySelector = () => {
 
                       {/* FLAG */}
 
-                      <span className="flex h-9 w-12 shrink-0 overflow-hidden rounded-md bg-gray-100">
+                      <span
+                        className={`
+                          flex h-9 w-12
+                          shrink-0
+                          overflow-hidden
+                          rounded-lg
+                          bg-[#F7F0EB]
+                          ring-1
+                          ${
+                            isSelected
+                              ? "ring-[#C9A66B]/35"
+                              : "ring-black/5"
+                          }
+                        `}
+                      >
                         <img
                           src={country.flag}
                           alt={`${country.name} flag`}
-                          className="block h-full w-full object-cover"
+                          className="
+                            block h-full w-full
+                            object-cover
+                          "
                           loading="eager"
                           draggable="false"
                         />
@@ -304,16 +480,29 @@ const CountrySelector = () => {
 
                       <span className="min-w-0">
 
-                        <span className="block truncate text-sm font-medium">
+                        <span
+                          className="
+                            block truncate
+                            text-sm
+                            font-medium
+                            tracking-[-0.01em]
+                          "
+                        >
                           {country.name}
                         </span>
 
                         <span
-                          className={`mt-0.5 block text-[11px] ${
-                            isSelected
-                              ? "text-white/60"
-                              : "text-black/40"
-                          }`}
+                          className={`
+                            mt-0.5
+                            block
+                            text-[10px]
+                            tracking-wide
+                            ${
+                              isSelected
+                                ? "text-[#9C756D]"
+                                : "text-[#A99A96]"
+                            }
+                          `}
                         >
                           {country.code} · {country.currency}
                         </span>
@@ -326,12 +515,33 @@ const CountrySelector = () => {
 
                     <span className="flex shrink-0 items-center gap-2">
 
-                      <span className="text-xs font-semibold">
+                      <span
+                        className={`
+                          text-xs
+                          font-medium
+                          ${
+                            isSelected
+                              ? "text-[#A47A4A]"
+                              : "text-[#9D8984]"
+                          }
+                        `}
+                      >
                         {country.symbol}
                       </span>
 
                       {isSelected && (
-                        <FiCheck className="text-sm" />
+                        <span
+                          className="
+                            flex h-5 w-5
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-[#C9A66B]/15
+                            text-[#A47A4A]
+                          "
+                        >
+                          <FiCheck className="text-[12px]" />
+                        </span>
                       )}
 
                     </span>

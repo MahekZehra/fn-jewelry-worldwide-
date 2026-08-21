@@ -4,9 +4,20 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-[#FAF8F5]">
+    <section className="relative overflow-hidden bg-[#FFF9F7]">
 
-      <div className="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
+      {/* Soft pastel background accents */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-[#F8DDE5]/40 blur-3xl"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 bottom-10 h-80 w-80 rounded-full bg-[#EADCF5]/35 blur-3xl"
+      />
+
+      <div className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
 
         {/* =========================
             HERO CONTENT
@@ -14,31 +25,32 @@ const Hero = () => {
         <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
 
           {/* Brand Label */}
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-black/50 sm:text-sm">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-[#A87585] sm:text-sm">
             FN Jewelry Worldwide
           </p>
 
           {/* Main Heading */}
-          <h1 className="font-serif text-4xl leading-[1.1] text-[#171717] sm:text-5xl lg:text-6xl">
+          <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-[#3B2930] sm:text-5xl lg:text-6xl">
             Elegance Made
-            <span className="block italic">
+            <span className="block italic text-[#B9788B]">
               Effortless.
             </span>
           </h1>
 
           {/* Premium Tagline */}
-          <p className="mt-5 font-serif text-xl italic leading-relaxed text-[#171717] sm:text-2xl">
-            Wear your sparkle.
-            <span className="block">
-              Own your story.
+          <p className="mt-5 font-serif text-xl italic leading-relaxed text-[#5B414B] sm:text-2xl">
+            Wear the moment.
+            <span className="block text-[#9D687A]">
+              Own your sparkle.
             </span>
           </p>
 
           {/* Description */}
-          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-black/60 sm:text-base lg:mx-0">
-            Discover thoughtfully curated artificial jewellery, elegant cloth
-            materials and statement Kundan clutches designed to bring
-            effortless sophistication to every look and every occasion.
+          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-[#6F5A61] sm:text-base lg:mx-0">
+            Where timeless tradition meets modern glamour. ✨
+            <br />
+            From statement pieces to everyday elegance, jewellery curated to
+            make every moment shine.
           </p>
 
           {/* =========================
@@ -50,7 +62,7 @@ const Hero = () => {
             <button
               type="button"
               onClick={() => navigate("/shop?category=Jewellery")}
-              className="flex h-12 w-full items-center justify-center rounded-full bg-black px-6 text-sm font-semibold text-white transition-all duration-300 hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 sm:w-auto sm:min-w-[170px]"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-[#B9788B] px-6 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(185,120,139,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#A9677A] hover:shadow-[0_12px_30px_rgba(185,120,139,0.25)] focus:outline-none focus:ring-2 focus:ring-[#D9A9B7] focus:ring-offset-2 focus:ring-offset-[#FFF9F7] active:scale-[0.98] sm:w-auto sm:min-w-[170px]"
             >
               Shop Jewellery
             </button>
@@ -59,7 +71,7 @@ const Hero = () => {
             <button
               type="button"
               onClick={() => navigate("/shop?category=Garments")}
-              className="flex h-12 w-full items-center justify-center rounded-full border border-black/20 bg-white px-6 text-sm font-semibold text-black transition-all duration-300 hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 sm:w-auto sm:min-w-[170px]"
+              className="flex h-12 w-full items-center justify-center rounded-full border border-[#E4C8D0] bg-[#FFFDFD] px-6 text-sm font-semibold text-[#6D4A55] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C997A7] hover:bg-[#FBECEF] focus:outline-none focus:ring-2 focus:ring-[#D9A9B7] focus:ring-offset-2 focus:ring-offset-[#FFF9F7] active:scale-[0.98] sm:w-auto sm:min-w-[170px]"
             >
               Explore Garments
             </button>
@@ -68,7 +80,7 @@ const Hero = () => {
             <button
               type="button"
               onClick={() => navigate("/shop?category=Accessories")}
-              className="flex h-12 w-full items-center justify-center rounded-full border border-black/20 bg-[#F7F4EF] px-6 text-sm font-semibold text-black transition-all duration-300 hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 sm:w-auto sm:min-w-[170px]"
+              className="flex h-12 w-full items-center justify-center rounded-full border border-[#DCCFE7] bg-[#F7F2FA] px-6 text-sm font-semibold text-[#66516F] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#BDA8CD] hover:bg-[#EDE3F3] focus:outline-none focus:ring-2 focus:ring-[#CBB9D7] focus:ring-offset-2 focus:ring-offset-[#FFF9F7] active:scale-[0.98] sm:w-auto sm:min-w-[170px]"
             >
               Shop Accessories
             </button>
@@ -82,12 +94,18 @@ const Hero = () => {
         ========================== */}
         <div className="order-2 lg:order-2">
 
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] border border-black/5 bg-[#E8E0D7] shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:rounded-[2.25rem] lg:max-w-lg">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] border border-[#E9D5DA] bg-[#F3E3E7] shadow-[0_24px_70px_rgba(128,82,96,0.14)] sm:rounded-[2.25rem] lg:max-w-lg">
+
+            {/* Soft pastel frame glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-1 z-0 rounded-[2rem] bg-gradient-to-br from-[#F7DDE5]/50 via-transparent to-[#E8DDF2]/50 blur-xl sm:rounded-[2.25rem]"
+            />
 
             {/* Cinematic Overlay */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/10 via-transparent to-white/5"
+              className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#5B3C46]/10 via-transparent to-[#FFF8FA]/10"
             />
 
             {/* Hero Video */}
@@ -98,7 +116,7 @@ const Hero = () => {
               playsInline
               preload="metadata"
               aria-label="FN Jewelry Worldwide artificial jewellery collection"
-              className="h-full w-full object-cover"
+              className="relative z-[1] h-full w-full object-cover"
             >
               <source
                 src="/videos/jewelry-hero.mp4"

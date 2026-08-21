@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import {
+  FiArrowUpRight,
+  FiChevronRight,
+  FiHeart,
+  FiStar,
+} from "react-icons/fi";
 
 import products from "../data/Products";
 import ProductCard from "../components/ProductCard";
@@ -47,17 +53,13 @@ const Shop = () => {
   ===================================================== */
 
   useEffect(() => {
-    setActiveCategory(
-      categoryFromUrl || "All"
-    );
+    setActiveCategory(categoryFromUrl || "All");
 
     setActiveSubCategory(
       subCategoryFromUrl || "All"
     );
 
-    setIsSaleOnly(
-      saleFromUrl === "true"
-    );
+    setIsSaleOnly(saleFromUrl === "true");
   }, [
     categoryFromUrl,
     subCategoryFromUrl,
@@ -66,7 +68,6 @@ const Shop = () => {
 
   /* =====================================================
      AVAILABLE SUBCATEGORIES
-     Dynamically generated from Products.js
   ===================================================== */
 
   const subCategories = useMemo(() => {
@@ -76,12 +77,8 @@ const Shop = () => {
 
     const categoryProducts = products.filter(
       (product) =>
-        product.category
-          ?.trim()
-          .toLowerCase() ===
-        activeCategory
-          .trim()
-          .toLowerCase()
+        product.category?.trim().toLowerCase() ===
+        activeCategory.trim().toLowerCase()
     );
 
     return [
@@ -101,36 +98,15 @@ const Shop = () => {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-
-      /* -----------------------------------------------
-         CATEGORY
-      ----------------------------------------------- */
-
       const matchesCategory =
         activeCategory === "All" ||
-        product.category
-          ?.trim()
-          .toLowerCase() ===
-          activeCategory
-            .trim()
-            .toLowerCase();
-
-      /* -----------------------------------------------
-         SUBCATEGORY
-      ----------------------------------------------- */
+        product.category?.trim().toLowerCase() ===
+          activeCategory.trim().toLowerCase();
 
       const matchesSubCategory =
         activeSubCategory === "All" ||
-        product.subCategory
-          ?.trim()
-          .toLowerCase() ===
-          activeSubCategory
-            .trim()
-            .toLowerCase();
-
-      /* -----------------------------------------------
-         SALE
-      ----------------------------------------------- */
+        product.subCategory?.trim().toLowerCase() ===
+          activeSubCategory.trim().toLowerCase();
 
       const matchesSale =
         !isSaleOnly ||
@@ -155,12 +131,6 @@ const Shop = () => {
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
     setActiveSubCategory("All");
-
-    /*
-      Selecting a normal category
-      turns Sale mode off.
-    */
-
     setIsSaleOnly(false);
 
     if (category === "All") {
@@ -169,16 +139,14 @@ const Shop = () => {
       setSearchParams({
         category,
       });
-    };
+    }
   };
 
   /* =====================================================
      SUBCATEGORY CHANGE
   ===================================================== */
 
-  const handleSubCategoryChange = (
-    subCategory
-  ) => {
+  const handleSubCategoryChange = (subCategory) => {
     setActiveSubCategory(subCategory);
 
     const params = {};
@@ -191,14 +159,8 @@ const Shop = () => {
       subCategory !== "All" &&
       activeCategory !== "All"
     ) {
-      params.subCategory =
-        subCategory;
+      params.subCategory = subCategory;
     }
-
-    /*
-      Preserve Sale mode when
-      changing subcategory.
-    */
 
     if (isSaleOnly) {
       params.sale = "true";
@@ -218,29 +180,16 @@ const Shop = () => {
 
     const params = {};
 
-    /*
-      Keep current category.
-    */
-
     if (activeCategory !== "All") {
       params.category = activeCategory;
     }
-
-    /*
-      Keep current subcategory.
-    */
 
     if (
       activeSubCategory !== "All" &&
       activeCategory !== "All"
     ) {
-      params.subCategory =
-        activeSubCategory;
+      params.subCategory = activeSubCategory;
     }
-
-    /*
-      Enable / disable sale filter.
-    */
 
     if (newSaleState) {
       params.sale = "true";
@@ -266,11 +215,6 @@ const Shop = () => {
   ===================================================== */
 
   const filterDescription = useMemo(() => {
-
-    /* -----------------------------------------------
-       SALE + SUBCATEGORY
-    ----------------------------------------------- */
-
     if (
       isSaleOnly &&
       activeCategory !== "All" &&
@@ -279,10 +223,6 @@ const Shop = () => {
       return `Showing sale items in ${activeSubCategory.toLowerCase()}`;
     }
 
-    /* -----------------------------------------------
-       SALE + CATEGORY
-    ----------------------------------------------- */
-
     if (
       isSaleOnly &&
       activeCategory !== "All"
@@ -290,36 +230,19 @@ const Shop = () => {
       return `Showing sale items in ${activeCategory.toLowerCase()}`;
     }
 
-    /* -----------------------------------------------
-       ALL SALE ITEMS
-    ----------------------------------------------- */
-
     if (isSaleOnly) {
       return "Showing all products currently on sale";
     }
-
-    /* -----------------------------------------------
-       ALL PRODUCTS
-    ----------------------------------------------- */
 
     if (activeCategory === "All") {
       return "Showing our complete collection";
     }
 
-    /* -----------------------------------------------
-       CATEGORY
-    ----------------------------------------------- */
-
     if (activeSubCategory === "All") {
       return `Showing all ${activeCategory.toLowerCase()}`;
     }
 
-    /* -----------------------------------------------
-       SUBCATEGORY
-    ----------------------------------------------- */
-
     return `Showing ${activeSubCategory.toLowerCase()}`;
-
   }, [
     activeCategory,
     activeSubCategory,
@@ -331,9 +254,71 @@ const Shop = () => {
   ===================================================== */
 
   return (
-    <main className="min-h-screen bg-[#FAF8F5] px-5 pb-20 pt-12 sm:px-8 sm:pt-16 lg:px-16 lg:pb-28 lg:pt-20">
+    <main
+      className="
+        relative min-h-screen
+        overflow-hidden
+        bg-[#F8F2EC]
+        px-5 pb-24 pt-12
+        sm:px-8 sm:pt-16
+        lg:px-16 lg:pb-32 lg:pt-20
+      "
+    >
 
-      <div className="mx-auto max-w-7xl">
+      {/* =================================================
+          WHIMSICAL BACKGROUND GLOW
+      ================================================= */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute -right-44 top-16
+          h-[30rem] w-[30rem]
+          rounded-full
+          bg-[#E8C9CF]/30
+          blur-[100px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute -left-48 top-[28%]
+          h-[32rem] w-[32rem]
+          rounded-full
+          bg-[#E7D4B7]/25
+          blur-[110px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute right-[20%] top-[55%]
+          h-72 w-72
+          rounded-full
+          bg-[#DCCFE0]/20
+          blur-[90px]
+        "
+      />
+
+      {/* =================================================
+          DECORATIVE FLOATING DETAILS
+      ================================================= */}
+
+      <div className="pointer-events-none absolute left-[7%] top-32 hidden text-[#B9937D]/30 lg:block">
+        <FiStar className="text-2xl" />
+      </div>
+
+      <div className="pointer-events-none absolute right-[8%] top-[24%] hidden text-[#B9937D]/25 lg:block">
+        <FiStar className="text-xl" />
+      </div>
+
+      <div className="pointer-events-none absolute bottom-[15%] left-[12%] hidden text-[#B9937D]/20 lg:block">
+        <FiStar className="text-lg" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* =================================================
             PAGE HEADER
@@ -341,34 +326,107 @@ const Shop = () => {
 
         <header className="mx-auto max-w-3xl text-center">
 
-          <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
-            FN Collection
-          </p>
+          <div className="flex items-center justify-center gap-3">
 
-          <h1 className="mt-4 font-serif text-4xl leading-tight tracking-tight text-[#171717] sm:text-5xl lg:text-6xl">
-            Shop Our Collection
+            <span className="h-px w-10 bg-[#B9937D]/45" />
+
+            <FiStar className="text-xs text-[#B9937D]/70" />
+
+            <p
+              className="
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.4em]
+                text-[#A8797D]
+                sm:text-xs
+              "
+            >
+              FN Jewelry Worldwide
+            </p>
+
+            <FiStar className="text-xs text-[#B9937D]/70" />
+
+            <span className="h-px w-10 bg-[#B9937D]/45" />
+
+          </div>
+
+          <h1
+            className="
+              mt-5
+              font-serif
+              text-5xl
+              leading-[0.95]
+              tracking-[-0.035em]
+              text-[#463532]
+              sm:text-6xl
+              lg:text-7xl
+            "
+          >
+            Shop Our
+            <span className="block italic text-[#A8797D]">
+              Collection
+            </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-black/50 sm:text-base">
-            Explore elegant artificial jewellery,
-            beautiful cloth materials and statement
-            accessories carefully selected to elevate
-            every occasion.
+          <p
+            className="
+              mx-auto mt-6
+              max-w-2xl
+              text-sm
+              leading-7
+              text-[#776966]
+              sm:text-base
+            "
+          >
+            A curated world of delicate jewellery,
+            beautiful fabrics and statement pieces —
+            selected for the woman who loves to
+            stand out effortlessly.
           </p>
+
+          {/* ORNAMENT */}
+
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+
+            <span className="h-px w-14 bg-[#B9937D]/35" />
+
+            <FiStar className="text-lg text-[#B9937D]/60" />
+
+            <span className="h-px w-14 bg-[#B9937D]/35" />
+
+          </div>
 
         </header>
 
         {/* =================================================
-            MAIN CATEGORY FILTERS
+            FILTER PANEL
         ================================================= */}
 
-        <div className="mt-10 border-y border-black/[0.06] py-4 sm:mt-14">
+        <div
+          className="
+            mt-12
+            rounded-[1.75rem]
+            border border-[#B9937D]/20
+            bg-[#FFF9F6]/75
+            p-3
+            shadow-[0_18px_50px_rgba(89,62,55,0.06)]
+            backdrop-blur-sm
+            sm:mt-16
+            sm:p-4
+          "
+        >
 
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide sm:justify-center">
-
-            {/* =================================================
-                ALL / JEWELLERY / GARMENTS / ACCESSORIES
-            ================================================= */}
+          <div
+            className="
+              flex items-center
+              gap-2
+              overflow-x-auto
+              pb-1
+              scrollbar-hide
+              sm:justify-center
+            "
+          >
 
             {categories.map((category) => {
 
@@ -381,33 +439,75 @@ const Shop = () => {
                   key={category}
                   type="button"
                   onClick={() =>
-                    handleCategoryChange(
-                      category
-                    )
+                    handleCategoryChange(category)
                   }
-                  className={`whitespace-nowrap rounded-full px-6 py-3 text-xs font-semibold tracking-wide transition-all duration-300 ${
-                    isActive
-                      ? "bg-black text-white shadow-sm"
-                      : "bg-white text-black/55 ring-1 ring-black/[0.07] hover:bg-black hover:text-white"
-                  }`}
+                  className={`
+                    whitespace-nowrap
+                    rounded-full
+                    px-6 py-3
+                    text-xs
+                    font-medium
+                    tracking-wide
+                    transition-all
+                    duration-300
+
+                    ${
+                      isActive
+                        ? `
+                          bg-[#493633]
+                          text-[#FFF9F6]
+                          shadow-[0_8px_22px_rgba(73,54,51,0.18)]
+                        `
+                        : `
+                          border
+                          border-[#D6B8B5]/35
+                          bg-[#FFFDFC]
+                          text-[#806D68]
+                          hover:border-[#B9937D]/45
+                          hover:bg-[#F5E6E3]
+                          hover:text-[#513D39]
+                        `
+                    }
+                  `}
                 >
                   {category}
                 </button>
               );
             })}
 
-            {/* =================================================
-                ON SALE
-            ================================================= */}
+            {/* SALE */}
 
             <button
               type="button"
               onClick={handleSaleChange}
-              className={`whitespace-nowrap rounded-full px-6 py-3 text-xs font-semibold tracking-wide transition-all duration-300 ${
-                isSaleOnly
-                  ? "bg-black text-white shadow-sm"
-                  : "bg-white text-black/55 ring-1 ring-black/[0.07] hover:bg-black hover:text-white"
-              }`}
+              className={`
+                whitespace-nowrap
+                rounded-full
+                px-6 py-3
+                text-xs
+                font-medium
+                tracking-wide
+                transition-all
+                duration-300
+
+                ${
+                  isSaleOnly
+                    ? `
+                      bg-[#A8797D]
+                      text-white
+                      shadow-[0_8px_22px_rgba(168,121,125,0.22)]
+                    `
+                    : `
+                      border
+                      border-[#D6B8B5]/35
+                      bg-[#FFFDFC]
+                      text-[#806D68]
+                      hover:border-[#B9937D]/45
+                      hover:bg-[#F5E6E3]
+                      hover:text-[#513D39]
+                    `
+                }
+              `}
             >
               On Sale
             </button>
@@ -421,23 +521,45 @@ const Shop = () => {
         ================================================= */}
 
         {isSaleOnly && (
-
-          <div className="mt-5 flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-black/[0.05] sm:px-5">
+          <div
+            className="
+              mt-5
+              flex items-center
+              justify-between
+              rounded-2xl
+              border border-[#D6B8B5]/25
+              bg-[#F7E8E6]/80
+              px-4 py-3
+              shadow-[0_8px_25px_rgba(89,62,55,0.05)]
+              sm:px-5
+            "
+          >
 
             <div className="flex items-center gap-3">
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-bold text-white">
+              <span
+                className="
+                  flex h-9 w-9
+                  items-center justify-center
+                  rounded-full
+                  bg-[#A8797D]
+                  text-xs
+                  font-bold
+                  text-white
+                  shadow-sm
+                "
+              >
                 %
               </span>
 
               <div>
 
-                <p className="text-xs font-semibold text-black">
+                <p className="text-xs font-semibold text-[#493633]">
                   Sale Collection
                 </p>
 
-                <p className="mt-0.5 text-[11px] text-black/40">
-                  Discover our current special offers
+                <p className="mt-0.5 text-[11px] text-[#9B817B]">
+                  A little something beautiful, for less.
                 </p>
 
               </div>
@@ -447,13 +569,18 @@ const Shop = () => {
             <button
               type="button"
               onClick={resetFilters}
-              className="text-[11px] font-medium text-black/45 transition hover:text-black"
+              className="
+                text-[11px]
+                font-medium
+                text-[#9C817B]
+                transition
+                hover:text-[#493633]
+              "
             >
               Clear
             </button>
 
           </div>
-
         )}
 
         {/* =================================================
@@ -465,31 +592,51 @@ const Shop = () => {
 
             <div className="mt-5">
 
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide sm:justify-center">
-
-                {/* =================================================
-                    ALL SUBCATEGORIES
-                ================================================= */}
+              <div
+                className="
+                  flex items-center
+                  gap-2
+                  overflow-x-auto
+                  pb-2
+                  scrollbar-hide
+                  sm:justify-center
+                "
+              >
 
                 <button
                   type="button"
                   onClick={() =>
-                    handleSubCategoryChange(
-                      "All"
-                    )
+                    handleSubCategoryChange("All")
                   }
-                  className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
-                    activeSubCategory === "All"
-                      ? "bg-[#171717] text-white"
-                      : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
-                  }`}
+                  className={`
+                    whitespace-nowrap
+                    rounded-full
+                    px-5 py-2.5
+                    text-[11px]
+                    font-medium
+                    transition-all
+                    duration-300
+
+                    ${
+                      activeSubCategory === "All"
+                        ? `
+                          bg-[#6B514B]
+                          text-white
+                          shadow-[0_5px_15px_rgba(73,54,51,0.12)]
+                        `
+                        : `
+                          border
+                          border-[#D6B8B5]/30
+                          bg-[#FFFDFC]
+                          text-[#8A7772]
+                          hover:bg-[#F7E9E5]
+                          hover:text-[#513D39]
+                        `
+                    }
+                  `}
                 >
                   All {activeCategory}
                 </button>
-
-                {/* =================================================
-                    DYNAMIC SUBCATEGORIES
-                ================================================= */}
 
                 {subCategories.map(
                   (subCategory) => {
@@ -507,11 +654,32 @@ const Shop = () => {
                             subCategory
                           )
                         }
-                        className={`whitespace-nowrap rounded-full px-5 py-2.5 text-[11px] font-medium transition-all duration-300 ${
-                          isActive
-                            ? "bg-[#171717] text-white"
-                            : "bg-white text-black/50 ring-1 ring-black/[0.06] hover:text-black"
-                        }`}
+                        className={`
+                          whitespace-nowrap
+                          rounded-full
+                          px-5 py-2.5
+                          text-[11px]
+                          font-medium
+                          transition-all
+                          duration-300
+
+                          ${
+                            isActive
+                              ? `
+                                bg-[#6B514B]
+                                text-white
+                                shadow-[0_5px_15px_rgba(73,54,51,0.12)]
+                              `
+                              : `
+                                border
+                                border-[#D6B8B5]/30
+                                bg-[#FFFDFC]
+                                text-[#8A7772]
+                                hover:bg-[#F7E9E5]
+                                hover:text-[#513D39]
+                              `
+                          }
+                        `}
                       >
                         {subCategory}
                       </button>
@@ -528,50 +696,118 @@ const Shop = () => {
             PRODUCTS META
         ================================================= */}
 
-        <div className="mt-8 flex items-center justify-between">
+        <div
+          className="
+            mt-10
+            flex items-end
+            justify-between
+            border-b border-[#B9937D]/15
+            pb-5
+          "
+        >
 
           <div>
 
-            <p className="text-sm font-medium text-black">
+            <p className="font-serif text-xl text-[#493633] sm:text-2xl">
 
               {filteredProducts.length}{" "}
 
-              {filteredProducts.length === 1
-                ? "Product"
-                : "Products"}
+              <span className="italic text-[#A8797D]">
+                {filteredProducts.length === 1
+                  ? "Piece"
+                  : "Pieces"}
+              </span>
 
             </p>
 
-            <p className="mt-1 text-xs text-black/40">
+            <p className="mt-1 text-xs text-[#9A8580]">
               {filterDescription}
             </p>
 
           </div>
 
-          <p className="hidden text-xs uppercase tracking-[0.2em] text-black/30 sm:block">
-            FN Jewelry Worldwide
-          </p>
+          <div className="hidden items-center gap-2 sm:flex">
+
+            <span className="h-px w-8 bg-[#B9937D]/30" />
+
+            <p
+              className="
+                text-[9px]
+                uppercase
+                tracking-[0.3em]
+                text-[#A8797D]/65
+              "
+            >
+              Curated for you
+            </p>
+
+            <FiHeart className="text-xs text-[#B9937D]/55" />
+
+          </div>
 
         </div>
 
         {/* =================================================
-            PRODUCTS GRID
+            PRODUCTS AREA
         ================================================= */}
 
         {filteredProducts.length > 0 ? (
 
-          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-12 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-14 lg:grid-cols-4 lg:gap-x-7 lg:gap-y-16">
+          <div
+            className="
+              relative
+              mt-8
+              rounded-[2rem]
+              border border-[#B9937D]/10
+              bg-[#FFF9F5]/45
+              p-3
+              shadow-[0_20px_60px_rgba(89,62,55,0.035)]
+              sm:mt-10
+              sm:p-5
+              lg:p-7
+            "
+          >
 
-            {filteredProducts.map(
-              (product) => (
+            {/* subtle inner glow */}
 
+            <div
+              className="
+                pointer-events-none
+                absolute inset-0
+                rounded-[2rem]
+                bg-gradient-to-br
+                from-white/50
+                via-transparent
+                to-[#E8C9CF]/10
+              "
+            />
+
+            <div
+              className="
+                relative z-10
+                grid
+                grid-cols-2
+                gap-x-4
+                gap-y-12
+
+                sm:grid-cols-3
+                sm:gap-x-6
+                sm:gap-y-14
+
+                lg:grid-cols-4
+                lg:gap-x-7
+                lg:gap-y-16
+              "
+            >
+
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                 />
+              ))}
 
-              )
-            )}
+            </div>
 
           </div>
 
@@ -581,34 +817,119 @@ const Shop = () => {
              EMPTY STATE
           ================================================= */
 
-          <div className="mx-auto mt-16 max-w-lg rounded-[2rem] border border-black/[0.06] bg-white px-6 py-16 text-center">
+          <div
+            className="
+              mx-auto
+              mt-16
+              max-w-lg
+              rounded-[2rem]
+              border border-[#D6B8B5]/25
+              bg-gradient-to-br
+              from-[#FFFDFC]
+              via-[#F9EEEB]
+              to-[#F1E3DD]
+              px-6 py-16
+              text-center
+              shadow-[0_15px_45px_rgba(82,58,52,0.06)]
+            "
+          >
 
-            <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/35">
-              Collection
+            <div className="mx-auto flex items-center justify-center gap-3">
+
+              <span className="h-px w-8 bg-[#B9937D]/45" />
+
+              <FiSparkles className="text-sm text-[#B9937D]/65" />
+
+              <span className="h-px w-8 bg-[#B9937D]/45" />
+
+            </div>
+
+            <p
+              className="
+                mt-5
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.35em]
+                text-[#A8797D]
+              "
+            >
+              The Collection
             </p>
 
-            <h2 className="mt-4 font-serif text-3xl text-[#171717]">
+            <h2
+              className="
+                mt-4
+                font-serif
+                text-3xl
+                tracking-tight
+                text-[#493633]
+              "
+            >
               No products found
             </h2>
 
-            <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-black/45">
-
+            <p
+              className="
+                mx-auto mt-3
+                max-w-sm
+                text-sm
+                leading-6
+                text-[#8A7772]
+              "
+            >
               {isSaleOnly
-                ? "There are currently no sale products matching your selected filters."
-                : "We couldn't find any products in this category. Please explore another collection."}
-
+                ? "There are currently no sale pieces matching your selected filters."
+                : "We couldn't find any pieces in this collection. Perhaps another one is waiting for you."}
             </p>
 
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-7 rounded-full bg-black px-7 py-3 text-sm font-semibold text-white transition hover:bg-black/80"
+              className="
+                mt-7
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                bg-[#493633]
+                px-7 py-3
+                text-sm
+                font-medium
+                tracking-wide
+                text-white
+                shadow-[0_8px_22px_rgba(67,48,43,0.14)]
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:bg-[#604A44]
+                hover:shadow-[0_10px_28px_rgba(67,48,43,0.18)]
+              "
             >
-              View All Products
+              View All Pieces
+              <FiArrowUpRight />
             </button>
 
           </div>
 
+        )}
+
+        {/* =================================================
+            BOTTOM BRAND NOTE
+        ================================================= */}
+
+        {filteredProducts.length > 0 && (
+          <div className="mt-14 flex items-center justify-center gap-3 text-center">
+
+            <span className="h-px w-10 bg-[#B9937D]/25" />
+
+            <p className="font-serif text-sm italic text-[#9B817B]">
+              Made for beautiful moments.
+            </p>
+
+            <span className="h-px w-10 bg-[#B9937D]/25" />
+
+          </div>
         )}
 
       </div>

@@ -501,6 +501,98 @@ const products = [
     },
   },
 
+    // =====================================================
+  // JEWELLERY — NEW ARRIVALS
+  // =====================================================
+
+  {
+    id: 30,
+    name: "Elegant New Arrival",
+    priceAED: 99,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+
+    image: "/products/jewellery-16.jpg",
+
+    description:
+      "A graceful artificial jewellery design with elegant detailing and a refined finish. Perfect for adding a sophisticated touch to everyday and special occasion looks.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "New Arrival",
+      occasion: "Everyday & Special Occasions",
+    },
+  },
+
+  {
+    id: 31,
+    name: "Graceful Statement Jewellery",
+    priceAED: 109,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+
+    image: "/products/jewellery-17.jpg",
+
+    description:
+      "A beautiful artificial jewellery piece featuring elegant detailing and a polished finish. Designed to bring effortless charm to both traditional and contemporary outfits.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Statement Jewellery",
+      occasion: "Everyday & Occasion Wear",
+    },
+  },
+
+  {
+    id: 32,
+    name: "Classic Elegance Jewellery",
+    priceAED: 119,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+
+    image: "/products/jewellery-18.jpg",
+
+    description:
+      "A timeless artificial jewellery design with sophisticated detailing and a graceful finish. An elegant choice for celebrations, gatherings and special occasions.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Classic Jewellery",
+      occasion: "Festive & Special Occasions",
+    },
+  },
+
+  {
+    id: 33,
+    name: "Luxury Charm Jewellery",
+    priceAED: 129,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+
+    image: "/products/jewellery-19.jpg",
+
+    description:
+      "A luxurious artificial jewellery design created to add a refined statement to your look. Perfect for elegant styling, festive occasions and memorable evenings.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Luxury Jewellery",
+      occasion: "Festive & Formal Wear",
+    },
+  },
+
   // =====================================================
   // GARMENTS — LAWN
   // =====================================================

@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import CategorySection from "./components/CategorySection";
+import OurStory from "./components/OurStory";
 import FeaturedProducts from "./components/FeaturedProducts";
+import KnowYourStones from "./components/KnowYourStones";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Cart from "./pages/Cart";
@@ -17,9 +19,17 @@ function Home() {
   return (
     <>
       <Hero />
+
       <CategorySection />
+
+      <OurStory />
+
       <FeaturedProducts />
-       <WorldwideDelivery />
+
+      <KnowYourStones />
+
+      <WorldwideDelivery />
+
       <Footer />
     </>
   );
@@ -50,9 +60,8 @@ function App() {
         />
       </Routes>
 
-      {/* Floating WhatsApp Button */} 
+      {/* Floating WhatsApp Button */}
       <WhatsAppButton />
-      
     </BrowserRouter>
   );
 }
