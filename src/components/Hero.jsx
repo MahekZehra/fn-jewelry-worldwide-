@@ -5,33 +5,44 @@ const Hero = () => {
   const navigate = useNavigate();
   const videoRef = useRef(null);
 
-  /* =====================================================
-     MOBILE VIDEO AUTOPLAY FIX
-  ===================================================== */
-
   useEffect(() => {
     const video = videoRef.current;
 
     if (!video) return;
 
+    // Mobile autoplay requirements
     video.muted = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
+    video.defaultMuted = true;
 
-    const playVideo = async () => {
+    const forcePlay = async () => {
       try {
-        await video.play();
+        if (video.paused) {
+          await video.play();
+        }
       } catch (error) {
-        console.log("Hero video autoplay waiting for browser permission.");
+        console.log("Hero video autoplay was blocked:", error);
       }
     };
 
-    playVideo();
+    // Try immediately
+    forcePlay();
 
+    // Try again once browser has loaded enough data
+    const handleCanPlay = () => {
+      forcePlay();
+    };
+
+    const handleLoadedData = () => {
+      forcePlay();
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("loadeddata", handleLoadedData);
+
+    // If browser temporarily pauses the video, try again
     const handleVisibilityChange = () => {
       if (!document.hidden) {
-        playVideo();
+        forcePlay();
       }
     };
 
@@ -41,6 +52,9 @@ const Hero = () => {
     );
 
     return () => {
+      video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("loadeddata", handleLoadedData);
+
       document.removeEventListener(
         "visibilitychange",
         handleVisibilityChange
@@ -69,12 +83,10 @@ const Hero = () => {
         ========================== */}
         <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
 
-          {/* Brand Label */}
           <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-[#A87585] sm:text-sm">
             FN Jewelry Worldwide
           </p>
 
-          {/* Main Heading */}
           <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-[#3B2930] sm:text-5xl lg:text-6xl">
             Elegance Made
             <span className="block italic text-[#B9788B]">
@@ -82,7 +94,6 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Premium Tagline */}
           <p className="mt-5 font-serif text-xl italic leading-relaxed text-[#5B414B] sm:text-2xl">
             Wear the moment.
             <span className="block text-[#9D687A]">
@@ -90,7 +101,6 @@ const Hero = () => {
             </span>
           </p>
 
-          {/* Description */}
           <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-[#6F5A61] sm:text-base lg:mx-0">
             Where timeless tradition meets modern glamour. ✨
             <br />
@@ -98,12 +108,9 @@ const Hero = () => {
             make every moment shine.
           </p>
 
-          {/* =========================
-              HERO BUTTONS
-          ========================== */}
+          {/* HERO BUTTONS */}
           <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center lg:mx-0 lg:justify-start">
 
-            {/* Jewellery */}
             <button
               type="button"
               onClick={() => navigate("/shop?category=Jewellery")}
@@ -112,7 +119,6 @@ const Hero = () => {
               Shop Jewellery
             </button>
 
-            {/* Garments */}
             <button
               type="button"
               onClick={() => navigate("/shop?category=Garments")}
@@ -121,7 +127,6 @@ const Hero = () => {
               Explore Garments
             </button>
 
-            {/* Accessories */}
             <button
               type="button"
               onClick={() => navigate("/shop?category=Accessories")}
@@ -153,16 +158,18 @@ const Hero = () => {
               className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#5B3C46]/10 via-transparent to-[#FFF8FA]/10"
             />
 
-            {/* Hero Video */}
+            {/* HERO VIDEO */}
             <video
               ref={videoRef}
               autoPlay
               muted
+              defaultMuted
               loop
               playsInline
               preload="auto"
               controls={false}
               disablePictureInPicture
+              webkit-playsinline="true"
               aria-label="FN Jewelry Worldwide artificial jewellery collection"
               className="relative z-[1] h-full w-full object-cover"
             >
