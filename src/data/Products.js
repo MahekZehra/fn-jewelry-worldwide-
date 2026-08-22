@@ -136,6 +136,54 @@ const products = [
   },
 
   // =====================================================
+  // ACCESSORIES — NEW KUNDAN CLUTCHES
+  // =====================================================
+
+  {
+    id: 34,
+    name: "Elegant Kundan Clutch",
+    priceAED: 239,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Accessories",
+    subCategory: "Kundan Clutches",
+
+    image: "/products/kundan-clutch-7.jpg",
+
+    description:
+      "An elegant Kundan clutch featuring intricate traditional-inspired detailing and a sophisticated finish. Perfect for weddings, festive celebrations, formal events and evening occasions.",
+
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Elegant Kundan Clutch",
+      occasion: "Weddings & Special Occasions",
+    },
+  },
+
+  {
+    id: 35,
+    name: "Luxury Statement Kundan Clutch",
+    priceAED: 259,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Accessories",
+    subCategory: "Kundan Clutches",
+
+    image: "/products/kundan-clutch-8.jpg",
+
+    description:
+      "A luxurious Kundan clutch with statement embellishment, elegant detailing and a refined finish. Designed to complement wedding, festive and sophisticated evening looks.",
+
+    details: {
+      material: "Kundan & Artificial Stones",
+      type: "Luxury Kundan Clutch",
+      occasion: "Weddings & Formal Events",
+    },
+  },
+
+  // =====================================================
   // JEWELLERY — SETS
   // =====================================================
 
@@ -148,6 +196,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-1.jpg",
 
@@ -170,6 +220,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Designer Sets",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-2.jpg",
 
@@ -196,6 +248,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Designer Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-3.jpg",
 
@@ -218,6 +272,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Designer Sets",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-8.jpg",
 
@@ -240,6 +296,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Designer Sets",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-13.jpg",
 
@@ -262,6 +320,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Designer Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-15.jpg",
 
@@ -288,6 +348,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Necklaces",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
 
     image: "/products/jewellery-4.jpg",
 
@@ -310,6 +372,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Necklaces",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
 
     image: "/products/jewellery-14.jpg",
 
@@ -336,6 +400,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Everyday Jewellery",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-5.jpg",
 
@@ -358,6 +424,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Everyday Jewellery",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-9.jpg",
 
@@ -384,6 +452,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-6.jpg",
 
@@ -410,6 +480,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Earrings",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
 
     image: "/products/jewellery-7.jpg",
 
@@ -436,6 +508,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Traditional Sets",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-10.jpg",
 
@@ -462,6 +536,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Statement Jewellery",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
 
     image: "/products/jewellery-11.jpg",
 
@@ -488,6 +564,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "Party Jewellery",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-12.jpg",
 
@@ -501,7 +579,7 @@ const products = [
     },
   },
 
-    // =====================================================
+  // =====================================================
   // JEWELLERY — NEW ARRIVALS
   // =====================================================
 
@@ -514,6 +592,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "New Arrivals",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-16.jpg",
 
@@ -536,6 +616,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
 
     image: "/products/jewellery-17.jpg",
 
@@ -558,6 +640,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
 
     image: "/products/jewellery-18.jpg",
 
@@ -580,6 +664,8 @@ const products = [
 
     category: "Jewellery",
     subCategory: "New Arrivals",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
 
     image: "/products/jewellery-19.jpg",
 
@@ -590,6 +676,106 @@ const products = [
       material: "Artificial Jewellery",
       type: "Luxury Jewellery",
       occasion: "Festive & Formal Wear",
+    },
+  },
+
+  // =====================================================
+  // JEWELLERY — NEW TURKISH COLLECTION
+  // =====================================================
+
+  {
+    id: 36,
+    name: "Turkish Elegance Jewellery",
+    priceAED: 119,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
+
+    image: "/products/jewellery-20.jpg",
+
+    description:
+      "A graceful artificial jewellery design inspired by elegant Turkish styling, featuring refined detailing and a polished finish. Perfect for adding a sophisticated touch to both traditional and contemporary looks.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Turkish Style Jewellery",
+      occasion: "Everyday & Special Occasions",
+    },
+  },
+
+  {
+    id: 37,
+    name: "Turkish Royal Jewellery",
+    priceAED: 129,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
+
+    image: "/products/jewellery-21.jpg",
+
+    description:
+      "A sophisticated artificial jewellery piece with elegant Turkish-inspired detailing and a luxurious finish. Designed to complement festive celebrations, parties and special occasion outfits.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Turkish Style Jewellery",
+      occasion: "Festive & Formal Wear",
+    },
+  },
+
+  {
+    id: 38,
+    name: "Turkish Classic Collection",
+    priceAED: 139,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
+
+    image: "/products/jewellery-22.jpg",
+
+    description:
+      "A timeless artificial jewellery design inspired by classic Turkish aesthetics, featuring graceful detailing and a refined polished finish. Ideal for elegant everyday and occasion styling.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Turkish Style Jewellery",
+      occasion: "Everyday & Occasion Wear",
+    },
+  },
+
+  {
+    id: 39,
+    name: "Turkish Luxury Statement",
+    priceAED: 149,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
+
+    image: "/products/jewellery-23.jpg",
+
+    description:
+      "A luxurious artificial jewellery design with striking Turkish-inspired detailing and an elegant statement finish. Perfect for weddings, celebrations, evening events and sophisticated styling.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Turkish Style Statement Jewellery",
+      occasion: "Weddings & Evening Events",
     },
   },
 

@@ -389,13 +389,59 @@ const ProductCard = ({ product }) => {
 
       <div className="px-1 pt-4">
 
-        {/* CATEGORY */}
+        {/* =================================================
+            STYLE ORIGIN
+        ================================================= */}
+
+        {product.origin && (
+          <div
+            className="
+              mb-2
+              inline-flex
+              items-center
+              gap-1.5
+              rounded-full
+              border
+              border-[#D8BFAF]/60
+              bg-[#FBF3EE]/90
+              px-2.5
+              py-1
+              shadow-[0_3px_12px_rgba(80,55,45,0.05)]
+              transition-all
+              duration-300
+              hover:border-[#C9A994]
+              hover:bg-[#F8E9E1]
+            "
+          >
+            <span className="text-[12px] leading-none">
+              {product.originFlag}
+            </span>
+
+            <span
+              className="
+                text-[8px]
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-[#725B52]
+              "
+            >
+              {product.origin}
+            </span>
+          </div>
+        )}
+
+        {/* =================================================
+            CATEGORY
+        ================================================= */}
 
         <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806D66]/70">
           {product.category}
         </p>
 
-        {/* SUBCATEGORY */}
+        {/* =================================================
+            SUBCATEGORY
+        ================================================= */}
 
         {product.subCategory && (
           <p className="mt-1 min-h-[16px] text-[11px] italic text-[#8E7A72]/65">
@@ -403,7 +449,9 @@ const ProductCard = ({ product }) => {
           </p>
         )}
 
-        {/* PRODUCT NAME */}
+        {/* =================================================
+            PRODUCT NAME
+        ================================================= */}
 
         <h3
           onClick={handleProductClick}

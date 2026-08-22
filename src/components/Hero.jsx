@@ -1,7 +1,52 @@
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const videoRef = useRef(null);
+
+  /* =====================================================
+     MOBILE VIDEO AUTOPLAY FIX
+  ===================================================== */
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    video.muted = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const playVideo = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.log("Hero video autoplay waiting for browser permission.");
+      }
+    };
+
+    playVideo();
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        playVideo();
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    return () => {
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+    };
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-[#FFF9F7]">
@@ -110,11 +155,14 @@ const Hero = () => {
 
             {/* Hero Video */}
             <video
+              ref={videoRef}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              controls={false}
+              disablePictureInPicture
               aria-label="FN Jewelry Worldwide artificial jewellery collection"
               className="relative z-[1] h-full w-full object-cover"
             >

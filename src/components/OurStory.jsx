@@ -136,7 +136,7 @@ const OurStory = () => {
               sm:leading-8
             "
           >
-            FN Jewelry Worldwide was founded in Dubai by Amina,
+            FN Jewelry Worldwide was founded in Dubai by Amna,
             with a simple belief — that jewellery is more than
             something you wear. It is a little piece of confidence,
             a celebration of individuality, and a reminder to feel
@@ -311,7 +311,7 @@ const OurStory = () => {
                 <p>
                   FN Jewelry Worldwide was founded in Dubai by
                   <span className="font-semibold text-[#704E59]">
-                    {" "}Amina
+                    {" "}Amna
                   </span>
                   , born from a simple yet heartfelt idea:
                   every woman deserves to find something that
