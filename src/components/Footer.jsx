@@ -186,13 +186,15 @@ const Footer = () => {
                 <FiArrowUpRight className="text-[11px] opacity-0 transition duration-300 group-hover:opacity-60" />
               </Link>
 
-              <a
-                href="mailto:info@fnjewelryworldwide.com"
+              {/* Contact Us → Homepage Contact Section */}
+
+              <Link
+                to="/#contact"
                 className="group flex w-fit items-center gap-1 text-sm text-[#2B2525]/55 transition duration-300 hover:translate-x-1 hover:text-[#2B2525]"
               >
                 Contact Us
                 <FiArrowUpRight className="text-[11px] opacity-0 transition duration-300 group-hover:opacity-60" />
-              </a>
+              </Link>
 
             </nav>
 

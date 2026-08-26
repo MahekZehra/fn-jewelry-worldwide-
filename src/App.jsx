@@ -7,7 +7,7 @@ import OurStory from "./components/OurStory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import KnowYourStones from "./components/KnowYourStones";
 import WorldwideDelivery from "./components/WorldwideDelivery";
-import FAQ from "./components/FAQ";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 
@@ -17,106 +17,87 @@ import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 
+
+/* =====================================================
+   HOME PAGE
+===================================================== */
+
 function Home() {
   return (
     <>
-      {/* =========================
-          HERO
-      ========================== */}
+      {/* HERO */}
       <Hero />
 
-      {/* =========================
-          CATEGORIES
-      ========================== */}
+      {/* CATEGORIES */}
       <CategorySection />
 
-      {/* =========================
-          OUR STORY
-      ========================== */}
+      {/* OUR STORY */}
       <OurStory />
 
-      {/* =========================
-          FEATURED PRODUCTS
-      ========================== */}
+      {/* FEATURED PRODUCTS */}
       <FeaturedProducts />
 
-      {/* =========================
-          KNOW YOUR STONES
-      ========================== */}
+      {/* KNOW YOUR STONES */}
       <KnowYourStones />
 
-      {/* =========================
-          WORLDWIDE DELIVERY
-      ========================== */}
+      {/* WORLDWIDE DELIVERY */}
       <WorldwideDelivery />
 
-      {/* =========================
-          FREQUENTLY ASKED QUESTIONS
-      ========================== */}
-      <FAQ />
+      {/* CONTACT INFORMATION */}
+      <Contact />
 
-      {/* =========================
-          FOOTER
-      ========================== */}
+      {/* FOOTER */}
       <Footer />
     </>
   );
 }
 
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
 function App() {
   return (
     <BrowserRouter>
 
-      {/* =========================
-          NAVBAR
-      ========================== */}
+      {/* NAVBAR */}
       <Navbar />
 
+      {/* ROUTES */}
       <Routes>
 
-        {/* =========================
-            HOME
-        ========================== */}
+        {/* HOME */}
         <Route
           path="/"
           element={<Home />}
         />
 
-        {/* =========================
-            SHOP
-        ========================== */}
+        {/* SHOP */}
         <Route
           path="/shop"
           element={<Shop />}
         />
 
-        {/* =========================
-            PRODUCT DETAILS
-        ========================== */}
+        {/* PRODUCT DETAILS */}
         <Route
           path="/product/:id"
           element={<ProductDetails />}
         />
 
-        {/* =========================
-            CART
-        ========================== */}
+        {/* CART */}
         <Route
           path="/cart"
           element={<Cart />}
         />
 
-        {/* =========================
-            CHECKOUT
-        ========================== */}
+        {/* CHECKOUT */}
         <Route
           path="/checkout"
           element={<Checkout />}
         />
 
-        {/* =========================
-            ORDER CONFIRMATION
-        ========================== */}
+        {/* ORDER CONFIRMATION */}
         <Route
           path="/order-confirmation"
           element={<OrderConfirmation />}
@@ -124,9 +105,10 @@ function App() {
 
       </Routes>
 
-      {/* =========================
+      {/* =================================================
           FLOATING WHATSAPP BUTTON
-      ========================== */}
+      ================================================= */}
+
       <WhatsAppButton />
 
     </BrowserRouter>
