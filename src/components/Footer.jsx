@@ -247,7 +247,7 @@ const Footer = () => {
               and a little bit of magic.
             </p>
 
-            <p> Designed and developed by MG Creatives. 
+            <p> Designed and Developed by MZ Creatives. 
             </p>
 
           </div>
