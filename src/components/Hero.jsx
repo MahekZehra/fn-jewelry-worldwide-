@@ -84,7 +84,7 @@ const Hero = () => {
         <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
 
           <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-[#A87585] sm:text-sm">
-            FN Jewelry Worldwide
+            F&A Fashion and Jewellery Collection
           </p>
 
           <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-[#3B2930] sm:text-5xl lg:text-6xl">
@@ -170,7 +170,7 @@ const Hero = () => {
               controls={false}
               disablePictureInPicture
               webkit-playsinline="true"
-              aria-label="FN Jewelry Worldwide artificial jewellery collection"
+              aria-label="F&A Fashion and Jewellery Collection artificial jewellery collection"
               className="relative z-[1] h-full w-full object-cover"
             >
               <source

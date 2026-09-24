@@ -77,11 +77,11 @@ const Navbar = () => {
             className="shrink-0"
           >
             <h1 className="font-serif text-3xl tracking-[5px] text-[#3B3032] sm:text-4xl sm:tracking-[6px] lg:text-5xl">
-              FN
+              F&A
             </h1>
 
             <p className="mt-[-3px] text-[6px] font-medium tracking-[0.32em] text-[#8C777B] sm:text-[8px] sm:tracking-[0.35em]">
-              JEWELRY WORLDWIDE
+              FASHION & JEWELLERY COLLECTION
             </p>
           </Link>
 

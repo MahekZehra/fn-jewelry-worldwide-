@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import CategorySection from "./components/CategorySection";
 import OurStory from "./components/OurStory";
 import FeaturedProducts from "./components/FeaturedProducts";
+import Exhibitions from "./components/Exhibitions";
 import KnowYourStones from "./components/KnowYourStones";
 import WorldwideDelivery from "./components/WorldwideDelivery";
 import Contact from "./components/Contact";
@@ -16,6 +17,7 @@ import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import ReturnsExchanges from "./pages/ReturnsExchanges";
 
 
 /* =====================================================
@@ -36,6 +38,9 @@ function Home() {
 
       {/* FEATURED PRODUCTS */}
       <FeaturedProducts />
+
+      {/* OUR EXHIBITIONS */}
+      <Exhibitions />
 
       {/* KNOW YOUR STONES */}
       <KnowYourStones />
@@ -103,12 +108,15 @@ function App() {
           element={<OrderConfirmation />}
         />
 
+        {/* RETURNS & EXCHANGES */}
+        <Route
+          path="/returns-exchanges"
+          element={<ReturnsExchanges />}
+        />
+
       </Routes>
 
-      {/* =================================================
-          FLOATING WHATSAPP BUTTON
-      ================================================= */}
-
+      {/* FLOATING WHATSAPP BUTTON */}
       <WhatsAppButton />
 
     </BrowserRouter>

@@ -136,7 +136,7 @@ const OurStory = () => {
               sm:leading-8
             "
           >
-            FN Jewelry Worldwide was founded in Dubai by Amna,
+            F&A Fashion and Jewellery Collection was founded in Dubai by Amna,
             with a simple belief — that jewellery is more than
             something you wear. It is a little piece of confidence,
             a celebration of individuality, and a reminder to feel
@@ -309,7 +309,7 @@ const OurStory = () => {
               >
 
                 <p>
-                  FN Jewelry Worldwide was founded in Dubai by
+                  F&A Fashion and Jewellery Collection was founded in Dubai by
                   <span className="font-semibold text-[#704E59]">
                     {" "}Amna
                   </span>
@@ -320,7 +320,7 @@ const OurStory = () => {
 
                 <p>
                   From timeless traditional details to modern
-                  statement pieces, FN was created to celebrate
+                  statement pieces, F&A was created to celebrate
                   the many sides of a woman — the effortlessly
                   elegant, the quietly confident, the romantic,
                   the bold, and everything in between.
@@ -367,7 +367,7 @@ const OurStory = () => {
                     sm:text-3xl
                   "
                 >
-                  FN Jewelry Worldwide is our love letter
+                  F&A Fashion and Jewellery Collection is our love letter
                   to women.
                 </p>
 

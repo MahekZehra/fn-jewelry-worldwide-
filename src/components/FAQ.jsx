@@ -129,7 +129,7 @@ const FAQ = () => {
 
           {/* Description */}
           <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#76636A] sm:text-base">
-            A few little details to make your FN Jewelry experience
+            A few little details to make your F&A Fashion and Jewellery experience
             effortless, beautiful and worry-free.
           </p>
 

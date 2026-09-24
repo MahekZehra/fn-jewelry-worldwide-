@@ -344,7 +344,7 @@ const Cart = () => {
                 sm:text-xs
               "
             >
-              FN Jewelry Worldwide
+              F&A Fashion and Jewellery Collection
             </p>
 
           </div>

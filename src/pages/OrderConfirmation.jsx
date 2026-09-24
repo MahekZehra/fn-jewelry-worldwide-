@@ -175,7 +175,7 @@ const OrderConfirmation = () => {
 
         {/* Footer Note */}
         <p className="mt-8 text-center text-[11px] leading-5 text-black/35">
-          Thank you for choosing FN Jewelry Worldwide.
+          Thank you for choosing F&A Fashion and Jewellery Collection.
         </p>
 
       </div>

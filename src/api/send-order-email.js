@@ -45,7 +45,7 @@ export default async function handler(req, res) {
       .join("");
 
     const { data, error } = await resend.emails.send({
-      from: "FN Jewelry Worldwide <onboarding@resend.dev>",
+      from: "F&A Fashion and Jewellery Collection <onboarding@resend.dev>",
       to: [customerEmail],
       subject: `Your Order ${orderNumber} Has Been Confirmed 🎉`,
       html: `
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
           <div style="max-width:600px; margin:auto; background:white; padding:40px; border-radius:20px;">
             
             <h1 style="font-family:Georgia, serif; text-align:center;">
-              FN Jewelry Worldwide
+              F&A Fashion and Jewellery Collection
             </h1>
 
             <p style="text-align:center; color:#777;">
@@ -112,7 +112,7 @@ export default async function handler(req, res) {
             </p>
 
             <p style="margin-top:30px; text-align:center; color:#999;">
-              Thank you for shopping with FN Jewelry Worldwide.
+              Thank you for shopping with F&A Fashion and Jewellery Collection.
             </p>
 
           </div>

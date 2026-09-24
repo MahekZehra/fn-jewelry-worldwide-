@@ -40,7 +40,7 @@ const ProductDetails = () => {
         <div className="mx-auto max-w-xl text-center">
 
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
-            FN Jewelry Worldwide
+            F&A Fashion and Jewellery Collection
           </p>
 
           <h1 className="mt-4 font-serif text-4xl tracking-tight text-[#171717] sm:text-5xl">
@@ -135,7 +135,7 @@ const ProductDetails = () => {
             </div>
 
             <p className="mt-4 text-center text-[9px] font-medium uppercase tracking-[0.3em] text-black/25 sm:text-[10px]">
-              FN Jewelry Worldwide
+              F&A Fashion and Jewellery Collection
             </p>
 
           </div>
@@ -418,7 +418,7 @@ const ProductDetails = () => {
                 </span>
 
                 <span className="text-right text-sm font-medium text-black">
-                  {product.subCategory || "FN Collection"}
+                  {product.subCategory || "F&A Collection"}
                 </span>
 
               </div>

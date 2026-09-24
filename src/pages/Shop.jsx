@@ -342,7 +342,7 @@ const Shop = () => {
                 sm:text-xs
               "
             >
-              FN Jewelry Worldwide
+              F&A Fashion and Jewellery Collection
             </p>
 
             <FiStar className="text-xs text-[#B9937D]/70" />

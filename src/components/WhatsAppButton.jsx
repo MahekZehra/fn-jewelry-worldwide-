@@ -5,7 +5,7 @@ const WhatsAppButton = () => {
   const WHATSAPP_NUMBER = "971501234567";
 
   const message = encodeURIComponent(
-    "Hi FN Jewelry Worldwide! I would like to know more about your products."
+    "Hi F&A Fashion and Jewellery Collection! I would like to know more about your products."
   );
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;

@@ -780,6 +780,178 @@ const products = [
   },
 
   // =====================================================
+  // JEWELLERY — NEW COLLECTION
+  // =====================================================
+
+  {
+    id: 40,
+    name: "Emerald Pearl Floral Earrings",
+    priceAED: 99,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-24.jpg",
+
+    description:
+      "Elegant statement earrings featuring intricate emerald-green detailing, delicate pink accents and pearl-inspired elements. A graceful choice for festive celebrations, weddings and sophisticated occasion styling.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Statement Earrings",
+      occasion: "Festive & Wedding Wear",
+    },
+  },
+
+  {
+    id: 41,
+    name: "Midnight Pearl Floral Earrings",
+    priceAED: 99,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-25.jpg",
+
+    description:
+      "A sophisticated pair of statement earrings combining deep blue detailing, pink accents and elegant pearl-inspired elements. Perfect for evening events, festive occasions and special celebrations.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Statement Earrings",
+      occasion: "Festive & Evening Wear",
+    },
+  },
+
+  {
+    id: 42,
+    name: "Royal Pearl Floral Set",
+    priceAED: 159,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-26.jpg",
+
+    description:
+      "A luxurious traditional-inspired jewellery set featuring intricate golden floral detailing and elegant pearl accents. Designed to complement weddings, festive celebrations and formal occasions.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Jewellery Set",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
+
+  {
+    id: 43,
+    name: "Pearl Heritage Necklace Set",
+    priceAED: 179,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-27.jpg",
+
+    description:
+      "An elegant pearl-inspired necklace set paired with coordinated earrings and intricate decorative detailing. A refined statement for bridal, festive and formal styling.",
+
+    details: {
+      material: "Artificial Jewellery & Pearls",
+      type: "Necklace Set",
+      occasion: "Bridal & Special Occasions",
+    },
+  },
+
+  {
+    id: 44,
+    name: "Emerald Bloom Statement Earrings",
+    priceAED: 109,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-28.jpg",
+
+    description:
+      "Beautiful floral statement earrings featuring rich emerald-green detailing, pearl accents and delicate pink embellishment. Designed to add an elegant finishing touch to traditional and occasion looks.",
+
+    details: {
+      material: "Artificial Jewellery, Pearls & Stones",
+      type: "Floral Statement Earrings",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
+
+  {
+    id: 45,
+    name: "Emerald Garden Earrings",
+    priceAED: 109,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-29.jpg",
+
+    description:
+      "A graceful pair of floral-inspired statement earrings with emerald-green stones, pearl detailing and delicate pink accents. Perfect for elegant traditional and festive styling.",
+
+    details: {
+      material: "Artificial Jewellery, Pearls & Stones",
+      type: "Floral Statement Earrings",
+      occasion: "Festive & Occasion Wear",
+    },
+  },
+
+  {
+    id: 46,
+    name: "Golden Pearl Heritage Set",
+    priceAED: 169,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "Sets",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-30.jpg",
+
+    description:
+      "A statement traditional jewellery set featuring ornate golden detailing, floral motifs and elegant pearl accents. Perfect for weddings, festive celebrations and sophisticated traditional looks.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Traditional Jewellery Set",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
+
+  // =====================================================
   // GARMENTS — LAWN
   // =====================================================
 

@@ -340,7 +340,7 @@ const Checkout = () => {
                 text-[#B18A83]
               "
             >
-              FN Jewelry Worldwide
+              F&A Fashion and Jewellery Collection
             </p>
 
           </div>

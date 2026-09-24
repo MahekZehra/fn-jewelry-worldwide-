@@ -284,7 +284,7 @@ const WorldwideDelivery = () => {
 
               <p className="max-w-xl text-sm leading-7 text-[#6F6060] sm:text-base">
 
-                FN Jewelry Worldwide brings elegant jewellery,
+                F&A Fashion and Jewellery Collection brings elegant jewellery,
                 garments and statement accessories to customers
                 around the world. Select your shopping location
                 to view prices in your preferred currency.

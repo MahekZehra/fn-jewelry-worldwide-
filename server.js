@@ -178,12 +178,12 @@ app.post(
         await resend.emails.send({
 
           from:
-            "FN Jewelry Worldwide <onboarding@resend.dev>",
+            "F&A Fashion and Jewellery Collection <onboarding@resend.dev>",
 
           to: [customerEmail],
 
           subject:
-            `Order ${orderNumber} Confirmed — FN Jewelry Worldwide`,
+            `Order ${orderNumber} Confirmed — F&A Fashion and Jewellery Collection`,
 
           html: `
             <!DOCTYPE html>
@@ -321,7 +321,7 @@ app.post(
                           "
                         >
                           Thank you for choosing
-                          FN Jewelry Worldwide.
+                          F&A Fashion and Jewellery Collection.
                         </p>
 
                       </div>
@@ -695,7 +695,7 @@ app.post(
                           "
                         >
                           We appreciate your trust
-                          in FN Jewelry Worldwide.
+                          in F&A Fashion and Jewellery Collection.
                         </p>
 
                       </div>
@@ -722,7 +722,7 @@ app.post(
                           letter-spacing:2px;
                         "
                       >
-                        FN JEWELRY WORLDWIDE
+                        F&A Fashion and Jewellery Collection
                       </p>
 
                       <p

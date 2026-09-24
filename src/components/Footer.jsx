@@ -63,11 +63,11 @@ const Footer = () => {
             >
 
               <span className="block font-serif text-4xl tracking-[5px] text-[#2B2525] transition duration-300 group-hover:text-[#9B7477]">
-                FN
+                F&A
               </span>
 
               <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[3px] text-[#9B7477]">
-                Jewelry Worldwide
+                Fashion & Jewellery Collection
               </span>
 
             </Link>
@@ -99,7 +99,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="mailto:info@fnjewelryworldwide.com"
+                href="mailto:info@F&A Fashion and Jewellery Collection.com"
                 aria-label="Email"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2B2525]/10 bg-white/40 text-[#2B2525]/60 transition-all duration-300 hover:-translate-y-1 hover:border-[#9B7477]/40 hover:bg-[#D8B6B8]/25 hover:text-[#9B7477]"
               >
@@ -186,6 +186,16 @@ const Footer = () => {
                 <FiArrowUpRight className="text-[11px] opacity-0 transition duration-300 group-hover:opacity-60" />
               </Link>
 
+              {/* Returns & Exchanges */}
+
+              <Link
+                to="/returns-exchanges"
+                className="group flex w-fit items-center gap-1 text-sm text-[#2B2525]/55 transition duration-300 hover:translate-x-1 hover:text-[#2B2525]"
+              >
+                Returns & Exchanges
+                <FiArrowUpRight className="text-[11px] opacity-0 transition duration-300 group-hover:opacity-60" />
+              </Link>
+
               {/* Contact Us → Homepage Contact Section */}
 
               <Link
@@ -238,7 +248,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3 text-xs text-[#2B2525]/40 sm:flex-row sm:items-center sm:justify-between">
 
             <p>
-              © 2026 FN Jewelry Worldwide. All rights reserved.
+              © 2026 F&A Fashion and Jewellery Collection. All rights reserved.
             </p>
 
             <p className="flex items-center gap-1.5">
@@ -247,7 +257,8 @@ const Footer = () => {
               and a little bit of magic.
             </p>
 
-            <p> Designed and Developed by MZ Creatives. 
+            <p>
+              Designed and Developed by MZ Creatives.
             </p>
 
           </div>
