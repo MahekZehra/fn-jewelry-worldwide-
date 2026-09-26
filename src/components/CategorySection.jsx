@@ -8,7 +8,7 @@ const categories = [
       "Elegant artificial jewellery designed to complete your everyday and special occasion looks.",
     button: "Shop Jewellery",
     link: "/shop?category=Jewellery",
-    image: "/products/jewellery-1.jpg",
+    image: "/products/jewellery-35.jpg",
     background:
       "from-[#F3E4E0] via-[#EBD5D1] to-[#D8B7B0]",
   },
@@ -19,7 +19,7 @@ const categories = [
       "Explore premium cloth materials and stylish fabrics for creating beautiful looks.",
     button: "Explore Garments",
     link: "/shop?category=Garments",
-    image: "/products/garment-1.jpg",
+    image: "/products/garment-3.jpg",
     background:
       "from-[#F3EEE8] via-[#E8DED5] to-[#D2C2B5]",
   },

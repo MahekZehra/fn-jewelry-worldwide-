@@ -70,76 +70,6 @@ const products = [
   },
 
   {
-    id: 10,
-    name: "Elegant Kundan Clutch",
-    priceAED: 229,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Accessories",
-    subCategory: "Kundan Clutches",
-
-    image: "/products/kundan-clutch-4.jpg",
-
-    description:
-      "An elegant Kundan clutch with delicate traditional-inspired detailing and a graceful silhouette. Designed to complement wedding, festive and formal outfits.",
-
-    details: {
-      material: "Kundan & Artificial Stones",
-      type: "Kundan Clutch",
-      occasion: "Weddings & Festive Wear",
-    },
-  },
-
-  {
-    id: 11,
-    name: "Royal Pearl Kundan Clutch",
-    priceAED: 239,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Accessories",
-    subCategory: "Kundan Clutches",
-
-    image: "/products/kundan-clutch-5.jpg",
-
-    description:
-      "A sophisticated Kundan clutch enhanced with elegant pearl-inspired detailing and a refined finish. Perfect for weddings, formal events and festive occasions.",
-
-    details: {
-      material: "Kundan & Pearl Detailing",
-      type: "Pearl Kundan Clutch",
-      occasion: "Weddings & Formal Events",
-    },
-  },
-
-  {
-    id: 12,
-    name: "Signature Kundan Clutch",
-    priceAED: 249,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Accessories",
-    subCategory: "Kundan Clutches",
-
-    image: "/products/kundan-clutch-6.jpg",
-
-    description:
-      "A signature Kundan clutch with traditional-inspired embellishment and a polished finish. Ideal for weddings, festive celebrations and formal events.",
-
-    details: {
-      material: "Kundan & Artificial Stones",
-      type: "Signature Kundan Clutch",
-      occasion: "Wedding & Formal Wear",
-    },
-  },
-
-  // =====================================================
-  // ACCESSORIES — NEW KUNDAN CLUTCHES
-  // =====================================================
-
-  {
     id: 34,
     name: "Elegant Kundan Clutch",
     priceAED: 239,
@@ -149,7 +79,7 @@ const products = [
     category: "Accessories",
     subCategory: "Kundan Clutches",
 
-    image: "/products/kundan-clutch-7.jpg",
+    image: "/products/kundan-clutch-4.jpg",
 
     description:
       "An elegant Kundan clutch featuring intricate traditional-inspired detailing and a sophisticated finish. Perfect for weddings, festive celebrations, formal events and evening occasions.",
@@ -171,7 +101,7 @@ const products = [
     category: "Accessories",
     subCategory: "Kundan Clutches",
 
-    image: "/products/kundan-clutch-8.jpg",
+    image: "/products/kundan-clutch-5.jpg",
 
     description:
       "A luxurious Kundan clutch with statement embellishment, elegant detailing and a refined finish. Designed to complement wedding, festive and sophisticated evening looks.",
@@ -951,7 +881,7 @@ const products = [
     },
   },
 
-    // =====================================================
+  // =====================================================
   // JEWELLERY — LATEST COLLECTION
   // =====================================================
 
@@ -1218,6 +1148,171 @@ const products = [
       fabricLength: "6 Yards",
       type: "2-Piece Fabric",
       occasion: "Festive & Formal Wear",
+    },
+  },
+
+  // =====================================================
+  // GARMENTS — NEW LAWN COLLECTION
+  // =====================================================
+
+  {
+    id: 56,
+    name: "Blush Bloom Lawn",
+    priceAED: 129,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — Single Shirt Piece",
+
+    image: "/products/garment-3.jpg",
+
+    description:
+      "A graceful premium Lawn fabric featuring an elegant printed design and a lightweight breathable feel. Perfect for creating a fresh and sophisticated warm-weather look. Currently out of stock, but this design can be made on order.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "3.5 Yards",
+      type: "Single Shirt Piece",
+      occasion: "Everyday & Summer Wear",
+    },
+  },
+
+  {
+    id: 57,
+    name: "Rose Garden Lawn",
+    priceAED: 139,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — Single Shirt Piece",
+
+    image: "/products/garment-4.jpg",
+
+    description:
+      "A beautifully detailed premium Lawn shirt piece designed with elegant floral-inspired styling. Lightweight, breathable and ideal for effortless seasonal dressing. Currently out of stock, but this design can be made on order.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "3.5 Yards",
+      type: "Single Shirt Piece",
+      occasion: "Everyday & Festive Wear",
+    },
+  },
+
+  {
+    id: 58,
+    name: "Ivory Garden Lawn",
+    priceAED: 139,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — Single Shirt Piece",
+
+    image: "/products/garment-5.jpg",
+
+    description:
+      "An elegant premium Lawn fabric with refined detailing and a soft sophisticated aesthetic. Perfect for creating a graceful custom shirt for summer and festive styling.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "3.5 Yards",
+      type: "Single Shirt Piece",
+      occasion: "Summer & Occasion Wear",
+    },
+  },
+
+  {
+    id: 59,
+    name: "Pastel Dream Lawn",
+    priceAED: 149,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — 2 Piece",
+
+    image: "/products/garment-6.jpg",
+
+    description:
+      "A premium Lawn 2-piece fabric collection featuring elegant seasonal detailing and a lightweight breathable texture. Ideal for polished everyday and semi-formal looks.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "6 Yards",
+      type: "2-Piece Fabric",
+      occasion: "Summer & Semi-Formal Wear",
+    },
+  },
+
+  {
+    id: 60,
+    name: "Golden Bloom Lawn",
+    priceAED: 159,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — 2 Piece",
+
+    image: "/products/garment-7.jpg",
+
+    description:
+      "A sophisticated premium Lawn 2-piece fabric design with elegant decorative detailing. Designed for graceful festive, summer and semi-formal styling.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "6 Yards",
+      type: "2-Piece Fabric",
+      occasion: "Festive & Semi-Formal Wear",
+    },
+  },
+
+  {
+    id: 61,
+    name: "Pearl Blossom Lawn",
+    priceAED: 169,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — 2 Piece",
+
+    image: "/products/garment-8.jpg",
+
+    description:
+      "A luxurious premium Lawn 2-piece fabric collection with graceful detailing and a refined finish. Perfect for creating elegant festive and occasion-ready outfits.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "6 Yards",
+      type: "2-Piece Fabric",
+      occasion: "Festive & Formal Wear",
+    },
+  },
+
+  {
+    id: 62,
+    name: "Royal Garden Lawn",
+    priceAED: 179,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Garments",
+    subCategory: "Lawn — 2 Piece",
+
+    image: "/products/garment-9.jpg",
+
+    description:
+      "A premium statement Lawn 2-piece collection featuring sophisticated detailing and an elegant finish. Designed for stylish festive celebrations and special occasions.",
+
+    details: {
+      material: "Premium Lawn",
+      fabricLength: "6 Yards",
+      type: "2-Piece Fabric",
+      occasion: "Festive & Special Occasions",
     },
   },
 ];
