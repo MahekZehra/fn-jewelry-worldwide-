@@ -6,6 +6,7 @@ import CategorySection from "./components/CategorySection";
 import OurStory from "./components/OurStory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Exhibitions from "./components/Exhibitions";
+import Testimonials from "./components/Testimonials";
 import KnowYourStones from "./components/KnowYourStones";
 import WorldwideDelivery from "./components/WorldwideDelivery";
 import Contact from "./components/Contact";
@@ -41,6 +42,9 @@ function Home() {
 
       {/* OUR EXHIBITIONS */}
       <Exhibitions />
+
+      {/* CUSTOMER TESTIMONIALS */}
+      <Testimonials />
 
       {/* KNOW YOUR STONES */}
       <KnowYourStones />

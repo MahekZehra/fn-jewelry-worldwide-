@@ -951,6 +951,226 @@ const products = [
     },
   },
 
+    // =====================================================
+  // JEWELLERY — LATEST COLLECTION
+  // =====================================================
+
+  {
+    id: 47,
+    name: "Elegant Pearl Statement Jewellery",
+    priceAED: 119,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-31.jpg",
+
+    description:
+      "An elegant artificial jewellery design featuring refined detailing and a sophisticated statement finish. Perfect for festive celebrations, weddings and special occasion styling.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Statement Jewellery",
+      occasion: "Festive & Special Occasions",
+    },
+  },
+
+  {
+    id: 48,
+    name: "Royal Floral Jewellery",
+    priceAED: 129,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-32.jpg",
+
+    description:
+      "A graceful artificial jewellery design with elegant floral detailing and a polished finish. Designed to complement traditional, festive and formal outfits.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Floral Jewellery",
+      occasion: "Festive & Wedding Wear",
+    },
+  },
+
+  {
+    id: 49,
+    name: "Classic Pearl Elegance",
+    priceAED: 139,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
+
+    image: "/products/jewellery-33.jpg",
+
+    description:
+      "A sophisticated artificial jewellery piece featuring elegant pearl-inspired detailing and a refined finish. Perfect for weddings, festive occasions and evening styling.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Pearl Jewellery",
+      occasion: "Weddings & Special Occasions",
+    },
+  },
+
+  {
+    id: 50,
+    name: "Golden Heritage Jewellery",
+    priceAED: 149,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-34.jpg",
+
+    description:
+      "A luxurious artificial jewellery design with ornate golden detailing and a graceful statement finish. Ideal for festive celebrations, weddings and formal occasions.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Heritage Jewellery",
+      occasion: "Wedding & Festive Wear",
+    },
+  },
+
+  {
+    id: 51,
+    name: "Royal Statement Collection",
+    priceAED: 159,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-35.jpg",
+
+    description:
+      "A statement artificial jewellery design with intricate embellishment and an elegant polished finish. Perfect for adding a luxurious touch to special occasion looks.",
+
+    details: {
+      material: "Artificial Jewellery & Stones",
+      type: "Statement Jewellery",
+      occasion: "Weddings & Formal Events",
+    },
+  },
+
+  {
+    id: 52,
+    name: "Luxury Floral Collection",
+    priceAED: 149,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
+
+    image: "/products/jewellery-36.jpg",
+
+    description:
+      "A beautiful artificial jewellery design inspired by elegant floral motifs, featuring refined detailing and a sophisticated finish. Perfect for festive and formal styling.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Floral Jewellery",
+      occasion: "Festive & Formal Wear",
+    },
+  },
+
+  {
+    id: 53,
+    name: "Pearl Charm Collection",
+    priceAED: 139,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Indian Style",
+    originFlag: "🇮🇳",
+
+    image: "/products/jewellery-37.jpg",
+
+    description:
+      "An elegant artificial jewellery design enhanced with pearl-inspired accents and delicate detailing. A graceful choice for weddings, celebrations and evening occasions.",
+
+    details: {
+      material: "Artificial Jewellery & Pearl Detailing",
+      type: "Pearl Jewellery",
+      occasion: "Weddings & Evening Wear",
+    },
+  },
+
+  {
+    id: 54,
+    name: "Elegant Golden Statement",
+    priceAED: 159,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Turkish Style",
+    originFlag: "🇹🇷",
+
+    image: "/products/jewellery-38.jpg",
+
+    description:
+      "A sophisticated artificial jewellery piece with elegant golden detailing and a luxurious statement finish. Designed for refined traditional and contemporary styling.",
+
+    details: {
+      material: "Artificial Jewellery",
+      type: "Statement Jewellery",
+      occasion: "Festive & Special Occasions",
+    },
+  },
+
+  {
+    id: 55,
+    name: "Signature Luxury Jewellery",
+    priceAED: 169,
+    salePriceAED: null,
+    onSale: false,
+
+    category: "Jewellery",
+    subCategory: "New Arrivals",
+    origin: "Pakistani Style",
+    originFlag: "🇵🇰",
+
+    image: "/products/jewellery-39.jpg",
+
+    description:
+      "A luxurious artificial jewellery design featuring intricate detailing and an elegant statement finish. Perfect for weddings, festive celebrations and sophisticated evening looks.",
+
+    details: {
+      material: "Artificial Jewellery & Stones",
+      type: "Luxury Jewellery",
+      occasion: "Weddings & Formal Events",
+    },
+  },
+
   // =====================================================
   // GARMENTS — LAWN
   // =====================================================
