@@ -5,13 +5,13 @@ const exhibitionImages = [
   {
     src: "/exhibitions/exhibition-1.jpg",
     number: "01",
-    caption: "A curated glimpse into the F&A world.",
+    caption: "A special moment from our first-ever exhibition.",
     position: "left",
   },
   {
     src: "/exhibitions/exhibition-2.jpg",
     number: "02",
-    caption: "Jewellery, details and moments.",
+    caption: "Jewellery, details and memorable moments.",
     position: "right",
   },
   {
@@ -29,7 +29,7 @@ const exhibitionImages = [
   {
     src: "/exhibitions/exhibition-5.jpg",
     number: "05",
-    caption: "A closer look at the collection.",
+    caption: "A closer look at our collection.",
     position: "right",
   },
   {
@@ -41,7 +41,7 @@ const exhibitionImages = [
   {
     src: "/exhibitions/exhibition-7.jpg",
     number: "07",
-    caption: "Beyond the collection.",
+    caption: "A glimpse into our exhibition journey.",
     position: "final",
   },
 ];
@@ -60,7 +60,6 @@ function Exhibitions() {
   return (
     <>
       <section className="fa-exhibitions" id="exhibitions">
-
         <div className="fa-exhibitions-container">
 
           {/* =================================================
@@ -76,13 +75,12 @@ function Exhibitions() {
               </span>
 
               <h2>
-                The F&amp;A
+                Our
                 <br />
-                <em>Exhibition Journal</em>
+                <em>Exhibition Journey</em>
               </h2>
 
             </div>
-
 
             <div className="fa-exhibitions-intro-right">
 
@@ -91,15 +89,17 @@ function Exhibitions() {
               </span>
 
               <p>
-                A glimpse into the moments where our jewellery
-                leaves the collection and becomes part of a
-                beautiful experience.
+                From our very first exhibition to the many professional
+                exhibitions that followed, every event has been an
+                important milestone in our journey. These experiences
+                have allowed us to showcase our craftsmanship, connect
+                with our customers, and bring our collections to life.
               </p>
 
               <div className="fa-exhibitions-line">
                 <span>EXHIBITIONS</span>
                 <span>SHOWCASES</span>
-                <span>MOMENTS</span>
+                <span>MILESTONES</span>
               </div>
 
             </div>
@@ -108,7 +108,7 @@ function Exhibitions() {
 
 
           {/* =================================================
-              FEATURED IMAGE
+              FEATURED IMAGE — FIRST EVER EXHIBITION
           ================================================= */}
 
           <div
@@ -118,26 +118,33 @@ function Exhibitions() {
 
             <img
               src={exhibitionImages[0].src}
-              alt="F&A Collective jewellery exhibition"
+              alt="F&A Collective first-ever exhibition"
             />
 
             <div className="fa-feature-overlay">
+
               <div className="fa-feature-number">
                 01 / 07
               </div>
 
               <div className="fa-feature-caption">
-                <span>THE COLLECTION</span>
+
+                <span>
+                  OUR FIRST-EVER EXHIBITION
+                </span>
+
                 <strong>
-                  A world of jewellery,
+                  Where our exhibition
                   <br />
-                  beautifully brought together.
+                  journey began.
                 </strong>
+
               </div>
 
               <span className="fa-view-moment">
                 VIEW MOMENT ↗
               </span>
+
             </div>
 
           </div>
@@ -150,6 +157,7 @@ function Exhibitions() {
           <div className="fa-editorial-row">
 
             <div className="fa-editorial-image small-image">
+
               <img
                 src={exhibitionImages[1].src}
                 alt="F&A Collective exhibition"
@@ -159,27 +167,28 @@ function Exhibitions() {
               <span className="fa-image-number">
                 02
               </span>
+
             </div>
 
 
             <div className="fa-editorial-copy">
 
               <span className="fa-copy-number">
-                02 — THE EXPERIENCE
+                02 — THE BEGINNING
               </span>
 
               <h3>
-                Beyond the
+                Where our
                 <br />
-                <em>collection.</em>
+                <em>journey began.</em>
               </h3>
 
               <p>
-                Every exhibition is an opportunity to bring
-                our jewellery closer to the people who love it.
-                From intricate details to statement pieces,
-                each showcase is carefully curated to feel
-                personal, elegant and memorable.
+                Our first-ever exhibition marked a special milestone
+                for F&amp;A Collective. It was the beginning of our
+                journey of bringing our jewellery closer to our
+                customers, showcasing our collections, and creating
+                memorable experiences through every exhibition.
               </p>
 
               <div className="fa-copy-decoration">
@@ -237,6 +246,8 @@ function Exhibitions() {
                 From intimate displays to beautifully arranged
                 showcases, our exhibitions reflect the same
                 attention to detail that defines F&amp;A Collective.
+                Every presentation is thoughtfully created to
+                celebrate our jewellery and the people who wear it.
               </p>
 
               <div className="fa-quote">
@@ -249,6 +260,7 @@ function Exhibitions() {
 
 
             <div className="fa-editorial-image">
+
               <img
                 src={exhibitionImages[3].src}
                 alt="F&A Collective exhibition display"
@@ -258,6 +270,7 @@ function Exhibitions() {
               <span className="fa-image-number">
                 04
               </span>
+
             </div>
 
           </div>
@@ -273,12 +286,16 @@ function Exhibitions() {
               className="fa-dual-image dual-large"
               onClick={() => openLightbox(exhibitionImages[4])}
             >
+
               <img
                 src={exhibitionImages[4].src}
                 alt="F&A Collective jewellery collection"
               />
 
-              <span>05</span>
+              <span>
+                05
+              </span>
+
             </div>
 
 
@@ -286,12 +303,16 @@ function Exhibitions() {
               className="fa-dual-image dual-small"
               onClick={() => openLightbox(exhibitionImages[5])}
             >
+
               <img
                 src={exhibitionImages[5].src}
                 alt="F&A Collective jewellery exhibition"
               />
 
-              <span>06</span>
+              <span>
+                06
+              </span>
+
             </div>
 
           </div>
@@ -308,7 +329,7 @@ function Exhibitions() {
 
             <img
               src={exhibitionImages[6].src}
-              alt="F&A Collective exhibition moment"
+              alt="F&A Collective exhibition journey"
             />
 
             <div className="fa-final-overlay">
@@ -320,7 +341,7 @@ function Exhibitions() {
               <h3>
                 A glimpse
                 <br />
-                <em>into F&amp;A.</em>
+                <em>into our journey.</em>
               </h3>
 
             </div>
@@ -366,7 +387,6 @@ function Exhibitions() {
           </div>
 
         </div>
-
       </section>
 
 

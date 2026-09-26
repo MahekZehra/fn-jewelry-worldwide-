@@ -74,16 +74,16 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={closeMenu}
-            className="shrink-0"
+            className="flex h-full shrink-0 items-center"
+            aria-label="F&A Collective Home"
           >
-            <h1 className="font-serif text-3xl tracking-[5px] text-[#3B3032] sm:text-4xl sm:tracking-[6px] lg:text-5xl">
-              F&A
-            </h1>
-
-            <p className="mt-[-3px] text-[6px] font-medium tracking-[0.32em] text-[#8C777B] sm:text-[8px] sm:tracking-[0.35em]">
-              FASHION & JEWELLERY COLLECTION
-            </p>
+            <img
+              src="/logo/fa-logo.jpg"
+              alt="F&A Collective - Fashion and Jewellery"
+              className="block h-[64px] w-auto object-contain sm:h-[76px] lg:h-[82px]"
+            />
           </Link>
+
 
           {/* =================================================
               DESKTOP NAVIGATION
@@ -104,6 +104,7 @@ const Navbar = () => {
               Home
             </Link>
 
+
             {/* SHOP */}
 
             <Link
@@ -116,6 +117,7 @@ const Navbar = () => {
             >
               Shop
             </Link>
+
 
             {/* JEWELLERY */}
 
@@ -130,6 +132,7 @@ const Navbar = () => {
               Jewellery
             </Link>
 
+
             {/* GARMENTS */}
 
             <Link
@@ -142,6 +145,7 @@ const Navbar = () => {
             >
               Garments
             </Link>
+
 
             {/* ACCESSORIES */}
 
@@ -156,9 +160,8 @@ const Navbar = () => {
               Accessories
             </Link>
 
-            {/* =================================================
-                SALE
-            ================================================= */}
+
+            {/* SALE */}
 
             <Link
               to="/shop?sale=true"
@@ -173,6 +176,7 @@ const Navbar = () => {
 
           </nav>
 
+
           {/* =================================================
               DESKTOP RIGHT SIDE
           ================================================= */}
@@ -182,6 +186,7 @@ const Navbar = () => {
             {/* COUNTRY SELECTOR */}
 
             <CountrySelector />
+
 
             {/* CART */}
 
@@ -200,6 +205,7 @@ const Navbar = () => {
             </Link>
 
           </div>
+
 
           {/* =================================================
               MOBILE RIGHT SIDE
@@ -223,6 +229,7 @@ const Navbar = () => {
               )}
             </Link>
 
+
             {/* MOBILE MENU */}
 
             <button
@@ -244,6 +251,7 @@ const Navbar = () => {
           </div>
 
         </div>
+
 
         {/* =====================================================
             MOBILE MENU
@@ -268,6 +276,7 @@ const Navbar = () => {
                 Home
               </Link>
 
+
               {/* SHOP */}
 
               <Link
@@ -281,6 +290,7 @@ const Navbar = () => {
               >
                 Shop
               </Link>
+
 
               {/* JEWELLERY */}
 
@@ -296,6 +306,7 @@ const Navbar = () => {
                 Jewellery
               </Link>
 
+
               {/* GARMENTS */}
 
               <Link
@@ -309,6 +320,7 @@ const Navbar = () => {
               >
                 Garments
               </Link>
+
 
               {/* ACCESSORIES */}
 
@@ -324,6 +336,7 @@ const Navbar = () => {
                 Accessories
               </Link>
 
+
               {/* SALE */}
 
               <Link
@@ -337,6 +350,7 @@ const Navbar = () => {
               >
                 Sale
               </Link>
+
 
               {/* =================================================
                   MOBILE COUNTRY SELECTOR
@@ -360,6 +374,7 @@ const Navbar = () => {
         )}
 
       </header>
+
 
       {/* =====================================================
           NAVBAR SPACING
