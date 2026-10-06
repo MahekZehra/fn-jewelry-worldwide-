@@ -444,10 +444,9 @@ const Cart = () => {
                         alt={item.name}
                         className="
                           h-full w-full
-                          object-cover
-                          transition
-                          duration-700
-                          hover:scale-105
+                          object-contain
+                          p-1
+                          sm:p-2
                         "
                       />
                     </Link>

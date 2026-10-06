@@ -1,428 +1,259 @@
-import { useState } from "react";
 import "./Exhibitions.css";
 
-const exhibitionImages = [
+const exhibitionVideo = "/exhibitions/exhibition-showcase.mp4";
+
+const milestones = [
   {
-    src: "/exhibitions/exhibition-1.jpg",
     number: "01",
-    caption: "A special moment from our first-ever exhibition.",
-    position: "left",
+    title: "THE BEGINNING",
+    text: "Our first exhibition marked the moment our jewellery journey stepped beyond the collection and into a shared experience."
   },
   {
-    src: "/exhibitions/exhibition-2.jpg",
     number: "02",
-    caption: "Jewellery, details and memorable moments.",
-    position: "right",
+    title: "ACROSS DUBAI",
+    text: "With every new showcase, we have continued meeting customers, sharing our collections and building beautiful connections across Dubai."
   },
   {
-    src: "/exhibitions/exhibition-3.jpg",
     number: "03",
-    caption: "Where craftsmanship meets celebration.",
-    position: "wide",
-  },
-  {
-    src: "/exhibitions/exhibition-4.jpg",
-    number: "04",
-    caption: "Curated pieces, thoughtfully presented.",
-    position: "left",
-  },
-  {
-    src: "/exhibitions/exhibition-5.jpg",
-    number: "05",
-    caption: "A closer look at our collection.",
-    position: "right",
-  },
-  {
-    src: "/exhibitions/exhibition-6.jpg",
-    number: "06",
-    caption: "Moments from our jewellery showcases.",
-    position: "wide",
-  },
-  {
-    src: "/exhibitions/exhibition-7.jpg",
-    number: "07",
-    caption: "A glimpse into our exhibition journey.",
-    position: "final",
-  },
+    title: "THE JOURNEY CONTINUES",
+    text: "Every exhibition becomes another memory — and another opportunity to bring F&A closer to the women we create for."
+  }
 ];
 
-function Exhibitions() {
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const openLightbox = (image) => {
-    setSelectedImage(image);
-  };
-
-  const closeLightbox = () => {
-    setSelectedImage(null);
-  };
-
+const Exhibitions = () => {
   return (
-    <>
-      <section className="fa-exhibitions" id="exhibitions">
-        <div className="fa-exhibitions-container">
+    <section className="fa-exhibitions" id="exhibitions">
+      <div className="fa-exhibitions-container">
 
-          {/* =================================================
-              EDITORIAL INTRO
-          ================================================= */}
+        {/* =====================================================
+            INTRO
+        ===================================================== */}
+        <div className="fa-exhibitions-intro">
 
-          <div className="fa-exhibitions-intro">
-
-            <div className="fa-exhibitions-intro-left">
-
-              <span className="fa-exhibitions-kicker">
-                F&amp;A COLLECTIVE
-              </span>
-
-              <h2>
-                Our
-                <br />
-                <em>Exhibition Journey</em>
-              </h2>
-
-            </div>
-
-            <div className="fa-exhibitions-intro-right">
-
-              <span className="fa-exhibitions-flower">
-                ✽
-              </span>
-
-              <p>
-                From our very first exhibition to the many professional
-                exhibitions that followed, every event has been an
-                important milestone in our journey. These experiences
-                have allowed us to showcase our craftsmanship, connect
-                with our customers, and bring our collections to life.
-              </p>
-
-              <div className="fa-exhibitions-line">
-                <span>EXHIBITIONS</span>
-                <span>SHOWCASES</span>
-                <span>MILESTONES</span>
-              </div>
-
-            </div>
-
+          <div className="fa-exhibitions-kicker">
+            <span className="fa-line"></span>
+            F&A COLLECTIVE
           </div>
 
-
-          {/* =================================================
-              FEATURED IMAGE — FIRST EVER EXHIBITION
-          ================================================= */}
-
-          <div
-            className="fa-exhibition-feature"
-            onClick={() => openLightbox(exhibitionImages[0])}
-          >
-
-            <img
-              src={exhibitionImages[0].src}
-              alt="F&A Collective first-ever exhibition"
-            />
-
-            <div className="fa-feature-overlay">
-
-              <div className="fa-feature-number">
-                01 / 07
-              </div>
-
-              <div className="fa-feature-caption">
-
-                <span>
-                  OUR FIRST-EVER EXHIBITION
-                </span>
-
-                <strong>
-                  Where our exhibition
-                  <br />
-                  journey began.
-                </strong>
-
-              </div>
-
-              <span className="fa-view-moment">
-                VIEW MOMENT ↗
-              </span>
-
-            </div>
-
+          <div className="fa-exhibitions-heading">
+            <h2>
+              Our Exhibitions,
+              <br />
+              <em>Our Journey.</em>
+            </h2>
           </div>
 
+          <div className="fa-exhibitions-intro-copy">
+            <p>
+              From our very first exhibition to the many showcases that
+              followed across Dubai, every exhibition has been a chapter
+              in the F&A story.
+            </p>
 
-          {/* =================================================
-              EDITORIAL STORY
-          ================================================= */}
-
-          <div className="fa-editorial-row">
-
-            <div className="fa-editorial-image small-image">
-
-              <img
-                src={exhibitionImages[1].src}
-                alt="F&A Collective exhibition"
-                onClick={() => openLightbox(exhibitionImages[1])}
-              />
-
-              <span className="fa-image-number">
-                02
-              </span>
-
-            </div>
-
-
-            <div className="fa-editorial-copy">
-
-              <span className="fa-copy-number">
-                02 — THE BEGINNING
-              </span>
-
-              <h3>
-                Where our
-                <br />
-                <em>journey began.</em>
-              </h3>
-
-              <p>
-                Our first-ever exhibition marked a special milestone
-                for F&amp;A Collective. It was the beginning of our
-                journey of bringing our jewellery closer to our
-                customers, showcasing our collections, and creating
-                memorable experiences through every exhibition.
-              </p>
-
-              <div className="fa-copy-decoration">
-                <span>✦</span>
-                <span>✦</span>
-                <span>✦</span>
-              </div>
-
-            </div>
-
+            <p>
+              These moments have allowed us to bring our jewellery closer
+              to women, share the details behind each collection, and create
+              meaningful connections beyond the boutique.
+            </p>
           </div>
 
+        </div>
 
-          {/* =================================================
-              WIDE IMAGE
-          ================================================= */}
 
-          <div
-            className="fa-wide-image"
-            onClick={() => openLightbox(exhibitionImages[2])}
-          >
+        {/* =====================================================
+            VIDEO
+        ===================================================== */}
+        <div className="fa-exhibition-video-section">
 
-            <img
-              src={exhibitionImages[2].src}
-              alt="F&A Collective jewellery showcase"
-            />
-
-            <div className="fa-wide-label">
-              <span>03</span>
-              <span>THE DETAILS</span>
-            </div>
-
+          <div className="fa-section-label">
+            <span>EXHIBITION MOMENTS</span>
           </div>
 
+          <div className="fa-video-wrapper">
 
-          {/* =================================================
-              SECOND EDITORIAL ROW
-          ================================================= */}
-
-          <div className="fa-editorial-row reverse">
-
-            <div className="fa-editorial-copy">
-
-              <span className="fa-copy-number">
-                04 — CURATED MOMENTS
-              </span>
-
-              <h3>
-                Crafted for
-                <br />
-                <em>the moment.</em>
-              </h3>
-
-              <p>
-                From intimate displays to beautifully arranged
-                showcases, our exhibitions reflect the same
-                attention to detail that defines F&amp;A Collective.
-                Every presentation is thoughtfully created to
-                celebrate our jewellery and the people who wear it.
-              </p>
-
-              <div className="fa-quote">
-                “Jewellery is not simply worn.
-                <br />
-                It becomes part of the moment.”
-              </div>
-
-            </div>
-
-
-            <div className="fa-editorial-image">
-
-              <img
-                src={exhibitionImages[3].src}
-                alt="F&A Collective exhibition display"
-                onClick={() => openLightbox(exhibitionImages[3])}
-              />
-
-              <span className="fa-image-number">
-                04
-              </span>
-
-            </div>
-
-          </div>
-
-
-          {/* =================================================
-              TWO IMAGE MOMENT
-          ================================================= */}
-
-          <div className="fa-dual-images">
-
-            <div
-              className="fa-dual-image dual-large"
-              onClick={() => openLightbox(exhibitionImages[4])}
+            <video
+              className="fa-exhibitions-video"
+              controls
+              playsInline
+              preload="metadata"
+              aria-label="F&A exhibition showcase"
             >
+              <source src={exhibitionVideo} type="video/mp4" />
 
-              <img
-                src={exhibitionImages[4].src}
-                alt="F&A Collective jewellery collection"
-              />
-
-              <span>
-                05
-              </span>
-
-            </div>
-
-
-            <div
-              className="fa-dual-image dual-small"
-              onClick={() => openLightbox(exhibitionImages[5])}
-            >
-
-              <img
-                src={exhibitionImages[5].src}
-                alt="F&A Collective jewellery exhibition"
-              />
-
-              <span>
-                06
-              </span>
-
-            </div>
+              Your browser does not support the video tag.
+            </video>
 
           </div>
 
+          <p className="fa-video-caption">
+            A glimpse into the exhibitions, showcases and beautiful moments
+            that have shaped the F&A journey.
+          </p>
 
-          {/* =================================================
-              FINAL IMAGE
-          ================================================= */}
+        </div>
 
-          <div
-            className="fa-final-image"
-            onClick={() => openLightbox(exhibitionImages[6])}
-          >
 
-            <img
-              src={exhibitionImages[6].src}
-              alt="F&A Collective exhibition journey"
-            />
+        {/* =====================================================
+            STORY
+        ===================================================== */}
+        <div className="fa-exhibition-story">
 
-            <div className="fa-final-overlay">
-
-              <span>
-                07 / 07
-              </span>
-
-              <h3>
-                A glimpse
-                <br />
-                <em>into our journey.</em>
-              </h3>
-
-            </div>
-
+          <div className="fa-story-number">
+            <span>THE STORY</span>
+            <strong>01</strong>
           </div>
 
-
-          {/* =================================================
-              INSTAGRAM CTA
-          ================================================= */}
-
-          <div className="fa-exhibitions-cta">
-
-            <div className="fa-cta-symbol">
-              ✽
-            </div>
-
-            <span className="fa-cta-kicker">
-              CONTINUE THE STORY
-            </span>
+          <div className="fa-story-content">
 
             <h3>
-              More moments,
+              From our first exhibition
               <br />
-              <em>on Instagram.</em>
+              <em>to every showcase after.</em>
             </h3>
 
             <p>
-              Discover new collections, exhibition moments
-              and behind-the-scenes glimpses from F&amp;A Collective.
+              Our first exhibition was more than a showcase — it was the
+              beginning of a journey. Meeting customers in person, seeing
+              pieces come alive, and sharing the F&A experience gave us
+              a new way to tell our story.
             </p>
+
+            <p>
+              Since then, we have had the joy of taking part in exhibitions
+              and showcases across Dubai. Each one has been different, but
+              the feeling remains the same: beautiful jewellery, genuine
+              conversations, and women finding pieces that feel like
+              their own.
+            </p>
+
+            <p>
+              The video above brings together a few of those moments —
+              from early beginnings to later showcases — as a little
+              glimpse into the journey behind F&A.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        {/* =====================================================
+            MILESTONES
+        ===================================================== */}
+        <div className="fa-exhibition-milestones">
+
+          <div className="fa-milestones-heading">
+            <span>OUR JOURNEY</span>
+
+            <h3>
+              Every exhibition
+              <br />
+              <em>becomes a memory.</em>
+            </h3>
+          </div>
+
+
+          <div className="fa-milestones-grid">
+
+            {milestones.map((milestone) => (
+              <article
+                className="fa-milestone-card"
+                key={milestone.number}
+              >
+
+                <div className="fa-milestone-top">
+                  <span>{milestone.number}</span>
+                  <span className="fa-milestone-dot"></span>
+                </div>
+
+                <h4>{milestone.title}</h4>
+
+                <p>{milestone.text}</p>
+
+              </article>
+            ))}
+
+          </div>
+
+        </div>
+
+
+        {/* =====================================================
+            CLOSING STATEMENT
+        ===================================================== */}
+        <div className="fa-exhibition-closing">
+
+          <div className="fa-closing-decoration">
+            ✦
+          </div>
+
+          <span className="fa-closing-kicker">
+            WITH LOVE FROM F&A
+          </span>
+
+          <h3>
+            More than jewellery.
+            <br />
+            <em>Moments to remember.</em>
+          </h3>
+
+          <p>
+            Every exhibition gives us another opportunity to share what
+            F&A represents — timeless elegance, meaningful craftsmanship,
+            and jewellery created to become part of a woman's story.
+          </p>
+
+        </div>
+
+
+        {/* =====================================================
+            CTA
+        ===================================================== */}
+        <div className="fa-exhibitions-cta">
+
+          <div className="fa-cta-content">
+
+            <span>DISCOVER F&A</span>
+
+            <h3>
+              Come experience
+              <br />
+              <em>the collection.</em>
+            </h3>
+
+            <p>
+              Explore our latest jewellery collections and stay close
+              to the moments, stories and showcases that are still to come.
+            </p>
+
+          </div>
+
+
+          <div className="fa-cta-actions">
+
+            <a
+              href="/collections"
+              className="fa-cta-button fa-cta-primary"
+            >
+              Explore Collection
+              <span>↗</span>
+            </a>
 
             <a
               href="#"
-              target="_blank"
-              rel="noreferrer"
-              className="fa-instagram-button"
+              className="fa-cta-button fa-cta-secondary"
             >
-              Follow F&amp;A on Instagram
+              Follow F&A
               <span>↗</span>
             </a>
 
           </div>
 
         </div>
-      </section>
 
-
-      {/* =====================================================
-          LIGHTBOX
-      ===================================================== */}
-
-      {selectedImage && (
-        <div
-          className="fa-lightbox"
-          onClick={closeLightbox}
-        >
-
-          <button
-            className="fa-lightbox-close"
-            onClick={closeLightbox}
-            aria-label="Close image"
-          >
-            ×
-          </button>
-
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.caption}
-            onClick={(event) => event.stopPropagation()}
-          />
-
-          <div className="fa-lightbox-caption">
-            {selectedImage.number} / 07
-          </div>
-
-        </div>
-      )}
-
-    </>
+      </div>
+    </section>
   );
-}
+};
 
 export default Exhibitions;

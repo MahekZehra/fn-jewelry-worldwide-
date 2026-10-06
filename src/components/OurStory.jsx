@@ -18,7 +18,6 @@ const OurStory = () => {
         lg:py-32
       "
     >
-
       {/* =====================================================
           SOFT PASTEL BACKGROUND DETAILS
       ===================================================== */}
@@ -136,11 +135,10 @@ const OurStory = () => {
               sm:leading-8
             "
           >
-            F&A Fashion and Jewellery Collection was founded in Dubai by Amna,
-            with a simple belief — that jewellery is more than
-            something you wear. It is a little piece of confidence,
-            a celebration of individuality, and a reminder to feel
-            beautiful in your own way.
+            F&A Fashion & Jewellery Collection was founded in Dubai
+            with a love for timeless fashion and elegant jewellery.
+            Our collection is a celebration of individuality,
+            femininity, tradition and modern elegance.
           </p>
 
         </div>
@@ -272,7 +270,9 @@ const OurStory = () => {
               "
             >
 
-              {/* STORY INTRO */}
+              {/* =================================================
+                  STORY INTRO
+              ================================================= */}
 
               <div className="text-center">
 
@@ -286,13 +286,16 @@ const OurStory = () => {
                     sm:text-3xl
                   "
                 >
-                  It began with a love for the little things
-                  that make a woman feel beautiful.
+                  It began with a love for timeless fashion,
+                  elegant jewellery, and the beautiful memories
+                  that stay with us forever.
                 </p>
 
               </div>
 
-              {/* STORY BODY */}
+              {/* =================================================
+                  STORY BODY
+              ================================================= */}
 
               <div
                 className="
@@ -308,14 +311,42 @@ const OurStory = () => {
                 "
               >
 
+                {/* INTRODUCTION */}
+
                 <p>
-                  F&A Fashion and Jewellery Collection was founded in Dubai by
                   <span className="font-semibold text-[#704E59]">
-                    {" "}Amna
-                  </span>
-                  , born from a simple yet heartfelt idea:
-                  every woman deserves to find something that
-                  feels beautifully, unmistakably hers.
+                    F&A Fashion & Jewellery Collection
+                  </span>{" "}
+                  was founded in Dubai with a love for timeless
+                  fashion and elegant jewellery.
+                </p>
+
+                {/* NAME MEANING */}
+
+                <p>
+                  <span className="font-semibold text-[#704E59]">
+                    F&A stands for Fakhar & Amna.
+                  </span>{" "}
+                  My sister and I created this brand in loving
+                  memory of our beloved mother, whose love,
+                  strength, and grace remain forever in our hearts.
+                  F&A is our way of keeping a part of her with us
+                  through this special journey.
+                </p>
+
+                <p>
+                  Her memory is woven into the heart of everything
+                  we create — from the elegance of every design
+                  to the feeling we hope every woman experiences
+                  when she wears a piece from F&A.
+                </p>
+
+                {/* COLLECTION PHILOSOPHY */}
+
+                <p>
+                  Our collection blends traditional elegance with
+                  modern style, celebrating every woman in her own
+                  unique way.
                 </p>
 
                 <p>
@@ -367,8 +398,11 @@ const OurStory = () => {
                     sm:text-3xl
                   "
                 >
-                  F&A Fashion and Jewellery Collection is our love letter
-                  to women.
+                  F&A is more than a collection.
+                  <br />
+                  It is our love letter to women,
+                  <br />
+                  and a tribute to the woman who inspired us.
                 </p>
 
                 <p
@@ -380,7 +414,7 @@ const OurStory = () => {
                     text-[#A87585]
                   "
                 >
-                  To every beautiful version of you
+                  Love • Strength • Grace
                 </p>
 
               </div>
@@ -413,6 +447,12 @@ const OurStory = () => {
                   to travel beyond borders — bringing together
                   elegance, tradition and modern glamour, one
                   beautiful piece at a time.
+                </p>
+
+                <p>
+                  Every piece is chosen with the intention of
+                  making you feel special, confident and
+                  beautifully yourself.
                 </p>
 
               </div>
@@ -450,6 +490,18 @@ const OurStory = () => {
                   <span className="ml-1">
                     ✨
                   </span>
+                </p>
+
+                <p
+                  className="
+                    mt-4
+                    text-xs
+                    uppercase
+                    tracking-[0.25em]
+                    text-[#A87585]
+                  "
+                >
+                  With love, Fakhar & Amna
                 </p>
 
               </div>

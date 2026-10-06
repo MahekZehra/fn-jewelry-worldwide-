@@ -879,7 +879,9 @@ const Checkout = () => {
                         alt={item.name}
                         className="
                           h-full w-full
-                          object-cover
+                          object-contain
+                          p-1
+                          sm:p-2
                         "
                       />
                     </div>

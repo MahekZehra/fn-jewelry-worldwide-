@@ -273,11 +273,11 @@ const ProductCard = ({ product }) => {
             z-10
             h-full
             w-full
-            object-cover
-            transition-transform
-            duration-700
-            ease-out
-            group-hover:scale-[1.045]
+            object-contain
+            p-1
+            sm:p-2
+            transition-opacity
+            duration-500
           "
         />
 

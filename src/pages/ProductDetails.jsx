@@ -127,7 +127,7 @@ const ProductDetails = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                className="aspect-[4/5] h-full w-full object-contain bg-[#EEE9E3] p-2 sm:p-4"
               />
 
               <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
