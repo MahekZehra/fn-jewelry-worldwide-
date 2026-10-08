@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   FiArrowUpRight,
@@ -67,64 +67,127 @@ const Shop = () => {
   ]);
 
   /* =====================================================
-     AVAILABLE SUBCATEGORIES
-  ===================================================== */
+   AVAILABLE SUBCATEGORIES
+===================================================== */
 
   const subCategories = useMemo(() => {
+
     if (activeCategory === "All") {
       return [];
     }
 
-    const categoryProducts = products.filter(
-      (product) =>
-        product.category?.trim().toLowerCase() ===
-        activeCategory.trim().toLowerCase()
-    );
+    if (activeCategory === "Jewellery") {
+      return [
+        "Sets",
+        "Designer Sets",
+        "Necklaces",
+        "Everyday Jewellery",
+        "Earrings",
+        "Traditional Sets",
+        "Statement Jewellery",
+        "Party Jewellery",
+        "New Arrivals",
+      ];
+    }
 
-    return [
-      ...new Set(
-        categoryProducts
-          .map((product) =>
-            product.subCategory?.trim()
-          )
-          .filter(Boolean)
-      ),
-    ];
+    if (activeCategory === "Garments") {
+      return [
+        "Lawn Single Shirt Piece",
+        "Lawn 2 Piece",
+        "Silk Kaftan",
+      ];
+    }
+
+    if (activeCategory === "Accessories") {
+      return [
+        "Kundan Clutches",
+      ];
+    }
+
+    return [];
   }, [activeCategory]);
-
-  /* =====================================================
-     FILTER PRODUCTS
-  ===================================================== */
+/* =====================================================
+   FILTER PRODUCTS
+===================================================== */
 
   const filteredProducts = useMemo(() => {
+
     return products.filter((product) => {
+
+      const normalizedCategory =
+        product.category?.trim().toLowerCase();
+
+      const normalizedActiveCategory =
+        activeCategory.trim().toLowerCase();
+
+      const normalizedSubCategory =
+        product.subCategory?.trim().toLowerCase();
+
+      const normalizedActiveSubCategory =
+        activeSubCategory.trim().toLowerCase();
+
+
+      // -------------------------------------------------
+      // MAIN CATEGORY
+      // -------------------------------------------------
+
       const matchesCategory =
         activeCategory === "All" ||
-        product.category?.trim().toLowerCase() ===
-          activeCategory.trim().toLowerCase();
+        normalizedCategory === normalizedActiveCategory;
 
-      const matchesSubCategory =
-        activeSubCategory === "All" ||
-        product.subCategory?.trim().toLowerCase() ===
-          activeSubCategory.trim().toLowerCase();
+
+      // -------------------------------------------------
+      // SUBCATEGORY
+      // -------------------------------------------------
+
+      let matchesSubCategory = true;
+
+
+      // New Arrivals is a SPECIAL FILTER.
+      // It does NOT depend on product.subCategory.
+      // Only the 5 products with isNewArrival: true appear.
+      if (activeSubCategory === "New Arrivals") {
+
+        matchesSubCategory =
+          product.category === "Jewellery" &&
+          product.isNewArrival === true;
+
+      } else if (activeSubCategory === "All") {
+
+        matchesSubCategory = true;
+
+      } else {
+
+        matchesSubCategory =
+          normalizedSubCategory ===
+          normalizedActiveSubCategory;
+
+      }
+
+
+      // -------------------------------------------------
+      // SALE
+      // -------------------------------------------------
 
       const matchesSale =
         !isSaleOnly ||
         product.onSale === true;
+
 
       return (
         matchesCategory &&
         matchesSubCategory &&
         matchesSale
       );
+
     });
+
   }, [
     activeCategory,
     activeSubCategory,
     isSaleOnly,
   ]);
-
-  /* =====================================================
+/* =====================================================
      MAIN CATEGORY CHANGE
   ===================================================== */
 
@@ -380,7 +443,7 @@ const Shop = () => {
             "
           >
             A curated world of delicate jewellery,
-            beautiful fabrics and statement pieces —
+            beautiful fabrics and statement pieces â€”
             selected for the woman who loves to
             stand out effortlessly.
           </p>

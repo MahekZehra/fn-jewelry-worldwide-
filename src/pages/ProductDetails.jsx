@@ -170,9 +170,15 @@ const ProductDetails = () => {
                 PRICE
             ================================================= */}
 
-            <p className="mt-6 text-xl font-semibold tracking-tight text-black sm:text-2xl">
-              {formatPrice(currentPrice)}
-            </p>
+            <div className="mt-6">
+  <p className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
+    {formatPrice(currentPrice)}
+  </p>
+
+  <p className="mt-1.5 text-[11px] text-black/45">
+    All prices include VAT.
+  </p>
+</div>
 
             {/* Divider */}
 

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+
 import { useLocation } from "react-router-dom";
+
 import {
   FiMail,
   FiMessageCircle,
@@ -10,6 +12,56 @@ import {
 
 const Contact = () => {
   const location = useLocation();
+
+  /* =====================================================
+     EMAIL SUPPORT
+  ====================================================== */
+
+  const handleEmail = () => {
+    const subject = encodeURIComponent(
+      "F&A Collective — Customer Enquiry"
+    );
+
+    const body = encodeURIComponent(
+      "Hello F&A Collective,\n\nI would like to enquire about your collection.\n\nThank you."
+    );
+
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=info@amnafacollective.com&su=${subject}&body=${body}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  /* =====================================================
+     WHATSAPP SUPPORT
+  ====================================================== */
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent(
+      "Hi F&A Collective! I would like to enquire about your jewellery and fashion collection."
+    );
+
+    window.open(
+      `https://wa.me/923353149929?text=${message}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  /* =====================================================
+     OPEN F&A CHATBOT
+  ====================================================== */
+
+  const openChatbot = () => {
+    window.dispatchEvent(
+      new Event("open-fna-chatbot")
+    );
+  };
+
+  /* =====================================================
+     CONTACT HASH SCROLL
+  ====================================================== */
 
   useEffect(() => {
     if (location.hash === "#contact") {
@@ -58,6 +110,7 @@ const Contact = () => {
         <div className="mx-auto max-w-2xl text-center">
 
           <div className="mb-4 flex items-center justify-center gap-3">
+
             <span className="h-px w-10 bg-[#D8B7A8]" />
 
             <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#A87585]">
@@ -65,6 +118,7 @@ const Contact = () => {
             </span>
 
             <span className="h-px w-10 bg-[#D8B7A8]" />
+
           </div>
 
           <h2 className="font-serif text-4xl leading-tight tracking-tight text-[#3B2930] sm:text-5xl lg:text-6xl">
@@ -88,8 +142,15 @@ const Contact = () => {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-          {/* EMAIL */}
-          <div className="group relative overflow-hidden rounded-[2rem] border border-[#E8D6D8] bg-white/75 p-7 shadow-[0_12px_40px_rgba(105,75,75,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(105,75,75,0.10)]">
+          {/* ===================================================
+              EMAIL
+          ==================================================== */}
+
+          <button
+            type="button"
+            onClick={handleEmail}
+            className="group relative overflow-hidden rounded-[2rem] border border-[#E8D6D8] bg-white/75 p-7 text-left shadow-[0_12px_40px_rgba(105,75,75,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(105,75,75,0.10)]"
+          >
 
             <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#F8DDE5]/50 blur-2xl" />
 
@@ -112,14 +173,21 @@ const Contact = () => {
               </p>
 
               <p className="mt-5 break-all text-sm font-medium text-[#9D687A]">
-                yourbusiness@email.com
+                info@amnafacollective.com
               </p>
 
             </div>
-          </div>
+          </button>
 
-          {/* WHATSAPP */}
-          <div className="group relative overflow-hidden rounded-[2rem] border border-[#DED5E8] bg-white/75 p-7 shadow-[0_12px_40px_rgba(105,75,75,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(105,75,75,0.10)]">
+          {/* ===================================================
+              WHATSAPP
+          ==================================================== */}
+
+          <button
+            type="button"
+            onClick={handleWhatsApp}
+            className="group relative overflow-hidden rounded-[2rem] border border-[#DED5E8] bg-white/75 p-7 text-left shadow-[0_12px_40px_rgba(105,75,75,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(105,75,75,0.10)]"
+          >
 
             <div className="absolute -bottom-10 -right-10 h-28 w-28 rounded-full bg-[#E8DDF2]/50 blur-2xl" />
 
@@ -142,13 +210,16 @@ const Contact = () => {
               </p>
 
               <p className="mt-5 text-sm font-medium text-[#80658B]">
-                +00 000 000 0000
+                WhatsApp Support
               </p>
 
             </div>
-          </div>
+          </button>
 
-          {/* RESPONSE TIME */}
+          {/* ===================================================
+              RESPONSE TIME
+          ==================================================== */}
+
           <div className="group relative overflow-hidden rounded-[2rem] border border-[#E6D9C9] bg-white/75 p-7 shadow-[0_12px_40px_rgba(105,75,75,0.06)] backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(105,75,75,0.10)] sm:col-span-2 lg:col-span-1">
 
             <div className="absolute -left-10 -bottom-10 h-28 w-28 rounded-full bg-[#EEDFCB]/50 blur-2xl" />
@@ -205,11 +276,13 @@ const Contact = () => {
             <div className="max-w-2xl">
 
               <div className="mb-3 flex items-center justify-center gap-2 lg:justify-start">
+
                 <FiHeart className="text-[#B9788B]" />
 
                 <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#A87585]">
                   Special Occasions
                 </span>
+
               </div>
 
               <h3 className="font-serif text-3xl leading-tight text-[#3B2930] sm:text-4xl">
@@ -228,13 +301,19 @@ const Contact = () => {
 
             </div>
 
+            {/* =================================================
+                ENQUIRE WITH US → OPEN CHATBOT
+            ================================================== */}
+
             <button
               type="button"
+              onClick={openChatbot}
               className="group flex shrink-0 items-center gap-3 rounded-full bg-[#B9788B] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(185,120,139,0.20)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#A9677A] hover:shadow-[0_15px_35px_rgba(185,120,139,0.28)]"
             >
               Enquire With Us
 
               <FiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+
             </button>
 
           </div>

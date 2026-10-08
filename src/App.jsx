@@ -10,6 +10,7 @@ import Testimonials from "./components/Testimonials";
 import KnowYourStones from "./components/KnowYourStones";
 import WorldwideDelivery from "./components/WorldwideDelivery";
 import Contact from "./components/Contact";
+import Chatbot from "./components/Chatbot";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 
@@ -122,6 +123,7 @@ function App() {
 
       {/* FLOATING WHATSAPP BUTTON */}
       <WhatsAppButton />
+      <Chatbot />
 
     </BrowserRouter>
   );

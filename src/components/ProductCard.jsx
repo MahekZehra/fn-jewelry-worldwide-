@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import {
   FiShoppingBag,
   FiArrowUpRight,
@@ -256,36 +258,75 @@ const ProductCard = ({ product }) => {
             SOFT VINTAGE GLOW
         ================================================= */}
 
-        <div className="pointer-events-none absolute -left-10 -top-10 h-28 w-28 rounded-full bg-[#F9DCE5]/40 blur-2xl" />
+        <div className="
+          pointer-events-none
+          absolute
+          -left-10
+          -top-10
+          h-28
+          w-28
+          rounded-full
+          bg-[#F9DCE5]/40
+          blur-2xl
+        " />
 
-        <div className="pointer-events-none absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-[#E8D8C5]/50 blur-2xl" />
+        <div className="
+          pointer-events-none
+          absolute
+          -bottom-10
+          -right-10
+          h-32
+          w-32
+          rounded-full
+          bg-[#E8D8C5]/50
+          blur-2xl
+        " />
 
         {/* =================================================
-            PRODUCT IMAGE
+            STANDARDIZED PRODUCT IMAGE
         ================================================= */}
 
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="
-            relative
-            z-10
-            h-full
-            w-full
-            object-contain
-            p-1
-            sm:p-2
-            transition-opacity
-            duration-500
-          "
-        />
+        <div className="
+          absolute
+          inset-0
+          z-10
+          flex
+          items-center
+          justify-center
+        ">
+          <img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            className="
+              h-full
+              w-full
+              object-contain
+              object-center
+              p-0
+              transition-transform
+              duration-500
+            "
+          />
+        </div>
 
         {/* =================================================
             SUBTLE LUXURY OVERLAY
         ================================================= */}
 
-        <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-[#5A4338]/[0.05] via-transparent to-white/[0.04] transition-all duration-500 group-hover:from-[#5A4338]/[0.09]" />
+        <div className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-20
+          bg-gradient-to-t
+          from-[#5A4338]/[0.05]
+          via-transparent
+          to-white/[0.04]
+          transition-all
+          duration-500
+          group-hover:from-[#5A4338]/[0.09]
+        " />
 
         {/* =================================================
             SALE BADGE
@@ -293,7 +334,25 @@ const ProductCard = ({ product }) => {
 
         {product.onSale &&
           salePriceAED !== null && (
-            <div className="absolute left-3 top-3 z-30 rounded-full border border-white/40 bg-[#6B4E4E]/90 px-3.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white shadow-md backdrop-blur-sm">
+            <div className="
+              absolute
+              left-3
+              top-3
+              z-30
+              rounded-full
+              border
+              border-white/40
+              bg-[#6B4E4E]/90
+              px-3.5
+              py-1.5
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-white
+              shadow-md
+              backdrop-blur-sm
+            ">
               Sale
             </div>
           )}
@@ -435,7 +494,13 @@ const ProductCard = ({ product }) => {
             CATEGORY
         ================================================= */}
 
-        <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#806D66]/70">
+        <p className="
+          text-[9px]
+          font-semibold
+          uppercase
+          tracking-[0.28em]
+          text-[#806D66]/70
+        ">
           {product.category}
         </p>
 
@@ -444,7 +509,13 @@ const ProductCard = ({ product }) => {
         ================================================= */}
 
         {product.subCategory && (
-          <p className="mt-1 min-h-[16px] text-[11px] italic text-[#8E7A72]/65">
+          <p className="
+            mt-1
+            min-h-[16px]
+            text-[11px]
+            italic
+            text-[#8E7A72]/65
+          ">
             {product.subCategory}
           </p>
         )}
@@ -478,7 +549,15 @@ const ProductCard = ({ product }) => {
         ================================================= */}
 
         {product.description && (
-          <p className="mt-2 line-clamp-6 text-[11px] leading-5 text-[#766762]/65 sm:text-xs sm:leading-5">
+          <p className="
+            mt-2
+            line-clamp-6
+            text-[11px]
+            leading-5
+            text-[#766762]/65
+            sm:text-xs
+            sm:leading-5
+          ">
             {product.description}
           </p>
         )}
@@ -487,27 +566,51 @@ const ProductCard = ({ product }) => {
             PRICE
         ================================================= */}
 
-        <div className="mt-3 flex items-center gap-2">
+        <div className="mt-3">
 
-          {/* ACTIVE / SALE PRICE */}
+          {/* PRICE ROW */}
 
-          <span className="text-sm font-semibold tracking-tight text-[#332724] sm:text-[15px]">
-            {currencySymbol}{" "}
-            {formatPrice(
-              convertedActivePrice
-            )}
-          </span>
+          <div className="flex items-center gap-2">
 
-          {/* ORIGINAL PRICE */}
+            {/* ACTIVE / SALE PRICE */}
 
-          {salePriceAED !== null && (
-            <span className="text-xs text-[#8E7A72]/55 line-through">
+            <span className="
+              text-sm
+              font-semibold
+              tracking-tight
+              text-[#332724]
+              sm:text-[15px]
+            ">
               {currencySymbol}{" "}
-              {formatPrice(
-                convertedOriginalPrice
-              )}
+              {formatPrice(convertedActivePrice)}
             </span>
-          )}
+
+            {/* ORIGINAL PRICE */}
+
+            {salePriceAED !== null && (
+              <span className="
+                text-xs
+                text-[#8E7A72]/55
+                line-through
+              ">
+                {currencySymbol}{" "}
+                {formatPrice(convertedOriginalPrice)}
+              </span>
+            )}
+
+          </div>
+
+          {/* VAT NOTE */}
+
+          <p className="
+            mt-1
+            text-[9px]
+            font-medium
+            tracking-wide
+            text-[#8E7A72]/65
+          ">
+            All prices include VAT.
+          </p>
 
         </div>
 

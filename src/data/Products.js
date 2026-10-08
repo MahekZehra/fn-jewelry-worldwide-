@@ -1,18 +1,18 @@
-const products = [
+﻿const products = [
   // =====================================================
-  // ACCESSORIES — KUNDAN CLUTCHES
+  // ACCESSORIES â€” KUNDAN CLUTCHES
   // =====================================================
 
   {
     id: 7,
     name: "Royal Kundan Clutch",
-    priceAED: 189,
-    salePriceAED: 169,
-    onSale: true,
+    priceAED: 150,
+   
+    salePriceAED: null,
+    onSale: false,
 
     category: "Accessories",
     subCategory: "Kundan Clutches",
-
     image: "/products/kundan-clutch-1.jpg",
 
     description:
@@ -28,7 +28,7 @@ const products = [
   {
     id: 8,
     name: "Classic Kundan Clutch",
-    priceAED: 199,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
 
@@ -50,7 +50,7 @@ const products = [
   {
     id: 9,
     name: "Luxury Kundan Clutch",
-    priceAED: 219,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
 
@@ -72,7 +72,7 @@ const products = [
   {
     id: 34,
     name: "Elegant Kundan Clutch",
-    priceAED: 239,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
 
@@ -94,7 +94,7 @@ const products = [
   {
     id: 35,
     name: "Luxury Statement Kundan Clutch",
-    priceAED: 259,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
 
@@ -116,7 +116,7 @@ const products = [
     {
     id: 125,
     name: "Royal Kundan Pearl Clutch",
-    priceAED: 269,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Accessories",
@@ -134,7 +134,7 @@ const products = [
   {
     id: 126,
     name: "Signature Luxe Kundan Clutch",
-    priceAED: 289,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Accessories",
@@ -151,20 +151,19 @@ const products = [
 
   
   // =====================================================
-  // JEWELLERY — SETS
+  // JEWELLERY â€” SETS
   // =====================================================
 
   {
     id: 13,
     name: "Elegant Jewellery Set",
-    priceAED: 79,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
     subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-1.jpg",
 
@@ -181,14 +180,13 @@ const products = [
   {
     id: 14,
     name: "Classic Jewellery Collection",
-    priceAED: 89,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Designer Sets",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-2.jpg",
 
@@ -203,92 +201,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — DESIGNER SETS
+  // JEWELLERY â€” DESIGNER SETS
   // =====================================================
-
-  {
-    id: 15,
-    name: "Royal Statement Jewellery",
-    priceAED: 99,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Designer Sets",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-3.jpg",
-
-    description:
-      "A striking artificial jewellery set with detailed design and a sophisticated finish. Perfect for weddings, parties, festive gatherings and special celebrations.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Statement Set",
-      occasion: "Weddings & Parties",
-    },
-  },
-
-  {
-    id: 20,
-    name: "Luxury Occasion Jewellery",
-    priceAED: 129,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Designer Sets",
-    origin: "Pakistani Style",
-    originFlag: "🇵🇰",
-
-    image: "/products/jewellery-8.jpg",
-
-    description:
-      "A luxurious artificial jewellery design with sophisticated detailing and a polished finish. Ideal for weddings, formal events and elegant evening styling.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Designer Set",
-      occasion: "Wedding & Formal Wear",
-    },
-  },
-
-  {
-    id: 25,
-    name: "Premium Jewellery Set",
-    priceAED: 139,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Designer Sets",
-    origin: "Pakistani Style",
-    originFlag: "🇵🇰",
-
-    image: "/products/jewellery-13.jpg",
-
-    description:
-      "A premium artificial jewellery set featuring elegant detailing and a refined decorative finish. Designed to elevate wedding, formal and special occasion outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Premium Designer Set",
-      occasion: "Wedding & Formal Wear",
-    },
-  },
 
   {
     id: 27,
     name: "Royal Occasion Set",
-    priceAED: 149,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
     subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-15.jpg",
 
@@ -303,72 +228,46 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — NECKLACES
+  // JEWELLERY â€” NECKLACES
   // =====================================================
-
-  {
-    id: 16,
-    name: "Golden Elegance",
-    priceAED: 109,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Necklaces",
-    origin: "Turkish Style",
-    originFlag: "🇹🇷",
-
-    image: "/products/jewellery-4.jpg",
-
-    description:
-      "An artificial jewellery necklace with a sophisticated golden-finish appearance and graceful detailing. Perfect for traditional, contemporary and elegant occasion styling.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Necklace",
-      occasion: "Everyday & Occasion Wear",
-    },
-  },
 
   {
     id: 26,
     name: "Signature Gold Jewellery",
-    priceAED: 109,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Necklaces",
+    subCategory: "Designer Sets",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
 
     image: "/products/jewellery-14.jpg",
 
     description:
-      "A signature imitation jewellery necklace with a refined golden-finish look and contemporary detailing. Easy to pair with everyday and occasion outfits.",
+      "A signature imitation jewellery set with a refined golden-finish look and contemporary detailing. Easy to pair with everyday and occasion outfits.",
 
     details: {
       material: "Artificial Jewellery",
-      type: "Necklace",
+      type: "Designer Set",
       occasion: "Everyday & Occasion Wear",
     },
   },
 
   // =====================================================
-  // JEWELLERY — EVERYDAY JEWELLERY
+  // JEWELLERY â€” EVERYDAY JEWELLERY
   // =====================================================
 
   {
     id: 17,
     name: "Pearl Grace Jewellery",
-    priceAED: 95,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-5.jpg",
 
@@ -382,45 +281,20 @@ const products = [
     },
   },
 
-  {
-    id: 21,
-    name: "Delicate Gold Collection",
-    priceAED: 85,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Everyday Jewellery",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-9.jpg",
-
-    description:
-      "A delicate artificial jewellery design with a subtle golden-finish appearance and clean detailing. Created for effortless everyday styling and understated elegance.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Everyday Jewellery",
-      occasion: "Everyday Wear",
-    },
-  },
-
   // =====================================================
-  // JEWELLERY — FESTIVE SETS
+  // JEWELLERY â€” FESTIVE SETS
   // =====================================================
 
   {
     id: 18,
     name: "Festive Charm Set",
-    priceAED: 119,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
     subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-6.jpg",
 
@@ -435,48 +309,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — EARRINGS
-  // =====================================================
-
-  {
-    id: 19,
-    name: "Classic Golden Earrings",
-    priceAED: 69,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Earrings",
-    origin: "Turkish Style",
-    originFlag: "🇹🇷",
-
-    image: "/products/jewellery-7.jpg",
-
-    description:
-      "Elegant artificial earrings with a classic golden-finish appearance and refined detailing. Easy to pair with traditional, casual and occasion outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Earrings",
-      occasion: "Everyday & Special Occasions",
-    },
-  },
-
-  // =====================================================
-  // JEWELLERY — TRADITIONAL SETS
+  // JEWELLERY â€” TRADITIONAL SETS
   // =====================================================
 
   {
     id: 22,
     name: "Traditional Beauty Set",
-    priceAED: 119,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Traditional Sets",
+    subCategory: "Designer Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-10.jpg",
 
@@ -491,20 +336,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — STATEMENT JEWELLERY
+  // JEWELLERY â€” STATEMENT JEWELLERY
   // =====================================================
 
   {
     id: 23,
     name: "Modern Statement Piece",
-    priceAED: 99,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Designer Sets",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
 
     image: "/products/jewellery-11.jpg",
 
@@ -519,20 +363,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — PARTY JEWELLERY
+  // JEWELLERY â€” PARTY JEWELLERY
   // =====================================================
 
   {
     id: 24,
     name: "Elegant Party Jewellery",
-    priceAED: 109,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-12.jpg",
 
@@ -547,20 +390,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — NEW ARRIVALS
+  // JEWELLERY â€” NEW ARRIVALS
   // =====================================================
 
   {
     id: 30,
     name: "Elegant New Arrival",
-    priceAED: 99,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-16.jpg",
 
@@ -575,64 +417,15 @@ const products = [
   },
 
   {
-    id: 31,
-    name: "Graceful Statement Jewellery",
-    priceAED: 109,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Turkish Style",
-    originFlag: "🇹🇷",
-
-    image: "/products/jewellery-17.jpg",
-
-    description:
-      "A beautiful artificial jewellery piece featuring elegant detailing and a polished finish. Designed to bring effortless charm to both traditional and contemporary outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Statement Jewellery",
-      occasion: "Everyday & Occasion Wear",
-    },
-  },
-
-  {
-    id: 32,
-    name: "Classic Elegance Jewellery",
-    priceAED: 119,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-18.jpg",
-
-    description:
-      "A timeless artificial jewellery design with sophisticated detailing and a graceful finish. An elegant choice for celebrations, gatherings and special occasions.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Classic Jewellery",
-      occasion: "Festive & Special Occasions",
-    },
-  },
-
-  {
     id: 33,
     name: "Luxury Charm Jewellery",
-    priceAED: 129,
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-19.jpg",
 
@@ -647,20 +440,19 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — NEW TURKISH COLLECTION
+  // JEWELLERY â€” NEW TURKISH COLLECTION
   // =====================================================
 
   {
     id: 36,
     name: "Turkish Elegance Jewellery",
-    priceAED: 119,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
 
     image: "/products/jewellery-20.jpg",
 
@@ -677,14 +469,13 @@ const products = [
   {
     id: 37,
     name: "Turkish Royal Jewellery",
-    priceAED: 129,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
 
     image: "/products/jewellery-21.jpg",
 
@@ -699,40 +490,15 @@ const products = [
   },
 
   {
-    id: 38,
-    name: "Turkish Classic Collection",
-    priceAED: 139,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Turkish Style",
-    originFlag: "🇹🇷",
-
-    image: "/products/jewellery-22.jpg",
-
-    description:
-      "A timeless artificial jewellery design inspired by classic Turkish aesthetics, featuring graceful detailing and a refined polished finish. Ideal for elegant everyday and occasion styling.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Turkish Style Jewellery",
-      occasion: "Everyday & Occasion Wear",
-    },
-  },
-
-  {
     id: 39,
     name: "Turkish Luxury Statement",
-    priceAED: 149,
+    priceAED: 200,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
 
     image: "/products/jewellery-23.jpg",
 
@@ -747,7 +513,7 @@ const products = [
   },
 
   // =====================================================
-  // JEWELLERY — NEW COLLECTION
+  // JEWELLERY â€” NEW COLLECTION
   // =====================================================
 
   {
@@ -760,7 +526,6 @@ const products = [
     category: "Jewellery",
     subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-24.jpg",
 
@@ -784,7 +549,6 @@ const products = [
     category: "Jewellery",
     subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-25.jpg",
 
@@ -799,40 +563,15 @@ const products = [
   },
 
   {
-    id: 42,
-    name: "Royal Pearl Floral Set",
-    priceAED: 159,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Sets",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-26.jpg",
-
-    description:
-      "A luxurious traditional-inspired jewellery set featuring intricate golden floral detailing and elegant pearl accents. Designed to complement weddings, festive celebrations and formal occasions.",
-
-    details: {
-      material: "Artificial Jewellery & Pearl Detailing",
-      type: "Jewellery Set",
-      occasion: "Weddings & Festive Wear",
-    },
-  },
-
-  {
     id: 43,
     name: "Pearl Heritage Necklace Set",
-    priceAED: 179,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
     subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-27.jpg",
 
@@ -847,40 +586,15 @@ const products = [
   },
 
   {
-    id: 44,
-    name: "Emerald Bloom Statement Earrings",
-    priceAED: 109,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Earrings",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-28.jpg",
-
-    description:
-      "Beautiful floral statement earrings featuring rich emerald-green detailing, pearl accents and delicate pink embellishment. Designed to add an elegant finishing touch to traditional and occasion looks.",
-
-    details: {
-      material: "Artificial Jewellery, Pearls & Stones",
-      type: "Floral Statement Earrings",
-      occasion: "Weddings & Festive Wear",
-    },
-  },
-
-  {
     id: 45,
-    name: "Emerald Garden Earrings",
-    priceAED: 109,
+    name: "Luxury Bridal Set",
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "Earrings",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-29.jpg",
 
@@ -894,45 +608,20 @@ const products = [
     },
   },
 
-  {
-    id: 46,
-    name: "Golden Pearl Heritage Set",
-    priceAED: 169,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Sets",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-30.jpg",
-
-    description:
-      "A statement traditional jewellery set featuring ornate golden detailing, floral motifs and elegant pearl accents. Perfect for weddings, festive celebrations and sophisticated traditional looks.",
-
-    details: {
-      material: "Artificial Jewellery & Pearl Detailing",
-      type: "Traditional Jewellery Set",
-      occasion: "Weddings & Festive Wear",
-    },
-  },
-
   // =====================================================
-  // JEWELLERY — LATEST COLLECTION
+  // JEWELLERY â€” LATEST COLLECTION
   // =====================================================
 
   {
     id: 47,
     name: "Elegant Pearl Statement Jewellery",
-    priceAED: 119,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-31.jpg",
 
@@ -947,40 +636,15 @@ const products = [
   },
 
   {
-    id: 48,
-    name: "Royal Floral Jewellery",
-    priceAED: 129,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-
-    image: "/products/jewellery-32.jpg",
-
-    description:
-      "A graceful artificial jewellery design with elegant floral detailing and a polished finish. Designed to complement traditional, festive and formal outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Floral Jewellery",
-      occasion: "Festive & Wedding Wear",
-    },
-  },
-
-  {
     id: 49,
     name: "Classic Pearl Elegance",
-    priceAED: 139,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-33.jpg",
 
@@ -997,14 +661,13 @@ const products = [
   {
     id: 50,
     name: "Golden Heritage Jewellery",
-    priceAED: 149,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-34.jpg",
 
@@ -1021,14 +684,13 @@ const products = [
   {
     id: 51,
     name: "Royal Statement Collection",
-    priceAED: 159,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-35.jpg",
 
@@ -1043,40 +705,15 @@ const products = [
   },
 
   {
-    id: 52,
-    name: "Luxury Floral Collection",
-    priceAED: 149,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Pakistani Style",
-    originFlag: "🇵🇰",
-
-    image: "/products/jewellery-36.jpg",
-
-    description:
-      "A beautiful artificial jewellery design inspired by elegant floral motifs, featuring refined detailing and a sophisticated finish. Perfect for festive and formal styling.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Floral Jewellery",
-      occasion: "Festive & Formal Wear",
-    },
-  },
-
-  {
     id: 53,
     name: "Pearl Charm Collection",
-    priceAED: 139,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
 
     image: "/products/jewellery-37.jpg",
 
@@ -1091,40 +728,15 @@ const products = [
   },
 
   {
-    id: 54,
-    name: "Elegant Golden Statement",
-    priceAED: 159,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Turkish Style",
-    originFlag: "🇹🇷",
-
-    image: "/products/jewellery-38.jpg",
-
-    description:
-      "A sophisticated artificial jewellery piece with elegant golden detailing and a luxurious statement finish. Designed for refined traditional and contemporary styling.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Statement Jewellery",
-      occasion: "Festive & Special Occasions",
-    },
-  },
-
-  {
     id: 55,
     name: "Signature Luxury Jewellery",
-    priceAED: 169,
+    priceAED: 280,
     salePriceAED: null,
     onSale: false,
 
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
 
     image: "/products/jewellery-39.jpg",
 
@@ -1138,59 +750,20 @@ const products = [
     },
   },
 
-    {
-    id: 68,
-    name: "Pearl Blossom Elegance",
-    priceAED: 109,
-    salePriceAED: null,
-    onSale: false,
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-    image: "/products/jewellery-40.jpg",
-    description:
-      "An elegant artificial jewellery design featuring delicate floral-inspired detailing and a graceful statement finish. Perfect for weddings, festive celebrations and special occasions.",
-    details: {
-      material: "Artificial Jewellery & Stones",
-      type: "Statement Jewellery",
-      occasion: "Weddings & Festive Wear",
-    },
-  },
-
-  {
-    id: 69,
-    name: "Royal Noor Statement Set",
-    priceAED: 119,
-    salePriceAED: null,
-    onSale: false,
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Pakistani Style",
-    originFlag: "🇵🇰",
-    image: "/products/jewellery-41.jpg",
-    description:
-      "A luxurious statement jewellery design with intricate detailing and a refined traditional finish. Created to add a regal touch to festive and formal looks.",
-    details: {
-      material: "Artificial Jewellery & Stones",
-      type: "Traditional Jewellery Set",
-      occasion: "Weddings & Special Occasions",
-    },
-  },
-
   {
     id: 70,
-    name: "Golden Flora Grace",
-    priceAED: 129,
+    name: "Emerald Flora Grace",
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-42.jpg",
+
     description:
-      "A graceful floral-inspired jewellery design with elegant golden detailing and a polished finish. Perfect for traditional and festive styling.",
+      "A graceful floral-inspired jewellery design with elegant emerald detailing and a polished finish. Perfect for traditional and festive styling.",
     details: {
       material: "Artificial Jewellery",
       type: "Floral Jewellery",
@@ -1200,17 +773,18 @@ const products = [
 
   {
     id: 71,
-    name: "Emerald Pearl Charm",
-    priceAED: 139,
+    name: "Gold Rose Pearl Charm",
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-43.jpg",
+
     description:
-      "A sophisticated jewellery design combining rich emerald-inspired detailing with elegant pearl accents. A beautiful choice for special occasion dressing.",
+      "A sophisticated jewellery design combining rich gold and rose-inspired detailing with elegant pearl accents. A beautiful choice for special occasion dressing.",
     details: {
       material: "Artificial Jewellery, Pearls & Stones",
       type: "Pearl Jewellery",
@@ -1221,13 +795,13 @@ const products = [
   {
     id: 72,
     name: "Regal Petal Jewellery",
-    priceAED: 149,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-44.jpg",
     description:
       "An elegant floral jewellery design featuring intricate petal-inspired detailing and a luxurious statement finish. Designed for graceful festive looks.",
@@ -1240,15 +814,16 @@ const products = [
 
   {
     id: 73,
-    name: "Ivory Pearl Heritage",
-    priceAED: 159,
+    name: "Ivory Black Heritage",
+    priceAED: 55,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-45.jpg",
+
     description:
       "A timeless pearl-inspired jewellery design with refined traditional detailing. Perfect for creating an elegant and sophisticated occasion look.",
     details: {
@@ -1260,17 +835,18 @@ const products = [
 
   {
     id: 74,
-    name: "Rose Gold Radiance",
-    priceAED: 139,
+    name: "Ruby Gold Radiance",
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
+
     image: "/products/jewellery-46.jpg",
+    
     description:
-      "A refined statement jewellery design with soft rose-gold inspired detailing and an elegant polished finish. Perfect for modern festive styling.",
+      "A refined statement jewellery design with soft ruby-gold inspired detailing and an elegant polished finish. Perfect for modern festive styling.",
     details: {
       material: "Artificial Jewellery & Stones",
       type: "Statement Jewellery",
@@ -1281,14 +857,15 @@ const products = [
   {
     id: 75,
     name: "Majestic Floral Adornments",
-    priceAED: 149,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-47.jpg",
+
     description:
       "A majestic floral-inspired jewellery design with intricate embellishment and a graceful statement appearance. Ideal for weddings and celebrations.",
     details: {
@@ -1301,14 +878,15 @@ const products = [
   {
     id: 76,
     name: "Classic Noor Collection",
-    priceAED: 159,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    
     image: "/products/jewellery-48.jpg",
+
     description:
       "A classic artificial jewellery collection with elegant traditional detailing and a sophisticated finish. Designed to complement timeless occasion wear.",
     details: {
@@ -1320,17 +898,18 @@ const products = [
 
   {
     id: 77,
-    name: "Golden Garden Statement",
-    priceAED: 169,
+    name: "Blush Pink Garden Statement",
+    priceAED: 195,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-49.jpg",
+
     description:
-      "A luxurious golden statement design inspired by elegant garden motifs and intricate traditional craftsmanship. Perfect for sophisticated festive looks.",
+      "A luxurious blush pink statement design inspired by elegant garden motifs and intricate traditional craftsmanship. Perfect for sophisticated festive looks.",
     details: {
       material: "Artificial Jewellery & Stones",
       type: "Statement Jewellery",
@@ -1341,14 +920,15 @@ const products = [
   {
     id: 78,
     name: "Pearl Luxe Ensemble",
-    priceAED: 179,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-50.jpg",
+
     description:
       "An elegant pearl-inspired jewellery ensemble with delicate detailing and a luxurious finish. A refined choice for bridal and formal styling.",
     details: {
@@ -1361,14 +941,15 @@ const products = [
   {
     id: 79,
     name: "Royal Bloom Jewellery",
-    priceAED: 149,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-51.jpg",
+
     description:
       "A graceful floral jewellery design with rich detailing and a polished royal finish. Perfect for adding an elegant statement to traditional outfits.",
     details: {
@@ -1381,14 +962,15 @@ const products = [
   {
     id: 80,
     name: "Timeless Heritage Set",
-    priceAED: 169,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-52.jpg",
+
     description:
       "A sophisticated heritage-inspired jewellery set featuring ornate detailing and a timeless traditional aesthetic. Perfect for weddings and formal celebrations.",
     details: {
@@ -1401,13 +983,13 @@ const products = [
   {
     id: 81,
     name: "Sapphire Grace Collection",
-    priceAED: 179,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-53.jpg",
     description:
       "An elegant statement jewellery design featuring sapphire-inspired tones and intricate embellishment. Created for polished festive and evening styling.",
@@ -1421,13 +1003,13 @@ const products = [
   {
     id: 82,
     name: "Golden Petal Charm",
-    priceAED: 129,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
+    originFlag: "ðŸ‡¹ðŸ‡·",
     image: "/products/jewellery-54.jpg",
     description:
       "A delicate golden jewellery design inspired by elegant petals and refined decorative detailing. Perfect for graceful occasion styling.",
@@ -1441,13 +1023,13 @@ const products = [
   {
     id: 83,
     name: "Elegant Pearl Cascade",
-    priceAED: 159,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    originFlag: "ðŸ‡µðŸ‡°",
     image: "/products/jewellery-55.jpg",
     description:
       "A refined pearl-inspired jewellery design featuring graceful cascading detailing and an elegant statement finish.",
@@ -1460,17 +1042,17 @@ const products = [
 
   {
     id: 84,
-    name: "Regal Rose Jewellery",
-    priceAED: 169,
+    name: "Regal Pearl Jewellery",
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-56.jpg",
     description:
-      "A romantic rose-inspired jewellery design with intricate embellishment and a graceful regal finish. Ideal for elegant festive and bridal looks.",
+      "A romantic pearl-inspired jewellery design with intricate embellishment and a graceful regal finish. Ideal for elegant festive and bridal looks.",
     details: {
       material: "Artificial Jewellery & Stones",
       type: "Floral Jewellery",
@@ -1480,15 +1062,16 @@ const products = [
 
   {
     id: 85,
-    name: "Luxe Emerald Heritage",
-    priceAED: 179,
+    name: "Luxe PearlHeritage",
+    priceAED: 55,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-57.jpg",
+
     description:
       "A luxurious heritage-inspired jewellery design enhanced with emerald-toned detailing and an elegant traditional finish.",
     details: {
@@ -1501,14 +1084,15 @@ const products = [
   {
     id: 86,
     name: "Golden Aura Collection",
-    priceAED: 149,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-58.jpg",
+
     description:
       "A sophisticated golden jewellery design with elegant detailing and a luminous statement finish. Perfect for festive and formal occasions.",
     details: {
@@ -1521,14 +1105,15 @@ const products = [
   {
     id: 87,
     name: "Pearl Garden Statement",
-    priceAED: 159,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-59.jpg",
+
     description:
       "An elegant pearl jewellery design inspired by delicate garden motifs, featuring refined detailing and a sophisticated finish.",
     details: {
@@ -1540,15 +1125,16 @@ const products = [
 
   {
     id: 88,
-    name: "Royal Bridal Glow",
-    priceAED: 189,
+    name: "Royal Ruby Glow",
+    priceAED: 55,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-60.jpg",
+
     description:
       "A glamorous bridal-inspired jewellery design with ornate detailing and a luxurious statement appearance. Created for unforgettable celebration looks.",
     details: {
@@ -1560,15 +1146,16 @@ const products = [
 
   {
     id: 89,
-    name: "Classic Gold & Pearl Set",
-    priceAED: 179,
+    name: "Classic Golden & Pearl Set",
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-61.jpg",
+    
     description:
       "A timeless combination of golden detailing and pearl-inspired accents, designed for elegant traditional and formal styling.",
     details: {
@@ -1581,13 +1168,13 @@ const products = [
   {
     id: 90,
     name: "Floral Noor Statement",
-    priceAED: 149,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-62.jpg",
     description:
       "A graceful floral statement jewellery design with intricate detailing and a polished traditional finish.",
@@ -1600,17 +1187,18 @@ const products = [
 
   {
     id: 91,
-    name: "Elegant Ruby Radiance",
-    priceAED: 169,
+    name: "Elegant stone Radiance",
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-63.jpg",
+
     description:
-      "A sophisticated jewellery design with ruby-inspired accents and elegant traditional detailing, perfect for adding richness to occasion looks.",
+      "A sophisticated jewellery design with stone-inspired accents and elegant traditional detailing, perfect for adding richness to occasion looks.",
     details: {
       material: "Artificial Jewellery & Stones",
       type: "Statement Jewellery",
@@ -1620,17 +1208,18 @@ const products = [
 
   {
     id: 92,
-    name: "Golden Lotus Jewellery",
-    priceAED: 159,
+    name: "black Lotus Jewellery",
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-64.jpg",
+
     description:
-      "A refined lotus-inspired jewellery design featuring elegant golden detailing and a graceful statement finish.",
+      "A refined lotus-inspired jewellery design featuring elegant black detailing and a graceful statement finish.",
     details: {
       material: "Artificial Jewellery",
       type: "Floral Jewellery",
@@ -1641,14 +1230,15 @@ const products = [
   {
     id: 93,
     name: "Pearl Princess Collection",
-    priceAED: 179,
+    priceAED: 50,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-65.jpg",
+
     description:
       "An elegant pearl-inspired collection with delicate embellishment and a feminine luxurious finish. Perfect for bridal and festive styling.",
     details: {
@@ -1661,14 +1251,15 @@ const products = [
   {
     id: 94,
     name: "Regal Emerald Bloom",
-    priceAED: 189,
+    priceAED: 280,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-66.jpg",
+
     description:
       "A luxurious emerald-inspired floral jewellery design with intricate detailing and an elegant regal finish.",
     details: {
@@ -1680,17 +1271,18 @@ const products = [
 
   {
     id: 95,
-    name: "Vintage Gold Elegance",
-    priceAED: 169,
+    name: "Vintage Golden Elegance",
+    priceAED: 200,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Turkish Style",
-    originFlag: "🇹🇷",
+
     image: "/products/jewellery-67.jpg",
+
     description:
-      "A timeless vintage-inspired jewellery design featuring ornate golden detailing and a sophisticated finish.",
+      "A timeless vintage-inspired jewellery design featuring ornate golden detailing and a sophisticated finish in a pair of elegeant bangles.",
     details: {
       material: "Artificial Jewellery & Stones",
       type: "Heritage Jewellery",
@@ -1701,14 +1293,15 @@ const products = [
   {
     id: 96,
     name: "Royal Pearl Cascade",
-    priceAED: 179,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-68.jpg",
+
     description:
       "A graceful royal pearl-inspired design featuring elegant cascading details and a luxurious statement finish.",
     details: {
@@ -1721,13 +1314,13 @@ const products = [
   {
     id: 97,
     name: "Golden Heritage Glow",
-    priceAED: 189,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-69.jpg",
     description:
       "A rich heritage-inspired jewellery design with intricate golden detailing and an elegant traditional appearance.",
@@ -1741,14 +1334,15 @@ const products = [
   {
     id: 98,
     name: "Blush Stone Statement",
-    priceAED: 149,
+    priceAED: 50,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-70.jpg",
+
     description:
       "A feminine statement jewellery design featuring soft blush-toned stone detailing and a refined polished finish.",
     details: {
@@ -1761,13 +1355,13 @@ const products = [
   {
     id: 99,
     name: "Luxe Floral Heritage",
-    priceAED: 169,
+    priceAED: 60,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Everyday Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-71.jpg",
     description:
       "A luxurious floral heritage design with intricate embellishment and an elegant statement finish, ideal for traditional occasion wear.",
@@ -1781,14 +1375,15 @@ const products = [
   {
     id: 100,
     name: "Pearl Majesty Collection",
-    priceAED: 179,
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-72.jpg",
+
     description:
       "A majestic pearl-inspired jewellery collection with elegant detailing and a sophisticated luxurious finish.",
     details: {
@@ -1801,14 +1396,15 @@ const products = [
   {
     id: 101,
     name: "Golden Rose Statement",
-    priceAED: 189,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-73.jpg",
+
     description:
       "A beautiful golden rose-inspired jewellery design featuring elegant floral detailing and a refined statement finish.",
     details: {
@@ -1820,14 +1416,14 @@ const products = [
 
   {
     id: 102,
-    name: "Emerald Garden Luxe",
-    priceAED: 199,
+    name: "Multicolor Garden Luxe",
+    priceAED: 80,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    originFlag: "ðŸ‡µðŸ‡°",
     image: "/products/jewellery-74.jpg",
     description:
       "A luxurious emerald-inspired jewellery design with garden-style detailing and a sophisticated statement appearance.",
@@ -1841,14 +1437,15 @@ const products = [
   {
     id: 103,
     name: "Classic Royal Adornment",
-    priceAED: 159,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-75.jpg",
+
     description:
       "A classic royal-inspired jewellery design with elegant traditional detailing and a polished statement finish.",
     details: {
@@ -1861,13 +1458,13 @@ const products = [
   {
     id: 104,
     name: "Pearl & Petal Elegance",
-    priceAED: 169,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    originFlag: "ðŸ‡µðŸ‡°",
     image: "/products/jewellery-76.jpg",
     description:
       "A delicate combination of pearl-inspired accents and floral detailing, created for graceful and feminine occasion styling.",
@@ -1881,13 +1478,13 @@ const products = [
   {
     id: 105,
     name: "Golden Charm Heritage",
-    priceAED: 179,
+    priceAED: 200,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-77.jpg",
     description:
       "A refined heritage jewellery design with elegant golden charm detailing and a luxurious traditional finish.",
@@ -1901,14 +1498,15 @@ const products = [
   {
     id: 106,
     name: "Regal Stone Collection",
-    priceAED: 189,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Necklaces",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-78.jpg",
+
     description:
       "A regal statement collection featuring intricate stone-inspired detailing and a polished luxurious finish.",
     details: {
@@ -1921,13 +1519,13 @@ const products = [
   {
     id: 107,
     name: "Noor Luxe Jewellery",
-    priceAED: 159,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Necklaces",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-79.jpg",
     description:
       "An elegant luxe jewellery design with refined detailing and a sophisticated statement finish for special occasions.",
@@ -1941,14 +1539,15 @@ const products = [
   {
     id: 108,
     name: "Royal Floral Cascade",
-    priceAED: 179,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-80.jpg",
+
     description:
       "A graceful cascading floral jewellery design with intricate detailing and an elegant royal finish.",
     details: {
@@ -1961,14 +1560,15 @@ const products = [
   {
     id: 109,
     name: "Elegant Golden Bloom",
-    priceAED: 189,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-81.jpg",
+
     description:
       "A sophisticated golden floral-inspired jewellery design with intricate embellishment and a luxurious polished finish.",
     details: {
@@ -1981,14 +1581,15 @@ const products = [
   {
     id: 110,
     name: "Pearl Heritage Statement",
-    priceAED: 199,
+    priceAED: 200,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-82.jpg",
+
     description:
       "A luxurious pearl-inspired heritage design with ornate detailing and an elegant statement finish.",
     details: {
@@ -2001,14 +1602,15 @@ const products = [
   {
     id: 111,
     name: "Majestic Noor Collection",
-    priceAED: 169,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-83.jpg",
+
     description:
       "A majestic artificial jewellery design with refined traditional detailing and a sophisticated statement appearance.",
     details: {
@@ -2021,13 +1623,13 @@ const products = [
   {
     id: 112,
     name: "Golden Petal Heritage",
-    priceAED: 179,
+    priceAED: 200,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    originFlag: "ðŸ‡µðŸ‡°",
     image: "/products/jewellery-84.jpg",
     description:
       "An elegant heritage-inspired design combining golden petal detailing with a refined traditional finish.",
@@ -2039,36 +1641,17 @@ const products = [
   },
 
   {
-    id: 113,
-    name: "Rose Pearl Radiance",
-    priceAED: 189,
-    salePriceAED: null,
-    onSale: false,
-    category: "Jewellery",
-    subCategory: "New Arrivals",
-    origin: "Indian Style",
-    originFlag: "🇮🇳",
-    image: "/products/jewellery-85.jpg",
-    description:
-      "A romantic jewellery design combining rose-inspired detailing with elegant pearl accents and a luminous finish.",
-    details: {
-      material: "Artificial Jewellery & Pearls",
-      type: "Pearl Jewellery",
-      occasion: "Weddings & Evening Wear",
-    },
-  },
-
-  {
     id: 114,
     name: "Luxury Emerald Charm",
-    priceAED: 199,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-86.jpg",
+
     description:
       "A luxurious emerald-inspired jewellery design with elegant stone detailing and a polished statement finish.",
     details: {
@@ -2081,14 +1664,15 @@ const products = [
   {
     id: 115,
     name: "Classic Heritage Glow",
-    priceAED: 169,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-87.jpg",
+
     description:
       "A classic heritage jewellery design with intricate detailing and a refined golden-inspired finish.",
     details: {
@@ -2101,14 +1685,15 @@ const products = [
   {
     id: 116,
     name: "Royal Garden Jewellery",
-    priceAED: 179,
+    priceAED: 110,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-88.jpg",
+
     description:
       "A beautiful garden-inspired jewellery design with graceful floral detailing and an elegant royal finish.",
     details: {
@@ -2121,13 +1706,13 @@ const products = [
   {
     id: 117,
     name: "Golden Pearl Majesty",
-    priceAED: 189,
+    priceAED: 120,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Party Jewellery",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+    originFlag: "ðŸ‡®ðŸ‡³",
     image: "/products/jewellery-89.jpg",
     description:
       "A luxurious golden and pearl-inspired jewellery design created for elegant bridal, festive and formal styling.",
@@ -2141,14 +1726,15 @@ const products = [
   {
     id: 118,
     name: "Elegant Floral Noor",
-    priceAED: 159,
+    priceAED: 80,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-90.jpg",
+
     description:
       "A graceful floral jewellery design with delicate detailing and an elegant traditional finish.",
     details: {
@@ -2161,14 +1747,15 @@ const products = [
   {
     id: 119,
     name: "Regal Luxe Statement",
-    priceAED: 189,
+    priceAED: 180,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-91.jpg",
+
     description:
       "A luxurious statement jewellery design featuring refined embellishment and a sophisticated regal finish.",
     details: {
@@ -2181,14 +1768,15 @@ const products = [
   {
     id: 120,
     name: "Pearl Blossom Heritage",
-    priceAED: 179,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Statement Jewellery",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+    originFlag: "ðŸ‡µðŸ‡°",
     image: "/products/jewellery-92.jpg",
+    isNewArrival: true,
     description:
       "An elegant pearl-inspired heritage design with delicate blossom detailing and a polished luxurious finish.",
     details: {
@@ -2201,14 +1789,16 @@ const products = [
   {
     id: 121,
     name: "Golden Aura Jewellery",
-    priceAED: 199,
+    priceAED: 150,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Earrings",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-93.jpg",
+
+    isNewArrival: true,
     description:
       "A radiant golden-inspired jewellery design with elegant detailing and a sophisticated statement finish.",
     details: {
@@ -2221,14 +1811,16 @@ const products = [
   {
     id: 122,
     name: "Royal Stone Elegance",
-    priceAED: 189,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Designer Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-94.jpg",
+
+    isNewArrival: true,
     description:
       "A refined royal jewellery design featuring elegant stone-inspired embellishment and a luxurious statement finish.",
     details: {
@@ -2241,14 +1833,16 @@ const products = [
   {
     id: 123,
     name: "Signature Pearl Luxe",
-    priceAED: 209,
+    priceAED: 125,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Necklaces",
     origin: "Indian Style",
-    originFlag: "🇮🇳",
+
     image: "/products/jewellery-95.jpg",
+
+    isNewArrival: true,
     description:
       "A signature luxury jewellery design enhanced with pearl-inspired detailing and an elegant polished finish.",
     details: {
@@ -2261,14 +1855,16 @@ const products = [
   {
     id: 124,
     name: "Grand Floral Heritage",
-    priceAED: 219,
+    priceAED: 225,
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "New Arrivals",
+    subCategory: "Sets",
     origin: "Pakistani Style",
-    originFlag: "🇵🇰",
+
     image: "/products/jewellery-96.jpg",
+
+    isNewArrival: true,
     description:
       "A grand floral heritage-inspired jewellery design featuring intricate detailing and a luxurious statement finish. Perfect for weddings, festive celebrations and formal occasions.",
     details: {
@@ -2280,18 +1876,18 @@ const products = [
 
 
   // =====================================================
-  // GARMENTS — LAWN
+  // GARMENTS â€” LAWN
   // =====================================================
 
   {
     id: 28,
     name: "Elegant Premium Lawn",
-    priceAED: 129,
-    salePriceAED: 109,
-    onSale: true,
+    priceAED: 300,
+    salePriceAED: null,
+    onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "Lawn 2 Piece",
 
     image: "/products/garment-1.jpg",
 
@@ -2309,12 +1905,12 @@ const products = [
   {
     id: 29,
     name: "Luxury Lawn 2-Piece",
-    priceAED: 149,
-    salePriceAED: 129,
-    onSale: true,
+    priceAED: 150,
+    salePriceAED: null,
+    onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Lawn Single Shirt Piece",
 
     image: "/products/garment-2.jpg",
 
@@ -2330,18 +1926,18 @@ const products = [
   },
 
   // =====================================================
-  // GARMENTS — NEW LAWN COLLECTION
+  // GARMENTS â€” NEW LAWN COLLECTION
   // =====================================================
 
   {
     id: 56,
-    name: "Blush Bloom Lawn",
-    priceAED: 129,
+    name: "Blush Brown Bloom Lawn",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "Lawn 3 Piece",
 
     image: "/products/garment-3.jpg",
 
@@ -2351,7 +1947,7 @@ const products = [
     details: {
       material: "Premium Lawn",
       fabricLength: "3.5 Yards",
-      type: "Single Shirt Piece",
+      type: "3-Piece Shirt Dupatta Trouser",
       occasion: "Everyday & Summer Wear",
     },
   },
@@ -2359,12 +1955,12 @@ const products = [
   {
     id: 57,
     name: "Rose Garden Lawn",
-    priceAED: 139,
+    priceAED: 300,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "Lawn 2Piece",
 
     image: "/products/garment-4.jpg",
 
@@ -2374,20 +1970,20 @@ const products = [
     details: {
       material: "Premium Lawn",
       fabricLength: "3.5 Yards",
-      type: "Single Shirt Piece",
+      type: "2-Piece Fabric",
       occasion: "Everyday & Festive Wear",
     },
   },
 
   {
     id: 58,
-    name: "Ivory Garden Lawn",
-    priceAED: 139,
+    name: "Blue Garden Lawn",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "Lawn 3 Piece",
 
     image: "/products/garment-5.jpg",
 
@@ -2397,189 +1993,192 @@ const products = [
     details: {
       material: "Premium Lawn",
       fabricLength: "3.5 Yards",
-      type: "Single Shirt Piece",
+      type: "3-Piece Shirt Dupatta Trouser",
       occasion: "Summer & Occasion Wear",
     },
   },
 
   {
     id: 59,
-    name: "Pastel Dream Lawn",
-    priceAED: 149,
+    name: "Wine Red Silk Kaftan",
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Silk Kaftan",
 
     image: "/products/garment-6.jpg",
 
     description:
-      "A premium Lawn 2-piece fabric collection featuring elegant seasonal detailing and a lightweight breathable texture. Ideal for polished everyday and semi-formal looks.",
+      "A premium silk kaftan collection featuring elegant seasonal detailing and a lightweight breathable texture. Ideal for polished everyday and semi-formal looks.",
 
     details: {
-      material: "Premium Lawn",
+      material: "Premium Silk",
       fabricLength: "6 Yards",
-      type: "2-Piece Fabric",
+      type: "Silk kaftan",
       occasion: "Summer & Semi-Formal Wear",
     },
   },
 
   {
     id: 60,
-    name: "Golden Bloom Lawn",
-    priceAED: 159,
+    name: "Grey Silver Silk Kaftan",
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Silk Kaftan",
 
     image: "/products/garment-7.jpg",
 
     description:
-      "A sophisticated premium Lawn 2-piece fabric design with elegant decorative detailing. Designed for graceful festive, summer and semi-formal styling.",
+      "A sophisticated premium Silk kaftan design with elegant decorative detailing. Designed for graceful festive, summer and semi-formal styling.",
 
     details: {
-      material: "Premium Lawn",
+      material: "Premium Silk",
       fabricLength: "6 Yards",
-      type: "2-Piece Fabric",
+      type: "Silk kaftan",
       occasion: "Festive & Semi-Formal Wear",
     },
   },
 
   {
     id: 61,
-    name: "Pearl Blossom Lawn",
-    priceAED: 169,
+    name: "Royal Blossom Lawn",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Lawn 3 Piece",
 
     image: "/products/garment-8.jpg",
 
     description:
-      "A luxurious premium Lawn 2-piece fabric collection with graceful detailing and a refined finish. Perfect for creating elegant festive and occasion-ready outfits.",
+      "A luxurious premium Lawn 3-piece fabric collection with graceful detailing and a refined finish. Perfect for creating elegant festive and occasion-ready outfits.",
 
     details: {
       material: "Premium Lawn",
       fabricLength: "6 Yards",
-      type: "2-Piece Fabric",
+      type: "3-Piece Shirt Dupatta Trouser",
       occasion: "Festive & Formal Wear",
     },
   },
 
   {
     id: 62,
-    name: "Royal Garden Lawn",
-    priceAED: 179,
+    name: "Rose Pink Silk Kaftan",
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
 
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Silk Kaftan",
 
     image: "/products/garment-9.jpg",
 
     description:
-      "A premium statement Lawn 2-piece collection featuring sophisticated detailing and an elegant finish. Designed for stylish festive celebrations and special occasions.",
+      "A premium statement Silk kaftan collection featuring sophisticated detailing and an elegant finish. Designed for stylish festive celebrations and special occasions.",
 
     details: {
-      material: "Premium Lawn",
+      material: "Premium Silk",
       fabricLength: "6 Yards",
-      type: "2-Piece Fabric",
+      type: "Silk kaftan",
       occasion: "Festive & Special Occasions",
     },
   },
 
   {
     id: 63,
-    name: "Blush Petal Lawn",
-    priceAED: 139,
+    name: "Black Petal Lawn",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "3 piece Lawn",
     image: "/products/garment-10.jpg",
     description:
-      "A graceful premium lawn shirt featuring a soft floral-inspired aesthetic and an elegant finish. A versatile choice for polished everyday and semi-formal styling.",
+      "A graceful premium lawn piece featuring a soft floral-inspired aesthetic and an elegant finish. A versatile choice for polished everyday and semi-formal styling.",
     details: {
       material: "Premium Lawn",
-      type: "Lawn Shirt",
+      fabricLength: "6 Yards",
+      type: "3 Piece Shirt Dupatta Trouser",
       occasion: "Everyday & Semi-Formal Wear",
     },
   },
 
   {
     id: 64,
-    name: "Rose Mist Lawn",
-    priceAED: 149,
+    name: "Red Mist Silk Kaftan",
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "Silk Kaftan",
     image: "/products/garment-11.jpg",
     description:
-      "A refined lawn shirt designed with a feminine and sophisticated look and an effortless seasonal appeal. Perfect for creating an elegant day-to-evening wardrobe.",
+      "A refined Silk Kaftan designed with a feminine and sophisticated look and an effortless seasonal appeal. Perfect for creating an elegant day-to-evening wardrobe.",
     details: {
-      material: "Premium Lawn",
-      type: "Lawn Shirt",
+      material: "Premium Silk",
+      fabricLength: "6 Yards",
+      type: "Silk Kaftan",
       occasion: "Everyday & Semi-Formal Wear",
     },
   },
 
   {
     id: 65,
-    name: "Ivory Bloom Lawn",
-    priceAED: 149,
+    name: "Blue Bloom Lawn",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
     category: "Garments",
-    subCategory: "Lawn — Single Shirt Piece",
+    subCategory: "3 Piece Lawn",
     image: "/products/garment-12.jpg",
     description:
       "An elegant premium lawn piece with a graceful floral-inspired character and timeless styling appeal. Ideal for refined seasonal looks.",
     details: {
       material: "Premium Lawn",
-      type: "Lawn Shirt",
+      fabricLength: "6 Yards",
+      type: "Silk Kaftan",
       occasion: "Festive & Semi-Formal Wear",
     },
   },
 
   {
     id: 66,
-    name: "Peach Garden Lawn Set",
-    priceAED: 169,
+    name: "Royal Blue Silk Kaftan",
+    priceAED: 250,
     salePriceAED: null,
     onSale: false,
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Silk Kaftan",
     image: "/products/garment-13.jpg",
     description:
-      "A sophisticated two-piece lawn ensemble created for an effortless coordinated look. Its elegant styling makes it perfect for seasonal occasions.",
+      "A sophisticated silk kaftan ensemble created for an effortless coordinated look. Its elegant styling makes it perfect for seasonal occasions.",
     details: {
-      material: "Premium Lawn",
-      type: "Lawn — 2 Piece",
+      material: "Premium Silk",
+      type: "Silk Kaftan",
       occasion: "Festive & Semi-Formal Wear",
     },
   },
 
   {
     id: 67,
-    name: "Pearl Rose Lawn Set",
-    priceAED: 179,
+    name: "Red Rose Silk Kaftan",
+    priceAED: 400,
     salePriceAED: null,
     onSale: false,
     category: "Garments",
-    subCategory: "Lawn — 2 Piece",
+    subCategory: "Silk Kaftan",
     image: "/products/garment-14.jpg",
     description:
-      "A premium two-piece lawn ensemble with a graceful feminine aesthetic and elegant finish. Designed for polished festive and occasion dressing.",
+      "A premium Silk Kaftan ensemble with a graceful feminine aesthetic and elegant finish. Designed for polished festive and occasion dressing.",
     details: {
-      material: "Premium Lawn",
-      type: "Lawn — 2 Piece",
+      material: "Premium Silk",
+      type: "Silk Kaftan",
       occasion: "Festive & Occasion Wear",
     },
   },

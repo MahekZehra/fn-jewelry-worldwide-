@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./ReturnsExchanges.css";
 
 const faqItems = [
@@ -337,7 +338,9 @@ function ReturnsExchanges() {
             </div>
 
             <div className="returns-warning">
-              <strong>Please do not send an item back without approval.</strong>
+              <strong>
+                Please do not send an item back without approval.
+              </strong>
               <span>
                 Contact our team first so we can provide the correct return
                 instructions.
@@ -531,10 +534,16 @@ function ReturnsExchanges() {
             to assist you.
           </p>
 
-          <a href="/contact" className="returns-contact-button">
+          <button
+            type="button"
+            className="returns-contact-button"
+            onClick={() =>
+              window.dispatchEvent(new Event("open-fna-chatbot"))
+            }
+          >
             Contact F&amp;A Collective
             <span>→</span>
-          </a>
+          </button>
         </div>
       </section>
 
@@ -546,7 +555,9 @@ function ReturnsExchanges() {
           published on our website.
         </p>
 
-        <span>F&amp;A COLLECTIVE · FASHION · JEWELLERY · ACCESSORIES</span>
+        <span>
+          F&amp;A COLLECTIVE · FASHION · JEWELLERY · ACCESSORIES
+        </span>
       </section>
 
     </main>
