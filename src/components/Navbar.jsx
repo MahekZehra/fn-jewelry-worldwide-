@@ -181,7 +181,7 @@ const Navbar = () => {
               DESKTOP RIGHT SIDE
           ================================================= */}
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
 
             {/* COUNTRY SELECTOR */}
 
@@ -191,18 +191,57 @@ const Navbar = () => {
             {/* CART */}
 
             <Link
-              to="/cart"
-              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 hover:border-[#D4A6AC] hover:bg-[#B98288] hover:text-white"
-              aria-label="Shopping Cart"
-            >
-              <FiShoppingBag className="text-lg" />
+  to="/cart"
+  className="
+    relative
+    flex
+    h-[52px]
+    w-[52px]
+    shrink-0
+    items-center
+    justify-center
+    rounded-full
+    border
+    border-[#A86F77]
+    bg-[#A86F77]
+    text-white
+    shadow-[0_8px_24px_rgba(168,111,119,0.28)]
+    transition-all
+    duration-300
+    hover:-translate-y-1
+    hover:bg-[#965F68]
+    hover:shadow-[0_12px_30px_rgba(168,111,119,0.35)]
+  "
+  aria-label="Shopping Cart"
+>
+  <FiShoppingBag className="text-[25px] stroke-[2]" />
 
-              {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#B98288] px-1 text-[10px] font-bold text-white shadow-sm">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+  {cartCount > 0 && (
+    <span
+      className="
+        absolute
+        -right-1.5
+        -top-1.5
+        flex
+        h-6
+        min-w-6
+        items-center
+        justify-center
+        rounded-full
+        border-2
+        border-[#FFF9F7]
+        bg-[#332724]
+        px-1.5
+        text-[10px]
+        font-bold
+        text-white
+        shadow-md
+      "
+    >
+      {cartCount}
+    </span>
+  )}
+</Link>
 
           </div>
 
@@ -216,18 +255,55 @@ const Navbar = () => {
             {/* MOBILE CART */}
 
             <Link
-              to="/cart"
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 active:scale-95"
-              aria-label="Shopping Cart"
-            >
-              <FiShoppingBag className="text-base" />
+  to="/cart"
+  className="
+    relative
+    flex
+    h-12
+    w-12
+    shrink-0
+    items-center
+    justify-center
+    rounded-full
+    border
+    border-[#A86F77]
+    bg-[#A86F77]
+    text-white
+    shadow-[0_6px_20px_rgba(168,111,119,0.25)]
+    transition-all
+    duration-300
+    active:scale-95
+  "
+  aria-label="Shopping Cart"
+>
+  <FiShoppingBag className="text-[22px] stroke-[2]" />
 
-              {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#B98288] px-1 text-[9px] font-bold text-white shadow-sm">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+  {cartCount > 0 && (
+    <span
+      className="
+        absolute
+        -right-1.5
+        -top-1.5
+        flex
+        h-5.5
+        min-w-5.5
+        items-center
+        justify-center
+        rounded-full
+        border-2
+        border-[#FFF9F7]
+        bg-[#332724]
+        px-1
+        text-[9px]
+        font-bold
+        text-white
+        shadow-md
+      "
+    >
+      {cartCount}
+    </span>
+  )}
+</Link>
 
 
             {/* MOBILE MENU */}

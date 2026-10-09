@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -32,8 +33,7 @@ const Checkout = () => {
     address: "",
   });
 
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   /* =====================================================
      FORM CHANGE
@@ -60,19 +60,29 @@ const Checkout = () => {
     setIsSubmitting(true);
 
     try {
+      /*
+        Generate a unique order number.
+      */
       const orderNumber = `FN-${Date.now()
         .toString()
         .slice(-6)}`;
 
-      const apiBaseUrl =
-        import.meta.env.VITE_API_URL ||
-        "http://localhost:3001";
+      /*
+        Get the checkout items from CartContext.
+      */
+      const checkoutItems = getCheckoutItems();
 
-      const checkoutItems =
-        getCheckoutItems();
+      /*
+        IMPORTANT:
+        Use the Vercel/serverless API directly.
 
+        Do NOT use:
+        http://localhost:3001
+
+        because that only works on your own computer.
+      */
       const response = await fetch(
-        `${apiBaseUrl}/api/send-order-email`,
+        "/api/send-order-email",
         {
           method: "POST",
 
@@ -86,14 +96,21 @@ const Checkout = () => {
             customerPhone: formData.phone,
             customerCity: formData.city,
             customerAddress: formData.address,
+
             orderNumber,
+
             items: checkoutItems,
+
             total: cartTotal,
+
             currency,
           }),
         }
       );
 
+      /*
+        Try to read the API response.
+      */
       let result = {};
 
       try {
@@ -102,23 +119,37 @@ const Checkout = () => {
         result = {};
       }
 
-      if (
-        !response.ok ||
-        !result.success
-      ) {
+      /*
+        If the backend failed, do not clear the cart
+        and do not redirect the customer.
+      */
+      if (!response.ok || !result.success) {
         throw new Error(
           result.message ||
-            "Order confirmation could not be completed."
+            result.error?.message ||
+            "Order confirmation could not be completed. Please try again."
         );
       }
 
+      /*
+        Email API succeeded.
+        Backend should have sent:
+        1. Customer confirmation email
+        2. Owner/admin order email
+      */
       console.log(
-        "Order confirmation email sent:",
+        "Order confirmation email sent successfully:",
         result
       );
 
+      /*
+        Clear cart only AFTER successful order confirmation.
+      */
       clearCart();
 
+      /*
+        Move customer to the order confirmation page.
+      */
       navigate("/order-confirmation", {
         state: {
           orderNumber,
@@ -180,9 +211,7 @@ const Checkout = () => {
         />
 
         <div className="relative z-10 mx-auto max-w-xl text-center">
-
           <div className="flex items-center justify-center gap-3">
-
             <span className="h-px w-8 bg-[#C9A66B]/50" />
 
             <p
@@ -199,7 +228,6 @@ const Checkout = () => {
             </p>
 
             <span className="h-px w-8 bg-[#C9A66B]/50" />
-
           </div>
 
           <h1
@@ -251,7 +279,6 @@ const Checkout = () => {
           >
             Continue Shopping
           </button>
-
         </div>
       </main>
     );
@@ -272,7 +299,6 @@ const Checkout = () => {
         lg:px-16 lg:py-16
       "
     >
-
       {/* =================================================
           SOFT BACKGROUND DETAILS
       ================================================= */}
@@ -300,7 +326,6 @@ const Checkout = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
         {/* =================================================
             BACK
         ================================================= */}
@@ -326,9 +351,7 @@ const Checkout = () => {
         ================================================= */}
 
         <header>
-
           <div className="flex items-center gap-3">
-
             <span className="h-px w-8 bg-[#C9A66B]/50" />
 
             <p
@@ -342,7 +365,6 @@ const Checkout = () => {
             >
               F&A Fashion and Jewellery Collection
             </p>
-
           </div>
 
           <h1
@@ -370,7 +392,6 @@ const Checkout = () => {
             Enter your delivery details below
             to complete your order.
           </p>
-
         </header>
 
         {/* =================================================
@@ -386,7 +407,6 @@ const Checkout = () => {
             lg:gap-12
           "
         >
-
           {/* =================================================
               CUSTOMER FORM
           ================================================= */}
@@ -403,9 +423,7 @@ const Checkout = () => {
               sm:p-8
             "
           >
-
             <div className="flex items-center gap-3">
-
               <span className="h-px w-7 bg-[#C9A66B]/50" />
 
               <p
@@ -419,7 +437,6 @@ const Checkout = () => {
               >
                 Delivery
               </p>
-
             </div>
 
             <h2
@@ -435,7 +452,6 @@ const Checkout = () => {
             </h2>
 
             <div className="mt-8 space-y-5">
-
               {/* FULL NAME */}
 
               <div>
@@ -656,7 +672,6 @@ const Checkout = () => {
                   "
                 />
               </div>
-
             </div>
 
             {/* =================================================
@@ -671,9 +686,7 @@ const Checkout = () => {
                 pt-8
               "
             >
-
               <div className="flex items-center gap-3">
-
                 <span className="h-px w-7 bg-[#C9A66B]/50" />
 
                 <p
@@ -687,7 +700,6 @@ const Checkout = () => {
                 >
                   Payment
                 </p>
-
               </div>
 
               <h2
@@ -711,9 +723,7 @@ const Checkout = () => {
                   p-5
                 "
               >
-
                 <div className="flex items-start gap-4">
-
                   <div
                     className="
                       flex h-6 w-6
@@ -728,7 +738,6 @@ const Checkout = () => {
                   </div>
 
                   <div>
-
                     <p className="text-sm font-semibold text-[#4A3935]">
                       Cash on Delivery
                     </p>
@@ -736,13 +745,9 @@ const Checkout = () => {
                     <p className="mt-1 text-xs leading-5 text-[#907C76]">
                       Pay securely when your order is delivered.
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
 
             {/* =================================================
@@ -791,7 +796,6 @@ const Checkout = () => {
               that the delivery information provided
               above is correct.
             </p>
-
           </form>
 
           {/* =================================================
@@ -814,9 +818,7 @@ const Checkout = () => {
               lg:top-28
             "
           >
-
             <div className="flex items-center gap-3">
-
               <span className="h-px w-7 bg-[#C9A66B]/50" />
 
               <p
@@ -830,7 +832,6 @@ const Checkout = () => {
               >
                 Summary
               </p>
-
             </div>
 
             <h2
@@ -845,11 +846,8 @@ const Checkout = () => {
             </h2>
 
             <div className="mt-7 space-y-4">
-
               {cart.map((item) => {
-
-                const itemPrice =
-                  getProductPrice(item);
+                const itemPrice = getProductPrice(item);
 
                 const quantity =
                   Number(item.quantity) || 0;
@@ -862,7 +860,6 @@ const Checkout = () => {
                     key={item.id}
                     className="flex gap-3"
                   >
-
                     <div
                       className="
                         h-16 w-14
@@ -887,7 +884,6 @@ const Checkout = () => {
                     </div>
 
                     <div className="min-w-0 flex-1">
-
                       <p
                         className="
                           truncate
@@ -907,7 +903,6 @@ const Checkout = () => {
                         {currencySymbols[currency]}{" "}
                         {formatPrice(itemPrice)}
                       </p>
-
                     </div>
 
                     <p
@@ -920,11 +915,9 @@ const Checkout = () => {
                       {currencySymbols[currency]}{" "}
                       {formatPrice(itemTotal)}
                     </p>
-
                   </div>
                 );
               })}
-
             </div>
 
             <div
@@ -935,10 +928,22 @@ const Checkout = () => {
               "
             />
 
+            {/* VAT NOTE */}
+
+            <p
+              className="
+                mb-5
+                text-[10px]
+                tracking-wide
+                text-[#907C76]
+              "
+            >
+              All prices include VAT.
+            </p>
+
             {/* SUBTOTAL */}
 
             <div className="flex justify-between text-sm">
-
               <span className="text-[#907C76]">
                 Subtotal
               </span>
@@ -947,13 +952,11 @@ const Checkout = () => {
                 {currencySymbols[currency]}{" "}
                 {formatPrice(cartTotal)}
               </span>
-
             </div>
 
             {/* DELIVERY */}
 
             <div className="mt-3 flex justify-between gap-4 text-sm">
-
               <span className="text-[#907C76]">
                 Delivery
               </span>
@@ -961,7 +964,6 @@ const Checkout = () => {
               <span className="text-right text-xs text-[#A28E88]">
                 Calculated at checkout
               </span>
-
             </div>
 
             <div
@@ -975,7 +977,6 @@ const Checkout = () => {
             {/* TOTAL */}
 
             <div className="flex justify-between">
-
               <span className="font-semibold text-[#4A3935]">
                 Total
               </span>
@@ -990,7 +991,6 @@ const Checkout = () => {
                 {currencySymbols[currency]}{" "}
                 {formatPrice(cartTotal)}
               </span>
-
             </div>
 
             {/* =================================================
@@ -998,7 +998,6 @@ const Checkout = () => {
             ================================================= */}
 
             <div className="mt-6 space-y-3">
-
               <div
                 className="
                   flex gap-3
@@ -1009,7 +1008,6 @@ const Checkout = () => {
                   p-3
                 "
               >
-
                 <FiTruck
                   className="
                     mt-0.5
@@ -1019,7 +1017,6 @@ const Checkout = () => {
                 />
 
                 <div>
-
                   <p className="text-xs font-semibold text-[#4A3935]">
                     Delivery Available
                   </p>
@@ -1027,9 +1024,7 @@ const Checkout = () => {
                   <p className="mt-1 text-[11px] leading-5 text-[#A28E88]">
                     Our team will contact you to confirm delivery.
                   </p>
-
                 </div>
-
               </div>
 
               <div
@@ -1042,7 +1037,6 @@ const Checkout = () => {
                   p-3
                 "
               >
-
                 <FiShield
                   className="
                     mt-0.5
@@ -1052,7 +1046,6 @@ const Checkout = () => {
                 />
 
                 <div>
-
                   <p className="text-xs font-semibold text-[#4A3935]">
                     Secure Checkout
                   </p>
@@ -1060,19 +1053,12 @@ const Checkout = () => {
                   <p className="mt-1 text-[11px] leading-5 text-[#A28E88]">
                     Your order details are handled securely.
                   </p>
-
                 </div>
-
               </div>
-
             </div>
-
           </aside>
-
         </div>
-
       </div>
-
     </main>
   );
 };
