@@ -19,6 +19,7 @@ function escapeHtml(value = "") {
       '"': "&quot;",
       "'": "&#39;",
     };
+
     return entities[char];
   });
 }
@@ -42,8 +43,10 @@ export default async function handler(req, res) {
       items,
       total,
       currency = "AED",
+      paymentMethod = "cod",
     } = req.body || {};
 
+    // Validate required order information.
     if (
       !customerName ||
       !customerEmail ||
@@ -57,6 +60,40 @@ export default async function handler(req, res) {
       });
     }
 
+    // Allow only the supported payment methods.
+    if (!["cod", "stripe"].includes(paymentMethod)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment method.",
+      });
+    }
+
+    /*
+     * Stripe orders must be authorized by the server.
+     * The webhook will provide this header after verifying
+     * the Stripe event and confirming payment.
+     *
+     * COD requests retain their existing behavior.
+     */
+    if (paymentMethod === "stripe") {
+      const expectedSecret =
+        process.env.INTERNAL_ORDER_EMAIL_SECRET;
+
+      const receivedSecret =
+        req.headers["x-internal-order-secret"];
+
+      if (
+        !expectedSecret ||
+        typeof receivedSecret !== "string" ||
+        receivedSecret !== expectedSecret
+      ) {
+        return res.status(401).json({
+          success: false,
+          message: "Unauthorized payment confirmation.",
+        });
+      }
+    }
+
     if (
       !process.env.RESEND_API_KEY ||
       !OWNER_EMAIL ||
@@ -68,24 +105,36 @@ export default async function handler(req, res) {
       });
     }
 
+    // Escape customer-supplied values before using them in HTML.
     const safeName = escapeHtml(customerName);
     const safeEmail = escapeHtml(customerEmail);
     const safePhone = escapeHtml(customerPhone || "Not provided");
     const safeCity = escapeHtml(customerCity || "Not provided");
+
     const safeAddress = escapeHtml(
       customerAddress || "Not provided"
     );
+
     const safeOrderNumber = escapeHtml(orderNumber);
     const safeCurrency = escapeHtml(currency || "AED");
 
+    const paymentMethodLabel =
+      paymentMethod === "stripe"
+        ? "Paid Online (Stripe)"
+        : "Cash on Delivery";
+
+    const safePaymentMethod = escapeHtml(paymentMethodLabel);
+
     const formatAmount = (amount) => {
       const value = Number(amount) || 0;
+
       return `${safeCurrency} ${value.toLocaleString("en", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })}`;
     };
 
+    // Product rows.
     const productRows = items
       .map((item) => {
         const name = escapeHtml(item.name || "Product");
@@ -109,6 +158,7 @@ export default async function handler(req, res) {
       })
       .join("");
 
+    // Order summary.
     const orderSummary = `
       <table
         width="100%"
@@ -149,6 +199,7 @@ export default async function handler(req, res) {
       </table>
     `;
 
+    // Customer and delivery details.
     const deliveryDetails = `
       <div style="background:#FAF5F2;padding:20px;border-radius:14px;margin:24px 0;color:#665955;font-size:14px;line-height:1.8;">
         <p><strong>Name:</strong> ${safeName}</p>
@@ -159,6 +210,7 @@ export default async function handler(req, res) {
       </div>
     `;
 
+    // Shared email design.
     const emailWrapperStart = `
       <div style="font-family:Arial,Helvetica,sans-serif;background:#FAF8F5;padding:30px 12px;color:#3E302D;">
         <div style="max-width:620px;margin:0 auto;background:#ffffff;border:1px solid #eee5df;border-radius:22px;overflow:hidden;">
@@ -187,6 +239,7 @@ export default async function handler(req, res) {
       </div>
     `;
 
+    // Customer confirmation email.
     const customerEmailHtml = `
       ${emailWrapperStart}
 
@@ -230,7 +283,7 @@ export default async function handler(req, res) {
 
       <div style="margin-top:24px;background:#FAF5F2;padding:18px;border-radius:14px;">
         <p style="margin:0;color:#665955;">
-          <strong>Payment Method:</strong> Cash on Delivery
+          <strong>Payment Method:</strong> ${safePaymentMethod}
         </p>
       </div>
 
@@ -241,6 +294,7 @@ export default async function handler(req, res) {
       ${emailWrapperEnd}
     `;
 
+    // Owner notification email.
     const ownerEmailHtml = `
       ${emailWrapperStart}
 
@@ -272,29 +326,54 @@ export default async function handler(req, res) {
 
       <div style="margin-top:24px;background:#3E302D;padding:18px;border-radius:14px;color:#ffffff;">
         <p style="margin:0;">
-          <strong>Payment Method:</strong> Cash on Delivery
+          <strong>Payment Method:</strong> ${safePaymentMethod}
         </p>
       </div>
 
       ${emailWrapperEnd}
     `;
 
-    // Send the customer confirmation and owner notification.
-    // Both are attempted for every valid order.
-    const [customerResult, ownerResult] = await Promise.all([
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to: [customerEmail],
-        subject: `Your Order ${orderNumber} Has Been Confirmed 🎉`,
-        html: customerEmailHtml,
-      }),
+    /*
+     * Resend idempotency keys help prevent duplicate sends
+     * when the same Stripe order is retried.
+     *
+     * COD keeps the original send behavior.
+     */
+    const customerSendOptions =
+      paymentMethod === "stripe"
+        ? {
+            idempotencyKey: `stripe-order-${orderNumber}-customer`,
+          }
+        : undefined;
 
-      resend.emails.send({
-        from: FROM_EMAIL,
-        to: [OWNER_EMAIL],
-        subject: `New Order ${orderNumber} — ${customerName}`,
-        html: ownerEmailHtml,
-      }),
+    const ownerSendOptions =
+      paymentMethod === "stripe"
+        ? {
+            idempotencyKey: `stripe-order-${orderNumber}-owner`,
+          }
+        : undefined;
+
+    // Send both emails.
+    const [customerResult, ownerResult] = await Promise.all([
+      resend.emails.send(
+        {
+          from: FROM_EMAIL,
+          to: [customerEmail],
+          subject: `Your Order ${orderNumber} Has Been Confirmed 🎉`,
+          html: customerEmailHtml,
+        },
+        customerSendOptions
+      ),
+
+      resend.emails.send(
+        {
+          from: FROM_EMAIL,
+          to: [OWNER_EMAIL],
+          subject: `New Order ${orderNumber} — ${customerName}`,
+          html: ownerEmailHtml,
+        },
+        ownerSendOptions
+      ),
     ]);
 
     if (customerResult.error) {
@@ -320,6 +399,7 @@ export default async function handler(req, res) {
       orderNumber,
       customerEmailSent: true,
       ownerEmailSent: true,
+      paymentMethod,
     });
   } catch (error) {
     console.error("Order email API error:", error);
