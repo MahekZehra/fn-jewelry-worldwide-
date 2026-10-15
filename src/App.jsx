@@ -12,7 +12,7 @@ import WorldwideDelivery from "./components/WorldwideDelivery";
 import Contact from "./components/Contact";
 import Chatbot from "./components/Chatbot";
 import Footer from "./components/Footer";
-import WhatsAppButton from "./components/WhatsAppButton";
+
 
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
@@ -121,8 +121,7 @@ function App() {
 
       </Routes>
 
-      {/* FLOATING WHATSAPP BUTTON */}
-      <WhatsAppButton />
+      {/* FLOATING CHATBOT BUTTON */}
       <Chatbot />
 
     </BrowserRouter>

@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +11,6 @@ const Hero = () => {
 
     if (!video) return;
 
-    // Mobile autoplay requirements
     video.muted = true;
     video.defaultMuted = true;
 
@@ -24,10 +24,8 @@ const Hero = () => {
       }
     };
 
-    // Try immediately
     forcePlay();
 
-    // Try again once browser has loaded enough data
     const handleCanPlay = () => {
       forcePlay();
     };
@@ -39,7 +37,6 @@ const Hero = () => {
     video.addEventListener("canplay", handleCanPlay);
     video.addEventListener("loadeddata", handleLoadedData);
 
-    // If browser temporarily pauses the video, try again
     const handleVisibilityChange = () => {
       if (!document.hidden) {
         forcePlay();
@@ -64,7 +61,6 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden bg-[#FFF9F7]">
-
       {/* Soft pastel background accents */}
       <div
         aria-hidden="true"
@@ -77,12 +73,8 @@ const Hero = () => {
       />
 
       <div className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-20">
-
-        {/* =========================
-            HERO CONTENT
-        ========================== */}
+        {/* HERO CONTENT */}
         <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
-
           <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-[#A87585] sm:text-sm">
             F&A Fashion and Jewellery Collection
           </p>
@@ -110,7 +102,6 @@ const Hero = () => {
 
           {/* HERO BUTTONS */}
           <div className="mx-auto mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center lg:mx-0 lg:justify-start">
-
             <button
               type="button"
               onClick={() => navigate("/shop?category=Jewellery")}
@@ -121,31 +112,17 @@ const Hero = () => {
 
             <button
               type="button"
-              onClick={() => navigate("/shop?category=Garments")}
-              className="flex h-12 w-full items-center justify-center rounded-full border border-[#E4C8D0] bg-[#FFFDFD] px-6 text-sm font-semibold text-[#6D4A55] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C997A7] hover:bg-[#FBECEF] focus:outline-none focus:ring-2 focus:ring-[#D9A9B7] focus:ring-offset-2 focus:ring-offset-[#FFF9F7] active:scale-[0.98] sm:w-auto sm:min-w-[170px]"
-            >
-              Explore Garments
-            </button>
-
-            <button
-              type="button"
               onClick={() => navigate("/shop?category=Accessories")}
               className="flex h-12 w-full items-center justify-center rounded-full border border-[#DCCFE7] bg-[#F7F2FA] px-6 text-sm font-semibold text-[#66516F] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#BDA8CD] hover:bg-[#EDE3F3] focus:outline-none focus:ring-2 focus:ring-[#CBB9D7] focus:ring-offset-2 focus:ring-offset-[#FFF9F7] active:scale-[0.98] sm:w-auto sm:min-w-[170px]"
             >
-              Shop Accessories
+              Shop Kundan Clutches
             </button>
-
           </div>
-
         </div>
 
-        {/* =========================
-            HERO VIDEO
-        ========================== */}
+        {/* HERO VIDEO */}
         <div className="order-2 lg:order-2">
-
           <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] border border-[#E9D5DA] bg-[#F3E3E7] shadow-[0_24px_70px_rgba(128,82,96,0.14)] sm:rounded-[2.25rem] lg:max-w-lg">
-
             {/* Soft pastel frame glow */}
             <div
               aria-hidden="true"
@@ -158,7 +135,6 @@ const Hero = () => {
               className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#5B3C46]/10 via-transparent to-[#FFF8FA]/10"
             />
 
-            {/* HERO VIDEO */}
             <video
               ref={videoRef}
               autoPlay
@@ -180,13 +156,9 @@ const Hero = () => {
 
               Your browser does not support the video tag.
             </video>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 };

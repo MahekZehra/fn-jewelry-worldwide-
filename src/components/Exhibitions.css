@@ -1,103 +1,93 @@
-/* ============================================================
-   F&A EXHIBITIONS
-   Luxury Editorial Exhibition Section
-   ============================================================ */
+
+/* =========================================================
+   F&A EXHIBITIONS — COMPACT LUXURY EDITORIAL
+========================================================= */
 
 .fa-exhibitions {
   position: relative;
   width: 100%;
-  background: #faf7f3;
-  padding: 125px 24px 135px;
   overflow: hidden;
+  padding: 72px 24px 76px;
+  background: #faf7f3;
   color: #2f2926;
 }
 
 .fa-exhibitions-container {
-  width: min(1180px, 100%);
+  width: min(1120px, 100%);
   margin: 0 auto;
 }
 
-
-/* ============================================================
-   INTRO
-   ============================================================ */
+/* INTRO */
 
 .fa-exhibitions-intro {
   display: grid;
-  grid-template-columns: 0.7fr 1.5fr 1fr;
-  gap: 55px;
+  grid-template-columns: 0.8fr 1.5fr 1fr;
   align-items: end;
-  margin-bottom: 85px;
+  gap: 32px;
+  margin-bottom: 42px;
 }
 
 .fa-exhibitions-kicker {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  font-size: 10px;
+  gap: 10px;
+  padding-bottom: 7px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   color: #8d7a70;
   white-space: nowrap;
 }
 
 .fa-line {
   display: block;
-  width: 35px;
+  flex-shrink: 0;
+  width: 27px;
   height: 1px;
   background: #bda89b;
 }
 
 .fa-exhibitions-heading h2 {
   margin: 0;
-
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(44px, 5vw, 72px);
-  line-height: 0.98;
+  font-size: clamp(38px, 4.2vw, 58px);
+  line-height: 1;
   font-weight: 400;
   letter-spacing: -0.045em;
   color: #302926;
 }
 
-.fa-exhibitions-heading h2 em {
+.fa-exhibitions-heading h2 em,
+.fa-story-heading h3 em,
+.fa-milestones-heading h3 em,
+.fa-cta-content h3 em {
   font-style: italic;
   color: #9a8276;
 }
 
-.fa-exhibitions-intro-copy {
+.fa-intro-description {
+  margin: 0;
   padding-bottom: 4px;
-}
-
-.fa-exhibitions-intro-copy p {
-  margin: 0 0 18px;
-
   font-family: Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.9;
+  font-size: 12px;
+  line-height: 1.8;
   color: #746861;
 }
 
-.fa-exhibitions-intro-copy p:last-child {
-  margin-bottom: 0;
-}
-
-
-/* ============================================================
-   SECTION LABEL
-   ============================================================ */
+/* SECTION LABEL */
 
 .fa-section-label {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 11px;
+  margin-bottom: 15px;
 }
 
 .fa-section-label::before {
   content: "";
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #c8afa1;
 }
@@ -106,855 +96,587 @@
   font-family: Arial, sans-serif;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   color: #8f7d73;
 }
 
+/* VIDEO + IMAGE */
 
-/* ============================================================
-   VIDEO SECTION
-   ============================================================ */
+.fa-exhibition-showcase {
+  margin-bottom: 52px;
+}
 
-.fa-exhibition-video-section {
-  width: 100%;
-  margin-bottom: 125px;
+.fa-showcase-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: start;
+  gap: 22px;
+}
+
+.fa-video-column,
+.fa-image-column {
+  min-width: 0;
 }
 
 .fa-video-wrapper {
-  position: relative;
   width: 100%;
-
-  background: #eee7e1;
-  border: 1px solid rgba(142, 119, 105, 0.16);
-
   overflow: hidden;
+  border: 1px solid rgba(142, 119, 105, 0.16);
+  background: #eee7e1;
 }
-
-
-/*
-   IMPORTANT:
-   DO NOT ADD A FIXED HEIGHT HERE.
-
-   The video must retain its original aspect ratio.
-   This prevents:
-   - cropping
-   - zooming
-   - stretching
-   - distortion
-*/
 
 .fa-exhibitions-video {
   display: block;
-
   width: 100%;
   height: auto;
-
   max-width: 100%;
-  max-height: none;
-
   object-fit: contain;
   object-position: center;
-
   background: #eee7e1;
 }
 
+/* IMAGE PLACEHOLDER
+   Replace the placeholder div with an img when ready. */
 
-.fa-video-caption {
-  max-width: 650px;
-  margin: 20px 0 0;
+.fa-exhibition-image-placeholder {
+  position: relative;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed rgba(142, 119, 105, 0.42);
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255, 255, 255, 0.8),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      #f1e4dd,
+      #e8d8ca 55%,
+      #d9c1b1
+    );
+}
 
+.fa-exhibition-image-placeholder::before,
+.fa-exhibition-image-placeholder::after {
+  position: absolute;
+  content: "";
+  width: 155px;
+  height: 155px;
+  border: 1px solid rgba(158, 124, 104, 0.18);
+  border-radius: 50%;
+}
+
+.fa-exhibition-image-placeholder::after {
+  width: 205px;
+  height: 205px;
+}
+
+.fa-placeholder-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.fa-placeholder-icon {
+  font-size: 27px;
+  color: #a98b79;
+}
+
+.fa-placeholder-label {
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #725c50;
+}
+
+.fa-placeholder-note {
+  max-width: 190px;
   font-family: Arial, sans-serif;
   font-size: 11px;
-  line-height: 1.8;
-  letter-spacing: 0.03em;
+  line-height: 1.6;
+  color: #806c60;
+}
 
+.fa-media-caption {
+  margin: 11px 0 0;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
   color: #8b7970;
 }
 
-
-/* ============================================================
-   STORY
-   ============================================================ */
+/* STORY */
 
 .fa-exhibition-story {
   display: grid;
-  grid-template-columns: 0.65fr 1.35fr;
-
-  gap: 70px;
-
-  padding: 100px 0;
-
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: start;
+  gap: 48px;
+  padding: 42px 0;
   border-top: 1px solid rgba(120, 100, 90, 0.18);
   border-bottom: 1px solid rgba(120, 100, 90, 0.18);
 }
 
-
-.fa-story-number {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  min-height: 220px;
-}
-
-
-.fa-story-number span {
+.fa-story-kicker {
+  display: block;
+  margin-bottom: 15px;
   font-family: Arial, sans-serif;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.22em;
   color: #a18c81;
 }
 
-
-.fa-story-number strong {
+.fa-story-heading h3 {
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 76px;
-  line-height: 1;
+  font-size: clamp(29px, 3.1vw, 42px);
+  line-height: 1.08;
   font-weight: 400;
-
-  color: #dfd1c8;
-}
-
-
-.fa-story-content {
-  max-width: 720px;
-}
-
-
-.fa-story-content h3 {
-  margin: 0 0 40px;
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(36px, 4vw, 56px);
-  line-height: 1.02;
-  font-weight: 400;
-
   letter-spacing: -0.035em;
-
   color: #332b28;
 }
 
-
-.fa-story-content h3 em {
-  font-style: italic;
-  color: #9c8377;
+.fa-story-content {
+  padding-top: 4px;
 }
-
 
 .fa-story-content p {
-  max-width: 670px;
-
-  margin: 0 0 23px;
-
+  margin: 0 0 13px;
   font-family: Arial, sans-serif;
-  font-size: 13px;
-  line-height: 2;
-
+  font-size: 12px;
+  line-height: 1.85;
   color: #746963;
 }
-
 
 .fa-story-content p:last-child {
   margin-bottom: 0;
 }
 
-
-/* ============================================================
-   MILESTONES
-   ============================================================ */
+/* MILESTONES */
 
 .fa-exhibition-milestones {
-  padding: 125px 0;
+  padding: 55px 0;
 }
-
 
 .fa-milestones-heading {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-
-  margin-bottom: 55px;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 26px;
 }
-
 
 .fa-milestones-heading > span {
   font-family: Arial, sans-serif;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.25em;
-
+  letter-spacing: 0.22em;
   color: #a08b80;
 }
 
-
 .fa-milestones-heading h3 {
   margin: 0;
-
-  max-width: 500px;
-
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(38px, 4vw, 58px);
-  line-height: 1;
+  font-size: clamp(30px, 3.2vw, 43px);
+  line-height: 1.03;
   font-weight: 400;
-
   letter-spacing: -0.04em;
-
   color: #342d29;
 }
 
-
-.fa-milestones-heading h3 em {
-  font-style: italic;
-  color: #9a8175;
-}
-
-
 .fa-milestones-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
-
 
 .fa-milestone-card {
-  position: relative;
-
-  min-height: 300px;
-
-  padding: 30px;
-
   display: flex;
+  min-height: 205px;
   flex-direction: column;
-  justify-content: space-between;
-
-  background: #f2ebe6;
-
+  padding: 22px;
   border: 1px solid rgba(140, 117, 103, 0.12);
-
+  background: #f2ebe6;
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    background 0.35s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
-
 
 .fa-milestone-card:nth-child(2) {
   background: #eee8e2;
 }
 
-
 .fa-milestone-card:nth-child(3) {
   background: #f5efeb;
 }
 
-
 .fa-milestone-card:hover {
-  transform: translateY(-5px);
-
-  box-shadow:
-    0 20px 45px rgba(92, 70, 60, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(92, 70, 60, 0.08);
 }
-
 
 .fa-milestone-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 }
-
 
 .fa-milestone-top > span:first-child {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 24px;
-  font-weight: 400;
-
+  font-size: 22px;
   color: #9c8275;
 }
-
 
 .fa-milestone-dot {
   width: 7px;
   height: 7px;
-
   border-radius: 50%;
-
   background: #bca294;
 }
 
-
 .fa-milestone-card h4 {
-  margin: auto 0 18px;
-
+  margin: auto 0 10px;
   font-family: Arial, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.16em;
-
+  line-height: 1.6;
+  letter-spacing: 0.12em;
   color: #4b3e38;
 }
 
-
 .fa-milestone-card p {
   margin: 0;
-
   font-family: Arial, sans-serif;
-  font-size: 12px;
-  line-height: 1.85;
-
+  font-size: 11px;
+  line-height: 1.75;
   color: #776a63;
 }
 
-
-/* ============================================================
-   CLOSING STATEMENT
-   ============================================================ */
-
-.fa-exhibition-closing {
-  position: relative;
-
-  max-width: 850px;
-
-  margin: 20px auto 120px;
-
-  padding: 80px 40px;
-
-  text-align: center;
-
-  border-top: 1px solid rgba(120, 100, 90, 0.16);
-  border-bottom: 1px solid rgba(120, 100, 90, 0.16);
-}
-
-
-.fa-closing-decoration {
-  margin-bottom: 20px;
-
-  font-size: 20px;
-
-  color: #b79b8c;
-}
-
-
-.fa-closing-kicker {
-  display: block;
-
-  margin-bottom: 25px;
-
-  font-family: Arial, sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-
-  color: #a08a7e;
-}
-
-
-.fa-exhibition-closing h3 {
-  margin: 0 0 28px;
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: 1;
-  font-weight: 400;
-
-  letter-spacing: -0.04em;
-
-  color: #342d29;
-}
-
-
-.fa-exhibition-closing h3 em {
-  font-style: italic;
-  color: #9c8276;
-}
-
-
-.fa-exhibition-closing p {
-  max-width: 600px;
-
-  margin: 0 auto;
-
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.9;
-
-  color: #786b64;
-}
-
-
-/* ============================================================
-   CTA
-   ============================================================ */
+/* COMBINED CLOSING + CTA */
 
 .fa-exhibitions-cta {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-
-  gap: 70px;
-
-  padding: 65px 70px;
-
-  background: #e9ddd5;
-
+  gap: 35px;
+  padding: 38px 42px;
   border: 1px solid rgba(135, 110, 96, 0.13);
+  background: #e9ddd5;
 }
-
 
 .fa-cta-content > span {
   display: block;
-
-  margin-bottom: 18px;
-
+  margin-bottom: 14px;
   font-family: Arial, sans-serif;
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.25em;
-
+  letter-spacing: 0.22em;
   color: #8d776c;
 }
 
-
 .fa-cta-content h3 {
-  margin: 0 0 20px;
-
+  margin: 0 0 15px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(40px, 4vw, 58px);
-  line-height: 1;
+  font-size: clamp(31px, 3.5vw, 46px);
+  line-height: 1.04;
   font-weight: 400;
-
   letter-spacing: -0.04em;
-
   color: #352d29;
 }
 
-
-.fa-cta-content h3 em {
-  font-style: italic;
-  color: #967b6f;
-}
-
-
 .fa-cta-content p {
-  max-width: 540px;
-
+  max-width: 470px;
   margin: 0;
-
   font-family: Arial, sans-serif;
-  font-size: 12px;
-  line-height: 1.9;
-
+  font-size: 11px;
+  line-height: 1.8;
   color: #776861;
 }
-
-
-/* ============================================================
-   CTA BUTTONS
-   ============================================================ */
 
 .fa-cta-actions {
   display: flex;
   flex-direction: column;
-
-  gap: 12px;
-
-  min-width: 205px;
+  gap: 10px;
+  min-width: 185px;
 }
-
 
 .fa-cta-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  min-width: 205px;
-
-  padding: 15px 18px;
-
+  gap: 15px;
+  width: 100%;
+  padding: 14px 16px;
   text-decoration: none;
-
   font-family: Arial, sans-serif;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-
+  letter-spacing: 0.04em;
   transition:
     transform 0.25s ease,
     background 0.25s ease,
     color 0.25s ease;
 }
 
-
 .fa-cta-button span {
   font-size: 14px;
   line-height: 1;
 }
 
-
 .fa-cta-primary {
   background: #3b302b;
-  color: #ffffff;
+  color: #fff;
 }
 
-
 .fa-cta-primary:hover {
-  transform: translateX(4px);
+  transform: translateY(-2px);
   background: #4c3c35;
 }
 
-
 .fa-cta-secondary {
-  background: transparent;
-
   border: 1px solid rgba(82, 65, 57, 0.28);
-
+  background: transparent;
   color: #4b3c35;
 }
 
-
 .fa-cta-secondary:hover {
-  transform: translateX(4px);
+  transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.35);
 }
 
-
-/* ============================================================
-   TABLET
-   ============================================================ */
+/* TABLET */
 
 @media (max-width: 900px) {
-
   .fa-exhibitions {
-    padding: 100px 22px 110px;
+    padding: 60px 22px;
   }
-
 
   .fa-exhibitions-intro {
-    grid-template-columns: 1fr 1.7fr;
-
-    gap: 35px;
-
-    margin-bottom: 65px;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px 28px;
+    margin-bottom: 35px;
   }
-
-
-  .fa-exhibitions-intro-copy {
-    grid-column: 2;
-  }
-
 
   .fa-exhibitions-kicker {
-    align-self: start;
+    grid-column: 1 / -1;
+    padding-bottom: 0;
   }
 
-
-  .fa-exhibitions-heading h2 {
-    font-size: clamp(42px, 7vw, 64px);
+  .fa-intro-description {
+    align-self: end;
   }
 
-
-  .fa-exhibition-video-section {
-    margin-bottom: 95px;
+  .fa-showcase-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 16px;
   }
 
+  .fa-exhibition-showcase {
+    margin-bottom: 40px;
+  }
 
   .fa-exhibition-story {
-    grid-template-columns: 0.4fr 1.6fr;
-
-    gap: 45px;
-
-    padding: 80px 0;
+    gap: 28px;
+    padding: 35px 0;
   }
-
-
-  .fa-story-number strong {
-    font-size: 60px;
-  }
-
 
   .fa-exhibition-milestones {
-    padding: 95px 0;
+    padding: 42px 0;
   }
-
-
-  .fa-milestones-grid {
-    gap: 12px;
-  }
-
 
   .fa-milestone-card {
-    min-height: 280px;
-    padding: 24px;
+    min-height: 215px;
+    padding: 18px;
   }
-
 
   .fa-exhibitions-cta {
-    grid-template-columns: 1fr;
-
-    gap: 40px;
-
-    padding: 55px 45px;
+    gap: 22px;
+    padding: 30px 25px;
   }
-
 
   .fa-cta-actions {
-    flex-direction: row;
-    flex-wrap: wrap;
+    min-width: 165px;
   }
-
 }
 
-
-/* ============================================================
-   MOBILE
-   ============================================================ */
+/* MOBILE */
 
 @media (max-width: 620px) {
-
   .fa-exhibitions {
-    padding: 80px 18px 90px;
+    padding: 45px 17px 50px;
   }
-
-
-  /* ----------------------------------------------------------
-     INTRO
-     ---------------------------------------------------------- */
 
   .fa-exhibitions-intro {
     display: block;
-
-    margin-bottom: 55px;
+    margin-bottom: 28px;
   }
-
 
   .fa-exhibitions-kicker {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
-
 
   .fa-exhibitions-heading {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
-
 
   .fa-exhibitions-heading h2 {
-    font-size: clamp(40px, 12vw, 54px);
+    font-size: clamp(38px, 10vw, 48px);
   }
 
-
-  .fa-exhibitions-intro-copy {
-    padding: 0;
-  }
-
-
-  .fa-exhibitions-intro-copy p {
+  .fa-intro-description {
     font-size: 12px;
-    line-height: 1.85;
+    line-height: 1.75;
   }
 
-
-  /* ----------------------------------------------------------
-     VIDEO
-     ---------------------------------------------------------- */
-
-  .fa-exhibition-video-section {
-    margin-bottom: 75px;
+  .fa-exhibition-showcase {
+    margin-bottom: 32px;
   }
 
-
-  .fa-video-wrapper {
-    width: 100%;
+  .fa-section-label {
+    margin-bottom: 12px;
   }
 
-
-  /*
-     IMPORTANT:
-     Still NO fixed height.
-     Video keeps its original aspect ratio.
-  */
+  .fa-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
   .fa-exhibitions-video {
     width: 100%;
     height: auto;
-
     object-fit: contain;
   }
 
-
-  .fa-video-caption {
-    margin-top: 15px;
-
-    font-size: 10px;
-    line-height: 1.75;
+  .fa-exhibition-image-placeholder {
+    aspect-ratio: 16 / 10;
   }
 
+  .fa-placeholder-content {
+    gap: 8px;
+  }
 
-  /* ----------------------------------------------------------
-     STORY
-     ---------------------------------------------------------- */
+  .fa-placeholder-icon {
+    font-size: 23px;
+  }
+
+  .fa-media-caption {
+    margin-top: 9px;
+    font-size: 10px;
+  }
 
   .fa-exhibition-story {
-    display: block;
-
-    padding: 65px 0;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 30px 0;
   }
 
-
-  .fa-story-number {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    min-height: auto;
-
-    margin-bottom: 35px;
+  .fa-story-kicker {
+    margin-bottom: 12px;
   }
 
-
-  .fa-story-number strong {
-    font-size: 48px;
+  .fa-story-heading h3 {
+    font-size: 34px;
   }
-
-
-  .fa-story-content h3 {
-    margin-bottom: 30px;
-
-    font-size: 39px;
-  }
-
 
   .fa-story-content p {
     font-size: 12px;
-    line-height: 1.9;
-  }
-
-
-  /* ----------------------------------------------------------
-     MILESTONES
-     ---------------------------------------------------------- */
-
-  .fa-exhibition-milestones {
-    padding: 75px 0;
-  }
-
-
-  .fa-milestones-heading {
-    display: block;
-
-    margin-bottom: 35px;
-  }
-
-
-  .fa-milestones-heading > span {
-    display: block;
-
-    margin-bottom: 20px;
-  }
-
-
-  .fa-milestones-heading h3 {
-    font-size: 40px;
-  }
-
-
-  .fa-milestones-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-
-  .fa-milestone-card {
-    min-height: 245px;
-
-    padding: 25px;
-  }
-
-
-  /* ----------------------------------------------------------
-     CLOSING
-     ---------------------------------------------------------- */
-
-  .fa-exhibition-closing {
-    margin: 0 auto 80px;
-
-    padding: 65px 15px;
-  }
-
-
-  .fa-exhibition-closing h3 {
-    font-size: 40px;
-  }
-
-
-  .fa-exhibition-closing p {
-    font-size: 12px;
-    line-height: 1.85;
-  }
-
-
-  /* ----------------------------------------------------------
-     CTA
-     ---------------------------------------------------------- */
-
-  .fa-exhibitions-cta {
-    padding: 45px 25px;
-
-    gap: 32px;
-  }
-
-
-  .fa-cta-content h3 {
-    font-size: 40px;
-  }
-
-
-  .fa-cta-content p {
-    font-size: 11px;
     line-height: 1.8;
   }
 
-
-  .fa-cta-actions {
-    width: 100%;
+  .fa-exhibition-milestones {
+    padding: 35px 0;
   }
 
-
-  .fa-cta-button {
-    width: 100%;
-    min-width: 0;
+  .fa-milestones-heading {
+    display: block;
+    margin-bottom: 20px;
   }
 
-}
-
-
-/* ============================================================
-   VERY SMALL MOBILE
-   ============================================================ */
-
-@media (max-width: 380px) {
-
-  .fa-exhibitions {
-    padding-left: 15px;
-    padding-right: 15px;
+  .fa-milestones-heading > span {
+    display: block;
+    margin-bottom: 12px;
   }
 
-
-  .fa-exhibitions-heading h2 {
-    font-size: 38px;
+  .fa-milestones-heading h3 {
+    font-size: 34px;
   }
 
+  .fa-milestones-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-  .fa-story-content h3,
-  .fa-milestones-heading h3,
-  .fa-exhibition-closing h3,
+  .fa-milestone-card {
+    min-height: 0;
+    padding: 19px;
+  }
+
+  .fa-milestone-top {
+    margin-bottom: 17px;
+  }
+
+  .fa-milestone-card h4 {
+    margin-bottom: 8px;
+  }
+
+  .fa-exhibitions-cta {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 27px 21px;
+  }
+
   .fa-cta-content h3 {
     font-size: 35px;
   }
 
-
-  .fa-exhibition-cta {
-    padding: 35px 20px;
+  .fa-cta-actions {
+    width: 100%;
+    min-width: 0;
   }
 
+  .fa-cta-button {
+    min-width: 0;
+    padding: 14px 15px;
+  }
+}
+
+/* VERY SMALL MOBILE */
+
+@media (max-width: 380px) {
+  .fa-exhibitions {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .fa-exhibitions-heading h2 {
+    font-size: 36px;
+  }
+
+  .fa-story-heading h3,
+  .fa-milestones-heading h3,
+  .fa-cta-content h3 {
+    font-size: 30px;
+  }
+}
+
+.fa-exhibition-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
 }

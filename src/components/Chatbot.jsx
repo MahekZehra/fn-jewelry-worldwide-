@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
 
+import { useEffect, useMemo, useState } from "react";
 import {
   FiMessageCircle,
   FiX,
@@ -9,8 +9,7 @@ import {
 } from "react-icons/fi";
 
 const LOGO_SRC = "/logo/fa-logo.jpg";
-
-const WHATSAPP_NUMBER = "923353149929";
+const WHATSAPP_NUMBER = "971529218985";
 const EMAIL = "info@amnafacollective.com";
 
 const Chatbot = () => {
@@ -18,9 +17,6 @@ const Chatbot = () => {
   const [view, setView] = useState("welcome");
   const [category, setCategory] = useState(null);
 
-  /* =========================
-     OPEN CHATBOT FROM WEBSITE
-  ========================== */
   useEffect(() => {
     const openChatbotFromWebsite = () => {
       setOpen(true);
@@ -28,10 +24,7 @@ const Chatbot = () => {
       setCategory(null);
     };
 
-    window.addEventListener(
-      "open-fna-chatbot",
-      openChatbotFromWebsite
-    );
+    window.addEventListener("open-fna-chatbot", openChatbotFromWebsite);
 
     return () => {
       window.removeEventListener(
@@ -41,9 +34,6 @@ const Chatbot = () => {
     };
   }, []);
 
-  /* =========================
-     WHATSAPP
-  ========================== */
   const whatsapp = (customMessage) => {
     const message = encodeURIComponent(
       customMessage ||
@@ -57,9 +47,6 @@ const Chatbot = () => {
     );
   };
 
-  /* =========================
-     EMAIL
-  ========================== */
   const email = (subjectText, bodyText) => {
     const subject = encodeURIComponent(
       subjectText || "F&A Collective — Customer Enquiry"
@@ -77,17 +64,11 @@ const Chatbot = () => {
     );
   };
 
-  /* =========================
-     HOME
-  ========================== */
   const home = () => {
     setView("welcome");
     setCategory(null);
   };
 
-  /* =========================
-     BASIC OPTIONS
-  ========================== */
   const basicOptions = useMemo(
     () => [
       {
@@ -106,6 +87,16 @@ const Chatbot = () => {
         text: "Need help with an order or want to enquire about a piece?",
       },
       {
+        id: "delivery",
+        title: "Delivery & Shipping",
+        text: "Ask about delivery availability, shipping charges and timelines.",
+      },
+      {
+        id: "orderStatus",
+        title: "Order Status",
+        text: "Contact our team about an existing order or delivery update.",
+      },
+      {
         id: "custom",
         title: "Custom & Special Orders",
         text: "Ask us about weddings, bulk orders and special occasions.",
@@ -114,9 +105,6 @@ const Chatbot = () => {
     []
   );
 
-  /* =========================
-     INFORMATION
-  ========================== */
   const categoryContent = {
     collection: {
       title: "Our Collection",
@@ -128,6 +116,8 @@ const Chatbot = () => {
         "Kundan clutches",
         "Statement and occasion pieces",
       ],
+      whatsappMessage:
+        "Hi F&A Collective! I would like to explore your jewellery, fashion and accessories collection. Please assist me.",
     },
 
     categories: {
@@ -147,6 +137,8 @@ const Chatbot = () => {
         "Lawn & Silk garments",
         "Kundan Clutches",
       ],
+      whatsappMessage:
+        "Hi F&A Collective! I would like help finding a product in your categories. Please guide me through your collection.",
     },
 
     orders: {
@@ -159,6 +151,35 @@ const Chatbot = () => {
         "Availability enquiries",
         "General assistance",
       ],
+      whatsappMessage:
+        "Hi F&A Collective! I have an order or product enquiry. Please assist me. I can provide my order number or product details if needed.",
+    },
+
+    delivery: {
+      title: "Delivery & Shipping",
+      description:
+        "Need help with delivery availability, shipping charges or estimated delivery times? Contact our team for assistance.",
+      points: [
+        "Worldwide delivery availability",
+        "Shipping charges",
+        "Estimated delivery time",
+        "Delivery-related questions",
+      ],
+      whatsappMessage:
+        "Hi F&A Collective! I would like to enquire about delivery and shipping. Please let me know whether delivery is available to my country, the shipping charges and the estimated delivery time.",
+    },
+
+    orderStatus: {
+      title: "Order Status",
+      description:
+        "Our team can help you with an existing order. Please have your order number ready when contacting us.",
+      points: [
+        "Order progress",
+        "Delivery updates",
+        "Order-related assistance",
+      ],
+      whatsappMessage:
+        "Hi F&A Collective! I would like an update on my order. My order number is: [Please enter your order number]. Please assist me with its status and delivery update.",
     },
 
     custom: {
@@ -171,14 +192,17 @@ const Chatbot = () => {
         "Special occasions",
         "Custom enquiries",
       ],
+      whatsappMessage:
+        "Hi F&A Collective! I would like to enquire about a custom, bulk or special-occasion order. Please share more information.",
     },
   };
 
+  const selectedContent =
+    category ? categoryContent[category] : null;
+
   return (
     <>
-      {/* =========================
-          FLOATING CHAT LAUNCHER
-      ========================== */}
+      {/* FLOATING CHATBOT LAUNCHER */}
       {!open && (
         <button
           type="button"
@@ -188,15 +212,13 @@ const Chatbot = () => {
             setCategory(null);
           }}
           aria-label="Open F&A chatbot"
-          className="fixed right-5 top-[92px] z-[9998] flex h-14 w-14 items-center justify-center rounded-full border border-[#E8D6D8] bg-white/95 text-[#A87585] shadow-[0_12px_35px_rgba(105,75,75,0.16)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_18px_40px_rgba(105,75,75,0.20)]"
+          className="fixed bottom-5 right-5 z-[9998] flex h-14 w-14 items-center justify-center rounded-full border border-[#E8D6D8] bg-white/95 text-[#A87585] shadow-[0_12px_35px_rgba(105,75,75,0.16)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_18px_40px_rgba(105,75,75,0.20)]"
         >
           <div className="relative flex items-center justify-center">
             <FiMessageCircle className="text-[23px]" />
-
             <span className="absolute -right-2 -top-2 text-[11px] text-[#B9788B]">
               ✦
             </span>
-
             <span className="absolute -bottom-2 -left-2 text-[8px] text-[#D8B7A8]">
               ✦
             </span>
@@ -204,21 +226,15 @@ const Chatbot = () => {
         </button>
       )}
 
-      {/* =========================
-          CHAT WINDOW
-      ========================== */}
+      {/* CHAT WINDOW */}
       {open && (
-        <div className="fixed right-5 top-[92px] z-[9999] flex h-[min(650px,calc(100vh-120px))] w-[min(390px,calc(100vw-32px))] flex-col overflow-hidden rounded-[2rem] border border-[#E8D6D8] bg-[#FFFDFC] shadow-[0_25px_80px_rgba(75,45,55,0.20)]">
-          {/* =========================
-              HEADER
-          ========================== */}
+        <div className="fixed bottom-5 right-5 z-[9999] flex h-[min(650px,calc(100vh-40px))] w-[min(390px,calc(100vw-32px))] flex-col overflow-hidden rounded-[2rem] border border-[#E8D6D8] bg-[#FFFDFC] shadow-[0_25px_80px_rgba(75,45,55,0.20)]">
+          {/* HEADER */}
           <div className="relative shrink-0 overflow-hidden border-b border-[#EEDFE2] bg-gradient-to-br from-[#FFF8F8] via-[#FFFDFB] to-[#F8F1FA] px-5 py-4">
             <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#F8DDE5]/50 blur-2xl" />
 
             <div className="relative flex items-center justify-between">
               <div className="flex items-center gap-3">
-
-                {/* FIXED LOGO */}
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#E5CDD3] bg-white p-1 shadow-sm">
                   <img
                     src={LOGO_SRC}
@@ -232,7 +248,6 @@ const Chatbot = () => {
                     <h3 className="font-serif text-lg font-semibold text-[#3B2930]">
                       F&A Collective
                     </h3>
-
                     <span className="text-[11px] text-[#B9788B]">
                       ✦
                     </span>
@@ -255,18 +270,14 @@ const Chatbot = () => {
             </div>
           </div>
 
-          {/* =========================
-              CONTENT
-          ========================== */}
-          <div className="flex-1 overflow-y-auto px-5 py-5">
-
+          {/* CONTENT */}
+          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
             {/* WELCOME */}
             {view === "welcome" && (
               <div className="space-y-5">
                 <div>
                   <div className="mb-2 flex items-center gap-2">
                     <span className="text-lg">✨</span>
-
                     <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A87585]">
                       Welcome
                     </p>
@@ -280,8 +291,8 @@ const Chatbot = () => {
                   </h2>
 
                   <p className="mt-3 text-sm leading-6 text-[#76636A]">
-                    Welcome to F&A Collective. I can help you explore our
-                    collection and answer basic questions.
+                    Welcome to F&A Collective. I can help you explore
+                    our collection and find the right assistance.
                   </p>
                 </div>
 
@@ -295,7 +306,6 @@ const Chatbot = () => {
                       <p className="font-serif text-lg text-[#3B2930]">
                         Explore F&A
                       </p>
-
                       <p className="mt-1 text-xs leading-5 text-[#806D66]">
                         Explore our collection and website information.
                       </p>
@@ -315,7 +325,6 @@ const Chatbot = () => {
                       <p className="font-serif text-lg text-[#3B2930]">
                         I Need Something Else
                       </p>
-
                       <p className="mt-1 text-xs leading-5 text-[#806D66]">
                         Need specific or advanced assistance?
                       </p>
@@ -336,6 +345,7 @@ const Chatbot = () => {
                   <button
                     type="button"
                     onClick={home}
+                    aria-label="Back to welcome"
                     className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8D6D8] bg-white text-[#806D66] transition hover:text-[#A87585]"
                   >
                     <FiArrowLeft />
@@ -345,7 +355,6 @@ const Chatbot = () => {
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A87585]">
                       Explore
                     </p>
-
                     <h2 className="font-serif text-2xl text-[#3B2930]">
                       What would you like to know?
                     </h2>
@@ -368,7 +377,6 @@ const Chatbot = () => {
                           <p className="font-serif text-lg text-[#3B2930]">
                             {item.title}
                           </p>
-
                           <p className="mt-1 text-xs leading-5 text-[#806D66]">
                             {item.text}
                           </p>
@@ -383,92 +391,82 @@ const Chatbot = () => {
             )}
 
             {/* ANSWER */}
-            {view === "answer" &&
-              category &&
-              categoryContent[category] && (
-                <div className="space-y-5">
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setView("explore")}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8D6D8] bg-white text-[#806D66] transition hover:text-[#A87585]"
-                    >
-                      <FiArrowLeft />
-                    </button>
+            {view === "answer" && selectedContent && (
+              <div className="space-y-5">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setView("explore")}
+                    aria-label="Back to options"
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8D6D8] bg-white text-[#806D66] transition hover:text-[#A87585]"
+                  >
+                    <FiArrowLeft />
+                  </button>
 
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A87585]">
-                      F&A Information
-                    </p>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A87585]">
+                    F&A Information
+                  </p>
+                </div>
+
+                <div className="rounded-[1.5rem] border border-[#E8D6D8] bg-white p-5 shadow-[0_10px_30px_rgba(105,75,75,0.05)]">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FDF1F4] text-[#B9788B]">
+                    <span className="text-lg">✦</span>
                   </div>
 
-                  <div className="rounded-[1.5rem] border border-[#E8D6D8] bg-white p-5 shadow-[0_10px_30px_rgba(105,75,75,0.05)]">
-                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FDF1F4] text-[#B9788B]">
-                      <span className="text-lg">✦</span>
-                    </div>
+                  <h2 className="font-serif text-2xl text-[#3B2930]">
+                    {selectedContent.title}
+                  </h2>
 
-                    <h2 className="font-serif text-2xl text-[#3B2930]">
-                      {categoryContent[category].title}
-                    </h2>
+                  <p className="mt-3 text-sm leading-6 text-[#76636A]">
+                    {selectedContent.description}
+                  </p>
 
-                    <p className="mt-3 text-sm leading-6 text-[#76636A]">
-                      {categoryContent[category].description}
-                    </p>
-
-                    <div className="mt-5 space-y-2">
-                      {categoryContent[category].points.map(
-                        (point) => (
-                          <div
-                            key={point}
-                            className="flex items-center gap-2 text-sm text-[#6F5A61]"
-                          >
-                            <span className="text-[#B9788B]">
-                              ✦
-                            </span>
-
-                            <span>{point}</span>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-[#E6D9C9] bg-[#FCF5EA]/70 p-4">
-                    <p className="text-sm leading-6 text-[#6F5A61]">
-                      Need more specific information? Our team can
-                      assist you directly.
-                    </p>
-
-                    <div className="mt-4 grid grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          whatsapp(
-                            "Hi F&A Collective! I need some assistance regarding your collection."
-                          )
-                        }
-                        className="flex items-center justify-center gap-2 rounded-xl bg-[#80658B] px-3 py-3 text-xs font-semibold text-white transition hover:bg-[#6F5679]"
+                  <div className="mt-5 space-y-2">
+                    {selectedContent.points.map((point) => (
+                      <div
+                        key={point}
+                        className="flex items-center gap-2 text-sm text-[#6F5A61]"
                       >
-                        <FiMessageCircle />
-                        WhatsApp
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          email(
-                            "F&A Collective — Customer Enquiry",
-                            "Hello F&A Collective,\n\nI need some assistance regarding your collection.\n\nThank you."
-                          )
-                        }
-                        className="flex items-center justify-center gap-2 rounded-xl bg-[#B9788B] px-3 py-3 text-xs font-semibold text-white transition hover:bg-[#A9677A]"
-                      >
-                        <FiMail />
-                        Email
-                      </button>
-                    </div>
+                        <span className="text-[#B9788B]">✦</span>
+                        <span>{point}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              )}
+
+                <div className="rounded-2xl border border-[#E6D9C9] bg-[#FCF5EA]/70 p-4">
+                  <p className="text-sm leading-6 text-[#6F5A61]">
+                    Need more specific information? Our team can
+                    assist you directly.
+                  </p>
+
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => whatsapp(selectedContent.whatsappMessage)}
+                      className="flex items-center justify-center gap-2 rounded-xl bg-[#80658B] px-3 py-3 text-xs font-semibold text-white transition hover:bg-[#6F5679]"
+                    >
+                      <FiMessageCircle />
+                      WhatsApp
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        email(
+                          `F&A Collective — ${selectedContent.title}`,
+                          `Hello F&A Collective,\n\n${selectedContent.whatsappMessage}\n\nThank you.`
+                        )
+                      }
+                      className="flex items-center justify-center gap-2 rounded-xl bg-[#B9788B] px-3 py-3 text-xs font-semibold text-white transition hover:bg-[#A9677A]"
+                    >
+                      <FiMail />
+                      Email
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* ADVANCED */}
             {view === "advanced" && (
@@ -477,6 +475,7 @@ const Chatbot = () => {
                   <button
                     type="button"
                     onClick={home}
+                    aria-label="Back to welcome"
                     className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8D6D8] bg-white text-[#806D66] transition hover:text-[#A87585]"
                   >
                     <FiArrowLeft />
@@ -486,7 +485,6 @@ const Chatbot = () => {
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#A87585]">
                       Personal Assistance
                     </p>
-
                     <h2 className="font-serif text-2xl text-[#3B2930]">
                       Let’s connect
                     </h2>
@@ -494,8 +492,6 @@ const Chatbot = () => {
                 </div>
 
                 <div className="rounded-[1.5rem] border border-[#E8D6D8] bg-white p-5 text-center shadow-[0_10px_30px_rgba(105,75,75,0.05)]">
-
-                  {/* FIXED LOGO */}
                   <div className="mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-[#E5CDD3] bg-white p-1">
                     <img
                       src={LOGO_SRC}
@@ -519,7 +515,7 @@ const Chatbot = () => {
                       type="button"
                       onClick={() =>
                         whatsapp(
-                          "Hi F&A Collective! I need some assistance that I couldn't find on the website."
+                          "Hi F&A Collective! I need some assistance that I couldn't find on the website. Please help me."
                         )
                       }
                       className="flex w-full items-center justify-center gap-2 rounded-full bg-[#80658B] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(128,101,139,0.18)] transition hover:-translate-y-0.5 hover:bg-[#6F5679]"
@@ -549,22 +545,14 @@ const Chatbot = () => {
             )}
           </div>
 
-          {/* =========================
-              FOOTER
-          ========================== */}
+          {/* FOOTER */}
           <div className="shrink-0 border-t border-[#EEDFE2] bg-[#FFF9F7] px-5 py-3">
             <div className="flex items-center justify-center gap-1.5 text-center">
-              <span className="text-[9px] text-[#B9788B]">
-                ✦
-              </span>
-
+              <span className="text-[9px] text-[#B9788B]">✦</span>
               <p className="text-[9px] uppercase tracking-[0.16em] text-[#A58B91]">
                 F&A Collective · Crafted With Care
               </p>
-
-              <span className="text-[9px] text-[#B9788B]">
-                ✦
-              </span>
+              <span className="text-[9px] text-[#B9788B]">✦</span>
             </div>
           </div>
         </div>

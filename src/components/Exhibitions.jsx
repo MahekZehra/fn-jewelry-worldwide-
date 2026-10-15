@@ -1,3 +1,4 @@
+
 import "./Exhibitions.css";
 
 const exhibitionVideo = "/exhibitions/exhibition-showcase.mp4";
@@ -6,18 +7,18 @@ const milestones = [
   {
     number: "01",
     title: "THE BEGINNING",
-    text: "Our first exhibition marked the moment our jewellery journey stepped beyond the collection and into a shared experience."
+    text: "Our first exhibition marked the beginning of the F&A journey, bringing our jewellery closer to our customers.",
   },
   {
     number: "02",
     title: "ACROSS DUBAI",
-    text: "With every new showcase, we have continued meeting customers, sharing our collections and building beautiful connections across Dubai."
+    text: "Every showcase has created new connections, beautiful memories and opportunities to share our collections.",
   },
   {
     number: "03",
     title: "THE JOURNEY CONTINUES",
-    text: "Every exhibition becomes another memory — and another opportunity to bring F&A closer to the women we create for."
-  }
+    text: "Each exhibition is another chapter in our story of timeless elegance and meaningful experiences.",
+  },
 ];
 
 const Exhibitions = () => {
@@ -25,13 +26,10 @@ const Exhibitions = () => {
     <section className="fa-exhibitions" id="exhibitions">
       <div className="fa-exhibitions-container">
 
-        {/* =====================================================
-            INTRO
-        ===================================================== */}
-        <div className="fa-exhibitions-intro">
-
+        {/* COMPACT INTRO */}
+        <header className="fa-exhibitions-intro">
           <div className="fa-exhibitions-kicker">
-            <span className="fa-line"></span>
+            <span className="fa-line" />
             F&A COLLECTIVE
           </div>
 
@@ -43,194 +41,133 @@ const Exhibitions = () => {
             </h2>
           </div>
 
-          <div className="fa-exhibitions-intro-copy">
-            <p>
-              From our very first exhibition to the many showcases that
-              followed across Dubai, every exhibition has been a chapter
-              in the F&A story.
-            </p>
+          <p className="fa-intro-description">
+            A glimpse into the exhibitions, beautiful encounters and
+            special moments that bring the F&A story to life.
+          </p>
+        </header>
 
-            <p>
-              These moments have allowed us to bring our jewellery closer
-              to women, share the details behind each collection, and create
-              meaningful connections beyond the boutique.
-            </p>
-          </div>
-
-        </div>
-
-
-        {/* =====================================================
-            VIDEO
-        ===================================================== */}
-        <div className="fa-exhibition-video-section">
-
+        {/* VIDEO + IMAGE PLACEHOLDER */}
+        <div className="fa-exhibition-showcase">
           <div className="fa-section-label">
             <span>EXHIBITION MOMENTS</span>
           </div>
 
-          <div className="fa-video-wrapper">
+          <div className="fa-showcase-grid">
 
-            <video
-              className="fa-exhibitions-video"
-              controls
-              playsInline
-              preload="metadata"
-              aria-label="F&A exhibition showcase"
-            >
-              <source src={exhibitionVideo} type="video/mp4" />
+            {/* EXISTING VIDEO */}
+            <div className="fa-video-column">
+              <div className="fa-video-wrapper">
+                <video
+                  className="fa-exhibitions-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label="F&A exhibition showcase"
+                >
+                  <source
+                    src={exhibitionVideo}
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
 
-              Your browser does not support the video tag.
-            </video>
+              <p className="fa-media-caption">
+                Moments from our exhibitions and showcases across Dubai.
+              </p>
+            </div>
+
+            {/* IMAGE PLACEHOLDER: REPLACE LATER */}
+            <div className="fa-image-column">
+              <img
+                className="fa-exhibition-photo"
+                src="/exhibitions/exhibition-photo.jpg"
+                alt="F&A exhibition showcase"
+              />
+
+              <p className="fa-media-caption">
+                The people, details and experiences behind F&A.
+              </p>
+            </div>
 
           </div>
-
-          <p className="fa-video-caption">
-            A glimpse into the exhibitions, showcases and beautiful moments
-            that have shaped the F&A journey.
-          </p>
-
         </div>
 
-
-        {/* =====================================================
-            STORY
-        ===================================================== */}
+        {/* COMPACT STORY */}
         <div className="fa-exhibition-story">
+          <div className="fa-story-heading">
+            <span className="fa-story-kicker">OUR STORY · 01</span>
 
-          <div className="fa-story-number">
-            <span>THE STORY</span>
-            <strong>01</strong>
+            <h3>
+              More than a showcase.
+              <br />
+              <em>A journey of connection.</em>
+            </h3>
           </div>
 
           <div className="fa-story-content">
-
-            <h3>
-              From our first exhibition
-              <br />
-              <em>to every showcase after.</em>
-            </h3>
-
             <p>
-              Our first exhibition was more than a showcase — it was the
-              beginning of a journey. Meeting customers in person, seeing
-              pieces come alive, and sharing the F&A experience gave us
-              a new way to tell our story.
+              From our first exhibition to showcases across Dubai,
+              every event has given us the opportunity to meet customers
+              in person, share our collections and celebrate the beauty
+              of jewellery together.
             </p>
 
             <p>
-              Since then, we have had the joy of taking part in exhibitions
-              and showcases across Dubai. Each one has been different, but
-              the feeling remains the same: beautiful jewellery, genuine
-              conversations, and women finding pieces that feel like
-              their own.
+              Every conversation and every memorable moment continues
+              to shape the F&A story.
             </p>
-
-            <p>
-              The video above brings together a few of those moments —
-              from early beginnings to later showcases — as a little
-              glimpse into the journey behind F&A.
-            </p>
-
           </div>
-
         </div>
 
-
-        {/* =====================================================
-            MILESTONES
-        ===================================================== */}
+        {/* COMPACT MILESTONES */}
         <div className="fa-exhibition-milestones">
-
           <div className="fa-milestones-heading">
-            <span>OUR JOURNEY</span>
-
+            <span>THE F&A JOURNEY</span>
             <h3>
-              Every exhibition
+              Every showcase,
               <br />
-              <em>becomes a memory.</em>
+              <em>a beautiful memory.</em>
             </h3>
           </div>
 
-
           <div className="fa-milestones-grid">
-
             {milestones.map((milestone) => (
               <article
                 className="fa-milestone-card"
                 key={milestone.number}
               >
-
                 <div className="fa-milestone-top">
                   <span>{milestone.number}</span>
-                  <span className="fa-milestone-dot"></span>
+                  <span className="fa-milestone-dot" />
                 </div>
 
                 <h4>{milestone.title}</h4>
-
                 <p>{milestone.text}</p>
-
               </article>
             ))}
-
           </div>
-
         </div>
 
-
-        {/* =====================================================
-            CLOSING STATEMENT
-        ===================================================== */}
-        <div className="fa-exhibition-closing">
-
-          <div className="fa-closing-decoration">
-            ✦
-          </div>
-
-          <span className="fa-closing-kicker">
-            WITH LOVE FROM F&A
-          </span>
-
-          <h3>
-            More than jewellery.
-            <br />
-            <em>Moments to remember.</em>
-          </h3>
-
-          <p>
-            Every exhibition gives us another opportunity to share what
-            F&A represents — timeless elegance, meaningful craftsmanship,
-            and jewellery created to become part of a woman's story.
-          </p>
-
-        </div>
-
-
-        {/* =====================================================
-            CTA
-        ===================================================== */}
+        {/* COMBINED CLOSING + CTA */}
         <div className="fa-exhibitions-cta">
-
           <div className="fa-cta-content">
-
-            <span>DISCOVER F&A</span>
+            <span>WITH LOVE FROM F&A</span>
 
             <h3>
-              Come experience
+              More than jewellery.
               <br />
-              <em>the collection.</em>
+              <em>Moments to remember.</em>
             </h3>
 
             <p>
-              Explore our latest jewellery collections and stay close
-              to the moments, stories and showcases that are still to come.
+              Discover timeless elegance, meaningful craftsmanship
+              and jewellery created to become part of your story.
             </p>
-
           </div>
 
-
           <div className="fa-cta-actions">
-
             <a
               href="/collections"
               className="fa-cta-button fa-cta-primary"
@@ -246,9 +183,7 @@ const Exhibitions = () => {
               Follow F&A
               <span>↗</span>
             </a>
-
           </div>
-
         </div>
 
       </div>

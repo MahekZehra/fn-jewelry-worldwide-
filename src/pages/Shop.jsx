@@ -1,11 +1,14 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+
 import {
   FiArrowUpRight,
-  FiChevronRight,
   FiHeart,
   FiStar,
 } from "react-icons/fi";
+import { FiStar as FiSparkles } from "react-icons/fi";
+
 
 import products from "../data/Products";
 import ProductCard from "../components/ProductCard";
@@ -18,8 +21,7 @@ const Shop = () => {
   ===================================================== */
 
   const categoryFromUrl = searchParams.get("category");
-  const subCategoryFromUrl =
-    searchParams.get("subCategory");
+  const subCategoryFromUrl = searchParams.get("subCategory");
   const saleFromUrl = searchParams.get("sale");
 
   /* =====================================================
@@ -30,8 +32,9 @@ const Shop = () => {
     categoryFromUrl || "All"
   );
 
-  const [activeSubCategory, setActiveSubCategory] =
-    useState(subCategoryFromUrl || "All");
+  const [activeSubCategory, setActiveSubCategory] = useState(
+    subCategoryFromUrl || "All"
+  );
 
   const [isSaleOnly, setIsSaleOnly] = useState(
     saleFromUrl === "true"
@@ -39,39 +42,45 @@ const Shop = () => {
 
   /* =====================================================
      MAIN CATEGORIES
+     Garments remains in the product data but is hidden
+     from the customer-facing category filters.
   ===================================================== */
 
   const categories = [
     "All",
     "Jewellery",
-    "Garments",
     "Accessories",
   ];
+
+  /* =====================================================
+     DISPLAY CATEGORY LABELS
+  ===================================================== */
+
+  const getCategoryLabel = (category) =>
+    category === "Accessories" ? "Kundan Clutches" : category;
 
   /* =====================================================
      SYNC STATE WITH URL
   ===================================================== */
 
   useEffect(() => {
-    setActiveCategory(categoryFromUrl || "All");
+    const requestedCategory = categoryFromUrl || "All";
 
-    setActiveSubCategory(
-      subCategoryFromUrl || "All"
+    // If someone opens a Garments URL directly,
+    // show all products instead of selecting a hidden filter.
+    setActiveCategory(
+      requestedCategory === "Garments" ? "All" : requestedCategory
     );
 
+    setActiveSubCategory(subCategoryFromUrl || "All");
     setIsSaleOnly(saleFromUrl === "true");
-  }, [
-    categoryFromUrl,
-    subCategoryFromUrl,
-    saleFromUrl,
-  ]);
+  }, [categoryFromUrl, subCategoryFromUrl, saleFromUrl]);
 
   /* =====================================================
-   AVAILABLE SUBCATEGORIES
-===================================================== */
+     AVAILABLE SUBCATEGORIES
+  ===================================================== */
 
   const subCategories = useMemo(() => {
-
     if (activeCategory === "All") {
       return [];
     }
@@ -99,21 +108,18 @@ const Shop = () => {
     }
 
     if (activeCategory === "Accessories") {
-      return [
-        "Kundan Clutches",
-      ];
+      return ["Kundan Clutches"];
     }
 
     return [];
   }, [activeCategory]);
-/* =====================================================
-   FILTER PRODUCTS
-===================================================== */
+
+  /* =====================================================
+     FILTER PRODUCTS
+  ===================================================== */
 
   const filteredProducts = useMemo(() => {
-
     return products.filter((product) => {
-
       const normalizedCategory =
         product.category?.trim().toLowerCase();
 
@@ -126,68 +132,40 @@ const Shop = () => {
       const normalizedActiveSubCategory =
         activeSubCategory.trim().toLowerCase();
 
-
-      // -------------------------------------------------
       // MAIN CATEGORY
-      // -------------------------------------------------
-
       const matchesCategory =
         activeCategory === "All" ||
         normalizedCategory === normalizedActiveCategory;
 
-
-      // -------------------------------------------------
       // SUBCATEGORY
-      // -------------------------------------------------
-
       let matchesSubCategory = true;
 
-
-      // New Arrivals is a SPECIAL FILTER.
-      // It does NOT depend on product.subCategory.
-      // Only the 5 products with isNewArrival: true appear.
+      // New Arrivals is a special filter.
+      // It only shows jewellery products marked isNewArrival: true.
       if (activeSubCategory === "New Arrivals") {
-
         matchesSubCategory =
           product.category === "Jewellery" &&
           product.isNewArrival === true;
-
       } else if (activeSubCategory === "All") {
-
         matchesSubCategory = true;
-
       } else {
-
         matchesSubCategory =
-          normalizedSubCategory ===
-          normalizedActiveSubCategory;
-
+          normalizedSubCategory === normalizedActiveSubCategory;
       }
 
-
-      // -------------------------------------------------
       // SALE
-      // -------------------------------------------------
-
       const matchesSale =
-        !isSaleOnly ||
-        product.onSale === true;
-
+        !isSaleOnly || product.onSale === true;
 
       return (
         matchesCategory &&
         matchesSubCategory &&
         matchesSale
       );
-
     });
+  }, [activeCategory, activeSubCategory, isSaleOnly]);
 
-  }, [
-    activeCategory,
-    activeSubCategory,
-    isSaleOnly,
-  ]);
-/* =====================================================
+  /* =====================================================
      MAIN CATEGORY CHANGE
   ===================================================== */
 
@@ -199,9 +177,7 @@ const Shop = () => {
     if (category === "All") {
       setSearchParams({});
     } else {
-      setSearchParams({
-        category,
-      });
+      setSearchParams({ category });
     }
   };
 
@@ -278,6 +254,8 @@ const Shop = () => {
   ===================================================== */
 
   const filterDescription = useMemo(() => {
+    const displayCategory = getCategoryLabel(activeCategory);
+
     if (
       isSaleOnly &&
       activeCategory !== "All" &&
@@ -286,11 +264,8 @@ const Shop = () => {
       return `Showing sale items in ${activeSubCategory.toLowerCase()}`;
     }
 
-    if (
-      isSaleOnly &&
-      activeCategory !== "All"
-    ) {
-      return `Showing sale items in ${activeCategory.toLowerCase()}`;
+    if (isSaleOnly && activeCategory !== "All") {
+      return `Showing sale items in ${displayCategory.toLowerCase()}`;
     }
 
     if (isSaleOnly) {
@@ -302,15 +277,11 @@ const Shop = () => {
     }
 
     if (activeSubCategory === "All") {
-      return `Showing all ${activeCategory.toLowerCase()}`;
+      return `Showing all ${displayCategory.toLowerCase()}`;
     }
 
     return `Showing ${activeSubCategory.toLowerCase()}`;
-  }, [
-    activeCategory,
-    activeSubCategory,
-    isSaleOnly,
-  ]);
+  }, [activeCategory, activeSubCategory, isSaleOnly]);
 
   /* =====================================================
      PAGE
@@ -327,10 +298,7 @@ const Shop = () => {
         lg:px-16 lg:pb-32 lg:pt-20
       "
     >
-
-      {/* =================================================
-          WHIMSICAL BACKGROUND GLOW
-      ================================================= */}
+      {/* WHIMSICAL BACKGROUND GLOW */}
 
       <div
         className="
@@ -365,9 +333,7 @@ const Shop = () => {
         "
       />
 
-      {/* =================================================
-          DECORATIVE FLOATING DETAILS
-      ================================================= */}
+      {/* DECORATIVE FLOATING DETAILS */}
 
       <div className="pointer-events-none absolute left-[7%] top-32 hidden text-[#B9937D]/30 lg:block">
         <FiStar className="text-2xl" />
@@ -382,15 +348,10 @@ const Shop = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
-        {/* =================================================
-            PAGE HEADER
-        ================================================= */}
+        {/* PAGE HEADER */}
 
         <header className="mx-auto max-w-3xl text-center">
-
           <div className="flex items-center justify-center gap-3">
-
             <span className="h-px w-10 bg-[#B9937D]/45" />
 
             <FiStar className="text-xs text-[#B9937D]/70" />
@@ -411,7 +372,6 @@ const Shop = () => {
             <FiStar className="text-xs text-[#B9937D]/70" />
 
             <span className="h-px w-10 bg-[#B9937D]/45" />
-
           </div>
 
           <h1
@@ -443,7 +403,7 @@ const Shop = () => {
             "
           >
             A curated world of delicate jewellery,
-            beautiful fabrics and statement pieces â€”
+            beautiful fabrics and statement pieces —
             selected for the woman who loves to
             stand out effortlessly.
           </p>
@@ -451,20 +411,13 @@ const Shop = () => {
           {/* ORNAMENT */}
 
           <div className="mx-auto mt-8 flex items-center justify-center gap-3">
-
             <span className="h-px w-14 bg-[#B9937D]/35" />
-
             <FiStar className="text-lg text-[#B9937D]/60" />
-
             <span className="h-px w-14 bg-[#B9937D]/35" />
-
           </div>
-
         </header>
 
-        {/* =================================================
-            FILTER PANEL
-        ================================================= */}
+        {/* FILTER PANEL */}
 
         <div
           className="
@@ -479,7 +432,6 @@ const Shop = () => {
             sm:p-4
           "
         >
-
           <div
             className="
               flex items-center
@@ -490,9 +442,7 @@ const Shop = () => {
               sm:justify-center
             "
           >
-
             {categories.map((category) => {
-
               const isActive =
                 activeCategory === category &&
                 !isSaleOnly;
@@ -501,9 +451,7 @@ const Shop = () => {
                 <button
                   key={category}
                   type="button"
-                  onClick={() =>
-                    handleCategoryChange(category)
-                  }
+                  onClick={() => handleCategoryChange(category)}
                   className={`
                     whitespace-nowrap
                     rounded-full
@@ -533,7 +481,7 @@ const Shop = () => {
                     }
                   `}
                 >
-                  {category}
+                  {getCategoryLabel(category)}
                 </button>
               );
             })}
@@ -574,14 +522,10 @@ const Shop = () => {
             >
               On Sale
             </button>
-
           </div>
-
         </div>
 
-        {/* =================================================
-            SALE STATUS
-        ================================================= */}
+        {/* SALE STATUS */}
 
         {isSaleOnly && (
           <div
@@ -597,9 +541,7 @@ const Shop = () => {
               sm:px-5
             "
           >
-
             <div className="flex items-center gap-3">
-
               <span
                 className="
                   flex h-9 w-9
@@ -616,7 +558,6 @@ const Shop = () => {
               </span>
 
               <div>
-
                 <p className="text-xs font-semibold text-[#493633]">
                   Sale Collection
                 </p>
@@ -624,9 +565,7 @@ const Shop = () => {
                 <p className="mt-0.5 text-[11px] text-[#9B817B]">
                   A little something beautiful, for less.
                 </p>
-
               </div>
-
             </div>
 
             <button
@@ -642,19 +581,14 @@ const Shop = () => {
             >
               Clear
             </button>
-
           </div>
         )}
 
-        {/* =================================================
-            SUBCATEGORY FILTERS
-        ================================================= */}
+        {/* SUBCATEGORY FILTERS */}
 
         {activeCategory !== "All" &&
           subCategories.length > 0 && (
-
             <div className="mt-5">
-
               <div
                 className="
                   flex items-center
@@ -665,12 +599,9 @@ const Shop = () => {
                   sm:justify-center
                 "
               >
-
                 <button
                   type="button"
-                  onClick={() =>
-                    handleSubCategoryChange("All")
-                  }
+                  onClick={() => handleSubCategoryChange("All")}
                   className={`
                     whitespace-nowrap
                     rounded-full
@@ -698,66 +629,56 @@ const Shop = () => {
                     }
                   `}
                 >
-                  All {activeCategory}
+                  All {getCategoryLabel(activeCategory)}
                 </button>
 
-                {subCategories.map(
-                  (subCategory) => {
+                {subCategories.map((subCategory) => {
+                  const isActive =
+                    activeSubCategory === subCategory;
 
-                    const isActive =
-                      activeSubCategory ===
-                      subCategory;
+                  return (
+                    <button
+                      key={subCategory}
+                      type="button"
+                      onClick={() =>
+                        handleSubCategoryChange(subCategory)
+                      }
+                      className={`
+                        whitespace-nowrap
+                        rounded-full
+                        px-5 py-2.5
+                        text-[11px]
+                        font-medium
+                        transition-all
+                        duration-300
 
-                    return (
-                      <button
-                        key={subCategory}
-                        type="button"
-                        onClick={() =>
-                          handleSubCategoryChange(
-                            subCategory
-                          )
+                        ${
+                          isActive
+                            ? `
+                              bg-[#6B514B]
+                              text-white
+                              shadow-[0_5px_15px_rgba(73,54,51,0.12)]
+                            `
+                            : `
+                              border
+                              border-[#D6B8B5]/30
+                              bg-[#FFFDFC]
+                              text-[#8A7772]
+                              hover:bg-[#F7E9E5]
+                              hover:text-[#513D39]
+                            `
                         }
-                        className={`
-                          whitespace-nowrap
-                          rounded-full
-                          px-5 py-2.5
-                          text-[11px]
-                          font-medium
-                          transition-all
-                          duration-300
-
-                          ${
-                            isActive
-                              ? `
-                                bg-[#6B514B]
-                                text-white
-                                shadow-[0_5px_15px_rgba(73,54,51,0.12)]
-                              `
-                              : `
-                                border
-                                border-[#D6B8B5]/30
-                                bg-[#FFFDFC]
-                                text-[#8A7772]
-                                hover:bg-[#F7E9E5]
-                                hover:text-[#513D39]
-                              `
-                          }
-                        `}
-                      >
-                        {subCategory}
-                      </button>
-                    );
-                  }
-                )}
-
+                      `}
+                    >
+                      {subCategory}
+                    </button>
+                  );
+                })}
               </div>
-
             </div>
           )}
 
-        {/* =================================================
-            PRODUCTS META
-        ================================================= */}
+        {/* PRODUCTS META */}
 
         <div
           className="
@@ -768,29 +689,20 @@ const Shop = () => {
             pb-5
           "
         >
-
           <div>
-
             <p className="font-serif text-xl text-[#493633] sm:text-2xl">
-
               {filteredProducts.length}{" "}
-
               <span className="italic text-[#A8797D]">
-                {filteredProducts.length === 1
-                  ? "Piece"
-                  : "Pieces"}
+                {filteredProducts.length === 1 ? "Piece" : "Pieces"}
               </span>
-
             </p>
 
             <p className="mt-1 text-xs text-[#9A8580]">
               {filterDescription}
             </p>
-
           </div>
 
           <div className="hidden items-center gap-2 sm:flex">
-
             <span className="h-px w-8 bg-[#B9937D]/30" />
 
             <p
@@ -805,17 +717,12 @@ const Shop = () => {
             </p>
 
             <FiHeart className="text-xs text-[#B9937D]/55" />
-
           </div>
-
         </div>
 
-        {/* =================================================
-            PRODUCTS AREA
-        ================================================= */}
+        {/* PRODUCTS AREA */}
 
         {filteredProducts.length > 0 ? (
-
           <div
             className="
               relative
@@ -830,8 +737,7 @@ const Shop = () => {
               lg:p-7
             "
           >
-
-            {/* subtle inner glow */}
+            {/* SUBTLE INNER GLOW */}
 
             <div
               className="
@@ -852,33 +758,24 @@ const Shop = () => {
                 grid-cols-2
                 gap-x-4
                 gap-y-12
-
                 sm:grid-cols-3
                 sm:gap-x-6
                 sm:gap-y-14
-
                 lg:grid-cols-4
                 lg:gap-x-7
                 lg:gap-y-16
               "
             >
-
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                 />
               ))}
-
             </div>
-
           </div>
-
         ) : (
-
-          /* =================================================
-             EMPTY STATE
-          ================================================= */
+          /* EMPTY STATE */
 
           <div
             className="
@@ -896,15 +793,12 @@ const Shop = () => {
               shadow-[0_15px_45px_rgba(82,58,52,0.06)]
             "
           >
-
             <div className="mx-auto flex items-center justify-center gap-3">
-
               <span className="h-px w-8 bg-[#B9937D]/45" />
 
               <FiSparkles className="text-sm text-[#B9937D]/65" />
 
               <span className="h-px w-8 bg-[#B9937D]/45" />
-
             </div>
 
             <p
@@ -972,18 +866,13 @@ const Shop = () => {
               View All Pieces
               <FiArrowUpRight />
             </button>
-
           </div>
-
         )}
 
-        {/* =================================================
-            BOTTOM BRAND NOTE
-        ================================================= */}
+        {/* BOTTOM BRAND NOTE */}
 
         {filteredProducts.length > 0 && (
           <div className="mt-14 flex items-center justify-center gap-3 text-center">
-
             <span className="h-px w-10 bg-[#B9937D]/25" />
 
             <p className="font-serif text-sm italic text-[#9B817B]">
@@ -991,12 +880,9 @@ const Shop = () => {
             </p>
 
             <span className="h-px w-10 bg-[#B9937D]/25" />
-
           </div>
         )}
-
       </div>
-
     </main>
   );
 };

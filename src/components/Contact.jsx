@@ -43,9 +43,9 @@ const Contact = () => {
     );
 
     window.open(
-      `https://wa.me/923353149929?text=${message}`,
-      "_blank",
-      "noopener,noreferrer"
+       "https://wa.me/971529218985",
+    "_blank",
+    "noopener,noreferrer"
     );
   };
 

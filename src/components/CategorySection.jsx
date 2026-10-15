@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 
 const categories = [
@@ -25,10 +26,10 @@ const categories = [
   },
   {
     number: "03",
-    title: "Accessories",
+    title: "Kundan Clutches",
     description:
       "Discover elegant Kundan clutches and statement accessories designed for weddings and special occasions.",
-    button: "Shop Accessories",
+    button: "Shop Kundan Clutches",
     link: "/shop?category=Accessories",
     image: "/products/kundan-clutch-1.jpg",
     background:
@@ -38,6 +39,11 @@ const categories = [
 
 const CategorySection = () => {
   const navigate = useNavigate();
+
+  // Keep Garments in the data, but hide it from customers.
+  const visibleCategories = categories.filter(
+    (category) => category.number !== "02"
+  );
 
   return (
     <section
@@ -49,10 +55,7 @@ const CategorySection = () => {
         lg:px-16 lg:py-28
       "
     >
-      {/* =====================================================
-          SOFT BACKGROUND DETAILS
-      ===================================================== */}
-
+      {/* SOFT BACKGROUND DETAILS */}
       <div
         className="
           pointer-events-none
@@ -75,10 +78,7 @@ const CategorySection = () => {
         "
       />
 
-      {/* =====================================================
-          SECTION HEADING
-      ===================================================== */}
-
+      {/* SECTION HEADING */}
       <div
         className="
           relative z-10
@@ -131,12 +131,11 @@ const CategorySection = () => {
             sm:text-base
           "
         >
-          Discover elegant artificial jewellery, beautiful cloth materials
-          and statement Kundan clutches selected for every occasion.
+          Discover elegant artificial jewellery and statement Kundan clutches
+          selected for every occasion.
         </p>
 
         {/* CHAMPAGNE GOLD ACCENT */}
-
         <div className="mx-auto mt-7 flex items-center justify-center gap-2">
           <span className="h-1 w-1 rounded-full bg-[#C9A66B]/70" />
           <span className="h-px w-12 bg-[#C9A66B]/40" />
@@ -144,23 +143,22 @@ const CategorySection = () => {
         </div>
       </div>
 
-      {/* =====================================================
-          CATEGORY CARDS
-      ===================================================== */}
-
+      {/* CENTERED CATEGORY CARDS */}
       <div
         className="
           relative z-10
           mx-auto
           grid
-          max-w-7xl
-          gap-5
+          w-full
+          max-w-[1000px]
+          grid-cols-1
+          gap-6
           sm:grid-cols-2
-          lg:grid-cols-3
-          lg:gap-7
+          sm:gap-7
+          lg:gap-9
         "
       >
-        {categories.map((category) => (
+        {visibleCategories.map((category) => (
           <article
             key={category.title}
             className="
@@ -178,10 +176,7 @@ const CategorySection = () => {
               sm:min-h-[560px]
             "
           >
-            {/* =================================================
-                BACKGROUND
-            ================================================= */}
-
+            {/* BACKGROUND */}
             <div
               className={`
                 absolute inset-0
@@ -190,10 +185,7 @@ const CategorySection = () => {
               `}
             />
 
-            {/* =================================================
-                SOFT LIGHT OVERLAY
-            ================================================= */}
-
+            {/* SOFT LIGHT OVERLAY */}
             <div
               className="
                 absolute inset-0
@@ -204,10 +196,7 @@ const CategorySection = () => {
               "
             />
 
-            {/* =================================================
-                LUXURY GLOW
-            ================================================= */}
-
+            {/* LUXURY GLOW */}
             <div
               className="
                 absolute
@@ -225,10 +214,7 @@ const CategorySection = () => {
               "
             />
 
-            {/* =================================================
-                GOLD DECORATIVE CIRCLE
-            ================================================= */}
-
+            {/* GOLD DECORATIVE CIRCLE */}
             <div
               className="
                 absolute
@@ -262,10 +248,7 @@ const CategorySection = () => {
               "
             />
 
-            {/* =================================================
-                CARD CONTENT
-            ================================================= */}
-
+            {/* CARD CONTENT */}
             <div
               className="
                 relative z-10
@@ -276,10 +259,7 @@ const CategorySection = () => {
                 sm:p-9
               "
             >
-              {/* =================================================
-                  PRODUCT IMAGE AREA
-              ================================================= */}
-
+              {/* PRODUCT IMAGE AREA */}
               <div
                 className="
                   flex
@@ -299,18 +279,14 @@ const CategorySection = () => {
                     h-full
                     items-center
                     justify-center
-
                     ${
                       category.title === "Jewellery"
-                        ? "w-[90%]"
-                        : category.title === "Garments"
                         ? "w-[90%]"
                         : "w-[78%]"
                     }
                   `}
                 >
                   {/* SOFT IMAGE GLOW */}
-
                   <div
                     className="
                       pointer-events-none
@@ -328,7 +304,6 @@ const CategorySection = () => {
                   />
 
                   {/* ACTUAL PRODUCT IMAGE */}
-
                   <img
                     src={category.image}
                     alt={category.title}
@@ -344,9 +319,8 @@ const CategorySection = () => {
                       ease-out
                       group-hover:scale-[1.04]
                       sm:max-h-[180px]
-
                       ${
-                        category.title === "Accessories"
+                        category.title === "Kundan Clutches"
                           ? "-translate-x-2 sm:-translate-x-3"
                           : ""
                       }
@@ -356,10 +330,7 @@ const CategorySection = () => {
                 </div>
               </div>
 
-              {/* =================================================
-                  CONTENT BLOCK
-              ================================================= */}
-
+              {/* CONTENT BLOCK */}
               <div
                 className="
                   mt-auto
@@ -370,7 +341,6 @@ const CategorySection = () => {
                 "
               >
                 {/* NUMBER */}
-
                 <p
                   className="
                     mb-3
@@ -385,7 +355,6 @@ const CategorySection = () => {
                 </p>
 
                 {/* TITLE */}
-
                 <h3
                   className="
                     font-serif
@@ -399,7 +368,6 @@ const CategorySection = () => {
                 </h3>
 
                 {/* GOLD ACCENT */}
-
                 <div
                   className="
                     mt-4
@@ -413,7 +381,6 @@ const CategorySection = () => {
                 />
 
                 {/* DESCRIPTION */}
-
                 <p
                   className="
                     mt-4
@@ -427,7 +394,6 @@ const CategorySection = () => {
                 </p>
 
                 {/* BUTTON */}
-
                 <button
                   type="button"
                   onClick={() => navigate(category.link)}

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -7,10 +8,13 @@ import {
   FiShoppingBag,
   FiTruck,
   FiShield,
+  FiMessageCircle,
 } from "react-icons/fi";
 
 import products from "../data/Products";
 import { useCart } from "../context/CartContext";
+
+const WHATSAPP_NUMBER = "971529218985";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -36,9 +40,7 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <main className="min-h-screen bg-[#FAF8F5] px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
-
         <div className="mx-auto max-w-xl text-center">
-
           <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
             F&A Fashion and Jewellery Collection
           </p>
@@ -60,9 +62,7 @@ const ProductDetails = () => {
           >
             Back to Shop
           </button>
-
         </div>
-
       </main>
     );
   }
@@ -92,14 +92,41 @@ const ProductDetails = () => {
     navigate("/cart");
   };
 
+  /* =====================================================
+     PRODUCT WHATSAPP INQUIRY
+  ===================================================== */
+
+  const handleProductInquiry = () => {
+    const productUrl = window.location.href;
+
+    const message = [
+      "Hi F&A Collective!",
+      "",
+      "I would like to enquire about this product.",
+      `Product: ${product.name}`,
+      `Category: ${product.category}`,
+      `Price: ${formatPrice(currentPrice)}`,
+      `Quantity: ${quantity}`,
+      `Product link: ${productUrl}`,
+      "",
+      "Please share more information about this product.",
+      "Thank you!",
+    ].join("\n");
+
+    const whatsappUrl =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-5 pb-16 pt-8 sm:px-8 sm:pb-20 lg:px-16 lg:pb-24 lg:pt-14">
-
       <div className="mx-auto max-w-7xl">
-
-        {/* =================================================
-            BACK BUTTON
-        ================================================= */}
+        {/* BACK BUTTON */}
 
         <button
           type="button"
@@ -110,49 +137,33 @@ const ProductDetails = () => {
           Back
         </button>
 
-        {/* =================================================
-            PRODUCT LAYOUT
-        ================================================= */}
+        {/* PRODUCT LAYOUT */}
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] lg:items-start lg:gap-16">
-
-          {/* =================================================
-              PRODUCT IMAGE
-          ================================================= */}
+          {/* PRODUCT IMAGE */}
 
           <div className="lg:sticky lg:top-28">
-
             <div className="group relative overflow-hidden rounded-[1.75rem] bg-[#EEE9E3] sm:rounded-[2rem]">
-
               <img
                 src={product.image}
                 alt={product.name}
-                className="aspect-[4/5] h-full w-full object-contain bg-[#EEE9E3] p-2 sm:p-4"
+                className="aspect-[4/5] h-full w-full bg-[#EEE9E3] object-contain p-2 sm:p-4"
               />
 
               <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
-
             </div>
 
             <p className="mt-4 text-center text-[9px] font-medium uppercase tracking-[0.3em] text-black/25 sm:text-[10px]">
               F&A Fashion and Jewellery Collection
             </p>
-
           </div>
 
-          {/* =================================================
-              PRODUCT INFORMATION
-          ================================================= */}
+          {/* PRODUCT INFORMATION */}
 
           <div className="lg:pt-3">
-
-            {/* Category */}
-
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
               {product.category}
             </p>
-
-            {/* Subcategory */}
 
             {product.subCategory && (
               <p className="mt-2 text-xs text-black/35">
@@ -160,36 +171,27 @@ const ProductDetails = () => {
               </p>
             )}
 
-            {/* Product Name */}
-
             <h1 className="mt-4 max-w-2xl font-serif text-4xl leading-[1.05] tracking-tight text-[#171717] sm:text-5xl lg:text-6xl">
               {product.name}
             </h1>
 
-            {/* =================================================
-                PRICE
-            ================================================= */}
+            {/* PRICE */}
 
             <div className="mt-6">
-  <p className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
-    {formatPrice(currentPrice)}
-  </p>
+              <p className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
+                {formatPrice(currentPrice)}
+              </p>
 
-  <p className="mt-1.5 text-[11px] text-black/45">
-    All prices include VAT.
-  </p>
-</div>
-
-            {/* Divider */}
+              <p className="mt-1.5 text-[11px] text-black/45">
+                All prices include VAT.
+              </p>
+            </div>
 
             <div className="my-8 border-t border-black/[0.08]" />
 
-            {/* =================================================
-                DESCRIPTION
-            ================================================= */}
+            {/* DESCRIPTION */}
 
             <section>
-
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/40 sm:text-xs">
                 Description
               </p>
@@ -197,103 +199,72 @@ const ProductDetails = () => {
               <p className="mt-4 max-w-xl text-sm leading-7 text-black/55 sm:text-[15px]">
                 {product.description}
               </p>
-
             </section>
 
-            {/* =================================================
-                PRODUCT DETAILS
-            ================================================= */}
+            {/* PRODUCT DETAILS */}
 
             {product.details && (
               <section className="mt-7 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
-
                 <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/40 sm:text-xs">
                   Product Details
                 </p>
 
                 <div className="mt-5">
-
-                  {/* Material */}
-
                   {product.details.material && (
                     <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3 first:pt-0">
-
                       <span className="shrink-0 text-sm text-black/45">
                         Material
                       </span>
-
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.material}
                       </span>
-
                     </div>
                   )}
-
-                  {/* Fabric Length */}
 
                   {product.details.fabricLength && (
                     <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3">
-
                       <span className="shrink-0 text-sm text-black/45">
                         Fabric Length
                       </span>
-
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.fabricLength}
                       </span>
-
                     </div>
                   )}
-
-                  {/* Type */}
 
                   {product.details.type && (
                     <div className="flex items-start justify-between gap-6 border-b border-black/[0.06] py-3">
-
                       <span className="shrink-0 text-sm text-black/45">
                         Type
                       </span>
-
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.type}
                       </span>
-
                     </div>
                   )}
-
-                  {/* Occasion */}
 
                   {product.details.occasion && (
                     <div className="flex items-start justify-between gap-6 py-3 last:pb-0">
-
                       <span className="shrink-0 text-sm text-black/45">
                         Occasion
                       </span>
-
                       <span className="text-right text-sm font-medium text-black">
                         {product.details.occasion}
                       </span>
-
                     </div>
                   )}
-
                 </div>
-
               </section>
             )}
 
-            {/* =================================================
-                QUANTITY
-            ================================================= */}
+            {/* QUANTITY */}
 
             <div className="mt-8">
-
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45 sm:text-xs">
                 Quantity
               </p>
 
               <div className="flex w-fit items-center rounded-full border border-black/10 bg-white p-1 shadow-sm">
-
                 <button
                   type="button"
                   onClick={() =>
@@ -321,19 +292,12 @@ const ProductDetails = () => {
                 >
                   <FiPlus className="text-sm" />
                 </button>
-
               </div>
-
             </div>
 
-            {/* =================================================
-                ACTION BUTTONS
-            ================================================= */}
+            {/* ACTION BUTTONS */}
 
             <div className="mt-6 space-y-3">
-
-              {/* Add To Cart */}
-
               <button
                 type="button"
                 onClick={handleAddToCart}
@@ -343,8 +307,6 @@ const ProductDetails = () => {
                 Add to Cart
               </button>
 
-              {/* Buy Now */}
-
               <button
                 type="button"
                 onClick={handleBuyNow}
@@ -353,18 +315,22 @@ const ProductDetails = () => {
                 Buy Now
               </button>
 
+              {/* NEW: WHATSAPP PRODUCT INQUIRY */}
+
+              <button
+                type="button"
+                onClick={handleProductInquiry}
+                className="flex h-14 w-full items-center justify-center gap-3 rounded-full border border-[#D9C6CC] bg-white text-sm font-semibold text-[#80658B] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FBF5F7] hover:shadow-lg active:scale-[0.98]"
+              >
+                <FiMessageCircle className="text-base" />
+                Enquire About This Product
+              </button>
             </div>
 
-            {/* =================================================
-                TRUST / DELIVERY
-            ================================================= */}
+            {/* TRUST / DELIVERY */}
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-
-              {/* Worldwide Delivery */}
-
               <div className="rounded-2xl border border-black/[0.07] bg-white p-4">
-
                 <FiTruck className="text-lg text-black/55" />
 
                 <p className="mt-3 text-sm font-semibold">
@@ -374,13 +340,9 @@ const ProductDetails = () => {
                 <p className="mt-1 text-xs leading-5 text-black/45">
                   Delivery availability depends on your selected country.
                 </p>
-
               </div>
 
-              {/* Secure Ordering */}
-
               <div className="rounded-2xl border border-black/[0.07] bg-white p-4">
-
                 <FiShield className="text-lg text-black/55" />
 
                 <p className="mt-3 text-sm font-semibold">
@@ -390,81 +352,51 @@ const ProductDetails = () => {
                 <p className="mt-1 text-xs leading-5 text-black/45">
                   Your order information is handled securely.
                 </p>
-
               </div>
-
             </div>
 
-            {/* =================================================
-                BASIC PRODUCT INFORMATION
-            ================================================= */}
+            {/* BASIC PRODUCT INFORMATION */}
 
             <div className="mt-8 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
-
-              {/* Category */}
-
               <div className="flex items-start justify-between gap-6 border-b border-black/[0.07] pb-4">
-
                 <span className="text-sm text-black/45">
                   Category
                 </span>
-
                 <span className="text-right text-sm font-medium text-black">
                   {product.category}
                 </span>
-
               </div>
 
-              {/* Collection */}
-
               <div className="flex items-start justify-between gap-6 border-b border-black/[0.07] py-4">
-
                 <span className="text-sm text-black/45">
                   Collection
                 </span>
-
                 <span className="text-right text-sm font-medium text-black">
                   {product.subCategory || "F&A Collection"}
                 </span>
-
               </div>
 
-              {/* Availability */}
-
               <div className="flex items-center justify-between border-b border-black/[0.07] py-4">
-
                 <span className="text-sm text-black/45">
                   Availability
                 </span>
-
                 <span className="text-sm font-medium text-black">
                   In Stock
                 </span>
-
               </div>
 
-              {/* Currency */}
-
               <div className="flex items-center justify-between pt-4">
-
                 <span className="text-sm text-black/45">
                   Currency
                 </span>
-
                 <span className="text-sm font-medium text-black">
                   {currency}
                 </span>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </main>
   );
 };
