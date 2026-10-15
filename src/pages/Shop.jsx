@@ -120,6 +120,10 @@ const Shop = () => {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
+       // Hide Garments everywhere in the Shop section
+  if (product.category?.trim().toLowerCase() === "garments") {
+    return false;
+  }
       const normalizedCategory =
         product.category?.trim().toLowerCase();
 

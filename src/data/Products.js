@@ -1,6 +1,6 @@
 ﻿const products = [
   // =====================================================
-  // ACCESSORIES â€” KUNDAN CLUTCHES
+  // ACCESSORIES KUNDAN CLUTCHES
   // =====================================================
 
   {
@@ -92,28 +92,6 @@
   },
 
   {
-    id: 35,
-    name: "Luxury Statement Kundan Clutch",
-    priceAED: 150,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Accessories",
-    subCategory: "Kundan Clutches",
-
-    image: "/products/kundan-clutch-5.jpg",
-
-    description:
-      "A luxurious Kundan clutch with statement embellishment, elegant detailing and a refined finish. Designed to complement wedding, festive and sophisticated evening looks.",
-
-    details: {
-      material: "Kundan & Artificial Stones",
-      type: "Luxury Kundan Clutch",
-      occasion: "Weddings & Formal Events",
-    },
-  },
-
-    {
     id: 125,
     name: "Royal Kundan Pearl Clutch",
     priceAED: 150,
@@ -151,7 +129,7 @@
 
   
   // =====================================================
-  // JEWELLERY â€” SETS
+  // JEWELLERY  SETS
   // =====================================================
 
   {
@@ -201,7 +179,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” DESIGNER SETS
+  // JEWELLERY  DESIGNER SETS
   // =====================================================
 
   {
@@ -228,7 +206,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” NECKLACES
+  // JEWELLERY  NECKLACES
   // =====================================================
 
   {
@@ -255,7 +233,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” EVERYDAY JEWELLERY
+  // JEWELLERY  EVERYDAY JEWELLERY
   // =====================================================
 
   {
@@ -282,7 +260,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” FESTIVE SETS
+  // JEWELLERY FESTIVE SETS
   // =====================================================
 
   {
@@ -309,7 +287,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” TRADITIONAL SETS
+  // JEWELLERY TRADITIONAL SETS
   // =====================================================
 
   {
@@ -336,7 +314,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” STATEMENT JEWELLERY
+  // JEWELLERY  STATEMENT JEWELLERY
   // =====================================================
 
   {
@@ -363,7 +341,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” PARTY JEWELLERY
+  // JEWELLERY  PARTY JEWELLERY
   // =====================================================
 
   {
@@ -390,7 +368,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” NEW ARRIVALS
+  // JEWELLERY  NEW ARRIVALS
   // =====================================================
 
   {
@@ -440,7 +418,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” NEW TURKISH COLLECTION
+  // JEWELLERY  — NEW TURKISH COLLECTION
   // =====================================================
 
   {
@@ -513,7 +491,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” NEW COLLECTION
+  // JEWELLERY  — NEW COLLECTION
   // =====================================================
 
   {
@@ -609,7 +587,7 @@
   },
 
   // =====================================================
-  // JEWELLERY â€” LATEST COLLECTION
+  // JEWELLERY  LATEST COLLECTION
   // =====================================================
 
   {
@@ -989,8 +967,9 @@
     category: "Jewellery",
     subCategory: "Traditional Sets",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-53.jpg",
+
     description:
       "An elegant statement jewellery design featuring sapphire-inspired tones and intricate embellishment. Created for polished festive and evening styling.",
     details: {
@@ -1009,8 +988,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Turkish Style",
-    originFlag: "ðŸ‡¹ðŸ‡·",
+  
     image: "/products/jewellery-54.jpg",
+
     description:
       "A delicate golden jewellery design inspired by elegant petals and refined decorative detailing. Perfect for graceful occasion styling.",
     details: {
@@ -1029,8 +1009,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Pakistani Style",
-    originFlag: "ðŸ‡µðŸ‡°",
+
     image: "/products/jewellery-55.jpg",
+
     description:
       "A refined pearl-inspired jewellery design featuring graceful cascading detailing and an elegant statement finish.",
     details: {
@@ -1049,8 +1030,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-56.jpg",
+
     description:
       "A romantic pearl-inspired jewellery design with intricate embellishment and a graceful regal finish. Ideal for elegant festive and bridal looks.",
     details: {
@@ -1174,8 +1156,9 @@
     category: "Jewellery",
     subCategory: "Sets",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-62.jpg",
+
     description:
       "A graceful floral statement jewellery design with intricate detailing and a polished traditional finish.",
     details: {
@@ -1320,8 +1303,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-69.jpg",
+
     description:
       "A rich heritage-inspired jewellery design with intricate golden detailing and an elegant traditional appearance.",
     details: {
@@ -1361,8 +1345,9 @@
     category: "Jewellery",
     subCategory: "Everyday Jewellery",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-71.jpg",
+
     description:
       "A luxurious floral heritage design with intricate embellishment and an elegant statement finish, ideal for traditional occasion wear.",
     details: {
@@ -1423,8 +1408,9 @@
     category: "Jewellery",
     subCategory: "Earrings",
     origin: "Pakistani Style",
-    originFlag: "ðŸ‡µðŸ‡°",
+
     image: "/products/jewellery-74.jpg",
+
     description:
       "A luxurious emerald-inspired jewellery design with garden-style detailing and a sophisticated statement appearance.",
     details: {
@@ -1464,8 +1450,9 @@
     category: "Jewellery",
     subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "ðŸ‡µðŸ‡°",
+
     image: "/products/jewellery-76.jpg",
+
     description:
       "A delicate combination of pearl-inspired accents and floral detailing, created for graceful and feminine occasion styling.",
     details: {
@@ -1484,8 +1471,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-77.jpg",
+
     description:
       "A refined heritage jewellery design with elegant golden charm detailing and a luxurious traditional finish.",
     details: {
@@ -1525,8 +1513,9 @@
     category: "Jewellery",
     subCategory: "Necklaces",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+    
     image: "/products/jewellery-79.jpg",
+
     description:
       "An elegant luxe jewellery design with refined detailing and a sophisticated statement finish for special occasions.",
     details: {
@@ -1629,8 +1618,9 @@
     category: "Jewellery",
     subCategory: "Traditional Sets",
     origin: "Pakistani Style",
-    originFlag: "ðŸ‡µðŸ‡°",
+
     image: "/products/jewellery-84.jpg",
+
     description:
       "An elegant heritage-inspired design combining golden petal detailing with a refined traditional finish.",
     details: {
@@ -1712,8 +1702,9 @@
     category: "Jewellery",
     subCategory: "Party Jewellery",
     origin: "Indian Style",
-    originFlag: "ðŸ‡®ðŸ‡³",
+
     image: "/products/jewellery-89.jpg",
+
     description:
       "A luxurious golden and pearl-inspired jewellery design created for elegant bridal, festive and formal styling.",
     details: {
@@ -1774,8 +1765,9 @@
     category: "Jewellery",
     subCategory: "Statement Jewellery",
     origin: "Pakistani Style",
-    originFlag: "ðŸ‡µðŸ‡°",
+
     image: "/products/jewellery-92.jpg",
+
     isNewArrival: true,
     description:
       "An elegant pearl-inspired heritage design with delicate blossom detailing and a polished luxurious finish.",
@@ -1874,6 +1866,68 @@
     },
   },
 
+  {
+    id: 128,
+    name: "Meenakari Chandbali Jhumkas",
+    priceAED: 150,
+    salePriceAED: null,
+    onSale: false,
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+
+    image: "/products/jewellery-99.jpg",
+
+    description:
+      "Beautifully detailed Meenakari Chandbali Jhumkas featuring ruby-toned stones, delicate pearl accents and an intricate traditional design. Perfect for weddings, festive celebrations and special occasions.",
+    details: {
+      material: "Artificial Jewellery, Stones & Pearls",
+      type: "Chandbali Jhumka Earrings",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
+
+  {
+    id: 129,
+    name: "Statement Bangle",
+    priceAED: 100,
+    salePriceAED: null,
+    onSale: false,
+    category: "Jewellery",
+    subCategory: "Party Jewellery",
+    origin: "Indian Style",
+
+    image: "/products/jewellery-97.jpg",
+
+    description:
+      "A statement bangle featuring intricate golden filigree detailing, floral-inspired accents and sparkling stone embellishments. An elegant accessory for parties, weddings and special celebrations.",
+    details: {
+      material: "Artificial Jewellery & Stones",
+      type: "Statement Bangle",
+      occasion: "Parties & Special Occasions",
+    },
+  },
+
+  {
+    id: 130,
+    name: "Traditional Gold Kada",
+    priceAED: 100,
+    salePriceAED: null,
+    onSale: false,
+    category: "Jewellery",
+    subCategory: "Party Jewellery",
+    origin: "Indian Style",
+
+    image: "/products/jewellery-98.jpg",
+
+    description:
+      "A traditional gold-toned Kada adorned with intricate floral detailing and ruby-inspired stone accents. A timeless statement piece for festive gatherings, weddings and elegant occasion wear.",
+    details: {
+      material: "Artificial Jewellery & Stones",
+      type: "Traditional Kada",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
 
   // =====================================================
   // GARMENTS â€” LAWN

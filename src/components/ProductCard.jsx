@@ -8,6 +8,7 @@ import {
 } from "react-icons/fi";
 
 import { useCart } from "../context/CartContext";
+import "./ProductImages.css";
 
 /* =====================================================
    CURRENCY RATES
@@ -235,8 +236,7 @@ const ProductCard = ({ product }) => {
       <div
         onClick={handleProductClick}
         className="
-          relative
-          aspect-[4/5]
+          product-image-canvas
           cursor-pointer
           overflow-hidden
           rounded-[1.75rem]
@@ -286,29 +286,22 @@ const ProductCard = ({ product }) => {
             STANDARDIZED PRODUCT IMAGE
         ================================================= */}
 
-        <div className="
-          absolute
-          inset-0
-          z-10
-          flex
-          items-center
-          justify-center
-        ">
-          <img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            className="
-              h-full
-              w-full
-              object-contain
-              object-center
-              p-0
-              transition-transform
-              duration-500
-            "
-          />
-        </div>
+        <div className="relative h-full w-full">
+  <img
+    src={product.image}
+    alt={product.name}
+    loading="lazy"
+    className="
+      h-full
+      w-full
+      object-contain
+      object-center
+      transition-transform
+      duration-500
+      group-hover:scale-[1.02]
+    "
+  />
+</div>
 
         {/* =================================================
             SUBTLE LUXURY OVERLAY

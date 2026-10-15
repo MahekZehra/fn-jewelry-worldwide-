@@ -176,6 +176,7 @@ const CategorySection = () => {
               sm:min-h-[560px]
             "
           >
+            
             {/* BACKGROUND */}
             <div
               className={`
