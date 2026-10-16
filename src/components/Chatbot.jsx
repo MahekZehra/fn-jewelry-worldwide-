@@ -132,7 +132,7 @@ const Chatbot = () => {
         "Earrings",
         "Traditional Sets",
         "Statement Jewellery",
-        "Party Jewellery",
+        "Statement Bangels",
         "New Arrivals",
         "Lawn & Silk garments",
         "Kundan Clutches",

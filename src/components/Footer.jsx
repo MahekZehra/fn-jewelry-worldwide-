@@ -258,7 +258,7 @@ const Footer = () => {
             </p>
 
             <p>
-              Designed and Developed by MZ Creatives.
+              Designed and Developed by MZ Creative Studio.
             </p>
 
           </div>

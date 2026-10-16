@@ -155,29 +155,7 @@
     },
   },
 
-  {
-    id: 14,
-    name: "Classic Jewellery Collection",
-    priceAED: 225,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Sets",
-    origin: "Pakistani Style",
-
-    image: "/products/jewellery-2.jpg",
-
-    description:
-      "A classic imitation jewellery set with refined designer-inspired detailing and an elegant finish. Easy to style with traditional and modern outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Designer Jewellery Set",
-      occasion: "Everyday & Occasion Wear",
-    },
-  },
-
+  
   // =====================================================
   // JEWELLERY  DESIGNER SETS
   // =====================================================
@@ -839,7 +817,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Indian Style",
 
     image: "/products/jewellery-47.jpg",
@@ -860,7 +838,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Pakistani Style",
     
     image: "/products/jewellery-48.jpg",
@@ -944,7 +922,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-52.jpg",
@@ -1259,7 +1237,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Turkish Style",
 
     image: "/products/jewellery-67.jpg",
@@ -1463,27 +1441,6 @@
   },
 
   {
-    id: 105,
-    name: "Golden Charm Heritage",
-    priceAED: 200,
-    salePriceAED: null,
-    onSale: false,
-    category: "Jewellery",
-    subCategory: "Statement Jewellery",
-    origin: "Indian Style",
-
-    image: "/products/jewellery-77.jpg",
-
-    description:
-      "A refined heritage jewellery design with elegant golden charm detailing and a luxurious traditional finish.",
-    details: {
-      material: "Artificial Jewellery",
-      type: "Heritage Jewellery",
-      occasion: "Weddings & Formal Events",
-    },
-  },
-
-  {
     id: 106,
     name: "Regal Stone Collection",
     priceAED: 150,
@@ -1574,7 +1531,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-82.jpg",
@@ -1595,7 +1552,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Indian Style",
 
     image: "/products/jewellery-83.jpg",
@@ -1637,7 +1594,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-86.jpg",
@@ -1679,7 +1636,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-88.jpg",
@@ -1700,7 +1657,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Indian Style",
 
     image: "/products/jewellery-89.jpg",
@@ -1894,7 +1851,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Indian Style",
 
     image: "/products/jewellery-97.jpg",
@@ -1915,7 +1872,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Party Jewellery",
+    subCategory: "Statement Bangels",
     origin: "Indian Style",
 
     image: "/products/jewellery-98.jpg",

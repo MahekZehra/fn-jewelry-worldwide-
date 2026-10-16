@@ -94,7 +94,7 @@ const Shop = () => {
         "Earrings",
         "Traditional Sets",
         "Statement Jewellery",
-        "Party Jewellery",
+        "Statement Bangels",
         "New Arrivals",
       ];
     }

@@ -501,7 +501,6 @@ const OurStory = () => {
                     text-[#A87585]
                   "
                 >
-                  With love, Fakhar & Amna
                 </p>
 
               </div>
