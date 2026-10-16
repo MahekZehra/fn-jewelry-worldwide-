@@ -916,27 +916,6 @@
   },
 
   {
-    id: 80,
-    name: "Timeless Heritage Set",
-    priceAED: 120,
-    salePriceAED: null,
-    onSale: false,
-    category: "Jewellery",
-    subCategory: "Statement Bangels",
-    origin: "Pakistani Style",
-
-    image: "/products/jewellery-52.jpg",
-
-    description:
-      "A sophisticated heritage-inspired jewellery set featuring ornate detailing and a timeless traditional aesthetic. Perfect for weddings and formal celebrations.",
-    details: {
-      material: "Artificial Jewellery & Stones",
-      type: "Traditional Jewellery Set",
-      occasion: "Weddings & Formal Events",
-    },
-  },
-
-  {
     id: 81,
     name: "Sapphire Grace Collection",
     priceAED: 225,
