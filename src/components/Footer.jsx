@@ -248,7 +248,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3 text-xs text-[#2B2525]/40 sm:flex-row sm:items-center sm:justify-between">
 
             <p>
-              © 2026 F&A Fashion and Jewellery Collection. All rights reserved.
+              © 2026 F AND A COLLECTIVE FZE LLC. All rights reserved.
             </p>
 
             <p className="flex items-center gap-1.5">

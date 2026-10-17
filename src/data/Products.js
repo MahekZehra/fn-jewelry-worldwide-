@@ -184,33 +184,6 @@
   },
 
   // =====================================================
-  // JEWELLERY  NECKLACES
-  // =====================================================
-
-  {
-    id: 26,
-    name: "Signature Gold Jewellery",
-    priceAED: 300,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Designer Sets",
-    origin: "Turkish Style",
-
-    image: "/products/jewellery-14.jpg",
-
-    description:
-      "A signature imitation jewellery set with a refined golden-finish look and contemporary detailing. Easy to pair with everyday and occasion outfits.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Designer Set",
-      occasion: "Everyday & Occasion Wear",
-    },
-  },
-
-  // =====================================================
   // JEWELLERY  EVERYDAY JEWELLERY
   // =====================================================
 
@@ -321,30 +294,7 @@
   // =====================================================
   // JEWELLERY  NEW ARRIVALS
   // =====================================================
-
-  {
-    id: 30,
-    name: "Elegant New Arrival",
-    priceAED: 225,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Sets",
-    origin: "Pakistani Style",
-
-    image: "/products/jewellery-16.jpg",
-
-    description:
-      "A graceful artificial jewellery design with elegant detailing and a refined finish. Perfect for adding a sophisticated touch to everyday and special occasion looks.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "New Arrival",
-      occasion: "Everyday & Special Occasions",
-    },
-  },
-
+  
   {
     id: 33,
     name: "Luxury Charm Jewellery",
