@@ -89,6 +89,19 @@ const Navbar = () => {
               Jewellery
             </Link>
 
+            
+            {/* GARMENTS — COMING SOON */}
+            <Link
+              to="/shop?category=Garments"
+              className={`text-sm font-medium transition-colors duration-300 ${
+                isCategoryActive("Garments")
+                  ? "text-[#A86F77]"
+                  : "text-[#6F5B5F] hover:text-[#A86F77]"
+              }`}
+            >
+              Garments
+            </Link>
+
             {/* ACCESSORIES DISPLAYED AS KUNDAN CLUTCHES */}
             <Link
               to="/shop?category=Accessories"
@@ -204,6 +217,20 @@ const Navbar = () => {
                 }`}
               >
                 Jewellery
+              </Link>
+
+              
+              {/* GARMENTS — COMING SOON */}
+              <Link
+                to="/shop?category=Garments"
+                onClick={closeMenu}
+                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
+                  isCategoryActive("Garments")
+                    ? "text-[#A86F77]"
+                    : "text-[#6F5B5F] hover:text-[#A86F77]"
+                }`}
+              >
+                Garments
               </Link>
 
               {/* ACCESSORIES DISPLAYED AS KUNDAN CLUTCHES */}

@@ -90,10 +90,11 @@ const Shop = () => {
         "Sets",
         "Designer Sets",
         "Necklaces",
-        "Everyday Jewellery",
+        "Rings",
         "Earrings",
         "Traditional Sets",
         "Statement Jewellery",
+        "Allah's Pandents",
         "Statement Bangels",
         "New Arrivals",
       ];
@@ -290,6 +291,66 @@ const Shop = () => {
   /* =====================================================
      PAGE
   ===================================================== */
+
+
+  // GARMENTS COMING SOON PAGE
+  if (categoryFromUrl === "Garments") {
+    return (
+      <main className="relative flex min-h-[75vh] items-center justify-center overflow-hidden bg-[#F8F2EC] px-5 py-16 sm:px-8">
+        {/* Soft background decorations */}
+        <div className="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-[#E8C9CF]/35 blur-[90px]" />
+
+        <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#E7D4B7]/35 blur-[100px]" />
+
+        {/* Coming Soon Card */}
+        <section className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-[#D6B8B5]/35 bg-[#FFF9F6]/85 px-6 py-14 text-center shadow-[0_20px_60px_rgba(89,62,55,0.08)] sm:px-12 sm:py-20">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#D6B8B5]/50 bg-[#F7E8EA] text-[#A8797D]">
+            <FiSparkles className="text-3xl" />
+          </div>
+
+          <p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.4em] text-[#A8797D] sm:text-xs">
+            Something Beautiful Is Coming
+          </p>
+
+          <h1 className="mt-5 font-serif text-4xl leading-tight tracking-tight text-[#493633] sm:text-6xl">
+            Garments Collection
+            <span className="mt-2 block italic text-[#A8797D]">
+              Coming Soon
+            </span>
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-md text-sm leading-7 text-[#806D68] sm:text-base">
+            A little something lovely is in the making.
+            Our garments collection is being thoughtfully
+            prepared just for you. Stay tuned for beautiful
+            styles, timeless elegance and something special.
+          </p>
+
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3">
+            <span className="h-px w-10 bg-[#B9937D]/40" />
+            <FiHeart className="text-sm text-[#B98288]" />
+            <span className="h-px w-10 bg-[#B9937D]/40" />
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              window.location.href = "/shop";
+            }}
+            className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#493633] px-7 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#604A44]"
+          >
+            Explore Jewellery
+            <FiArrowUpRight />
+          </button>
+
+          <p className="mt-6 text-[10px] uppercase tracking-[0.25em] text-[#A8797D]/75">
+            Made with love by F&A Collective
+          </p>
+        </section>
+      </main>
+    );
+  }
+
 
   return (
     <main
