@@ -319,33 +319,6 @@
   },
 
   // =====================================================
-  // JEWELLERY  PARTY JEWELLERY
-  // =====================================================
-
-  {
-    id: 24,
-    name: "Elegant Party Jewellery",
-    priceAED: 300,
-    salePriceAED: null,
-    onSale: false,
-
-    category: "Jewellery",
-    subCategory: "Designer Sets",
-    origin: "Indian Style",
-
-    image: "/products/jewellery-12.jpg",
-
-    description:
-      "An elegant artificial jewellery design with polished detailing and a sophisticated finish. Perfect for parties, dinners and stylish evening occasions.",
-
-    details: {
-      material: "Artificial Jewellery",
-      type: "Party Jewellery",
-      occasion: "Parties & Dinners",
-    },
-  },
-
-  // =====================================================
   // JEWELLERY  NEW ARRIVALS
   // =====================================================
 
@@ -775,7 +748,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-45.jpg",
@@ -943,7 +916,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Allah's Pandents",
     origin: "Turkish Style",
   
     image: "/products/jewellery-54.jpg",
@@ -964,7 +937,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Allah's Pandents",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-55.jpg",
@@ -1006,7 +979,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-57.jpg",
@@ -1069,7 +1042,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Indian Style",
 
     image: "/products/jewellery-60.jpg",
@@ -1153,7 +1126,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Traditional Sets",
+    subCategory: "Necklaces",
     origin: "Indian Style",
 
     image: "/products/jewellery-64.jpg",
@@ -1174,7 +1147,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-65.jpg",
@@ -1279,7 +1252,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-70.jpg",
@@ -1300,7 +1273,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Everyday Jewellery",
+    subCategory: "Rings",
     origin: "Indian Style",
 
     image: "/products/jewellery-71.jpg",
@@ -1699,7 +1672,7 @@
     salePriceAED: null,
     onSale: false,
     category: "Jewellery",
-    subCategory: "Statement Jewellery",
+    subCategory: "Allah's Pandents",
     origin: "Pakistani Style",
 
     image: "/products/jewellery-92.jpg",
