@@ -12,6 +12,7 @@ import { FiStar as FiSparkles } from "react-icons/fi";
 
 import products from "../data/Products";
 import ProductCard from "../components/ProductCard";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -332,16 +333,14 @@ const Shop = () => {
             <span className="h-px w-10 bg-[#B9937D]/40" />
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              window.location.href = "/shop";
-            }}
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#493633] px-7 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#604A44]"
-          >
-            Explore Jewellery
-            <FiArrowUpRight />
-          </button>
+         
+<Link
+  to="/shop?category=Jewellery"
+  className="inline-flex items-center justify-center rounded-full bg-[#A86F77] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#8F5962] hover:shadow-lg"
+>
+  Explore Jewellery
+</Link>
+
 
           <p className="mt-6 text-[10px] uppercase tracking-[0.25em] text-[#A8797D]/75">
             Made with love by F&A Collective
