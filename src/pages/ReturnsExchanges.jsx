@@ -6,7 +6,7 @@ const faqItems = [
   {
     question: "How many days do I have to request a return or exchange?",
     answer:
-      "Eligible return or exchange requests can be submitted within 7 days of delivery.",
+      "Eligible return or exchange requests can be submitted within 3 days of delivery.",
   },
   {
     question: "Can I return jewellery after wearing it?",
@@ -21,7 +21,7 @@ const faqItems = [
   {
     question: "Can I exchange a garment?",
     answer:
-      "Eligible garments may be exchanged within 7 days of delivery, provided they are unworn, unwashed, unaltered, free from stains or marks, and returned with their original tags and packaging.",
+      "Eligible garments may be exchanged within 3 days of delivery, provided they are unworn, unwashed, unaltered, free from stains or marks, and returned with their original tags and packaging.",
   },
   {
     question: "Do you accept international returns?",
@@ -98,7 +98,7 @@ function ReturnsExchanges() {
       <section className="returns-highlights">
         <div className="returns-highlight">
           <span>01</span>
-          <strong>7 Days</strong>
+          <strong>3 Days</strong>
           <p>Eligible return &amp; exchange window</p>
         </div>
 
@@ -128,7 +128,7 @@ function ReturnsExchanges() {
 
             <p>
               We accept eligible return or exchange requests within{" "}
-              <strong>7 days of delivery</strong>.
+              <strong>3 days of delivery</strong>.
             </p>
 
             <p>To be eligible, the item must:</p>
@@ -215,7 +215,7 @@ function ReturnsExchanges() {
 
             <p>
               Garments and eligible accessories may be considered for exchange
-              within 7 days of delivery, provided they are:
+              within 3 days of delivery, provided they are:
             </p>
 
             <ul>
