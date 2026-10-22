@@ -61,11 +61,115 @@
    GRID
 ===================================================== */
 
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+
+/* TESTIMONIALS CAROUSEL */
+
+.testimonials-carousel {
+  position: relative;
+  width: 100%;
 }
+
+.testimonials-grid {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 8px 2px 20px;
+}
+
+.testimonials-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-card {
+  flex: 0 0 calc((100% - 72px) / 4);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* ARROW BUTTONS */
+
+.testimonial-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e6d5d2;
+  background: #fffaf8;
+  color: #76545a;
+
+  font-size: 23px;
+  cursor: pointer;
+
+  box-shadow: 0 5px 18px rgba(90, 65, 60, 0.12);
+  transition: background 0.25s ease,
+              color 0.25s ease;
+}
+
+.testimonial-arrow:hover {
+  background: #b77982;
+  color: #ffffff;
+}
+
+.testimonial-arrow-left {
+  left: -18px;
+}
+
+.testimonial-arrow-right {
+  right: -18px;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+  .testimonial-card {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .testimonials-section {
+    padding: 75px 20px;
+  }
+
+  .testimonial-card {
+    flex-basis: 100%;
+  }
+
+  .testimonials-grid {
+    gap: 18px;
+  }
+
+  .testimonial-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 19px;
+  }
+
+  .testimonial-arrow-left {
+    left: -10px;
+  }
+
+  .testimonial-arrow-right {
+    right: -10px;
+  }
+}
+
 
 /* =====================================================
    CARD
