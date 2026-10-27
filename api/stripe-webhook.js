@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY;
+  const secretKey = process.env.STRIPE_SECRET_KEY_NEW;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   const siteUrl = process.env.SITE_URL;
   const internalEmailSecret =
