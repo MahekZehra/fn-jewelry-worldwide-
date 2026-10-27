@@ -76,7 +76,9 @@ const Hero = () => {
         {/* HERO CONTENT */}
         <div className="order-1 flex flex-col justify-center text-center lg:order-1 lg:text-left">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[3px] text-[#A87585] sm:text-sm">
-            F&A Fashion and Jewellery Collection
+            F & A COLLECTIVE FZE LLC
+            <br />
+            Fashion & Jewelry Collection
           </p>
 
           <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-[#3B2930] sm:text-5xl lg:text-6xl">
