@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   FiCheck,
   FiShoppingBag,
@@ -8,6 +8,8 @@ import {
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isStripePayment = searchParams.has("session_id");
 
   const orderNumber = `FN-${Date.now().toString().slice(-6)}`;
 
@@ -79,7 +81,7 @@ const OrderConfirmation = () => {
               </span>
 
               <span className="text-right text-sm font-medium">
-                Cash on Delivery
+              {isStripePayment ? "Paid Online through Stripe" : "Cash on Delivery"}
               </span>
 
             </div>
