@@ -397,8 +397,8 @@ const Cart = () => {
               const convertedPrice =
                 convertPrice(priceAED);
 
-              const quantity =
-                Number(item.quantity) || 1;
+              const quantity = 1;
+              const itemAvailability = getItemInventoryStatus(item.id);
 
               const itemTotal =
                 convertedPrice * quantity;
@@ -500,6 +500,17 @@ const Cart = () => {
                             {currencySymbols[currency]}{" "}
                             {formatPrice(convertedPrice)}
                           </p>
+
+                          {itemAvailability === "reserved" && (
+                            <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-[#A8797D]">
+                              This piece is currently reserved
+                            </p>
+                          )}
+                          {itemAvailability === "sold" && (
+                            <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-red-700">
+                              This piece has sold out
+                            </p>
+                          )}
 
                         </div>
 
