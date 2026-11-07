@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 
 import products from "../data/Products";
+import Product360Viewer from "../components/Product360Viewer";
 import { useCart } from "../context/CartContext";
 
 const WHATSAPP_NUMBER = "971529218985";
@@ -143,19 +144,7 @@ const ProductDetails = () => {
           {/* PRODUCT IMAGE */}
 
           <div className="lg:sticky lg:top-28">
-            <div className="group relative overflow-hidden rounded-[1.75rem] bg-[#EEE9E3] sm:rounded-[2rem]">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="aspect-[4/5] h-full w-full bg-[#EEE9E3] object-contain p-2 sm:p-4"
-              />
-
-              <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
-            </div>
-
-            <p className="mt-4 text-center text-[9px] font-medium uppercase tracking-[0.3em] text-black/25 sm:text-[10px]">
-              F&A Fashion and Jewellery Collection
-            </p>
+            <Product360Viewer product={product} />
           </div>
 
           {/* PRODUCT INFORMATION */}
