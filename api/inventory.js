@@ -1,4 +1,4 @@
-import { loadUnavailableInventory } from "./_lib/inventory.js";
+import { loadUnavailableInventory } from "../lib/inventory.js";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store, max-age=0");
