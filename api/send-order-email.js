@@ -40,6 +40,7 @@ export default async function handler(req, res) {
       customerCity,
       customerAddress,
       orderNumber,
+      reservationId,
       items,
       total,
       currency = "AED",
@@ -116,6 +117,7 @@ export default async function handler(req, res) {
     );
 
     const safeOrderNumber = escapeHtml(orderNumber);
+    const safeReservationId = escapeHtml(reservationId || "");
     const safeCurrency = escapeHtml(currency || "AED");
 
     const paymentMethodLabel =
@@ -310,6 +312,9 @@ export default async function handler(req, res) {
         <p style="margin:0;color:#665955;">
           <strong>Order Number:</strong> ${safeOrderNumber}
         </p>
+        ${paymentMethod === "cod" && safeReservationId
+          ? `<p style="margin:8px 0 0;color:#665955;font-size:12px;"><strong>Inventory Reservation:</strong> ${safeReservationId}</p>`
+          : ""}
       </div>
 
       <h3 style="font-family:Georgia,serif;font-size:20px;font-weight:normal;">
