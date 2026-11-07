@@ -1,5 +1,10 @@
+import { randomUUID } from "node:crypto";
 import Stripe from "stripe";
 import products from "../src/data/Products.js";
+import {
+  reserveProductItems,
+  releaseProductReservation,
+} from "./_lib/inventory.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -8,6 +13,8 @@ export default async function handler(req, res) {
       message: "Method not allowed",
     });
   }
+
+  let reservationId = null;
 
   try {
     if (!process.env.STRIPE_SECRET_KEY_NEW) {
@@ -31,8 +38,12 @@ export default async function handler(req, res) {
     if (
       !customerName ||
       !customerEmail ||
+      !customerPhone ||
+      !customerCity ||
+      !customerAddress ||
       !Array.isArray(items) ||
-      items.length === 0
+      items.length === 0 ||
+      items.length > 20
     ) {
       return res.status(400).json({
         success: false,
@@ -40,21 +51,30 @@ export default async function handler(req, res) {
       });
     }
 
-    // Always calculate prices from the server's product catalog.
-    const lineItems = items.map((item) => {
+    const normalizedItems = items.map((item) => ({
+      id: String(item?.id ?? ""),
+      quantity: Number(item?.quantity),
+    }));
+    const productIds = normalizedItems.map((item) => item.id);
+
+    if (
+      normalizedItems.some((item) => !item.id || item.quantity !== 1) ||
+      new Set(productIds).size !== productIds.length
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Each one-of-one piece can only be purchased once.",
+      });
+    }
+
+    // Always calculate prices from the server's product catalogue.
+    const lineItems = normalizedItems.map((item) => {
       const product = products.find(
-        (p) => String(p.id) === String(item.id)
+        (p) => String(p.id) === item.id
       );
 
-      const quantity = Number(item.quantity);
-
-      if (
-        !product ||
-        !Number.isInteger(quantity) ||
-        quantity < 1 ||
-        quantity > 20
-      ) {
-        throw new Error("Invalid product or quantity in cart.");
+      if (!product) {
+        throw new Error("One or more selected products could not be found.");
       }
 
       const unitPrice =
@@ -78,12 +98,11 @@ export default async function handler(req, res) {
           },
           unit_amount: Math.round(unitPrice * 100),
         },
-        quantity,
+        quantity: 1,
       };
     });
 
     const siteUrl = process.env.SITE_URL;
-
     if (!siteUrl) {
       return res.status(500).json({
         success: false,
@@ -92,38 +111,61 @@ export default async function handler(req, res) {
     }
 
     const orderNumber = `FA-${Date.now()}`;
+    reservationId = `FA-STRIPE-${randomUUID()}`;
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: lineItems,
-      customer_email: customerEmail,
-      billing_address_collection: "required",
-
-      metadata: {
-        orderNumber,
-        customerName: String(customerName).slice(0, 200),
-        customerEmail: String(customerEmail).slice(0, 200),
-        customerPhone: String(customerPhone || "").slice(0, 200),
-        customerCity: String(customerCity || "").slice(0, 200),
-        customerAddress: String(customerAddress || "").slice(0, 200),
-      },
-
-      success_url:
-        `${siteUrl}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
-
-      cancel_url: `${siteUrl}/checkout?payment=cancelled`,
+    // Reserve all selected items in one atomic database operation.
+    // A concurrent customer cannot reserve the same product.
+    await reserveProductItems({
+      productIds,
+      reservationId,
+      customerEmail,
+      expiryMinutes: 40,
     });
 
-    return res.status(200).json({
-      success: true,
-      url: session.url,
-    });
+    try {
+      const expiresAt = Math.floor(Date.now() / 1000) + 32 * 60;
+
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        line_items: lineItems,
+        customer_email: customerEmail,
+        billing_address_collection: "required",
+        expires_at: expiresAt,
+        client_reference_id: orderNumber,
+
+        metadata: {
+          orderNumber,
+          reservationId,
+          productIds: productIds.join(","),
+          customerName: String(customerName).slice(0, 200),
+          customerEmail: String(customerEmail).slice(0, 200),
+          customerPhone: String(customerPhone || "").slice(0, 200),
+          customerCity: String(customerCity || "").slice(0, 200),
+          customerAddress: String(customerAddress || "").slice(0, 200),
+        },
+
+        success_url:
+          `${siteUrl}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+
+        cancel_url: `${siteUrl}/checkout?payment=cancelled`,
+      });
+
+      return res.status(200).json({
+        success: true,
+        url: session.url,
+      });
+    } catch (error) {
+      await releaseProductReservation(reservationId).catch((releaseError) => {
+        console.error("Could not release failed Stripe reservation:", releaseError);
+      });
+      throw error;
+    }
   } catch (error) {
     console.error("Stripe Checkout Session Error:", error);
 
     return res.status(400).json({
       success: false,
-      message: error.message || "Could not start online checkout.",
+      message: error.message || "Could not start secure online checkout.",
     });
   }
 }
