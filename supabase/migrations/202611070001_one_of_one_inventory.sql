@@ -143,6 +143,7 @@ as $$
 declare
   v_total integer;
   v_ready integer;
+  v_sold integer;
 begin
   if p_reservation_id is null or p_order_number is null then
     return jsonb_build_object('success', false, 'reason', 'invalid_request');
@@ -162,16 +163,11 @@ begin
          count(*) filter (
            where status = 'sold' and sold_order_number = p_order_number
          )
-    into v_total, v_ready, v_total
+    into v_total, v_ready, v_sold
     from public.product_inventory
    where reservation_id = p_reservation_id;
 
-  if v_total > 0 and v_ready = 0 and exists (
-    select 1 from public.product_inventory
-     where reservation_id = p_reservation_id
-       and status = 'sold'
-       and sold_order_number = p_order_number
-  ) then
+  if v_total > 0 and v_sold = v_total then
     return jsonb_build_object('success', true, 'alreadySold', true);
   end if;
 
