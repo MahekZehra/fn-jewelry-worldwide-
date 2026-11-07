@@ -89,7 +89,7 @@ const Checkout = () => {
     setErrorMessage("");
 
     try {
-      // STRIPE CARD CHECKOUT
+      // STRIPE ONLINE CHECKOUT (CARD / GOOGLE PAY)
       if (paymentMethod === "stripe") {
         const response = await fetch(
           "/api/create-checkout-session",
@@ -113,7 +113,7 @@ const Checkout = () => {
         if (!response.ok || !result.success || !result.url) {
           throw new Error(
             result.message ||
-              "Unable to start card checkout."
+              "Unable to start secure online checkout."
           );
         }
 
@@ -426,11 +426,11 @@ const Checkout = () => {
 
                 <span>
                   <span className="block text-sm font-semibold text-[#4A3935]">
-                    Credit / Debit Card
+                    Card / Google Pay
                   </span>
 
                   <span className="mt-1 block text-xs leading-5 text-[#907C76]">
-                    Continue to Stripe's secure card payment page.
+                    Continue to Stripe’s secure checkout. Google Pay appears on supported devices and browsers.
                   </span>
 
                   {currency !== "AED" && (
@@ -481,7 +481,7 @@ const Checkout = () => {
               ) : (
                 <>
                   <FiCreditCard />
-                  Continue to Card Payment
+                  Continue to Secure Payment
                 </>
               )}
             </button>
