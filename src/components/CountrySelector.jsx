@@ -159,16 +159,16 @@ const CountrySelector = () => {
   ===================================================== */
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return undefined;
 
     const isMobile = window.innerWidth < 640;
+    if (!isMobile) return undefined;
 
-    if (isMobile) {
-      document.body.style.overflow = "hidden";
-    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
@@ -313,9 +313,7 @@ const CountrySelector = () => {
             "
           >
 
-            {/* =================================================
-                HEADER
-            ================================================= */}
+            {/* HEADER */}
 
             <div
               className="
@@ -328,235 +326,83 @@ const CountrySelector = () => {
                 px-5 py-5
               "
             >
-
               <div className="flex items-start justify-between gap-4">
-
                 <div>
-
-                  <p
-                    className="
-                      text-[9px]
-                      font-semibold
-                      uppercase
-                      tracking-[0.3em]
-                      text-[#B18A83]
-                    "
-                  >
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.3em] text-[#B18A83]">
                     Worldwide Shopping
                   </p>
-
-                  <p
-                    className="
-                      mt-1.5
-                      font-serif
-                      text-[17px]
-                      font-medium
-                      tracking-[-0.01em]
-                      text-[#3E302D]
-                    "
-                  >
+                  <p className="mt-1.5 font-serif text-[17px] font-medium tracking-[-0.01em] text-[#3E302D]">
                     Select your country
                   </p>
-
                 </div>
-
-                <span
-                  className="
-                    mt-1
-                    rounded-full
-                    border border-[#C9A66B]/25
-                    bg-[#F8F0E4]
-                    px-2.5 py-1
-                    text-[9px]
-                    font-medium
-                    tracking-wide
-                    text-[#A37C48]
-                  "
-                >
+                <span className="mt-1 rounded-full border border-[#C9A66B]/25 bg-[#F8F0E4] px-2.5 py-1 text-[9px] font-medium tracking-wide text-[#A37C48]">
                   {countries.length} destinations
                 </span>
-
               </div>
-
-              <div
-                className="
-                  mt-3 h-px w-10
-                  bg-[#C9A66B]/60
-                "
-              />
-
+              <div className="mt-3 h-px w-10 bg-[#C9A66B]/60" />
             </div>
 
-            {/* =================================================
-                SCROLLABLE LIST
-            ================================================= */}
+            {/* SCROLLABLE LIST */}
 
             <div
-              className="
-                min-h-0 flex-1
-                overflow-y-auto
-                overscroll-contain
-                p-2.5
-              "
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2.5"
               style={{
                 WebkitOverflowScrolling: "touch",
                 touchAction: "pan-y",
               }}
             >
-
               {countries.map((country) => {
-
-                const isSelected =
-                  selectedCountry.code === country.code;
+                const isSelected = selectedCountry.code === country.code;
 
                 return (
                   <button
                     key={country.code}
                     type="button"
-                    onClick={() =>
-                      handleCountryChange(country)
-                    }
+                    onClick={() => handleCountryChange(country)}
                     className={`
-                      group flex w-full
-                      items-center
-                      justify-between
-                      gap-3
-                      rounded-[15px]
-                      px-3
-                      py-3
-                      text-left
-                      transition-all
-                      duration-200
-
-                      ${
-                        isSelected
-                          ? `
-                            bg-[#F5E5E2]
-                            text-[#493936]
-                            shadow-[inset_0_0_0_1px_rgba(184,137,126,0.14)]
-                          `
-                          : `
-                            text-[#4A3D3A]
-                            hover:bg-[#FCF4F1]
-                          `
-                      }
+                      group flex w-full items-center justify-between gap-3
+                      rounded-[15px] px-3 py-3 text-left transition-all duration-200
+                      ${isSelected
+                        ? "bg-[#F5E5E2] text-[#493936] shadow-[inset_0_0_0_1px_rgba(184,137,126,0.14)]"
+                        : "text-[#4A3D3A] hover:bg-[#FCF4F1]"}
                     `}
                   >
-
-                    {/* LEFT */}
-
                     <span className="flex min-w-0 items-center gap-3">
-
-                      {/* FLAG */}
-
-                      <span
-                        className={`
-                          flex h-9 w-12
-                          shrink-0
-                          overflow-hidden
-                          rounded-lg
-                          bg-[#F7F0EB]
-                          ring-1
-                          ${
-                            isSelected
-                              ? "ring-[#C9A66B]/35"
-                              : "ring-black/5"
-                          }
-                        `}
-                      >
+                      <span className={`flex h-9 w-12 shrink-0 overflow-hidden rounded-lg bg-[#F7F0EB] ring-1 ${isSelected ? "ring-[#C9A66B]/35" : "ring-black/5"}`}>
                         <img
                           src={country.flag}
                           alt={`${country.name} flag`}
-                          className="
-                            block h-full w-full
-                            object-cover
-                          "
+                          className="block h-full w-full object-cover"
                           loading="eager"
                           draggable="false"
                         />
                       </span>
-
-                      {/* COUNTRY INFO */}
-
                       <span className="min-w-0">
-
-                        <span
-                          className="
-                            block truncate
-                            text-sm
-                            font-medium
-                            tracking-[-0.01em]
-                          "
-                        >
+                        <span className="block truncate text-sm font-medium tracking-[-0.01em]">
                           {country.name}
                         </span>
-
-                        <span
-                          className={`
-                            mt-0.5
-                            block
-                            text-[10px]
-                            tracking-wide
-                            ${
-                              isSelected
-                                ? "text-[#9C756D]"
-                                : "text-[#A99A96]"
-                            }
-                          `}
-                        >
+                        <span className={`mt-0.5 block text-[10px] tracking-wide ${isSelected ? "text-[#9C756D]" : "text-[#A99A96]"}`}>
                           {country.code} · {country.currency}
                         </span>
-
                       </span>
-
                     </span>
-
-                    {/* RIGHT */}
-
                     <span className="flex shrink-0 items-center gap-2">
-
-                      <span
-                        className={`
-                          text-xs
-                          font-medium
-                          ${
-                            isSelected
-                              ? "text-[#A47A4A]"
-                              : "text-[#9D8984]"
-                          }
-                        `}
-                      >
+                      <span className={`text-xs font-medium ${isSelected ? "text-[#A47A4A]" : "text-[#9D8984]"}`}>
                         {country.symbol}
                       </span>
-
                       {isSelected && (
-                        <span
-                          className="
-                            flex h-5 w-5
-                            items-center
-                            justify-center
-                            rounded-full
-                            bg-[#C9A66B]/15
-                            text-[#A47A4A]
-                          "
-                        >
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A66B]/15 text-[#A47A4A]">
                           <FiCheck className="text-[12px]" />
                         </span>
                       )}
-
                     </span>
-
                   </button>
                 );
               })}
-
             </div>
-
           </div>
-
         </>
       )}
-
     </div>
   );
 };
