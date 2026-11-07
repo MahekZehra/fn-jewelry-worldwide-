@@ -22,6 +22,7 @@ const Checkout = () => {
     getCheckoutItems,
     getActualPriceAED,
     clearCart,
+    refreshInventory,
   } = useCart();
 
   const navigate = useNavigate();
@@ -89,6 +90,23 @@ const Checkout = () => {
     setErrorMessage("");
 
     try {
+      // Re-check live stock immediately before either checkout method.
+      const liveInventory = await refreshInventory();
+      if (!liveInventory) {
+        throw new Error("We couldn't verify live stock. Please refresh and try again.");
+      }
+
+      const unavailableItem = cart.find((item) => {
+        const status = liveInventory[String(item.id)]?.status || "available";
+        return status !== "available";
+      });
+
+      if (unavailableItem) {
+        throw new Error(
+          `${unavailableItem.name} is no longer available. Your bag has not been charged.`
+        );
+      }
+
       // STRIPE ONLINE CHECKOUT (CARD / GOOGLE PAY)
       if (paymentMethod === "stripe") {
         const response = await fetch(
@@ -122,60 +140,43 @@ const Checkout = () => {
         return;
       }
 
-      // CASH ON DELIVERY
-      const orderNumber = `FA-${Date.now()}`;
-
-      // Email API expects item.price and item.quantity.
-      const emailItems = checkoutItems.map((item) => ({
-        id: item.id,
-        name: item.name,
-        quantity: Number(item.quantity) || 1,
-        price: Number(item.price) || 0,
-      }));
-
-      const response = await fetch(
-        "/api/send-order-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...form,
-            orderNumber,
-            items: emailItems,
-            total: Number(cartTotal) || 0,
-            currency: currency || "AED",
-            paymentMethod: "cod",
-          }),
-        }
-      );
+      // CASH ON DELIVERY: reserve one-of-one stock before placing the order.
+      const response = await fetch("/api/create-cod-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          items: cart.map((item) => ({
+            id: item.id,
+            quantity: 1,
+          })),
+          currency: currency || "AED",
+        }),
+      });
 
       const result = await response.json();
 
-      if (
-        !response.ok ||
-        !result.success ||
-        !result.customerEmailSent ||
-        !result.ownerEmailSent
-      ) {
+      if (!response.ok || !result.success || !result.orderNumber) {
         throw new Error(
-          result.message ||
-            "Order emails could not both be sent. Please try again."
+          result.message || "Unable to place your Cash on Delivery order."
         );
       }
 
-      // Clear cart only after both emails have been confirmed sent.
+      // COD stock stays reserved until the team confirms collection
+      // or releases the piece if the order is cancelled.
       clearCart();
+      refreshInventory();
 
-      // Preserve the existing confirmation route.
       navigate("/order-confirmation", {
         replace: true,
         state: {
-          orderNumber,
+          orderNumber: result.orderNumber,
+          reservationId: result.reservationId,
           paymentMethod: "cod",
-          total: Number(cartTotal) || 0,
-          currency: currency || "AED",
+          total: Number(result.total) || Number(cartTotal) || 0,
+          currency: result.currency || currency || "AED",
         },
       });
     } catch (error) {
