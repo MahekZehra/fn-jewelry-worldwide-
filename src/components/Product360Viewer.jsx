@@ -19,7 +19,6 @@ const Product360Viewer = ({ product }) => {
   const [frame, setFrame] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [isTiltActive, setIsTiltActive] = useState(false);
   const imageStageRef = useRef(null);
   const dragStartX = useRef(null);
   const dragStartFrame = useRef(0);
@@ -35,7 +34,6 @@ const Product360Viewer = ({ product }) => {
     stage.style.setProperty("--product-rotate-y", "0deg");
     stage.style.setProperty("--product-shift-x", "0px");
     stage.style.setProperty("--product-shift-y", "0px");
-    setIsTiltActive(false);
   };
 
   const handlePointerMove = (event) => {
@@ -59,7 +57,6 @@ const Product360Viewer = ({ product }) => {
     stage.style.setProperty("--product-rotate-y", `${rotateY.toFixed(2)}deg`);
     stage.style.setProperty("--product-shift-x", `${((x - 0.5) * 7).toFixed(1)}px`);
     stage.style.setProperty("--product-shift-y", `${((y - 0.5) * 7).toFixed(1)}px`);
-    setIsTiltActive(true);
   };
 
   const handlePointerDown = (event) => {
