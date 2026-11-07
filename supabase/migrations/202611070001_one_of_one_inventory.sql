@@ -13,7 +13,7 @@ create table if not exists public.product_inventory (
   updated_at timestamptz not null default now()
 );
 
-create unique index if not exists product_inventory_reservation_id_idx
+create index if not exists product_inventory_reservation_id_idx
   on public.product_inventory (reservation_id)
   where reservation_id is not null;
 
