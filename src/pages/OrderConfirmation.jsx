@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   FiCheck,
   FiShoppingBag,
@@ -8,10 +8,13 @@ import {
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const isStripePayment = searchParams.has("session_id");
 
-  const orderNumber = `FN-${Date.now().toString().slice(-6)}`;
+  const orderNumber =
+    location.state?.orderNumber ||
+    `FA-${Date.now().toString().slice(-6)}`;
 
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-5 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-24">
