@@ -118,3 +118,67 @@ a {
     -webkit-touch-callout: none;
   }
 }
+
+
+/* -------------------------------------------------------
+   F&A Collective — subtle cinematic product presentation
+------------------------------------------------------- */
+.product-viewer-stage {
+  perspective: 1000px;
+  isolation: isolate;
+  --product-rotate-x: 0deg;
+  --product-rotate-y: 0deg;
+  --product-shift-x: 0px;
+  --product-shift-y: 0px;
+}
+
+.product-viewer-image-wrap {
+  transform: translate3d(var(--product-shift-x), var(--product-shift-y), 0)
+    rotateX(var(--product-rotate-x)) rotateY(var(--product-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(.2,.75,.25,1);
+  will-change: transform;
+}
+
+.product-viewer-stage:hover .product-viewer-image-wrap {
+  transition-duration: 100ms;
+}
+
+.product-viewer-shimmer {
+  z-index: 1;
+  opacity: .35;
+  background: linear-gradient(
+    112deg,
+    transparent 20%,
+    rgba(255,255,255,.32) 42%,
+    rgba(255,255,255,.08) 52%,
+    transparent 72%
+  );
+  transform: translateX(-115%);
+  animation: productViewerGlow 7s ease-in-out infinite;
+}
+
+@keyframes productViewerGlow {
+  0%, 18% { transform: translateX(-115%); }
+  62%, 100% { transform: translateX(115%); }
+}
+
+@media (hover: none) {
+  .product-viewer-image-wrap {
+    animation: productViewerFloat 6s ease-in-out infinite;
+  }
+}
+
+@keyframes productViewerFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.008); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-viewer-image-wrap,
+  .product-viewer-shimmer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
