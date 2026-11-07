@@ -3,7 +3,7 @@ import products from "../src/data/Products.js";
 import {
   reserveProductItems,
   releaseProductReservation,
-} from "./_lib/inventory.js";
+} from "../lib/inventory.js";
 
 const currencyRates = {
   AED: 1,
