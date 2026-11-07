@@ -50,10 +50,18 @@ const currencySymbols = {
 ===================================================== */
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart, cart, inventoryReady, getItemInventoryStatus } = useCart();
   const navigate = useNavigate();
 
   const [currency, setCurrency] = useState("AED");
+
+  const alreadyInCart = cart.some(
+    (item) => String(item.id) === String(product.id)
+  );
+  const inventoryStatus = getItemInventoryStatus(product.id);
+  const isSoldOut = inventoryStatus === "sold";
+  const isReserved = inventoryStatus === "reserved";
+  const isUnavailable = isSoldOut || isReserved;
 
   /* ===================================================
      COUNTRY / CURRENCY
@@ -350,6 +358,12 @@ const ProductCard = ({ product }) => {
             </div>
           )}
 
+        {(isSoldOut || isReserved) && (
+          <div className="pointer-events-none absolute inset-x-3 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/50 bg-[#332724]/90 px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg backdrop-blur-sm">
+            {isSoldOut ? "Sold Out" : "Reserved"}
+          </div>
+        )}
+
         {/* =================================================
             VIEW PRODUCT
         ================================================= */}
@@ -396,40 +410,29 @@ const ProductCard = ({ product }) => {
         <button
           type="button"
           onClick={handleAddToCart}
-          className="
-            absolute
-            bottom-4
-            left-4
-            right-4
-            z-30
-            flex
-            h-11
-            items-center
-            justify-center
-            gap-2
-            rounded-full
-            border
-            border-white/60
-            bg-white/90
-            text-sm
-            font-semibold
-            text-[#332724]
-            shadow-md
-            backdrop-blur-md
-            transition-all
-            duration-300
-            hover:bg-[#332724]
-            hover:text-white
-            sm:translate-y-3
-            sm:opacity-0
-            sm:group-hover:translate-y-0
-            sm:group-hover:opacity-100
-          "
+          disabled={!inventoryReady || isUnavailable || alreadyInCart}
+          className={`
+            absolute bottom-4 left-4 right-4 z-30
+            flex h-11 items-center justify-center gap-2
+            rounded-full border border-white/60
+            text-sm font-semibold shadow-md backdrop-blur-md
+            transition-all duration-300
+            ${!inventoryReady || isUnavailable || alreadyInCart
+              ? "cursor-not-allowed bg-[#E9E1DC]/95 text-[#806D68]"
+              : "bg-white/90 text-[#332724] hover:bg-[#332724] hover:text-white sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"}
+          `}
         >
           <FiShoppingBag className="text-base" />
-
           <span>
-            Add to Cart
+            {!inventoryReady
+              ? "Checking Stock"
+              : isSoldOut
+                ? "Sold Out"
+                : isReserved
+                  ? "Reserved"
+                  : alreadyInCart
+                    ? "Already in Bag"
+                    : "Add to Cart"}
           </span>
         </button>
 
