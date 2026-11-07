@@ -1,280 +1,208 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiMenu, FiX, FiShoppingBag } from "react-icons/fi";
+import { FiMenu, FiX, FiShoppingBag, FiArrowUpRight } from "react-icons/fi";
 
 import { useCart } from "../context/CartContext";
 import CountrySelector from "./CountrySelector";
 
+const navigationItems = [
+  { label: "Home", to: "/", isActive: (location) => location.pathname === "/" },
+  {
+    label: "Shop",
+    to: "/shop",
+    isActive: (location) => location.pathname === "/shop" && !location.search,
+  },
+  {
+    label: "Jewellery",
+    to: "/shop?category=Jewellery",
+    isActive: (location) =>
+      location.pathname === "/shop" &&
+      new URLSearchParams(location.search).get("category") === "Jewellery",
+  },
+  {
+    label: "Garments",
+    to: "/shop?category=Garments",
+    isActive: (location) =>
+      location.pathname === "/shop" &&
+      new URLSearchParams(location.search).get("category") === "Garments",
+  },
+  {
+    label: "Kundan Clutches",
+    to: "/shop?category=Accessories",
+    isActive: (location) =>
+      location.pathname === "/shop" &&
+      new URLSearchParams(location.search).get("category") === "Accessories",
+  },
+  {
+    label: "Sale",
+    to: "/shop?sale=true",
+    isSale: true,
+    isActive: (location) =>
+      location.pathname === "/shop" &&
+      new URLSearchParams(location.search).get("sale") === "true",
+  },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const location = useLocation();
   const { cartCount } = useCart();
 
-  const isActive = (path) => location.pathname === path;
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const isCategoryActive = (category) => {
-    const params = new URLSearchParams(location.search);
-
-    return (
-      location.pathname === "/shop" &&
-      params.get("category") === category
-    );
-  };
-
-  const isSaleActive = () => {
-    const params = new URLSearchParams(location.search);
-
-    return (
-      location.pathname === "/shop" &&
-      params.get("sale") === "true"
-    );
-  };
-
-  const closeMenu = () => {
+  useEffect(() => {
     setIsMenuOpen(false);
-  };
+  }, [location.pathname, location.search]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") closeMenu();
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isMenuOpen]);
+
+  const renderCartLink = (mobile = false) => (
+    <Link
+      to="/cart"
+      onClick={closeMenu}
+      className={`relative flex shrink-0 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 hover:border-[#D4A6AC] hover:bg-[#B98288] hover:text-white active:scale-95 ${mobile ? "h-10 w-10" : "h-11 w-11"}`}
+      aria-label={`Shopping bag, ${cartCount} items`}
+    >
+      <FiShoppingBag className={mobile ? "text-base" : "text-lg"} />
+      {cartCount > 0 && (
+        <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#B98288] px-1 text-[10px] font-bold text-white shadow-sm">
+          {cartCount}
+        </span>
+      )}
+    </Link>
+  );
 
   return (
     <>
-      <header className="fixed left-0 top-0 z-50 w-full border-b border-[#E8D8DA]/80 bg-[#FFF9F7]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:h-24 sm:px-8 lg:px-10">
-          {/* LOGO */}
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-[#E8D8DA]/80 bg-[#FFF9F7]/95 shadow-[0_4px_24px_rgba(90,69,73,0.04)] backdrop-blur-xl">
+        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-8 lg:h-24 lg:px-10">
           <Link
             to="/"
             onClick={closeMenu}
-            className="flex h-full shrink-0 items-center"
+            className="flex h-full min-w-0 shrink items-center"
             aria-label="F&A Collective Home"
           >
             <img
               src="/logo/fa-logo.jpg"
               alt="F&A Collective - Fashion and Jewellery"
-              className="block h-[64px] w-auto object-contain sm:h-[76px] lg:h-[82px]"
+              className="block h-[54px] w-auto max-w-[min(48vw,220px)] object-contain sm:h-[68px] sm:max-w-[260px] lg:h-[82px]"
             />
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
-          <nav className="hidden items-center gap-7 lg:flex xl:gap-9">
-            <Link
-              to="/"
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isActive("/")
-                  ? "text-[#A86F77]"
-                  : "text-[#6F5B5F] hover:text-[#A86F77]"
-              }`}
-            >
-              Home
-            </Link>
-
-            <Link
-              to="/shop"
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isActive("/shop") && !location.search
-                  ? "text-[#A86F77]"
-                  : "text-[#6F5B5F] hover:text-[#A86F77]"
-              }`}
-            >
-              Shop
-            </Link>
-
-            <Link
-              to="/shop?category=Jewellery"
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isCategoryActive("Jewellery")
-                  ? "text-[#A86F77]"
-                  : "text-[#6F5B5F] hover:text-[#A86F77]"
-              }`}
-            >
-              Jewellery
-            </Link>
-
-            
-            {/* GARMENTS — COMING SOON */}
-            <Link
-              to="/shop?category=Garments"
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isCategoryActive("Garments")
-                  ? "text-[#A86F77]"
-                  : "text-[#6F5B5F] hover:text-[#A86F77]"
-              }`}
-            >
-              Garments
-            </Link>
-
-            {/* ACCESSORIES DISPLAYED AS KUNDAN CLUTCHES */}
-            <Link
-              to="/shop?category=Accessories"
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isCategoryActive("Accessories")
-                  ? "text-[#A86F77]"
-                  : "text-[#6F5B5F] hover:text-[#A86F77]"
-              }`}
-            >
-              Kundan Clutches
-            </Link>
-
-            <Link
-              to="/shop?sale=true"
-              className={`text-sm font-semibold transition-colors duration-300 ${
-                isSaleActive()
-                  ? "text-[#A86F77]"
-                  : "text-[#9C626B] hover:text-[#A86F77]"
-              }`}
-            >
-              Sale
-            </Link>
+          <nav aria-label="Main navigation" className="hidden items-center gap-5 xl:gap-7 lg:flex">
+            {navigationItems.map((item) => {
+              const active = item.isActive(location);
+              return (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className={`whitespace-nowrap text-[13px] font-medium transition-colors duration-300 xl:text-sm ${active ? "text-[#A86F77]" : item.isSale ? "text-[#9C626B] hover:text-[#A86F77]" : "text-[#6F5B5F] hover:text-[#A86F77]"}`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* DESKTOP RIGHT SIDE */}
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden shrink-0 items-center gap-3 lg:flex">
             <CountrySelector />
-
-            <Link
-              to="/cart"
-              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 hover:border-[#D4A6AC] hover:bg-[#B98288] hover:text-white"
-              aria-label="Shopping Cart"
-            >
-              <FiShoppingBag className="text-lg" />
-
-              {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#B98288] px-1 text-[10px] font-bold text-white shadow-sm">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            {renderCartLink()}
           </div>
 
-          {/* MOBILE RIGHT SIDE */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <Link
-              to="/cart"
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 active:scale-95"
-              aria-label="Shopping Cart"
-            >
-              <FiShoppingBag className="text-base" />
-
-              {cartCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#B98288] px-1 text-[9px] font-bold text-white shadow-sm">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-
+          <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
+            {renderCartLink(true)}
             <button
               type="button"
-              onClick={() =>
-                setIsMenuOpen((current) => !current)
-              }
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 active:scale-95"
-              aria-label="Toggle Menu"
+              onClick={() => setIsMenuOpen((current) => !current)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5D4D7] bg-[#F7E8EA] text-[#5A4549] transition-all duration-300 hover:bg-[#EEDBDD] active:scale-95"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              {isMenuOpen ? (
-                <FiX className="text-xl" />
-              ) : (
-                <FiMenu className="text-xl" />
-              )}
+              {isMenuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
             </button>
           </div>
         </div>
-
-        {/* MOBILE MENU */}
-        {isMenuOpen && (
-          <div className="border-t border-[#E8D8DA] bg-[#FFF9F7]/98 px-5 py-5 backdrop-blur-xl lg:hidden">
-            <nav className="flex flex-col">
-              <Link
-                to="/"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
-                  isActive("/")
-                    ? "text-[#A86F77]"
-                    : "text-[#6F5B5F] hover:text-[#A86F77]"
-                }`}
-              >
-                Home
-              </Link>
-
-              <Link
-                to="/shop"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
-                  isActive("/shop") && !location.search
-                    ? "text-[#A86F77]"
-                    : "text-[#6F5B5F] hover:text-[#A86F77]"
-                }`}
-              >
-                Shop
-              </Link>
-
-              <Link
-                to="/shop?category=Jewellery"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
-                  isCategoryActive("Jewellery")
-                    ? "text-[#A86F77]"
-                    : "text-[#6F5B5F] hover:text-[#A86F77]"
-                }`}
-              >
-                Jewellery
-              </Link>
-
-              
-              {/* GARMENTS — COMING SOON */}
-              <Link
-                to="/shop?category=Garments"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
-                  isCategoryActive("Garments")
-                    ? "text-[#A86F77]"
-                    : "text-[#6F5B5F] hover:text-[#A86F77]"
-                }`}
-              >
-                Garments
-              </Link>
-
-              {/* ACCESSORIES DISPLAYED AS KUNDAN CLUTCHES */}
-              <Link
-                to="/shop?category=Accessories"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-medium transition-colors ${
-                  isCategoryActive("Accessories")
-                    ? "text-[#A86F77]"
-                    : "text-[#6F5B5F] hover:text-[#A86F77]"
-                }`}
-              >
-                Kundan Clutches
-              </Link>
-
-              <Link
-                to="/shop?sale=true"
-                onClick={closeMenu}
-                className={`border-b border-[#E8D8DA] py-4 text-sm font-semibold transition-colors ${
-                  isSaleActive()
-                    ? "text-[#A86F77]"
-                    : "text-[#9C626B] hover:text-[#A86F77]"
-                }`}
-              >
-                Sale
-              </Link>
-
-              {/* MOBILE COUNTRY SELECTOR */}
-              <div className="pt-6">
-                <p className="mb-3 text-[9px] font-semibold uppercase tracking-[0.3em] text-[#9C8589]">
-                  Shopping Country
-                </p>
-
-                <div className="w-full">
-                  <CountrySelector />
-                </div>
-              </div>
-            </nav>
-          </div>
-        )}
       </header>
 
-      {/* NAVBAR SPACING */}
-      <div className="h-20 sm:h-24" />
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 h-full w-full animate-[fadeIn_180ms_ease-out] bg-[#302522]/35 backdrop-blur-[2px]"
+            onClick={closeMenu}
+            aria-label="Close navigation menu"
+            tabIndex={-1}
+          />
+
+          <aside
+            id="mobile-navigation"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            className="mobile-menu-panel absolute bottom-0 right-0 top-[72px] flex w-[min(88vw,390px)] flex-col overflow-y-auto border-l border-[#E8D8DA] bg-[#FFF9F7] px-6 pb-[max(28px,env(safe-area-inset-bottom))] pt-7 shadow-[-18px_0_55px_rgba(48,37,34,0.12)] sm:top-20 sm:px-8"
+          >
+            <div className="mb-7 border-b border-[#E8D8DA] pb-6">
+              <p className="text-[9px] font-semibold uppercase tracking-[0.34em] text-[#A8797D]">
+                F&A Collective
+              </p>
+              <p className="mt-2 font-serif text-2xl text-[#493633]">
+                Discover something beautiful.
+              </p>
+            </div>
+
+            <nav aria-label="Mobile navigation links" className="flex flex-col">
+              {navigationItems.map((item, index) => {
+                const active = item.isActive(location);
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.to}
+                    onClick={closeMenu}
+                    aria-current={active ? "page" : undefined}
+                    className={`group flex min-h-[58px] items-center justify-between border-b border-[#E8D8DA] py-4 text-[15px] transition-colors duration-200 ${active ? "font-semibold text-[#A86F77]" : item.isSale ? "font-semibold text-[#9C626B]" : "font-medium text-[#6F5B5F] hover:text-[#A86F77]"}`}
+                    style={{ animation: `mobileMenuItemIn 260ms ease both `, animationDelay: `${index * 35}ms` }}
+                  >
+                    <span>{item.label}</span>
+                    <FiArrowUpRight className="text-base opacity-35 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="mt-auto pt-8">
+              <p className="mb-3 text-[9px] font-semibold uppercase tracking-[0.3em] text-[#9C8589]">
+                Shopping Country & Currency
+              </p>
+              <div className="w-full">
+                <CountrySelector />
+              </div>
+              <p className="mt-6 text-center text-[9px] uppercase tracking-[0.2em] text-[#B19A98]">
+                Timeless elegance · F&A Collective
+              </p>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      <div className="h-[72px] sm:h-20 lg:h-24" />
     </>
   );
 };
