@@ -12,6 +12,7 @@ const Product360Viewer = ({ product }) => {
   const imageRef = useRef(null);
   const dragStartX = useRef(null);
   const dragStartFrame = useRef(0);
+  const isTouching = useRef(false);
 
   const setWrappedFrame = (value) => {
     setFrame(((value % images.length) + images.length) % images.length);
@@ -29,7 +30,7 @@ const Product360Viewer = ({ product }) => {
       setWrappedFrame(dragStartFrame.current - steps);
       return;
     }
-    if (event.pointerType === "touch" && event.buttons === 0) return;
+    if (event.pointerType === "touch" && !isTouching.current) return;
     const bounds = stageRef.current?.getBoundingClientRect();
     if (!bounds || !imageRef.current) return;
     const x = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width));
@@ -42,14 +43,25 @@ const Product360Viewer = ({ product }) => {
   };
 
   const handlePointerDown = (event) => {
+    if (event.pointerType === "touch") isTouching.current = true;
     if (has360Frames) {
       dragStartX.current = event.clientX;
       dragStartFrame.current = frame;
-      event.currentTarget.setPointerCapture?.(event.pointerId);
+    }
+    // Capture touch input so movement continues to be received across the image.
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    if (!has360Frames && event.pointerType === "touch") {
+      const bounds = stageRef.current?.getBoundingClientRect();
+      if (bounds && imageRef.current) {
+        const x = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width));
+        const y = Math.max(0, Math.min(1, (event.clientY - bounds.top) / bounds.height));
+        imageRef.current.style.transform = `translate3d(${(x - 0.5) * 8}px,${(y - 0.5) * 8}px,0) rotateX(${(0.5 - y) * 9}deg) rotateY(${(x - 0.5) * 12}deg) scale(1.025)`;
+      }
     }
   };
 
   const stopPointer = () => {
+    isTouching.current = false;
     dragStartX.current = null;
     resetTilt();
   };
@@ -84,7 +96,7 @@ const Product360Viewer = ({ product }) => {
         onPointerCancel={stopPointer}
         onLostPointerCapture={stopPointer}
         onPointerLeave={stopPointer}
-        style={{ touchAction: has360Frames ? "pan-y" : "pan-y" }}
+        style={{ touchAction: "none", WebkitUserSelect: "none", userSelect: "none" }}
       >
         <div className="product-viewer-shimmer pointer-events-none absolute inset-0" />
         <div ref={imageRef} className="product-viewer-image-wrap absolute inset-0" style={{ transform: "translate3d(0,0,0) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 180ms ease-out", transformStyle: "preserve-3d" }}>
