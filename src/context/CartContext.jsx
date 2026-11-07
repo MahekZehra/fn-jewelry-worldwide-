@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -110,7 +111,7 @@ export const CartProvider = ({ children }) => {
   const [inventoryReady, setInventoryReady] = useState(false);
   const [inventoryError, setInventoryError] = useState("");
 
-  const refreshInventory = async () => {
+  const refreshInventory = useCallback(async () => {
     try {
       const response = await fetch("/api/inventory", {
         method: "GET",
@@ -141,7 +142,7 @@ export const CartProvider = ({ children }) => {
       setInventoryError(error.message || "Live inventory is unavailable.");
       return null;
     }
-  };
+  }, []);
 
   const getItemInventoryStatus = (productId) => {
     if (!inventoryReady) return "checking";
@@ -180,7 +181,7 @@ export const CartProvider = ({ children }) => {
       window.clearInterval(intervalId);
       window.removeEventListener("focus", refreshInventory);
     };
-  }, []);
+  }, [refreshInventory]);
 
   /* =========================================================
      GET BASE PRICE AED
