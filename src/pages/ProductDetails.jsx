@@ -33,7 +33,6 @@ const ProductDetails = () => {
     (item) => item.id === Number(id)
   );
 
-  const quantity = 1;
   const [cartNotice, setCartNotice] = useState("");
 
   const inventoryStatus = product
