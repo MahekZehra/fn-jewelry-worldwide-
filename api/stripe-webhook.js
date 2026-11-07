@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import {
   completeProductReservation,
   releaseProductReservation,
-} from "./_lib/inventory.js";
+} from "../lib/inventory.js";
 
 export const config = {
   api: {
