@@ -95,13 +95,13 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={closeMenu}
-            className="flex h-full min-w-0 shrink items-center"
+            className="flex h-full w-auto min-w-0 max-w-[44%] shrink items-center overflow-hidden"
             aria-label="F&A Collective Home"
           >
             <img
               src="/logo/fa-logo.jpg"
               alt="F&A Collective - Fashion and Jewellery"
-              className="block h-[54px] w-auto max-w-[min(48vw,220px)] object-contain sm:h-[68px] sm:max-w-[260px] lg:h-[82px]"
+              className="block h-[40px] max-h-[40px] w-auto max-w-[min(42vw,156px)] object-contain object-left sm:h-[54px] sm:max-h-[54px] sm:max-w-[210px] lg:h-[66px] lg:max-h-[66px] lg:max-w-[240px]"
             />
           </Link>
 
