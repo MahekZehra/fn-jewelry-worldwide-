@@ -167,16 +167,9 @@ const ProductDetails = () => {
 
         {/* PRODUCT LAYOUT */}
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] lg:items-start lg:gap-16">
-          {/* PRODUCT IMAGE */}
-
-          <div className="lg:sticky lg:top-28">
-            <Product360Viewer product={product} />
-          </div>
-
-          {/* PRODUCT INFORMATION */}
-
-          <div className="lg:pt-3">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,0.95fr)] lg:items-start lg:gap-16">
+          {/* PRODUCT INTRO — shown before the image on mobile */}
+          <div className="lg:col-start-2 lg:row-start-1 lg:pt-3">
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-black/40 sm:text-xs">
               {product.category}
             </p>
@@ -226,7 +219,16 @@ const ProductDetails = () => {
                 {product.description}
               </p>
             </section>
+          </div>
 
+          {/* PRODUCT IMAGE */}
+
+          <div className="lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-28">
+            <Product360Viewer product={product} />
+          </div>
+
+          {/* PRODUCT DETAILS AND PURCHASE ACTIONS — after image on mobile */}
+          <div className="lg:col-start-2 lg:row-start-2">
             {/* PRODUCT DETAILS */}
 
             {product.details && (
