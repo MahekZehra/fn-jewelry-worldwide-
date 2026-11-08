@@ -21,6 +21,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import ReturnsExchanges from "./pages/ReturnsExchanges";
+import CustomerCancelOrder from "./pages/CustomerCancelOrder";
+import AdminOrders from "./pages/AdminOrders";
 
 
 /* =====================================================
@@ -114,6 +116,10 @@ function App() {
           path="/order-confirmation"
           element={<OrderConfirmation />}
         />
+
+        {/* CUSTOMER AND ADMIN ORDER CANCELLATION */}
+        <Route path="/cancel-order" element={<CustomerCancelOrder />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
 
         {/* RETURNS & EXCHANGES */}
         <Route
