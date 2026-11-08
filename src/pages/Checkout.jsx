@@ -77,10 +77,17 @@ const Checkout = () => {
       window.dispatchEvent(new Event("countryChanged"));
       setSelectedCountry({ code: "AE", name: "United Arab Emirates" });
       setErrorMessage("");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Unable to switch shopping country to UAE:", error);
       setErrorMessage("We couldn't update your shopping country. Please use the country selector in the header.");
     }
+  };
+
+  const handleGoBackToShopping = () => {
+    setErrorMessage("");
+    navigate("/shop");
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   const [form, setForm] = useState({
@@ -253,11 +260,11 @@ const Checkout = () => {
   // DELIVERY RESTRICTION — purchases are currently UAE-only.
   if (cart.length > 0 && !isUaeDeliveryAvailable) {
     return (
-      <main className="relative flex min-h-[75vh] items-center justify-center overflow-hidden bg-[#FFFDF9] px-5 py-16 sm:px-8">
+      <main className="relative flex min-h-[calc(100dvh-5rem)] items-center justify-center overflow-x-hidden bg-[#FFFDF9] px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-16">
         <div className="pointer-events-none absolute -right-24 top-8 h-72 w-72 rounded-full bg-[#EEDBD7]/35 blur-3xl" />
         <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[#E7D4B7]/25 blur-3xl" />
 
-        <section className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-[#D8B9B5]/30 bg-white/90 px-6 py-12 text-center shadow-[0_18px_55px_rgba(82,58,52,0.08)] sm:px-12 sm:py-16">
+        <section className="relative z-10 my-auto w-full max-w-2xl rounded-[1.5rem] border border-[#D8B9B5]/30 bg-white/95 px-5 py-8 text-center shadow-[0_18px_55px_rgba(82,58,52,0.08)] sm:rounded-[2rem] sm:px-12 sm:py-16">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-[#FFF5F2] text-[#A97972]">
             <FiTruck className="text-2xl" />
           </div>
@@ -281,15 +288,15 @@ const Checkout = () => {
             <button
               type="button"
               onClick={handleContinueWithUAE}
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#4A3935] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#5A4540] focus:outline-none focus:ring-2 focus:ring-[#B18A83] focus:ring-offset-2"
+              className="inline-flex min-h-14 w-full touch-manipulation select-none items-center justify-center rounded-full bg-[#4A3935] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#5A4540] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-[#B18A83] focus:ring-offset-2 sm:w-auto"
             >
               Continue with UAE
             </button>
 
             <button
               type="button"
-              onClick={() => navigate("/shop")}
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-white px-7 py-3 text-sm font-medium text-[#6F5B5F] transition hover:bg-[#FFF7F4] focus:outline-none focus:ring-2 focus:ring-[#D8B9B5] focus:ring-offset-2"
+              onClick={handleGoBackToShopping}
+              className="inline-flex min-h-14 w-full touch-manipulation select-none items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-white px-7 py-4 text-sm font-semibold text-[#6F5B5F] transition hover:bg-[#FFF7F4] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-[#D8B9B5] focus:ring-offset-2 sm:w-auto"
             >
               Go Back to Shopping
             </button>
