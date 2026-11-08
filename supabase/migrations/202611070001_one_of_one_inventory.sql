@@ -23,6 +23,9 @@ create index if not exists product_inventory_status_idx
 alter table public.product_inventory enable row level security;
 revoke all on table public.product_inventory from anon, authenticated;
 
+-- The server-side inventory API uses the service_role to read stock states.
+grant select on table public.product_inventory to service_role;
+
 create or replace function public.release_expired_product_reservations()
 returns integer
 language plpgsql
