@@ -538,6 +538,18 @@ const ProductCard = ({ product }) => {
           {product.name}
         </h3>
 
+        {(isSoldOut || isReserved) && (
+          <span
+            className={`mt-2 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] ${
+              isSoldOut
+                ? "border-[#8B6865]/20 bg-[#8B6865]/10 text-[#76504D]"
+                : "border-[#A47A4A]/20 bg-[#A47A4A]/10 text-[#8A683E]"
+            }`}
+          >
+            {isSoldOut ? "Sold Out" : "Reserved"}
+          </span>
+        )}
+
         {/* =================================================
             DESCRIPTION
         ================================================= */}
