@@ -48,8 +48,11 @@ const Product360Viewer = ({ product }) => {
       dragStartX.current = event.clientX;
       dragStartFrame.current = frame;
     }
-    // Capture touch input so movement continues to be received across the image.
-    event.currentTarget.setPointerCapture?.(event.pointerId);
+    // Capture mouse and multi-frame drag input. For a single image on touch
+    // devices, leave gestures to the browser so vertical page scrolling works.
+    if (event.pointerType !== "touch" || has360Frames) {
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+    }
     if (!has360Frames && event.pointerType === "touch") {
       const bounds = stageRef.current?.getBoundingClientRect();
       if (bounds && imageRef.current) {
@@ -96,7 +99,14 @@ const Product360Viewer = ({ product }) => {
         onPointerCancel={stopPointer}
         onLostPointerCapture={stopPointer}
         onPointerLeave={stopPointer}
-        style={{ touchAction: "none", WebkitUserSelect: "none", userSelect: "none" }}
+        style={{
+          // Preserve native vertical page scrolling and pinch zoom on phones.
+          // Horizontal pointer movement remains available for image interactions.
+          touchAction: "pan-y pinch-zoom",
+          overscrollBehaviorY: "auto",
+          WebkitUserSelect: "none",
+          userSelect: "none",
+        }}
       >
         <div className="product-viewer-shimmer pointer-events-none absolute inset-0" />
         <div ref={imageRef} className="product-viewer-image-wrap absolute inset-0" style={{ transform: "translate3d(0,0,0) rotateX(0deg) rotateY(0deg) scale(1)", transition: "transform 180ms ease-out", transformStyle: "preserve-3d" }}>
