@@ -4,6 +4,7 @@ import {
   completeProductReservation,
   releaseProductReservation,
 } from "../lib/inventory.js";
+import { getOrder, upsertOrder, updateOrder, makeCustomerCancelToken } from "../lib/orders.js";
 
 export const config = {
   api: {
@@ -118,6 +119,13 @@ export default async function handler(req, res) {
     if (reservationId) {
       await releaseProductReservation(reservationId);
     }
+    const expiredOrderNumber = eventSession.metadata?.orderNumber;
+    if (expiredOrderNumber) {
+      await updateOrder(expiredOrderNumber, {
+        status: "payment_failed",
+        payment_status: "failed",
+      }, "awaiting_payment").catch(() => null);
+    }
     return res.status(200).json({ received: true, inventoryReleased: true });
   }
 
@@ -153,6 +161,11 @@ export default async function handler(req, res) {
     const customerName = metadata.customerName;
     const customerEmail =
       metadata.customerEmail || session.customer_details?.email;
+    const storedOrder = orderNumber ? await getOrder(orderNumber) : null;
+
+    if (storedOrder?.status === "cancelled") {
+      return res.status(200).json({ received: true, ignored: true, reason: "order_already_cancelled" });
+    }
 
     // Inventory is marked sold only after Stripe confirms successful payment.
     // This RPC is idempotent so Stripe can safely retry webhook deliveries.
@@ -209,7 +222,8 @@ export default async function handler(req, res) {
       });
     }
 
-    const items = lineItems.data.map((line) => {
+    const productIds = String(metadata.productIds || "").split(",").filter(Boolean);
+    const items = lineItems.data.map((line, index) => {
       const quantity = Number(line.quantity);
       const unitAmount = line.price?.unit_amount;
       const itemCurrency = line.currency;
@@ -225,6 +239,7 @@ export default async function handler(req, res) {
       }
 
       return {
+        productId: productIds[index] || null,
         name: line.description || "F&A Product",
         quantity,
         price: unitAmount / 100,
@@ -248,6 +263,31 @@ export default async function handler(req, res) {
       });
     }
 
+    const cancelToken = makeCustomerCancelToken(orderNumber, customerEmail);
+    const cancelUrl = `${siteUrl.replace(/\\/+$/, "")}/cancel-order?order=${encodeURIComponent(orderNumber)}&token=${cancelToken}`;
+
+    await upsertOrder({
+      order_number: orderNumber,
+      customer_name: customerName,
+      customer_email: String(customerEmail).trim().toLowerCase(),
+      customer_phone: metadata.customerPhone || "",
+      customer_city: metadata.customerCity,
+      customer_address: metadata.customerAddress,
+      items,
+      total: session.amount_total / 100,
+      currency: "AED",
+      payment_method: "stripe",
+      payment_status: "paid",
+      status: storedOrder?.status && storedOrder.status !== "awaiting_payment"
+        ? storedOrder.status
+        : "confirmed",
+      reservation_id: metadata.reservationId || null,
+      stripe_checkout_session_id: session.id,
+      stripe_payment_intent_id: typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : session.payment_intent?.id || null,
+    });
+
     // Send online-order emails through the existing Resend API.
     // The internal secret must match the Vercel environment variable.
     const emailResponse = await fetch(
@@ -269,6 +309,7 @@ export default async function handler(req, res) {
           total: session.amount_total / 100,
           currency: "AED",
           paymentMethod: "stripe",
+          cancelUrl,
         }),
       }
     );
