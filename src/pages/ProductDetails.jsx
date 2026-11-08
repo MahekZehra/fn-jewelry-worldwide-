@@ -43,8 +43,7 @@ const ProductDetails = () => {
   const alreadyInCart = product
     ? cart.some((item) => String(item.id) === String(product.id))
     : false;
-  const cannotPurchase =
-    !inventoryReady || isSoldOut || isReserved;
+  const cannotPurchase = isSoldOut || isReserved;
 
   /* =====================================================
      PRODUCT NOT FOUND
@@ -101,7 +100,7 @@ const ProductDetails = () => {
             ? "This piece has already sold out."
             : isReserved
               ? "This piece is currently reserved by another customer."
-              : "Live stock is being checked. Please try again."
+              : "This piece could not be added. Please try again."
     );
   };
 
@@ -305,9 +304,7 @@ const ProductDetails = () => {
                   ? "Sold Out"
                   : isReserved
                     ? "Reserved"
-                    : !inventoryReady
-                      ? "Checking Stock"
-                      : alreadyInCart
+                    : alreadyInCart
                         ? "Already in Your Bag"
                         : "Add to Cart"}
               </button>
