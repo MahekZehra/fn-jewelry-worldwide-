@@ -45,6 +45,7 @@ export default async function handler(req, res) {
       total,
       currency = "AED",
       paymentMethod = "cod",
+      cancelUrl = "",
     } = req.body || {};
 
     // Validate required order information.
@@ -126,6 +127,19 @@ export default async function handler(req, res) {
         : "Cash on Delivery";
 
     const safePaymentMethod = escapeHtml(paymentMethodLabel);
+    let safeCancelUrl = "";
+    try {
+      const candidate = new URL(String(cancelUrl));
+      const trustedOrigin = new URL(process.env.SITE_URL).origin;
+      if (candidate.origin === trustedOrigin && candidate.pathname === "/cancel-order") {
+        safeCancelUrl = escapeHtml(candidate.toString());
+      }
+    } catch {
+      safeCancelUrl = "";
+    }
+    const customerCancellationAction = safeCancelUrl
+      ? `<div style="margin:28px 0;padding:22px;border:1px solid #eee5df;border-radius:14px;text-align:center;background:#fffdfb;"><p style="margin:0 0 14px;color:#665955;font-size:13px;line-height:1.7;">Need to cancel this order? You can request cancellation before it is dispatched.</p><a href="${safeCancelUrl}" style="display:inline-block;background:#3E302D;color:#ffffff;text-decoration:none;padding:13px 26px;border-radius:999px;font-size:13px;font-weight:bold;">Cancel My Order</a></div>`
+      : "";
 
     const formatAmount = (amount) => {
       const value = Number(amount) || 0;
@@ -282,6 +296,8 @@ export default async function handler(req, res) {
       </h3>
 
       ${orderSummary}
+
+      ${customerCancellationAction}
 
       <div style="margin-top:24px;background:#FAF5F2;padding:18px;border-radius:14px;">
         <p style="margin:0;color:#665955;">
