@@ -133,6 +133,25 @@ const CountrySelector = () => {
     };
   }, []);
 
+  /* Keep selector state synchronized when checkout switches the store to UAE. */
+  useEffect(() => {
+    const syncSelectedCountry = () => {
+      try {
+        const saved = localStorage.getItem("selectedCountry");
+        const parsed = saved ? JSON.parse(saved) : null;
+        const matchingCountry = countries.find(
+          (country) => country.code === String(parsed?.code || "").toUpperCase()
+        );
+        if (matchingCountry) setSelectedCountry(matchingCountry);
+      } catch (error) {
+        console.error("Unable to sync selected country:", error);
+      }
+    };
+
+    window.addEventListener("countryChanged", syncSelectedCountry);
+    return () => window.removeEventListener("countryChanged", syncSelectedCountry);
+  }, []);
+
   /* =====================================================
      ESCAPE
   ===================================================== */
