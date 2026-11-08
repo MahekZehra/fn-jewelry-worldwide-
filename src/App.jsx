@@ -12,6 +12,7 @@ import WorldwideDelivery from "./components/WorldwideDelivery";
 import Contact from "./components/Contact";
 import Chatbot from "./components/Chatbot";
 import Footer from "./components/Footer";
+import SEO from "./components/SEO";
 
 
 import Cart from "./pages/Cart";
@@ -70,6 +71,7 @@ function Home() {
 function App() {
   return (
     <BrowserRouter>
+      <SEO />
 
       {/* NAVBAR */}
       <Navbar />
