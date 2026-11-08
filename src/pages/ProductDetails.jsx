@@ -25,7 +25,6 @@ const ProductDetails = () => {
     currency,
     formatPrice,
     getProductPrice,
-    inventoryReady,
     getItemInventoryStatus,
   } = useCart();
 
