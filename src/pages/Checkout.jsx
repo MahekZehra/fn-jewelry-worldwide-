@@ -243,6 +243,7 @@ const Checkout = () => {
           paymentMethod: "cod",
           total: Number(result.total) || Number(cartTotal) || 0,
           currency: result.currency || currency || "AED",
+          cancelToken: result.cancelToken,
         },
       });
     } catch (error) {
