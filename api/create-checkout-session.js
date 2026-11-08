@@ -5,6 +5,7 @@ import {
   reserveProductItems,
   releaseProductReservation,
 } from "../lib/inventory.js";
+import { upsertOrder } from "../lib/orders.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -130,10 +131,11 @@ export default async function handler(req, res) {
       expiryMinutes: 40,
     });
 
+    let session = null;
     try {
       const expiresAt = Math.floor(Date.now() / 1000) + 32 * 60;
 
-      const session = await stripe.checkout.sessions.create({
+      session = await stripe.checkout.sessions.create({
         mode: "payment",
         line_items: lineItems,
         customer_email: customerEmail,
@@ -158,11 +160,45 @@ export default async function handler(req, res) {
         cancel_url: `${siteUrl}/checkout?payment=cancelled`,
       });
 
+      const orderItems = normalizedItems.map(({ id }) => {
+        const product = products.find((entry) => String(entry.id) === id);
+        const unitPrice = product.onSale === true && Number(product.salePriceAED) > 0
+          ? Number(product.salePriceAED)
+          : Number(product.priceAED ?? product.price);
+        return {
+          productId: id,
+          name: product.name,
+          quantity: 1,
+          price: unitPrice,
+          currency: "AED",
+        };
+      });
+
+      await upsertOrder({
+        order_number: orderNumber,
+        customer_name: customerName,
+        customer_email: String(customerEmail).trim().toLowerCase(),
+        customer_phone: customerPhone || "",
+        customer_city: customerCity,
+        customer_address: customerAddress,
+        items: orderItems,
+        total: Number(orderItems.reduce((sum, item) => sum + item.price, 0).toFixed(2)),
+        currency: "AED",
+        payment_method: "stripe",
+        payment_status: "unpaid",
+        status: "awaiting_payment",
+        reservation_id: reservationId,
+        stripe_checkout_session_id: session.id,
+      });
+
       return res.status(200).json({
         success: true,
         url: session.url,
       });
     } catch (error) {
+      if (session?.id) {
+        await stripe.checkout.sessions.expire(session.id).catch(() => null);
+      }
       await releaseProductReservation(reservationId).catch((releaseError) => {
         console.error("Could not release failed Stripe reservation:", releaseError);
       });
