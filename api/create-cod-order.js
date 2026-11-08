@@ -126,7 +126,7 @@ export default async function handler(req, res) {
     });
 
     const cancelToken = makeCustomerCancelToken(orderNumber, customerEmail);
-    const cancelUrl = `${siteUrl.replace(/\\/+$/, "")}/cancel-order?order=${encodeURIComponent(orderNumber)}&token=${cancelToken}`;
+    const cancelUrl = `${siteUrl.replace(/\/+$/, "")}/cancel-order?order=${encodeURIComponent(orderNumber)}&token=${cancelToken}`;
 
     await upsertOrder({
       order_number: orderNumber,
