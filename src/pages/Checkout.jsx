@@ -63,6 +63,26 @@ const Checkout = () => {
 
   const isUaeDeliveryAvailable = selectedCountry.code === "AE";
 
+  const handleContinueWithUAE = () => {
+    const uaeCountry = {
+      name: "United Arab Emirates",
+      code: "AE",
+      currency: "AED",
+      symbol: "AED",
+      flag: "https://flagcdn.com/w80/ae.png",
+    };
+
+    try {
+      localStorage.setItem("selectedCountry", JSON.stringify(uaeCountry));
+      window.dispatchEvent(new Event("countryChanged"));
+      setSelectedCountry({ code: "AE", name: "United Arab Emirates" });
+      setErrorMessage("");
+    } catch (error) {
+      console.error("Unable to switch shopping country to UAE:", error);
+      setErrorMessage("We couldn't update your shopping country. Please use the country selector in the header.");
+    }
+  };
+
   const [form, setForm] = useState({
     customerName: "",
     customerEmail: "",
@@ -260,18 +280,19 @@ const Checkout = () => {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <button
               type="button"
-              onClick={() => window.dispatchEvent(new Event("openCountrySelector"))}
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#4A3935] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#5A4540]"
+              onClick={handleContinueWithUAE}
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#4A3935] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#5A4540] focus:outline-none focus:ring-2 focus:ring-[#B18A83] focus:ring-offset-2"
             >
-              Select UAE to Continue
+              Continue with UAE
             </button>
 
-            <Link
-              to="/cart"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-white px-7 py-3 text-sm font-medium text-[#6F5B5F] transition hover:bg-[#FFF7F4]"
+            <button
+              type="button"
+              onClick={() => navigate("/shop")}
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-white px-7 py-3 text-sm font-medium text-[#6F5B5F] transition hover:bg-[#FFF7F4] focus:outline-none focus:ring-2 focus:ring-[#D8B9B5] focus:ring-offset-2"
             >
-              Back to Shopping Bag
-            </Link>
+              Go Back to Shopping
+            </button>
           </div>
 
           <p className="mt-7 text-[10px] uppercase tracking-[0.22em] text-[#B18A83]/75">
