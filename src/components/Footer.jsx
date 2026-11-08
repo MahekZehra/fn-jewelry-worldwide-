@@ -83,19 +83,11 @@ const Footer = () => {
             <div className="mt-7 flex items-center gap-3">
 
               <a
-                href="#"
+                href="https://www.instagram.com/fa_collective_jewellery/"
                 aria-label="Instagram"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2B2525]/10 bg-white/40 text-[#2B2525]/60 transition-all duration-300 hover:-translate-y-1 hover:border-[#9B7477]/40 hover:bg-[#D8B6B8]/25 hover:text-[#9B7477]"
               >
                 <FiInstagram className="text-sm" />
-              </a>
-
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2B2525]/10 bg-white/40 text-[#2B2525]/60 transition-all duration-300 hover:-translate-y-1 hover:border-[#9B7477]/40 hover:bg-[#D8B6B8]/25 hover:text-[#9B7477]"
-              >
-                <FiFacebook className="text-sm" />
               </a>
 
               <a
