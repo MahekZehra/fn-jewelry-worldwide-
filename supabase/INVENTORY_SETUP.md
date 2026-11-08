@@ -7,7 +7,7 @@ This feature treats every catalog product as a single, unique piece (quantity 1)
 1. Create a Supabase project at https://supabase.com/dashboard.
 2. Open the project's **SQL Editor**.
 3. Run the complete migration in `supabase/migrations/202611070001_one_of_one_inventory.sql`.
-4. In **Project Settings → API**, copy the Project URL and the server-side `service_role` key (or the new server-side secret key).
+4. In **Project Settings → API**, copy the Project URL and the server-side Secret key (`sb_secret_...`) from Settings → API Keys → Secret keys. The code also supports the legacy `service_role` key if required.
 
 The inventory table has Row Level Security enabled and no browser-role access. The service-role key is used only by Vercel server-side API functions. Never put it in frontend code, a `VITE_` variable, or Git.
 
@@ -18,7 +18,7 @@ In the Vercel project connected to this repository, open **Settings → Environm
 | Variable | Value |
 | --- | --- |
 | `SUPABASE_URL` | Supabase Project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase server-side service-role/secret key |
+| `SUPABASE_SECRET_KEY` | Supabase server-side Secret key (`sb_secret_...`) |
 | `INVENTORY_ADMIN_SECRET` | A new, long, random secret used only for the protected inventory admin endpoint |
 
 Add them to **Preview** and **Production**. Redeploy after saving them. Do not commit any of these values to GitHub.
