@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CurrencyContext = createContext();
 
@@ -107,9 +107,24 @@ const currencies = {
 };
 
 export const CurrencyProvider = ({ children }) => {
-  const [selectedCountry, setSelectedCountry] = useState(
-    "United Arab Emirates"
-  );
+  const readCountry = () => {
+    try {
+      const saved = localStorage.getItem("selectedCountry");
+      const parsed = saved ? JSON.parse(saved) : null;
+      const supported = parsed?.name && currencies[parsed.name];
+      return supported ? parsed.name : "United Arab Emirates";
+    } catch {
+      return "United Arab Emirates";
+    }
+  };
+
+  const [selectedCountry, setSelectedCountry] = useState(readCountry);
+
+  useEffect(() => {
+    const syncCountry = () => setSelectedCountry(readCountry());
+    window.addEventListener("countryChanged", syncCountry);
+    return () => window.removeEventListener("countryChanged", syncCountry);
+  }, []);
 
   const currency = currencies[selectedCountry];
 
