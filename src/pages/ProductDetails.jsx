@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   FiArrowLeft,
@@ -18,6 +18,12 @@ const WHATSAPP_NUMBER = "971529218985";
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  // Always start a newly opened product page at the very top.
+  // useLayoutEffect runs after the route content commits and before paint.
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const {
     addToCart,
