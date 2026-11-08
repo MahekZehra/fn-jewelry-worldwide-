@@ -33,7 +33,15 @@ export default async function handler(req, res) {
       customerPhone,
       customerCity,
       customerAddress,
+      selectedCountryCode,
     } = req.body || {};
+
+    if (String(selectedCountryCode || "").toUpperCase() !== "AE") {
+      return res.status(403).json({
+        success: false,
+        message: "We're currently delivering only within the United Arab Emirates. International shipping is not available right now.",
+      });
+    }
 
     if (
       !customerName ||
