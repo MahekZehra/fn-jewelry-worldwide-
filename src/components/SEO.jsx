@@ -175,6 +175,12 @@ function getPageMetadata(pathname, search) {
             "@type": "Brand",
             name: "F&A Collective",
           },
+          offers: {
+            "@type": "Offer",
+            url: canonical,
+            price: Number(price).toFixed(2),
+            priceCurrency: "AED",
+          },
           material: product.details?.material,
         },
       };
