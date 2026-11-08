@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  FiMinus,
-  FiPlus,
   FiTrash2,
   FiArrowLeft,
 } from "react-icons/fi";
@@ -51,9 +49,8 @@ const currencySymbols = {
 const Cart = () => {
   const {
     cart,
-    increaseQuantity,
-    decreaseQuantity,
     removeFromCart,
+    getItemInventoryStatus,
   } = useCart();
 
   const navigate = useNavigate();
@@ -400,8 +397,8 @@ const Cart = () => {
               const convertedPrice =
                 convertPrice(priceAED);
 
-              const quantity =
-                Number(item.quantity) || 1;
+              const quantity = 1;
+              const itemAvailability = getItemInventoryStatus(item.id);
 
               const itemTotal =
                 convertedPrice * quantity;
@@ -504,6 +501,17 @@ const Cart = () => {
                             {formatPrice(convertedPrice)}
                           </p>
 
+                          {itemAvailability === "reserved" && (
+                            <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-[#A8797D]">
+                              This piece is currently reserved
+                            </p>
+                          )}
+                          {itemAvailability === "sold" && (
+                            <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-red-700">
+                              This piece has sold out
+                            </p>
+                          )}
+
                         </div>
 
                         {/* REMOVE */}
@@ -544,71 +552,10 @@ const Cart = () => {
                         "
                       >
 
-                        {/* QUANTITY */}
-
-                        <div
-                          className="
-                            flex items-center
-                            rounded-full
-                            border
-                            border-[#D8B9B5]/25
-                            bg-[#FFF9F7]
-                            p-1
-                          "
-                        >
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              decreaseQuantity(item.id)
-                            }
-                            aria-label="Decrease quantity"
-                            className="
-                              flex h-8 w-8
-                              items-center
-                              justify-center
-                              rounded-full
-                              text-[#806D68]
-                              transition
-                              hover:bg-[#F2E2DE]
-                              hover:text-[#4A3935]
-                            "
-                          >
-                            <FiMinus className="text-xs" />
-                          </button>
-
-                          <span
-                            className="
-                              min-w-8
-                              text-center
-                              text-sm
-                              font-medium
-                              text-[#4A3935]
-                            "
-                          >
-                            {quantity}
+                        <div className="rounded-full border border-[#D8B9B5]/25 bg-[#FFF9F7] px-4 py-2">
+                          <span className="text-[11px] font-medium text-[#806D68]">
+                            One of a kind · Qty 1
                           </span>
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              increaseQuantity(item.id)
-                            }
-                            aria-label="Increase quantity"
-                            className="
-                              flex h-8 w-8
-                              items-center
-                              justify-center
-                              rounded-full
-                              text-[#806D68]
-                              transition
-                              hover:bg-[#F2E2DE]
-                              hover:text-[#4A3935]
-                            "
-                          >
-                            <FiPlus className="text-xs" />
-                          </button>
-
                         </div>
 
                         {/* ITEM TOTAL */}

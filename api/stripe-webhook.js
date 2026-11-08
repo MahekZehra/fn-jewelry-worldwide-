@@ -1,5 +1,9 @@
 
 import Stripe from "stripe";
+import {
+  completeProductReservation,
+  releaseProductReservation,
+} from "../lib/inventory.js";
 
 export const config = {
   api: {
@@ -81,7 +85,9 @@ export default async function handler(req, res) {
   // Ignore unrelated events.
   if (
     event.type !== "checkout.session.completed" &&
-    event.type !== "checkout.session.async_payment_succeeded"
+    event.type !== "checkout.session.async_payment_succeeded" &&
+    event.type !== "checkout.session.expired" &&
+    event.type !== "checkout.session.async_payment_failed"
   ) {
     return res.status(200).json({
       received: true,
@@ -100,6 +106,19 @@ export default async function handler(req, res) {
       success: false,
       message: "Invalid Checkout Session event.",
     });
+  }
+
+  // Release stock when a customer abandons/expires the hosted Checkout
+  // Session or an asynchronous payment method ultimately fails.
+  if (
+    event.type === "checkout.session.expired" ||
+    event.type === "checkout.session.async_payment_failed"
+  ) {
+    const reservationId = eventSession.metadata?.reservationId;
+    if (reservationId) {
+      await releaseProductReservation(reservationId);
+    }
+    return res.status(200).json({ received: true, inventoryReleased: true });
   }
 
   // A completed Checkout Session is not necessarily paid.
@@ -134,6 +153,20 @@ export default async function handler(req, res) {
     const customerName = metadata.customerName;
     const customerEmail =
       metadata.customerEmail || session.customer_details?.email;
+
+    // Inventory is marked sold only after Stripe confirms successful payment.
+    // This RPC is idempotent so Stripe can safely retry webhook deliveries.
+    if (metadata.reservationId) {
+      const inventoryResult = await completeProductReservation(
+        metadata.reservationId,
+        orderNumber
+      );
+      if (!inventoryResult?.success) {
+        throw new Error(
+          "Payment succeeded, but the reserved inventory could not be confirmed. Manual review is required."
+        );
+      }
+    }
 
     if (
       !orderNumber ||

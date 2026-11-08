@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FiShield,
@@ -12,6 +12,24 @@ import {
 
 import { useCart } from "../context/CartContext";
 
+const readSelectedCountry = () => {
+  try {
+    const saved = localStorage.getItem("selectedCountry");
+    const parsed = saved ? JSON.parse(saved) : null;
+
+    return {
+      code: String(parsed?.code || "PK").toUpperCase(),
+      name: parsed?.name || "Pakistan",
+    };
+  } catch (error) {
+    console.error("Unable to read selected delivery country:", error);
+    return { code: "PK", name: "Pakistan" };
+  }
+};
+
+const UAE_DELIVERY_MESSAGE =
+  "We're currently delivering only within the United Arab Emirates. International shipping is not available right now. Please select UAE as your country to continue.";
+
 const Checkout = () => {
   const {
     cart,
@@ -22,6 +40,7 @@ const Checkout = () => {
     getCheckoutItems,
     getActualPriceAED,
     clearCart,
+    refreshInventory,
   } = useCart();
 
   const navigate = useNavigate();
@@ -29,6 +48,20 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(readSelectedCountry);
+
+  useEffect(() => {
+    const updateSelectedCountry = () => {
+      setSelectedCountry(readSelectedCountry());
+    };
+
+    window.addEventListener("countryChanged", updateSelectedCountry);
+    return () => {
+      window.removeEventListener("countryChanged", updateSelectedCountry);
+    };
+  }, []);
+
+  const isUaeDeliveryAvailable = selectedCountry.code === "AE";
 
   const [form, setForm] = useState({
     customerName: "",
@@ -85,11 +118,33 @@ const Checkout = () => {
       return;
     }
 
+    if (!isUaeDeliveryAvailable) {
+      setErrorMessage(UAE_DELIVERY_MESSAGE);
+      return;
+    }
+
     setIsSubmitting(true);
     setErrorMessage("");
 
     try {
-      // STRIPE CARD CHECKOUT
+      // Re-check live stock immediately before either checkout method.
+      const liveInventory = await refreshInventory();
+      if (!liveInventory) {
+        throw new Error("We couldn't verify live stock. Please refresh and try again.");
+      }
+
+      const unavailableItem = cart.find((item) => {
+        const status = liveInventory[String(item.id)]?.status || "available";
+        return status !== "available";
+      });
+
+      if (unavailableItem) {
+        throw new Error(
+          `${unavailableItem.name} is no longer available. Your bag has not been charged.`
+        );
+      }
+
+      // STRIPE ONLINE CHECKOUT (CARD / GOOGLE PAY)
       if (paymentMethod === "stripe") {
         const response = await fetch(
           "/api/create-checkout-session",
@@ -100,6 +155,7 @@ const Checkout = () => {
             },
             body: JSON.stringify({
               ...form,
+              selectedCountryCode: selectedCountry.code,
               items: cart.map((item) => ({
                 id: item.id,
                 quantity: Number(item.quantity) || 1,
@@ -113,7 +169,7 @@ const Checkout = () => {
         if (!response.ok || !result.success || !result.url) {
           throw new Error(
             result.message ||
-              "Unable to start card checkout."
+              "Unable to start secure online checkout."
           );
         }
 
@@ -122,60 +178,44 @@ const Checkout = () => {
         return;
       }
 
-      // CASH ON DELIVERY
-      const orderNumber = `FA-${Date.now()}`;
-
-      // Email API expects item.price and item.quantity.
-      const emailItems = checkoutItems.map((item) => ({
-        id: item.id,
-        name: item.name,
-        quantity: Number(item.quantity) || 1,
-        price: Number(item.price) || 0,
-      }));
-
-      const response = await fetch(
-        "/api/send-order-email",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...form,
-            orderNumber,
-            items: emailItems,
-            total: Number(cartTotal) || 0,
-            currency: currency || "AED",
-            paymentMethod: "cod",
-          }),
-        }
-      );
+      // CASH ON DELIVERY: reserve one-of-one stock before placing the order.
+      const response = await fetch("/api/create-cod-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          selectedCountryCode: selectedCountry.code,
+          items: cart.map((item) => ({
+            id: item.id,
+            quantity: 1,
+          })),
+          currency: currency || "AED",
+        }),
+      });
 
       const result = await response.json();
 
-      if (
-        !response.ok ||
-        !result.success ||
-        !result.customerEmailSent ||
-        !result.ownerEmailSent
-      ) {
+      if (!response.ok || !result.success || !result.orderNumber) {
         throw new Error(
-          result.message ||
-            "Order emails could not both be sent. Please try again."
+          result.message || "Unable to place your Cash on Delivery order."
         );
       }
 
-      // Clear cart only after both emails have been confirmed sent.
+      // COD stock stays reserved until the team confirms collection
+      // or releases the piece if the order is cancelled.
       clearCart();
+      refreshInventory();
 
-      // Preserve the existing confirmation route.
       navigate("/order-confirmation", {
         replace: true,
         state: {
-          orderNumber,
+          orderNumber: result.orderNumber,
+          reservationId: result.reservationId,
           paymentMethod: "cod",
-          total: Number(cartTotal) || 0,
-          currency: currency || "AED",
+          total: Number(result.total) || Number(cartTotal) || 0,
+          currency: result.currency || currency || "AED",
         },
       });
     } catch (error) {
@@ -189,6 +229,58 @@ const Checkout = () => {
       setIsSubmitting(false);
     }
   };
+
+  // DELIVERY RESTRICTION — purchases are currently UAE-only.
+  if (cart.length > 0 && !isUaeDeliveryAvailable) {
+    return (
+      <main className="relative flex min-h-[75vh] items-center justify-center overflow-hidden bg-[#FFFDF9] px-5 py-16 sm:px-8">
+        <div className="pointer-events-none absolute -right-24 top-8 h-72 w-72 rounded-full bg-[#EEDBD7]/35 blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[#E7D4B7]/25 blur-3xl" />
+
+        <section className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-[#D8B9B5]/30 bg-white/90 px-6 py-12 text-center shadow-[0_18px_55px_rgba(82,58,52,0.08)] sm:px-12 sm:py-16">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-[#FFF5F2] text-[#A97972]">
+            <FiTruck className="text-2xl" />
+          </div>
+
+          <p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.35em] text-[#B18A83]">
+            UAE Delivery Only
+          </p>
+
+          <h1 className="mt-4 font-serif text-3xl leading-tight tracking-tight text-[#3E302D] sm:text-4xl">
+            We're currently delivering within the UAE only
+          </h1>
+
+          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-[#907C76]">
+            Thank you for shopping with F&A Collective. We are not offering
+            international shipping at the moment, so checkout is unavailable
+            for your selected country ({selectedCountry.name}).
+            Please select the United Arab Emirates to place an order.
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("openCountrySelector"))}
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#4A3935] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#5A4540]"
+            >
+              Select UAE to Continue
+            </button>
+
+            <Link
+              to="/cart"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#D8B9B5]/45 bg-white px-7 py-3 text-sm font-medium text-[#6F5B5F] transition hover:bg-[#FFF7F4]"
+            >
+              Back to Shopping Bag
+            </Link>
+          </div>
+
+          <p className="mt-7 text-[10px] uppercase tracking-[0.22em] text-[#B18A83]/75">
+            International delivery is temporarily unavailable
+          </p>
+        </section>
+      </main>
+    );
+  }
 
   // EMPTY CART
   if (!cart.length) {
@@ -426,11 +518,11 @@ const Checkout = () => {
 
                 <span>
                   <span className="block text-sm font-semibold text-[#4A3935]">
-                    Credit / Debit Card
+                    Card / Google Pay
                   </span>
 
                   <span className="mt-1 block text-xs leading-5 text-[#907C76]">
-                    Continue to Stripe's secure card payment page.
+                    Continue to Stripe’s secure checkout. Google Pay appears on supported devices and browsers.
                   </span>
 
                   {currency !== "AED" && (
@@ -481,7 +573,7 @@ const Checkout = () => {
               ) : (
                 <>
                   <FiCreditCard />
-                  Continue to Card Payment
+                  Continue to Secure Payment
                 </>
               )}
             </button>

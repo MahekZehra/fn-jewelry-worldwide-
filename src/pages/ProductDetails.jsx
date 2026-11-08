@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   FiArrowLeft,
-  FiMinus,
-  FiPlus,
   FiShoppingBag,
   FiTruck,
   FiShield,
@@ -12,6 +10,7 @@ import {
 } from "react-icons/fi";
 
 import products from "../data/Products";
+import Product360Viewer from "../components/Product360Viewer";
 import { useCart } from "../context/CartContext";
 
 const WHATSAPP_NUMBER = "971529218985";
@@ -22,16 +21,28 @@ const ProductDetails = () => {
 
   const {
     addToCart,
+    cart,
     currency,
     formatPrice,
     getProductPrice,
+    getItemInventoryStatus,
   } = useCart();
 
   const product = products.find(
     (item) => item.id === Number(id)
   );
 
-  const [quantity, setQuantity] = useState(1);
+  const [cartNotice, setCartNotice] = useState("");
+
+  const inventoryStatus = product
+    ? getItemInventoryStatus(product.id)
+    : "checking";
+  const isSoldOut = inventoryStatus === "sold";
+  const isReserved = inventoryStatus === "reserved";
+  const alreadyInCart = product
+    ? cart.some((item) => String(item.id) === String(product.id))
+    : false;
+  const cannotPurchase = isSoldOut || isReserved;
 
   /* =====================================================
      PRODUCT NOT FOUND
@@ -78,9 +89,18 @@ const ProductDetails = () => {
   ===================================================== */
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addToCart(product);
-    }
+    const added = addToCart(product);
+    setCartNotice(
+      added
+        ? "This one-of-a-kind piece has been added to your bag."
+        : alreadyInCart
+          ? "This piece is already in your bag. It can only be added once."
+          : isSoldOut
+            ? "This piece has already sold out."
+            : isReserved
+              ? "This piece is currently reserved by another customer."
+              : "This piece could not be added. Please try again."
+    );
   };
 
   /* =====================================================
@@ -88,8 +108,16 @@ const ProductDetails = () => {
   ===================================================== */
 
   const handleBuyNow = () => {
-    handleAddToCart();
-    navigate("/cart");
+    if (alreadyInCart) {
+      navigate("/cart");
+      return;
+    }
+    const added = addToCart(product);
+    if (added) {
+      navigate("/cart");
+    } else {
+      handleAddToCart();
+    }
   };
 
   /* =====================================================
@@ -106,7 +134,7 @@ const ProductDetails = () => {
       `Product: ${product.name}`,
       `Category: ${product.category}`,
       `Price: ${formatPrice(currentPrice)}`,
-      `Quantity: ${quantity}`,
+      "Quantity: 1",
       `Product link: ${productUrl}`,
       "",
       "Please share more information about this product.",
@@ -143,19 +171,7 @@ const ProductDetails = () => {
           {/* PRODUCT IMAGE */}
 
           <div className="lg:sticky lg:top-28">
-            <div className="group relative overflow-hidden rounded-[1.75rem] bg-[#EEE9E3] sm:rounded-[2rem]">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="aspect-[4/5] h-full w-full bg-[#EEE9E3] object-contain p-2 sm:p-4"
-              />
-
-              <div className="pointer-events-none absolute inset-0 bg-black/[0.02]" />
-            </div>
-
-            <p className="mt-4 text-center text-[9px] font-medium uppercase tracking-[0.3em] text-black/25 sm:text-[10px]">
-              F&A Fashion and Jewellery Collection
-            </p>
+            <Product360Viewer product={product} />
           </div>
 
           {/* PRODUCT INFORMATION */}
@@ -174,6 +190,16 @@ const ProductDetails = () => {
             <h1 className="mt-4 max-w-2xl font-serif text-4xl leading-[1.05] tracking-tight text-[#171717] sm:text-5xl lg:text-6xl">
               {product.name}
             </h1>
+
+            <div className="mt-4 inline-flex rounded-full border border-black/10 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/55">
+              {isSoldOut
+                ? "Sold Out"
+                : isReserved
+                  ? "Reserved"
+                  : alreadyInCart
+                      ? "Added to Your Bag"
+                      : "One of a Kind · Only 1 Available"}
+            </div>
 
             {/* PRICE */}
 
@@ -257,63 +283,47 @@ const ProductDetails = () => {
               </section>
             )}
 
-            {/* QUANTITY */}
-
-            <div className="mt-8">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-black/45 sm:text-xs">
-                Quantity
-              </p>
-
-              <div className="flex w-fit items-center rounded-full border border-black/10 bg-white p-1 shadow-sm">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setQuantity((current) =>
-                      Math.max(1, current - 1)
-                    )
-                  }
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:bg-black/5 active:scale-90"
-                  aria-label="Decrease quantity"
-                >
-                  <FiMinus className="text-sm" />
-                </button>
-
-                <span className="min-w-10 text-center text-sm font-semibold">
-                  {quantity}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setQuantity((current) => current + 1)
-                  }
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 hover:bg-black/5 active:scale-90"
-                  aria-label="Increase quantity"
-                >
-                  <FiPlus className="text-sm" />
-                </button>
-              </div>
-            </div>
-
             {/* ACTION BUTTONS */}
 
             <div className="mt-6 space-y-3">
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="flex h-14 w-full items-center justify-center gap-3 rounded-full bg-black text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-[0.98]"
+                disabled={cannotPurchase || alreadyInCart}
+                className={`flex h-14 w-full items-center justify-center gap-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  cannotPurchase || alreadyInCart
+                    ? "cursor-not-allowed bg-[#E9E1DC] text-[#806D68]"
+                    : "bg-black text-white hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-[0.98]"
+                }`}
               >
                 <FiShoppingBag className="text-base" />
-                Add to Cart
+                {isSoldOut
+                  ? "Sold Out"
+                  : isReserved
+                    ? "Reserved"
+                    : alreadyInCart
+                        ? "Already in Your Bag"
+                        : "Add to Cart"}
               </button>
 
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="flex h-14 w-full items-center justify-center rounded-full border border-black/15 bg-white text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg active:scale-[0.98]"
+                disabled={cannotPurchase}
+                className={`flex h-14 w-full items-center justify-center rounded-full border border-black/15 text-sm font-semibold transition-all duration-300 ${
+                  cannotPurchase
+                    ? "cursor-not-allowed bg-[#F0ECE9] text-[#9A8B86]"
+                    : "bg-white text-black hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg active:scale-[0.98]"
+                }`}
               >
                 Buy Now
               </button>
+
+              {cartNotice && (
+                <p role="status" className="text-center text-xs leading-5 text-[#806D68]">
+                  {cartNotice}
+                </p>
+              )}
 
               {/* NEW: WHATSAPP PRODUCT INQUIRY */}
 

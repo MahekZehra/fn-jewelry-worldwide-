@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -106,6 +107,48 @@ export const CartProvider = ({ children }) => {
     getSavedCurrency()
   );
 
+  const [inventory, setInventory] = useState({});
+  const [inventoryReady, setInventoryReady] = useState(false);
+  const [inventoryError, setInventoryError] = useState("");
+
+  const refreshInventory = useCallback(async () => {
+    try {
+      const response = await fetch("/api/inventory", {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success || !Array.isArray(result.items)) {
+        throw new Error(result.message || "Live inventory could not be loaded.");
+      }
+
+      const nextInventory = {};
+      result.items.forEach((item) => {
+        nextInventory[String(item.product_id)] = {
+          status: item.status,
+          reservationExpiresAt: item.reservation_expires_at || null,
+        };
+      });
+
+      setInventory(nextInventory);
+      setInventoryReady(true);
+      setInventoryError("");
+      return nextInventory;
+    } catch (error) {
+      console.error("Live inventory refresh failed:", error);
+      setInventoryReady(false);
+      setInventoryError(error.message || "Live inventory is unavailable.");
+      return null;
+    }
+  }, []);
+
+  const getItemInventoryStatus = (productId) => {
+    if (!inventoryReady) return "checking";
+    return inventory[String(productId)]?.status || "available";
+  };
+
   /* =======================================================
      LISTEN FOR COUNTRY CHANGES
   ======================================================= */
@@ -127,6 +170,18 @@ export const CartProvider = ({ children }) => {
       );
     };
   }, []);
+
+  useEffect(() => {
+    refreshInventory();
+
+    const intervalId = window.setInterval(refreshInventory, 20000);
+    window.addEventListener("focus", refreshInventory);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("focus", refreshInventory);
+    };
+  }, [refreshInventory]);
 
   /* =========================================================
      GET BASE PRICE AED
@@ -194,112 +249,40 @@ export const CartProvider = ({ children }) => {
 ========================================================= */
 
   const addToCart = (product) => {
-    if (!product) {
-      return;
+    if (!product) return false;
+
+    const productId = String(product.id);
+    const currentStatus = inventory[productId]?.status;
+
+    // Unknown/loading inventory must not block adding to the bag.
+    // The server performs the authoritative stock check at checkout.
+    if (currentStatus === "sold" || currentStatus === "reserved") {
+      return false;
     }
+    if (cart.some((item) => String(item.id) === productId)) return false;
 
     setCart((prevCart) => {
-      const existingProduct =
-        prevCart.find(
-          (item) => item.id === product.id
-        );
-
-      /* =====================================================
-         PRODUCT ALREADY IN CART
-      ===================================================== */
-
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-
-                /*
-                 * Make sure latest pricing information
-                 * is preserved.
-                 */
-
-                priceAED: safeNumber(
-                  product.priceAED ??
-                    product.price,
-                  0
-                ),
-
-                salePriceAED:
-                  product.salePriceAED !==
-                    null &&
-                  product.salePriceAED !==
-                    undefined
-                    ? safeNumber(
-                        product.salePriceAED,
-                        0
-                      )
-                    : null,
-
-                onSale:
-                  product.onSale === true,
-
-                quantity:
-                  safeNumber(
-                    item.quantity,
-                    0
-                  ) + 1,
-              }
-            : item
-        );
+      if (prevCart.some((item) => String(item.id) === productId)) {
+        return prevCart;
       }
-
-      /* =====================================================
-         NEW PRODUCT
-      ===================================================== */
 
       return [
         ...prevCart,
-
         {
           ...product,
-
-          /*
-           * ALWAYS preserve original AED price.
-           */
-
-          priceAED: safeNumber(
-            product.priceAED ??
-              product.price,
-            0
-          ),
-
-          /*
-           * Preserve sale price.
-           */
-
+          priceAED: safeNumber(product.priceAED ?? product.price, 0),
           salePriceAED:
-            product.salePriceAED !==
-              null &&
-            product.salePriceAED !==
-              undefined
-              ? safeNumber(
-                  product.salePriceAED,
-                  0
-                )
+            product.salePriceAED !== null && product.salePriceAED !== undefined
+              ? safeNumber(product.salePriceAED, 0)
               : null,
-
-          /*
-           * Preserve sale status.
-           */
-
-          onSale:
-            product.onSale === true,
-
+          onSale: product.onSale === true,
           quantity: 1,
         },
       ];
     });
-  };
 
-  /* =========================================================
-     REMOVE FROM CART
-========================================================= */
+    return true;
+  };
 
   const removeFromCart = (id) => {
     setCart((prevCart) =>
@@ -311,60 +294,6 @@ export const CartProvider = ({ children }) => {
 
   /* =========================================================
      INCREASE QUANTITY
-========================================================= */
-
-  const increaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-
-              quantity:
-                safeNumber(
-                  item.quantity,
-                  0
-                ) + 1,
-            }
-          : item
-      )
-    );
-  };
-
-  /* =========================================================
-     DECREASE QUANTITY
-========================================================= */
-
-  const decreaseQuantity = (id) => {
-    setCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === id
-            ? {
-                ...item,
-
-                quantity: Math.max(
-                  safeNumber(
-                    item.quantity,
-                    1
-                  ) - 1,
-                  0
-                ),
-              }
-            : item
-        )
-        .filter(
-          (item) =>
-            safeNumber(
-              item.quantity,
-              0
-            ) > 0
-        )
-    );
-  };
-
-  /* =========================================================
-     CLEAR CART
 ========================================================= */
 
   const clearCart = () => {
@@ -615,11 +544,14 @@ export const CartProvider = ({ children }) => {
 
         addToCart,
         removeFromCart,
-        increaseQuantity,
-        decreaseQuantity,
         clearCart,
 
         cartCount,
+        inventory,
+        inventoryReady,
+        inventoryError,
+        refreshInventory,
+        getItemInventoryStatus,
 
         /* Currency */
 

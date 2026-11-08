@@ -1,6 +1,184 @@
 @import "tailwindcss";
 
+/* -------------------------------------------------------
+   Global foundations
+------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html {
+  min-width: 320px;
+  overflow-x: clip;
+  scroll-padding-top: 6rem;
+}
+
 body {
   margin: 0;
+  min-width: 320px;
+  overflow-x: clip;
   font-family: Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid #A86F77;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #493633;
+  background: #F1DDE0;
+}
+
+/* -------------------------------------------------------
+   Mobile navigation motion
+------------------------------------------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mobileMenuItemIn {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu-panel {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* -------------------------------------------------------
+   Small-screen layout safeguards
+------------------------------------------------------- */
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  button,
+  a {
+    -webkit-touch-callout: none;
+  }
+}
+
+
+/* -------------------------------------------------------
+   F&A Collective — subtle cinematic product presentation
+------------------------------------------------------- */
+.product-viewer-stage {
+  perspective: 1000px;
+  isolation: isolate;
+  --product-rotate-x: 0deg;
+  --product-rotate-y: 0deg;
+  --product-shift-x: 0px;
+  --product-shift-y: 0px;
+}
+
+.product-viewer-image-wrap {
+  transform: translate3d(var(--product-shift-x), var(--product-shift-y), 0)
+    rotateX(var(--product-rotate-x)) rotateY(var(--product-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(.2,.75,.25,1);
+  will-change: transform;
+}
+
+.product-viewer-stage:hover .product-viewer-image-wrap {
+  transition-duration: 100ms;
+}
+
+.product-viewer-shimmer {
+  z-index: 1;
+  opacity: .35;
+  background: linear-gradient(
+    112deg,
+    transparent 20%,
+    rgba(255,255,255,.32) 42%,
+    rgba(255,255,255,.08) 52%,
+    transparent 72%
+  );
+  transform: translateX(-115%);
+  animation: productViewerGlow 7s ease-in-out infinite;
+}
+
+@keyframes productViewerGlow {
+  0%, 18% { transform: translateX(-115%); }
+  62%, 100% { transform: translateX(115%); }
+}
+
+@media (hover: none) {
+  .product-viewer-image-wrap {
+    animation: productViewerFloat 6s ease-in-out infinite;
+  }
+}
+
+@keyframes productViewerFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.008); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-viewer-image-wrap,
+  .product-viewer-shimmer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
