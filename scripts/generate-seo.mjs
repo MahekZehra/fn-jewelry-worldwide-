@@ -133,6 +133,16 @@ function productMetadata(product) {
         "@type": "Brand",
         name: BRAND,
       },
+      offers: {
+        "@type": "Offer",
+        url: canonical,
+        price: Number(
+          product.onSale === true && Number(product.salePriceAED) > 0
+            ? product.salePriceAED
+            : product.priceAED ?? product.price
+        ).toFixed(2),
+        priceCurrency: "AED",
+      },
       ...(product.details && product.details.material
         ? { material: product.details.material }
         : {}),
