@@ -4,6 +4,7 @@ import {
   reserveProductItems,
   releaseProductReservation,
 } from "../lib/inventory.js";
+import { upsertOrder, makeCustomerCancelToken, updateOrder } from "../lib/orders.js";
 
 const currencyRates = {
   AED: 1,
@@ -124,6 +125,25 @@ export default async function handler(req, res) {
       expiryMinutes: null,
     });
 
+    const cancelToken = makeCustomerCancelToken(orderNumber, customerEmail);
+    const cancelUrl = `${siteUrl.replace(/\\/+$/, "")}/cancel-order?order=${encodeURIComponent(orderNumber)}&token=${cancelToken}`;
+
+    await upsertOrder({
+      order_number: orderNumber,
+      customer_name: customerName,
+      customer_email: String(customerEmail).trim().toLowerCase(),
+      customer_phone: customerPhone || "",
+      customer_city: customerCity,
+      customer_address: customerAddress,
+      items: emailItems.map((item) => ({ ...item, productId: String(item.id) })),
+      total,
+      currency: selectedCurrency,
+      payment_method: "cod",
+      payment_status: "pending",
+      status: "confirmed",
+      reservation_id: reservationId,
+    });
+
     const emailResponse = await fetch(
       `${siteUrl.replace(/\/+$/, "")}/api/send-order-email`,
       {
@@ -141,6 +161,7 @@ export default async function handler(req, res) {
           total,
           currency: selectedCurrency,
           paymentMethod: "cod",
+          cancelUrl,
         }),
       }
     );
@@ -163,8 +184,13 @@ export default async function handler(req, res) {
       reservationId,
       total,
       currency: selectedCurrency,
+      cancelToken,
     });
   } catch (error) {
+    await updateOrder(orderNumber, {
+      status: "payment_failed",
+      payment_status: "failed",
+    }).catch(() => null);
     await releaseProductReservation(reservationId).catch((releaseError) => {
       console.error("Could not release failed COD reservation:", releaseError);
     });
