@@ -24,33 +24,50 @@ const escapeXml = (value) =>
     .replaceAll("'", "&apos;");
 
 function upsertMeta(html, attribute, key, value) {
-  const expression = new RegExp(
-    "<meta\\s+" + attribute + "=[\"']" + key + "[\"'][^>]*>",
-    "i"
-  );
+  const opening = '<meta ' + attribute + '="' + key + '"';
+  const start = html.indexOf(opening);
   const tag =
     '<meta ' + attribute + '="' + escapeHtml(key) +
     '" content="' + escapeHtml(value) + '" />';
 
-  return expression.test(html)
-    ? html.replace(expression, tag)
-    : html.replace("</head>", "  " + tag + "\\n  </head>");
+  if (start === -1) {
+    return html.replace("</head>", "  " + tag + "\n  </head>");
+  }
+
+  const end = html.indexOf(">", start);
+  return html.slice(0, start) + tag + html.slice(end + 1);
 }
 
 function upsertCanonical(html, url) {
-  const expression = /<link\\s+rel=["']canonical["'][^>]*>/i;
+  const opening = '<link rel="canonical"';
+  const start = html.indexOf(opening);
   const tag = '<link rel="canonical" href="' + escapeHtml(url) + '" />';
 
-  return expression.test(html)
-    ? html.replace(expression, tag)
-    : html.replace("</head>", "  " + tag + "\\n  </head>");
+  if (start === -1) {
+    return html.replace("</head>", "  " + tag + "\n  </head>");
+  }
+
+  const end = html.indexOf(">", start);
+  return html.slice(0, start) + tag + html.slice(end + 1);
+}
+
+function setTitle(html, title) {
+  const start = html.indexOf("<title>");
+  const end = html.indexOf("</title>", start);
+
+  if (start === -1 || end === -1) {
+    return html.replace("</head>", "  <title>" + escapeHtml(title) + "</title>\n  </head>");
+  }
+
+  return (
+    html.slice(0, start) +
+    "<title>" + escapeHtml(title) + "</title>" +
+    html.slice(end + "</title>".length)
+  );
 }
 
 function applyMetadata(baseHtml, metadata, schema) {
-  let html = baseHtml.replace(
-    /<title>.*?<\\/title>/is,
-    "<title>" + escapeHtml(metadata.title) + "</title>"
-  );
+  let html = setTitle(baseHtml, metadata.title);
 
   const values = [
     ["name", "description", metadata.description],
@@ -80,7 +97,7 @@ function applyMetadata(baseHtml, metadata, schema) {
       '<script id="site-seo-jsonld" type="application/ld+json">' +
       json +
       "</script>";
-    html = html.replace("</head>", "  " + script + "\\n  </head>");
+    html = html.replace("</head>", "  " + script + "\n  </head>");
   }
 
   return html;
@@ -91,7 +108,7 @@ function productMetadata(product) {
     product.description || (product.name + " from F&A Collective.");
   const description =
     (descriptionText + " Shop online at F&A Collective with delivery within the UAE.")
-      .replace(/\\s+/g, " ")
+      .replace(/\s+/g, " ")
       .slice(0, 300);
   const image = product.image && product.image.startsWith("http")
     ? product.image
@@ -228,13 +245,13 @@ const xmlUrls = urls
       imageTag + "</url>"
     );
   })
-  .join("\\n");
+  .join("\n");
 
 const sitemap =
-  '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ' +
-  'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\\n' +
-  xmlUrls + "\\n</urlset>\\n";
+  'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' +
+  xmlUrls + "\n</urlset>\n";
 
 await writeFile(path.join(DIST, "sitemap.xml"), sitemap, "utf8");
 
