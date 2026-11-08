@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-confirmation
+Disallow: /api/
+
+Sitemap: https://amnafacollective.com/sitemap.xml
