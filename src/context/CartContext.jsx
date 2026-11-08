@@ -249,12 +249,16 @@ export const CartProvider = ({ children }) => {
 ========================================================= */
 
   const addToCart = (product) => {
-    if (!product || !inventoryReady) return false;
+    if (!product) return false;
 
     const productId = String(product.id);
-    const currentStatus = inventory[productId]?.status || "available";
+    const currentStatus = inventory[productId]?.status;
 
-    if (currentStatus !== "available") return false;
+    // Unknown/loading inventory must not block adding to the bag.
+    // The server performs the authoritative stock check at checkout.
+    if (currentStatus === "sold" || currentStatus === "reserved") {
+      return false;
+    }
     if (cart.some((item) => String(item.id) === productId)) return false;
 
     setCart((prevCart) => {
