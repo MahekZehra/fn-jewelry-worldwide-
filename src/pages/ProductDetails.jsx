@@ -196,9 +196,7 @@ const ProductDetails = () => {
                 ? "Sold Out"
                 : isReserved
                   ? "Reserved"
-                  : !inventoryReady
-                    ? "Checking Availability"
-                    : alreadyInCart
+                  : alreadyInCart
                       ? "Added to Your Bag"
                       : "One of a Kind · Only 1 Available"}
             </div>
