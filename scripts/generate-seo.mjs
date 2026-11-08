@@ -136,11 +136,11 @@ function productMetadata(product) {
       offers: {
         "@type": "Offer",
         url: canonical,
-        price: Number(
+        price: Number((
           product.onSale === true && Number(product.salePriceAED) > 0
             ? product.salePriceAED
             : product.priceAED ?? product.price
-        ).toFixed(2),
+        ).toFixed(2)),
         priceCurrency: "AED",
       },
       ...(product.details && product.details.material
