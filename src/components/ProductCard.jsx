@@ -50,7 +50,7 @@ const currencySymbols = {
 ===================================================== */
 
 const ProductCard = ({ product }) => {
-  const { addToCart, cart, inventoryReady, getItemInventoryStatus } = useCart();
+  const { addToCart, cart, getItemInventoryStatus } = useCart();
   const navigate = useNavigate();
 
   const [currency, setCurrency] = useState("AED");
@@ -410,7 +410,7 @@ const ProductCard = ({ product }) => {
         <button
           type="button"
           onClick={handleAddToCart}
-          disabled={!inventoryReady || isUnavailable || alreadyInCart}
+          disabled={isUnavailable || alreadyInCart}
           className={`
             absolute bottom-4 left-4 right-4 z-30
             flex h-11 items-center justify-center gap-2
@@ -424,15 +424,13 @@ const ProductCard = ({ product }) => {
         >
           <FiShoppingBag className="text-base" />
           <span>
-            {!inventoryReady
-              ? "Checking Stock"
-              : isSoldOut
-                ? "Sold Out"
-                : isReserved
-                  ? "Reserved"
-                  : alreadyInCart
-                    ? "Already in Bag"
-                    : "Add to Cart"}
+            {isSoldOut
+              ? "Sold Out"
+              : isReserved
+                ? "Reserved"
+                : alreadyInCart
+                  ? "Already in Bag"
+                  : "Add to Cart"}
           </span>
         </button>
 
