@@ -417,7 +417,7 @@ const ProductCard = ({ product }) => {
             rounded-full border border-white/60
             text-sm font-semibold shadow-md backdrop-blur-md
             transition-all duration-300
-            ${!inventoryReady || isUnavailable || alreadyInCart
+            ${isUnavailable || alreadyInCart
               ? "cursor-not-allowed bg-[#E9E1DC]/95 text-[#806D68]"
               : "bg-white/90 text-[#332724] hover:bg-[#332724] hover:text-white sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"}
           `}
