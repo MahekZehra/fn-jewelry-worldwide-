@@ -229,7 +229,61 @@ const ProductDetails = () => {
 
           {/* PRODUCT DETAILS AND PURCHASE ACTIONS — after image on mobile */}
           <div className="lg:col-start-2 lg:row-start-2">
-            {/* PRODUCT DETAILS */}
+            {/* ACTION BUTTONS */}
+
+            <div className="mt-6 space-y-3">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={cannotPurchase || alreadyInCart}
+                className={`flex h-14 w-full items-center justify-center gap-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  cannotPurchase || alreadyInCart
+                    ? "cursor-not-allowed bg-[#E9E1DC] text-[#806D68]"
+                    : "bg-black text-white hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-[0.98]"
+                }`}
+              >
+                <FiShoppingBag className="text-base" />
+                {isSoldOut
+                  ? "Sold Out"
+                  : isReserved
+                    ? "Reserved"
+                    : alreadyInCart
+                        ? "Already in Your Bag"
+                        : "Add to Cart"}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleBuyNow}
+                disabled={cannotPurchase}
+                className={`flex h-14 w-full items-center justify-center rounded-full border border-black/15 text-sm font-semibold transition-all duration-300 ${
+                  cannotPurchase
+                    ? "cursor-not-allowed bg-[#F0ECE9] text-[#9A8B86]"
+                    : "bg-white text-black hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg active:scale-[0.98]"
+                }`}
+              >
+                Buy Now
+              </button>
+
+              {cartNotice && (
+                <p role="status" className="text-center text-xs leading-5 text-[#806D68]">
+                  {cartNotice}
+                </p>
+              )}
+
+              {/* NEW: WHATSAPP PRODUCT INQUIRY */}
+
+              <button
+                type="button"
+                onClick={handleProductInquiry}
+                className="flex h-14 w-full items-center justify-center gap-3 rounded-full border border-[#D9C6CC] bg-white text-sm font-semibold text-[#80658B] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FBF5F7] hover:shadow-lg active:scale-[0.98]"
+              >
+                <FiMessageCircle className="text-base" />
+                Enquire About This Product
+              </button>
+            </div>
+
+          {/* PRODUCT DETAILS */}
 
             {product.details && (
               <section className="mt-7 rounded-2xl border border-black/[0.07] bg-white p-5 sm:p-6">
@@ -285,61 +339,7 @@ const ProductDetails = () => {
               </section>
             )}
 
-            {/* ACTION BUTTONS */}
-
-            <div className="mt-6 space-y-3">
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                disabled={cannotPurchase || alreadyInCart}
-                className={`flex h-14 w-full items-center justify-center gap-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  cannotPurchase || alreadyInCart
-                    ? "cursor-not-allowed bg-[#E9E1DC] text-[#806D68]"
-                    : "bg-black text-white hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg active:scale-[0.98]"
-                }`}
-              >
-                <FiShoppingBag className="text-base" />
-                {isSoldOut
-                  ? "Sold Out"
-                  : isReserved
-                    ? "Reserved"
-                    : alreadyInCart
-                        ? "Already in Your Bag"
-                        : "Add to Cart"}
-              </button>
-
-              <button
-                type="button"
-                onClick={handleBuyNow}
-                disabled={cannotPurchase}
-                className={`flex h-14 w-full items-center justify-center rounded-full border border-black/15 text-sm font-semibold transition-all duration-300 ${
-                  cannotPurchase
-                    ? "cursor-not-allowed bg-[#F0ECE9] text-[#9A8B86]"
-                    : "bg-white text-black hover:-translate-y-0.5 hover:bg-black hover:text-white hover:shadow-lg active:scale-[0.98]"
-                }`}
-              >
-                Buy Now
-              </button>
-
-              {cartNotice && (
-                <p role="status" className="text-center text-xs leading-5 text-[#806D68]">
-                  {cartNotice}
-                </p>
-              )}
-
-              {/* NEW: WHATSAPP PRODUCT INQUIRY */}
-
-              <button
-                type="button"
-                onClick={handleProductInquiry}
-                className="flex h-14 w-full items-center justify-center gap-3 rounded-full border border-[#D9C6CC] bg-white text-sm font-semibold text-[#80658B] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FBF5F7] hover:shadow-lg active:scale-[0.98]"
-              >
-                <FiMessageCircle className="text-base" />
-                Enquire About This Product
-              </button>
-            </div>
-
-            {/* TRUST / DELIVERY */}
+              {/* TRUST / DELIVERY */}
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-black/[0.07] bg-white p-4">
