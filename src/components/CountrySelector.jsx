@@ -329,14 +329,17 @@ const CountrySelector = () => {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[9px] font-semibold uppercase tracking-[0.3em] text-[#B18A83]">
-                    Worldwide Shopping
+                    Country & Currency
                   </p>
                   <p className="mt-1.5 font-serif text-[17px] font-medium tracking-[-0.01em] text-[#3E302D]">
                     Select your country
                   </p>
+                  <p className="mt-2 max-w-[230px] text-[11px] leading-5 text-[#907C76]">
+                    Orders are currently delivered within the UAE only.
+                  </p>
                 </div>
                 <span className="mt-1 rounded-full border border-[#C9A66B]/25 bg-[#F8F0E4] px-2.5 py-1 text-[9px] font-medium tracking-wide text-[#A37C48]">
-                  {countries.length} destinations
+                  {countries.length} currency options
                 </span>
               </div>
               <div className="mt-3 h-px w-10 bg-[#C9A66B]/60" />
