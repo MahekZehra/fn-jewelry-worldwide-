@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   FiCheck,
@@ -15,6 +16,37 @@ const OrderConfirmation = () => {
   const orderNumber =
     location.state?.orderNumber ||
     `FA-${Date.now().toString().slice(-6)}`;
+
+  const cancelToken = location.state?.cancelToken || "";
+  const [isCancelling, setIsCancelling] = useState(false);
+  const [cancelMessage, setCancelMessage] = useState("");
+  const [cancelError, setCancelError] = useState("");
+
+  const handleCancelOrder = async () => {
+    if (!window.confirm("Are you sure you want to cancel this order?")) return;
+    setIsCancelling(true);
+    setCancelError("");
+    try {
+      const response = await fetch("/api/cancel-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderNumber,
+          token: cancelToken,
+          reason: "Customer requested cancellation",
+        }),
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data?.success) {
+        throw new Error(data?.message || "Unable to cancel this order.");
+      }
+      setCancelMessage(data.message || "Your order has been cancelled.");
+    } catch (error) {
+      setCancelError(error.message || "Unable to cancel this order.");
+    } finally {
+      setIsCancelling(false);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-5 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-24">
@@ -121,6 +153,24 @@ const OrderConfirmation = () => {
 
         </div>
 
+
+
+        {cancelToken && (
+          <div className="mt-5 rounded-[1.5rem] border border-red-100 bg-white p-6 sm:p-7">
+            {cancelMessage ? (
+              <p className="text-sm leading-6 text-[#665955]">{cancelMessage}</p>
+            ) : (
+              <>
+                <p className="text-sm font-semibold text-[#3E302D]">Need to cancel your order?</p>
+                <p className="mt-2 text-xs leading-5 text-[#907C76]">You can request cancellation before the order is dispatched.</p>
+                {cancelError && <p role="alert" className="mt-3 text-xs text-red-700">{cancelError}</p>}
+                <button type="button" onClick={handleCancelOrder} disabled={isCancelling} className="mt-4 min-h-12 rounded-full border border-red-200 px-6 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:opacity-50">
+                  {isCancelling ? "Cancelling..." : "Cancel This Order"}
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {/* What's Next */}
         <div className="mt-5 rounded-[1.5rem] border border-black/[0.07] bg-white p-6 sm:p-7">
