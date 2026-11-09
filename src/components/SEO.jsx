@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import products from "../data/Products";
+import { useCart } from "../context/CartContext";
 
 const SITE_URL = "https://amnafacollective.com";
 const BRAND_NAME = "F&A Collective Fashion & Jewellery";
@@ -8,6 +9,16 @@ const DEFAULT_IMAGE = `${SITE_URL}/logo/fa-logo.jpg`;
 
 const DEFAULT_DESCRIPTION =
   "Shop curated artificial jewellery, elegant jewellery sets and Kundan clutches online at F&A Collective. Explore occasion-ready styles with delivery within the UAE.";
+
+const RETURN_POLICY_ID = `${SITE_URL}/returns-exchanges#merchant-return-policy`;
+const MERCHANT_RETURN_POLICY = {
+  "@type": "MerchantReturnPolicy",
+  "@id": RETURN_POLICY_ID,
+  applicableCountry: "AE",
+  returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+  merchantReturnDays: 3,
+  merchantReturnLink: `${SITE_URL}/returns-exchanges`,
+};
 
 function upsertMeta(attribute, key, content) {
   let element = document.head.querySelector(`meta[${attribute}="${key}"]`);
@@ -46,7 +57,7 @@ function upsertJsonLd(data) {
   element.textContent = JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-function getPageMetadata(pathname, search) {
+function getPageMetadata(pathname, search, inventoryStatus = "checking") {
   const params = new URLSearchParams(search);
 
   if (pathname === "/") {
@@ -66,6 +77,7 @@ function getPageMetadata(pathname, search) {
             url: `${SITE_URL}/`,
             logo: DEFAULT_IMAGE,
             description: DEFAULT_DESCRIPTION,
+            hasMerchantReturnPolicy: MERCHANT_RETURN_POLICY,
           },
           {
             "@type": "WebSite",
@@ -156,6 +168,11 @@ function getPageMetadata(pathname, search) {
         ? product.image
         : `${SITE_URL}${product.image || "/logo/fa-logo.jpg"}`;
       const canonical = `${SITE_URL}/product/${product.id}`;
+      const availability = inventoryStatus === "available"
+        ? "https://schema.org/InStock"
+        : ["sold", "reserved"].includes(inventoryStatus)
+          ? "https://schema.org/OutOfStock"
+          : null;
 
       return {
         title: `${product.name} | F&A Collective UAE`,
@@ -180,6 +197,8 @@ function getPageMetadata(pathname, search) {
             url: canonical,
             price: Number(price.toFixed(2)),
             priceCurrency: "AED",
+            hasMerchantReturnPolicy: { "@id": RETURN_POLICY_ID },
+            ...(availability ? { availability } : {}),
           },
           material: product.details?.material,
         },
@@ -195,6 +214,10 @@ function getPageMetadata(pathname, search) {
       canonical: `${SITE_URL}/returns-exchanges`,
       image: DEFAULT_IMAGE,
       type: "website",
+      schema: {
+        "@context": "https://schema.org",
+        ...MERCHANT_RETURN_POLICY,
+      },
     };
   }
 
@@ -209,9 +232,16 @@ function getPageMetadata(pathname, search) {
 
 export default function SEO() {
   const location = useLocation();
+  const { inventory, inventoryReady } = useCart();
 
   useEffect(() => {
-    const metadata = getPageMetadata(location.pathname, location.search);
+    const productMatch = location.pathname.match(/^\\/product\\/(\\d+)\\/?$/);
+    const inventoryStatus = productMatch
+      ? inventoryReady
+        ? inventory[String(productMatch[1])]?.status || "available"
+        : "checking"
+      : "checking";
+    const metadata = getPageMetadata(location.pathname, location.search, inventoryStatus);
 
     document.title = metadata.title;
     upsertMeta("name", "description", metadata.description);
@@ -235,7 +265,7 @@ export default function SEO() {
       const existing = document.getElementById("site-seo-jsonld");
       if (existing) existing.remove();
     }
-  }, [location.pathname, location.search]);
+  }, [location.pathname, location.search, inventory, inventoryReady]);
 
   return null;
 }
