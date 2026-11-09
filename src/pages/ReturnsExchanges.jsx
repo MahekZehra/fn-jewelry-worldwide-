@@ -26,7 +26,7 @@ const faqItems = [
   {
     question: "Do you accept international returns?",
     answer:
-      "Yes. F&A Collective ships worldwide. International returns may involve additional shipping, customs or other charges depending on the destination and circumstances of the return.",
+      "F&A Collective currently accepts orders for delivery within the UAE only. This returns policy applies to eligible UAE orders; international orders and international returns are not available while international delivery is paused.",
   },
   {
     question: "Who pays the return shipping cost?",
@@ -110,8 +110,8 @@ function ReturnsExchanges() {
 
         <div className="returns-highlight">
           <span>03</span>
-          <strong>Worldwide</strong>
-          <p>Returns &amp; exchanges for eligible orders</p>
+          <strong>UAE Orders</strong>
+          <p>Returns &amp; exchanges for eligible UAE orders</p>
         </div>
       </section>
 
@@ -370,9 +370,9 @@ function ReturnsExchanges() {
             </p>
 
             <p>
-              International customers are responsible for any customs duties,
-              import taxes or other charges imposed by their destination
-              country, where applicable.
+              This policy currently applies to eligible orders delivered within
+              the United Arab Emirates. International delivery and international
+              returns are temporarily unavailable.
             </p>
           </div>
         </article>
@@ -382,25 +382,18 @@ function ReturnsExchanges() {
           <div className="returns-policy-number">09</div>
 
           <div className="returns-policy-content">
-            <span>WORLDWIDE</span>
-            <h3>International Returns</h3>
+            <span>DELIVERY AREA</span>
+            <h3>UAE Orders Only</h3>
 
             <p>
-              F&amp;A Collective ships worldwide. International returns may
-              involve additional delivery time, shipping costs and customs
-              considerations.
+              F&amp;A Collective currently accepts orders for delivery within the
+              United Arab Emirates only. This returns and exchanges policy applies
+              to eligible UAE orders.
             </p>
 
             <p>
-              Customers sending an eligible return from outside the UAE are
-              responsible for ensuring that the package is shipped securely and
-              reaches us in acceptable condition.
-            </p>
-
-            <p>
-              Any customs duties, import taxes or charges imposed by the
-              destination or return country may apply separately and are not
-              automatically refundable by F&amp;A Collective.
+              International delivery and international returns are temporarily
+              unavailable. We will update this page if our delivery coverage changes.
             </p>
           </div>
         </article>
