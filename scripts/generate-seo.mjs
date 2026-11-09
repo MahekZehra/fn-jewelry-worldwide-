@@ -7,6 +7,15 @@ const BRAND = "F&A Collective";
 const DIST = path.resolve("dist");
 const DEFAULT_DESCRIPTION =
   "Shop curated artificial jewellery, elegant jewellery sets and Kundan clutches online at F&A Collective. Explore occasion-ready styles with delivery within the UAE.";
+const RETURN_POLICY_ID = SITE_URL + "/returns-exchanges#merchant-return-policy";
+const MERCHANT_RETURN_POLICY = {
+  "@type": "MerchantReturnPolicy",
+  "@id": RETURN_POLICY_ID,
+  applicableCountry: "AE",
+  returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+  merchantReturnDays: 3,
+  merchantReturnLink: SITE_URL + "/returns-exchanges",
+};
 
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -103,7 +112,77 @@ function applyMetadata(baseHtml, metadata, schema) {
   return html;
 }
 
-function productMetadata(product) {
+
+async function loadUnavailableInventory() {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceKey =
+    process.env.SUPABASE_SECRET_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceKey) {
+    console.warn("SEO build: Supabase inventory credentials unavailable; availability will be omitted from product markup.");
+    return null;
+  }
+
+  const baseUrl = supabaseUrl.replace(/\/+$/, "");
+  const headers = {
+    apikey: serviceKey,
+    "Content-Type": "application/json",
+  };
+
+  if (!serviceKey.startsWith("sb_secret_")) {
+    headers.Authorization = "Bearer " + serviceKey;
+  }
+
+  try {
+    const releaseResponse = await fetch(
+      baseUrl + "/rest/v1/rpc/release_expired_product_reservations",
+      {
+        method: "POST",
+        headers,
+        body: "{}",
+        cache: "no-store",
+      }
+    );
+
+    if (!releaseResponse.ok) {
+      throw new Error("Could not refresh expired inventory reservations.");
+    }
+
+    const inventoryResponse = await fetch(
+      baseUrl + "/rest/v1/product_inventory?select=product_id,status&status=in.(reserved,sold)",
+      {
+        method: "GET",
+        headers,
+        cache: "no-store",
+      }
+    );
+
+    if (!inventoryResponse.ok) {
+      throw new Error("Could not read unavailable product inventory.");
+    }
+
+    const unavailableItems = await inventoryResponse.json();
+    if (!Array.isArray(unavailableItems)) {
+      throw new Error("Inventory response was not a list.");
+    }
+
+    return new Map(
+      unavailableItems.map((item) => [
+        String(item.product_id),
+        item.status,
+      ])
+    );
+  } catch (error) {
+    console.warn(
+      "SEO build: live inventory could not be loaded; availability will be omitted from product markup.",
+      error.message
+    );
+    return null;
+  }
+}
+
+function productMetadata(product, unavailableInventory) {
   const descriptionText =
     product.description || (product.name + " from F&A Collective.");
   const description =
@@ -114,6 +193,24 @@ function productMetadata(product) {
     ? product.image
     : SITE_URL + (product.image || "/logo/fa-logo.jpg");
   const canonical = SITE_URL + "/product/" + product.id;
+  const offer = {
+    "@type": "Offer",
+    url: canonical,
+    price: Number((
+      product.onSale === true && Number(product.salePriceAED) > 0
+        ? product.salePriceAED
+        : product.priceAED ?? product.price
+    ).toFixed(2)),
+    priceCurrency: "AED",
+    hasMerchantReturnPolicy: { "@id": RETURN_POLICY_ID },
+  };
+
+  if (unavailableInventory !== null) {
+    const inventoryStatus = unavailableInventory.get(String(product.id));
+    offer.availability = inventoryStatus === "sold" || inventoryStatus === "reserved"
+      ? "https://schema.org/OutOfStock"
+      : "https://schema.org/InStock";
+  }
 
   return {
     title: product.name + " | F&A Collective UAE",
@@ -133,16 +230,7 @@ function productMetadata(product) {
         "@type": "Brand",
         name: BRAND,
       },
-      offers: {
-        "@type": "Offer",
-        url: canonical,
-        price: Number((
-          product.onSale === true && Number(product.salePriceAED) > 0
-            ? product.salePriceAED
-            : product.priceAED ?? product.price
-        ).toFixed(2)),
-        priceCurrency: "AED",
-      },
+      offers: offer,
       ...(product.details && product.details.material
         ? { material: product.details.material }
         : {}),
@@ -162,6 +250,7 @@ const homeSchema = {
       url: SITE_URL + "/",
       logo: SITE_URL + "/logo/fa-logo.jpg",
       description: DEFAULT_DESCRIPTION,
+      hasMerchantReturnPolicy: MERCHANT_RETURN_POLICY,
     },
     {
       "@type": "WebSite",
@@ -213,9 +302,32 @@ await writeFile(
   "utf8"
 );
 
+
+const returnsMetadata = {
+  title: "Returns & Exchanges | F&A Collective UAE",
+  description:
+    "Read the F&A Collective returns and exchanges policy for eligible UAE orders, including the 3-day request window.",
+  canonical: SITE_URL + "/returns-exchanges",
+  image: SITE_URL + "/logo/fa-logo.jpg",
+  type: "website",
+};
+
+const returnsSchema = {
+  "@context": "https://schema.org",
+  ...MERCHANT_RETURN_POLICY,
+};
+
+await mkdir(path.join(DIST, "returns-exchanges"), { recursive: true });
+await writeFile(
+  path.join(DIST, "returns-exchanges", "index.html"),
+  applyMetadata(baseHtml, returnsMetadata, returnsSchema),
+  "utf8"
+);
+
 const urls = [
   { loc: SITE_URL + "/", image: SITE_URL + "/logo/fa-logo.jpg" },
   { loc: SITE_URL + "/shop", image: SITE_URL + "/logo/fa-logo.jpg" },
+  { loc: SITE_URL + "/returns-exchanges", image: SITE_URL + "/logo/fa-logo.jpg" },
   {
     loc: SITE_URL + "/shop?category=Jewellery",
     image: SITE_URL + "/products/jewellery-35.jpg",
@@ -226,8 +338,10 @@ const urls = [
   },
 ];
 
+const unavailableInventory = await loadUnavailableInventory();
+
 for (const product of products) {
-  const metadata = productMetadata(product);
+  const metadata = productMetadata(product, unavailableInventory);
   const relativePath = path.join("product", String(product.id), "index.html");
   const fullPath = path.join(DIST, relativePath);
 
