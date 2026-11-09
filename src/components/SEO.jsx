@@ -235,7 +235,7 @@ export default function SEO() {
   const { inventory, inventoryReady } = useCart();
 
   useEffect(() => {
-    const productMatch = location.pathname.match(/^\\/product\\/(\\d+)\\/?$/);
+    const productMatch = location.pathname.match(/^\/product\/(\d+)\/?$/);
     const inventoryStatus = productMatch
       ? inventoryReady
         ? inventory[String(productMatch[1])]?.status || "available"
