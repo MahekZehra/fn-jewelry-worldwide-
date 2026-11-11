@@ -2210,5 +2210,25 @@
     },
   },
 
+
+  {
+    id: 137,
+    name: "Traditional Chandbali Jhumka",
+    priceAED: 175,
+    salePriceAED: null,
+    onSale: false,
+    category: "Jewellery",
+    subCategory: "Earrings",
+    origin: "Indian Style",
+    image: "/products/traditional-chandbali-jhumka.webp",
+    description:
+      "A statement pair of traditional Chandbali Jhumka earrings featuring intricate Kundan-style work, vibrant ruby and emerald-tone stones, and delicate pearl detailing. A graceful choice for weddings, festive celebrations and special occasions.",
+    details: {
+      material: "Artificial Jewellery, Kundan-Style Stones & Pearl Detailing",
+      type: "Traditional Chandbali Jhumka Earrings",
+      occasion: "Weddings & Festive Wear",
+    },
+  },
+
 ];
 export default products;
