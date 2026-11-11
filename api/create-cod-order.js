@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import products from "../src/data/Products.js";
 import {
   reserveProductItems,
+  completeProductReservation,
   releaseProductReservation,
 } from "../lib/inventory.js";
 import { upsertOrder, makeCustomerCancelToken, updateOrder } from "../lib/orders.js";
@@ -116,8 +117,8 @@ export default async function handler(req, res) {
   const orderNumber = `FA-${Date.now()}`;
 
   try {
-    // COD orders reserve the one-of-one item until the team marks it sold
-    // after collection, or releases it if the order is cancelled.
+    // COD orders become sold as soon as the order is successfully confirmed.
+    // If the order is cancelled, the cancellation flow restores availability.
     await reserveProductItems({
       productIds,
       reservationId,
@@ -176,6 +177,16 @@ export default async function handler(req, res) {
       throw new Error(
         emailResult?.message || "Order emails could not both be sent."
       );
+    }
+
+    // A confirmed Cash on Delivery order consumes this one-of-one item too.
+    // The payment is collected at delivery, but the stock is no longer for sale.
+    const inventoryResult = await completeProductReservation(
+      reservationId,
+      orderNumber
+    );
+    if (!inventoryResult?.success) {
+      throw new Error("The order was created, but inventory could not be marked sold. Please contact the store.");
     }
 
     return res.status(200).json({
