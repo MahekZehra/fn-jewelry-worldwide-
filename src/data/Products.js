@@ -2095,5 +2095,120 @@
       occasion: "Festive & Occasion Wear",
     },
   },
+
+
+  // =====================================================
+  // NEW JEWELLERY SALE COLLECTION — NOVEMBER 2026
+  // All catalogue prices are stored in AED.
+  // =====================================================
+
+  {
+    id: 131,
+    name: "Emerald Heritage Set",
+    priceAED: 225,
+    salePriceAED: 175,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Traditional Sets",
+    image: "/products/emerald-heritage-set.webp",
+    description:
+      "A traditional jewellery set featuring emerald-green stones, pearl embellishments and intricate gold-tone detailing. A striking choice for festive occasions and wedding looks.",
+    details: {
+      material: "Artificial Stones, Pearl-Style Beads & Gold-Tone Setting",
+      type: "Traditional Necklace Set",
+      occasion: "Festive Wear & Weddings",
+    },
+  },
+
+  {
+    id: 132,
+    name: "Kundan Necklace Set",
+    priceAED: 175,
+    salePriceAED: 125,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Traditional Sets",
+    image: "/products/kundan-necklace-elegance.webp",
+    description:
+      "An elegant Kundan necklace set with radiant clear stones, floral detailing and a sophisticated two-tone finish. Designed for weddings, festive occasions and special gatherings.",
+    details: {
+      material: "Kundan-Style Stones & Gold-Tone Setting",
+      type: "Kundan Necklace Set",
+      occasion: "Weddings & Festive Occasions",
+    },
+  },
+
+  {
+    id: 133,
+    name: "Ruby Glow Jewellery Set",
+    priceAED: 200,
+    salePriceAED: 150,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Designer Sets",
+    image: "/products/ruby-glow-jewellery-set.webp",
+    description:
+      "A striking jewellery set featuring ruby-red stones, sparkling crystal accents and a modern, elegant design for weddings, parties and special occasions.",
+    details: {
+      material: "Artificial Ruby-Red Stones & Crystal-Style Accents",
+      type: "Designer Necklace Set",
+      occasion: "Weddings, Parties & Special Occasions",
+    },
+  },
+
+  {
+    id: 134,
+    name: "Emerald Elegance Necklace Set",
+    priceAED: 150,
+    salePriceAED: 100,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Necklaces",
+    image: "/products/emerald-elegance-necklace-set.webp",
+    description:
+      "A statement necklace set featuring emerald-tone stones and sparkling cubic-zirconia-style accents, accompanied by matching earrings. A refined choice for special occasions.",
+    details: {
+      material: "Emerald-Tone Artificial Stones & Crystal-Style Accents",
+      type: "Necklace Set with Matching Earrings",
+      occasion: "Festive & Special Occasions",
+    },
+  },
+
+  {
+    id: 135,
+    name: "Multi-Colour Necklace Set",
+    priceAED: 180,
+    salePriceAED: 150,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Designer Sets",
+    image: "/products/multi-colour-necklace-set.webp",
+    description:
+      "A graceful gold-tone necklace set adorned with multi-colour stones, shimmering details and delicate pearl drops, with matching earrings for a coordinated look.",
+    details: {
+      material: "Multi-Colour Artificial Stones & Pearl-Style Beads",
+      type: "Designer Necklace Set with Matching Earrings",
+      occasion: "Festive & Special Occasions",
+    },
+  },
+
+  {
+    id: 136,
+    name: "Classic Kundan Necklace Set",
+    priceAED: 180,
+    salePriceAED: 110,
+    onSale: true,
+    category: "Jewellery",
+    subCategory: "Necklaces",
+    image: "/products/classic-kundan-necklace-set.webp",
+    description:
+      "A timeless Kundan necklace set featuring clear stones in a rich gold-tone finish, with a traditional and versatile design for festive and wedding looks.",
+    details: {
+      material: "Kundan-Style Clear Stones & Gold-Tone Setting",
+      type: "Classic Kundan Necklace Set",
+      occasion: "Festive Wear & Weddings",
+    },
+  },
+
 ];
 export default products;
