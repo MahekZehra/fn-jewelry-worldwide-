@@ -98,6 +98,18 @@ export default async function handler(req, res) {
         throw new Error("Refund was initiated, but inventory could not be released. Please retry or contact support.");
       }
     } else {
+      // COD orders are marked sold at order confirmation. Restore those
+      // sold items when the customer or admin cancels the order.
+      const inventoryResult = await inventoryRpc(
+        "cancel_sold_product_items",
+        { p_order_number: orderNumber }
+      );
+      if (!inventoryResult?.success) {
+        throw new Error("The order was cancelled, but inventory could not be restored. Please retry or contact support.");
+      }
+
+      // Backward compatibility: release reservations created by older
+      // deployments or unpaid Stripe sessions.
       if (order.reservation_id) {
         await releaseProductReservation(order.reservation_id);
       }
