@@ -31,6 +31,8 @@ const ProductDetails = () => {
     currency,
     formatPrice,
     getProductPrice,
+    getProductOriginalPrice,
+    getProductSalePrice,
     getItemInventoryStatus,
   } = useCart();
 
@@ -89,6 +91,9 @@ const ProductDetails = () => {
   ===================================================== */
 
   const currentPrice = getProductPrice(product);
+  const originalPrice = getProductOriginalPrice(product);
+  const salePrice = getProductSalePrice(product);
+  const isOnSale = product.onSale === true && salePrice !== null;
 
   /* =====================================================
      ADD TO CART
@@ -203,9 +208,22 @@ const ProductDetails = () => {
             {/* PRICE */}
 
             <div className="mt-6">
-              <p className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
-                {formatPrice(currentPrice)}
-              </p>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                <p className="text-xl font-semibold tracking-tight text-black sm:text-2xl">
+                  {formatPrice(currentPrice)} {currency}
+                </p>
+
+                {isOnSale && (
+                  <>
+                    <p className="text-sm font-medium text-black/40 line-through">
+                      {formatPrice(originalPrice)} {currency}
+                    </p>
+                    <span className="rounded-full bg-[#6B4E4E] px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-white">
+                      Sale
+                    </span>
+                  </>
+                )}
+              </div>
 
               <p className="mt-1.5 text-[11px] text-black/45">
                 All prices include VAT.
