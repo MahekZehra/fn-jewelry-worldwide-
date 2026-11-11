@@ -953,7 +953,7 @@
     subCategory: "Earrings",
     origin: "Indian Style",
 
-    image: "/products/jewellery-58.jpg",
+    image: "/products/golden-aura-chandbali.webp",
 
     description:
       "A sophisticated golden jewellery design with elegant detailing and a luminous statement finish. Perfect for festive and formal occasions.",
